@@ -8,5 +8,6 @@ namespace TicketingSystem.Classes
 {
     class User
     {
+
     }
 }

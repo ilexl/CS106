@@ -5,6 +5,74 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TicketingSystem"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    
+        Title="Ticketing Software" Height="900" Width="1600">
+
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="130*"/>
+            <RowDefinition Height="739*"/>
+        </Grid.RowDefinitions>
+        <Frame x:Name="Login" Visibility="Hidden" Grid.RowSpan="2"/>
+        <!-- Sidebar -->
+        <Grid Name="SideBarHolder" Width="330" Background="#FF10152D" HorizontalAlignment="Left" Grid.RowSpan="2">
+            <!-- Add your sidebar content here -->
+            <Rectangle Fill="#FFF9F9F9" HorizontalAlignment="Left" Height="900" Margin="325,0,0,0" Stroke="#FFF9F9F9" VerticalAlignment="Top" Width="5"/>
+            <StackPanel Margin="0,15,5,0">
+                <Grid>
+                    <StackPanel VerticalAlignment="Center">
+                        <Image HorizontalAlignment="Left" Width="100" Margin="100,0, 100, 0" Source="logo.png"/>
+                        <Button Margin="10" Background="#00000000" BorderBrush="#00000000" Foreground="#FFF9F9F9" Click="Button_Dashboard">
+                            <StackPanel Orientation="Horizontal" Width="305" >
+                                <Image HorizontalAlignment="Left" Height="33" Width="33" Source="./Resources/Icons/Home.png" Margin="10,0,3,7"/>
+                                <TextBlock HorizontalAlignment="Left" FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" Height="38" Foreground="#FFF9F9F9" FontSize="32" TextWrapping="NoWrap"><Run Text="Dashboard"/></TextBlock>
+                            </StackPanel>
+                        </Button>
+                        <Button Margin="10" Background="#00000000" BorderBrush="#00000000" Foreground="#FFF9F9F9">
+                            <StackPanel Orientation="Horizontal" Width="305" >
+                                <Image HorizontalAlignment="Left" Height="33" Width="33" Source="./Resources/Icons/File_dock_search.png" Margin="10,0,3,7"/>
+                                <TextBlock HorizontalAlignment="Left" FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" Height="38" Foreground="#FFF9F9F9" FontSize="32" TextWrapping="NoWrap" Text="View Tickets"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Margin="10" Background="#00000000" BorderBrush="#00000000" Foreground="#FFF9F9F9">
+                            <StackPanel Orientation="Horizontal" Width="305" >
+                                <Image HorizontalAlignment="Left" Height="33" Width="33" Source="./Resources/Icons/Arhives_group_docks.png" Margin="10,0,3,7"/>
+                                <TextBlock HorizontalAlignment="Left" FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" Height="38" Foreground="#FFF9F9F9" FontSize="32" TextWrapping="NoWrap" Text="Closed Tickets"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Margin="10" Background="#00000000" BorderBrush="#00000000" Foreground="#FFF9F9F9">
+                            <StackPanel Orientation="Horizontal" Width="305" >
+                                <Image HorizontalAlignment="Left" Height="33" Width="33" Source="./Resources/Icons/File_dock_add.png" Margin="10,0,3,7"/>
+                                <TextBlock HorizontalAlignment="Left" FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" Height="38" Foreground="#FFF9F9F9" FontSize="32" TextWrapping="NoWrap" Text="Create Ticket"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Margin="10" Background="#00000000" BorderBrush="#00000000" Foreground="#FFF9F9F9">
+                            <StackPanel Orientation="Horizontal" Width="305" >
+                                <Image HorizontalAlignment="Left" Height="33" Width="33" Source="./Resources/Icons/Lock.png" Margin="10,0,3,7"/>
+                                <TextBlock HorizontalAlignment="Left" FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" Height="38" Foreground="#FFF9F9F9" FontSize="32" TextWrapping="NoWrap" Text="My Account"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Margin="10" Background="#00000000" BorderBrush="#00000000" Foreground="#FFF9F9F9" Click="Button_Settings">
+                            <StackPanel Orientation="Horizontal" Width="305" >
+                                <Image HorizontalAlignment="Left" Height="33" Width="33" Source="./Resources/Icons/Setting_line.png" Margin="10,0,3,7"/>
+                                <TextBlock HorizontalAlignment="Left" FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" Height="38" Foreground="#FFF9F9F9" FontSize="32" TextWrapping="NoWrap" Text="Settings"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+                <Grid>
+
+                    <!-- The bottom of the side nav -->
+                </Grid>
+            </StackPanel>
+
+        </Grid>
+
+        <!-- Main content area -->
+        <Grid Name="ContentHolder" Margin="330,0,0,0" Grid.RowSpan="2">
+            <!-- Add your main content here -->
+            <Frame x:Name="mainFrame" NavigationUIVisibility="Hidden" Background="#FF343434"/>
+        </Grid>
+    </Grid>
 </Window>

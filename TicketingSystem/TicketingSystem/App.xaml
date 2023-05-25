@@ -4,6 +4,8 @@
              xmlns:local="clr-namespace:TicketingSystem"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+
+        <FontFamily x:Key="Epilogue">Epilogue</FontFamily>
+
     </Application.Resources>
 </Application>
