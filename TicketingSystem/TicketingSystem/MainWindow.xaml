@@ -5,20 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TicketingSystem"
         mc:Ignorable="d"
-        Title="Ticketing Software" Height="900" Width="1600">
+        Title="Ticketing Software" Height="900" Width="1600" MinHeight="900" MinWidth="1600">
 
 
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="130*"/>
-            <RowDefinition Height="739*"/>
-        </Grid.RowDefinitions>
-        <Frame x:Name="Login" Visibility="Hidden" Grid.RowSpan="2"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="330"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Frame x:Name="Login" Visibility="Hidden" Grid.ColumnSpan="2"/>
         <!-- Sidebar -->
-        <Grid Name="SideBarHolder" Width="330" Background="#FF10152D" HorizontalAlignment="Left" Grid.RowSpan="2">
+        <Grid Name="SideBarHolder" Width="330" Background="#FF10152D" HorizontalAlignment="Left" Grid.Column="0">
             <!-- Add your sidebar content here -->
-            <Rectangle Fill="#FFF9F9F9" HorizontalAlignment="Left" Height="900" Margin="325,0,0,0" Stroke="#FFF9F9F9" VerticalAlignment="Top" Width="5"/>
+            <StackPanel Orientation="Vertical" Margin="325,0,0,0" Background="#FFF9F9F9"/>
             <StackPanel Margin="0,15,5,0">
                 <Grid>
                     <StackPanel VerticalAlignment="Center">
@@ -70,7 +70,7 @@
         </Grid>
 
         <!-- Main content area -->
-        <Grid Name="ContentHolder" Margin="330,0,0,0" Grid.RowSpan="2">
+        <Grid Name="ContentHolder" Margin="0,0,0,0" Grid.Column="1">
             <!-- Add your main content here -->
             <Frame x:Name="mainFrame" NavigationUIVisibility="Hidden" Background="#FF343434"/>
         </Grid>

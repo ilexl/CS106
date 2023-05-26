@@ -9,7 +9,7 @@
       Title="Dashboard">
 
     <Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="329,203,0,0" TextWrapping="Wrap" Text="Dashboard" VerticalAlignment="Top" Height="55" Width="159" Background="White"/>
+        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Dashboard" VerticalAlignment="Center" Height="55" Width="159" Background="White"/>
 
     </Grid>
 </Page>
