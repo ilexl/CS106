@@ -28,3 +28,7 @@ C:\Users\270168960\OneDrive - UP Education\Desktop\CS106\TicketingSystem\Ticketi
 C:\Users\270168960\OneDrive - UP Education\Desktop\CS106\TicketingSystem\TicketingSystem\obj\Debug\Frames\MyAccount.baml
 C:\Users\270168960\OneDrive - UP Education\Desktop\CS106\TicketingSystem\TicketingSystem\obj\Debug\Frames\Settings.baml
 C:\Users\270168960\OneDrive - UP Education\Desktop\CS106\TicketingSystem\TicketingSystem\obj\Debug\Frames\ViewTickets.baml
+C:\Users\270168960\OneDrive - UP Education\Desktop\CS106\TicketingSystem\TicketingSystem\obj\Debug\Frames\ViewAccounts.g.cs
+C:\Users\270168960\OneDrive - UP Education\Desktop\CS106\TicketingSystem\TicketingSystem\obj\Debug\Frames\ViewAccounts.baml
+C:\Users\270168960\OneDrive - UP Education\Desktop\CS106\TicketingSystem\TicketingSystem\obj\Debug\Frames\Console.g.cs
+C:\Users\270168960\OneDrive - UP Education\Desktop\CS106\TicketingSystem\TicketingSystem\obj\Debug\Frames\Console.baml
