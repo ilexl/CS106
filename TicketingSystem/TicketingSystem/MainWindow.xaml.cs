@@ -27,6 +27,18 @@ namespace TicketingSystem
         {
             InitializeComponent();
 
+            if (System.Diagnostics.Debugger.IsAttached)
+            {
+                Debug.SetLogger(new Debug.LogConsole());
+            }
+            else
+            {
+                Debug.SetLogger(new Debug.LogTxt());
+                // or another that follows the correct interface
+            }
+
+            Debug.Log("application started");
+
             if (LoggedIn)
             {
                 MainWindowVisability(true);
@@ -38,12 +50,12 @@ namespace TicketingSystem
                 LoginWindowVisability(true);
             }
 
-
         }
 
         private void ChangeWindow(string windowName)
         {
             mainFrame.Navigate(new Uri("./Frames/" + windowName, UriKind.Relative));
+            Debug.Log(windowName + " opened");
         }
 
         private SolidColorBrush HexColor(string hex)
@@ -52,7 +64,7 @@ namespace TicketingSystem
         }
 
 
-        #region LOGIN_STUFF
+#region LOGIN_STUFF
         /// <summary>
         /// Hides or Shows the main window and nav bar
         /// </summary>
@@ -93,8 +105,8 @@ namespace TicketingSystem
             // Temp
             GenerateSideNavButtons(User.Type.Test);
         }
-        #endregion
-        #region SIDE_NAV
+#endregion
+#region SIDE_NAV
         private void GenerateSideNavButtons(User.Type loginType)
         {
             var sidenav = SideNavButtonsHolder;
@@ -200,6 +212,6 @@ namespace TicketingSystem
             main.Content = stackPanel;
             sidenav.Children.Add(main);
         }
-        #endregion
+#endregion
     }
 }

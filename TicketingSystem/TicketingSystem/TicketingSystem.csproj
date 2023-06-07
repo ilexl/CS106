@@ -120,6 +120,7 @@
     <Compile Include="Frames\ViewAccounts.xaml.cs">
       <DependentUpon>ViewAccounts.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Framework\Debug.cs" />
     <Compile Include="Framework\Ticket.cs" />
     <Compile Include="Framework\User.cs" />
     <Compile Include="Frames\ClosedTickets.xaml.cs">
