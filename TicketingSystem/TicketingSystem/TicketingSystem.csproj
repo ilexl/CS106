@@ -90,9 +90,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Frames\Console.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Frames\Settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Frames\ViewAccounts.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Frames\ViewTickets.xaml">
       <SubType>Designer</SubType>
@@ -106,8 +114,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Classes\Ticket.cs" />
-    <Compile Include="Classes\User.cs" />
+    <Compile Include="Frames\Console.xaml.cs">
+      <DependentUpon>Console.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Frames\ViewAccounts.xaml.cs">
+      <DependentUpon>ViewAccounts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\Ticket.cs" />
+    <Compile Include="Framework\User.cs" />
     <Compile Include="Frames\ClosedTickets.xaml.cs">
       <DependentUpon>ClosedTickets.xaml</DependentUpon>
     </Compile>
@@ -191,6 +205,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\People.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\terminal.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

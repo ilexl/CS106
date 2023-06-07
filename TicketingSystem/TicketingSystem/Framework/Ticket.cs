@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TicketingSystem.Classes
+namespace TicketingSystem.Framework
 {
     class Ticket
     {
