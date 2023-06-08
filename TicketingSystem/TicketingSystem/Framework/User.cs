@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Windows;
 
-namespace TicketingSystem.Classes
+namespace TicketingSystem.Framework
 {
     class User
     {

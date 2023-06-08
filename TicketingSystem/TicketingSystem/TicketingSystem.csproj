@@ -106,8 +106,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Classes\Ticket.cs" />
-    <Compile Include="Classes\User.cs" />
+    <Compile Include="Framework\Ticket.cs" />
+    <Compile Include="Framework\User.cs" />
     <Compile Include="Frames\ClosedTickets.xaml.cs">
       <DependentUpon>ClosedTickets.xaml</DependentUpon>
     </Compile>
@@ -193,10 +193,10 @@
     <Resource Include="logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Classes\Users.mdf">
+    <Content Include="Framework\Users.mdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Classes\Users_log.ldf">
+    <Content Include="Framework\Users_log.ldf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <DependentUpon>Users.mdf</DependentUpon>
     </Content>
