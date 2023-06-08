@@ -114,14 +114,17 @@ namespace TicketingSystem
             }
         }
 
-        public void LoginActivation()
+        public void LoginActivation(string username, string password)
         {
-            MainWindowVisability(true);
-            LoginWindowVisability(false);
-            ChangeWindow("Dashboard.xaml");
+            if (user.ConnectToDatabase(username, password))
+            {
+                MainWindowVisability(true);
+                LoginWindowVisability(false);
+                ChangeWindow("Dashboard.xaml");
 
-            // Temp
-            GenerateSideNavButtons(User.Type.Test);
+                // Temp
+                GenerateSideNavButtons((User.Type)user.userType);
+            }
         }
 #endregion
 #region SIDE_NAV
@@ -230,6 +233,11 @@ namespace TicketingSystem
             main.Content = stackPanel;
             sidenav.Children.Add(main);
         }
-#endregion
+        #endregion
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
