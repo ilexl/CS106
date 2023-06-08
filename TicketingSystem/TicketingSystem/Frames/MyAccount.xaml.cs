@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data.SqlClient;
 
 namespace TicketingSystem.Frames
 {
@@ -23,6 +24,32 @@ namespace TicketingSystem.Frames
         public MyAccount()
         {
             InitializeComponent();
+        }
+
+        private void ButtonClick_ApplyPassword(object sender, RoutedEventArgs e)
+        {
+            var window = (MainWindow)Application.Current.MainWindow;
+
+            //  CHECKS IF THE NEW PASSWORDS MATCHES, AND IF THE OLD PASSWORD MATCHES THEIR CURRENT PASSWORD
+            if (NewPassword.Text == ConfirmNewPassword.Text && OldPassword.Text == window.User.password)
+            {
+                //  DISPOSES CONNECTION WHEN FINISHED
+                using (SqlConnection connection = new SqlConnection(window.GetConnectionStringUsers()))
+                {
+                    connection.Open();
+
+                    //  FILESTREAM / WRITER, ALLOWS INSERTING / UPDATING ROWS IN SQL
+                    SqlDataAdapter adapter = new SqlDataAdapter();
+
+                    string commandText = "UPDATE Users SET Password='" + NewPassword.Text + "' WHERE ID='" + window.User.ID + "';";
+
+                    adapter.InsertCommand = new SqlCommand(commandText, connection);
+
+                    adapter.InsertCommand.ExecuteNonQuery();
+
+                    connection.Close();
+                }
+            }
         }
     }
 }

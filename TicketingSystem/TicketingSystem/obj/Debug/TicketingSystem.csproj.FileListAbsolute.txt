@@ -58,3 +58,6 @@ C:\Users\270045020\source\repos\CS105_Assesment_Scenario_4\CS106\TicketingSystem
 C:\Users\270045020\source\repos\CS105_Assesment_Scenario_4\CS106\TicketingSystem\TicketingSystem\obj\Debug\TicketingSystem.csproj.CoreCompileInputs.cache
 C:\Users\270045020\source\repos\CS105_Assesment_Scenario_4\CS106\TicketingSystem\TicketingSystem\obj\Debug\TicketingSystem.exe
 C:\Users\270045020\source\repos\CS105_Assesment_Scenario_4\CS106\TicketingSystem\TicketingSystem\obj\Debug\TicketingSystem.pdb
+C:\Users\270045020\source\repos\CS105_Assesment_Scenario_4\CS106\TicketingSystem\TicketingSystem\bin\Debug\Classes\Users.mdf
+C:\Users\270045020\source\repos\CS105_Assesment_Scenario_4\CS106\TicketingSystem\TicketingSystem\bin\Debug\Classes\Users_log.ldf
+C:\Users\270045020\source\repos\CS105_Assesment_Scenario_4\CS106\TicketingSystem\TicketingSystem\obj\Debug\TicketingSystem_Content.g.cs

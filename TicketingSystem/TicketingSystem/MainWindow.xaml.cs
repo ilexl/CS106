@@ -12,18 +12,25 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TicketingSystem.Classes;
 
 namespace TicketingSystem
 {
-    
-    
-
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
+        private User user = new User();
         public bool LoggedIn = false; // temp
+
+        //  !!RELATIVE STRING, REFACTORING RECOMMENDED!!
+        public const string connectionStringUsers = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Classes\Users.mdf;Integrated Security=True";
+
+
+        //  UTILITY CLASS TO ASSURE ACCESSIBILITY TO THE USER DETAILS FROM ANY GIVEN CLASS
+        internal User User { get => user; set => user = value; }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -78,11 +85,16 @@ namespace TicketingSystem
             }
         }
 
-        public void LoginActivation()
+        public void LoginActivation(string username, string password)
         {
-            MainWindowVisability(true);
-            LoginWindowVisability(false);
-            ChangeWindow("Dashboard.xaml");
+            User = new User();
+            
+            if (User.ConnectToDatabase(username, password))
+            {
+                MainWindowVisability(true);
+                LoginWindowVisability(false);
+                ChangeWindow("Dashboard.xaml");
+            }
         }
 
         public void Button_Dashboard(object sender, RoutedEventArgs e)
@@ -94,6 +106,14 @@ namespace TicketingSystem
             ChangeWindow("Settings.xaml");
         }
 
+        public void Button_Account(object sender, RoutedEventArgs e)
+        {
+            ChangeWindow("MyAccount.xaml");
+        }
 
+        public string GetConnectionStringUsers()
+        {
+            return connectionStringUsers;
+        }
     }
 }
