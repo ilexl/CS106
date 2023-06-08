@@ -23,6 +23,8 @@ namespace TicketingSystem
     public partial class MainWindow : Window
     {
         public bool LoggedIn = false; // temp
+        private User user = new User();
+        public const string connectionStringUsers = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Server\Users.mdf;Integrated Security=True";
         public MainWindow()
         {
             InitializeComponent();
