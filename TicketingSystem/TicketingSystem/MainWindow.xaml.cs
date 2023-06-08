@@ -39,6 +39,20 @@ namespace TicketingSystem
 
             Debug.Log("application started");
 
+            Ticket.TestCreate();
+
+            bool worked = false;
+            Ticket known = new Ticket(2, out worked);
+            if (worked)
+            {
+                MessageBox.Show("Ticket Loaded");
+            }
+            else
+            {
+                MessageBox.Show("Ticket doesnt exist");
+            }
+            
+
             if (LoggedIn)
             {
                 MainWindowVisability(true);
