@@ -35,3 +35,5 @@ C:\Users\270168960\OneDrive - UP Education\Desktop\CS106\TicketingSystem\Ticketi
 C:\Users\270168960\OneDrive - UP Education\Desktop\CS106\TicketingSystem\TicketingSystem\bin\Debug\Server\Tickets.mdf
 C:\Users\270168960\OneDrive - UP Education\Desktop\CS106\TicketingSystem\TicketingSystem\bin\Debug\Server\Tickets_log.ldf
 C:\Users\270168960\OneDrive - UP Education\Desktop\CS106\TicketingSystem\TicketingSystem\obj\Debug\TicketingSystem_Content.g.cs
+C:\Users\270168960\OneDrive - UP Education\Desktop\CS106\TicketingSystem\TicketingSystem\bin\Debug\Server\Users.mdf
+C:\Users\270168960\OneDrive - UP Education\Desktop\CS106\TicketingSystem\TicketingSystem\bin\Debug\Server\Users_log.ldf

@@ -8,8 +8,10 @@ using System.Windows;
 
 namespace TicketingSystem.Framework
 {
-    class User
+    public class User
     {
+        public const string connectionStringUsers = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Server\Users.mdf;Integrated Security=True";
+
         public int ID;
         public int userType;
         public string password;
@@ -22,7 +24,7 @@ namespace TicketingSystem.Framework
             var window = (MainWindow)Application.Current.MainWindow;
 
             //  DISPOSES CONNECTION WHEN FINISHED
-            using (SqlConnection connection = new SqlConnection(window.GetConnectionStringUsers()))
+            using (SqlConnection connection = new SqlConnection(connectionStringUsers))
             {
                 connection.Open();
 

@@ -27,7 +27,7 @@ namespace TicketingSystem.Frames
 
         private void ButtonClick_Login(object sender, RoutedEventArgs e)
         {
-            ((MainWindow)Application.Current.MainWindow).LoginActivation(LoginUserName.Text, LoginPassword.Text);
+            ((MainWindow)Application.Current.MainWindow).LoginActivation();
         }
 
     }

@@ -21,6 +21,8 @@ namespace TicketingSystem.Frames
     /// </summary>
     public partial class MyAccount : Page
     {
+        public const string connectionStringUsers = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Server\Users.mdf;Integrated Security=True";
+
         public MyAccount()
         {
             InitializeComponent();
@@ -31,17 +33,17 @@ namespace TicketingSystem.Frames
             var window = (MainWindow)Application.Current.MainWindow;
 
             //  CHECKS IF THE NEW PASSWORDS MATCHES, AND IF THE OLD PASSWORD MATCHES THEIR CURRENT PASSWORD
-            if (NewPassword.Text == ConfirmNewPassword.Text && OldPassword.Text == window.User.password)
+            if (NewPassword.Text == ConfirmNewPassword.Text && OldPassword.Text == window.user.password)
             {
                 //  DISPOSES CONNECTION WHEN FINISHED
-                using (SqlConnection connection = new SqlConnection(window.GetConnectionStringUsers()))
+                using (SqlConnection connection = new SqlConnection(connectionStringUsers))
                 {
                     connection.Open();
 
                     //  FILESTREAM / WRITER, ALLOWS INSERTING / UPDATING ROWS IN SQL
                     SqlDataAdapter adapter = new SqlDataAdapter();
 
-                    string commandText = "UPDATE Users SET Password='" + NewPassword.Text + "' WHERE ID='" + window.User.ID + "';";
+                    string commandText = "UPDATE Users SET Password='" + NewPassword.Text + "' WHERE ID='" + window.user.ID + "';";
 
                     adapter.InsertCommand = new SqlCommand(commandText, connection);
 

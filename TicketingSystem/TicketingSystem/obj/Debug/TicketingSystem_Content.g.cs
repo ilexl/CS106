@@ -10,5 +10,7 @@
 
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("server/tickets.mdf")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("server/tickets_log.ldf")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("server/users.mdf")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("server/users_log.ldf")]
 
 
