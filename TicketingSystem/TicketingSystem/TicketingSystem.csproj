@@ -70,6 +70,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Server\TicketsDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TicketsDataSet.xsd</DependentUpon>
+    </Compile>
     <Page Include="Frames\ClosedTickets.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -90,9 +95,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Frames\Console.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Frames\Settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Frames\ViewAccounts.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Frames\ViewTickets.xaml">
       <SubType>Designer</SubType>
@@ -106,6 +119,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Frames\Console.xaml.cs">
+      <DependentUpon>Console.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Frames\ViewAccounts.xaml.cs">
+      <DependentUpon>ViewAccounts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\Debug.cs" />
     <Compile Include="Framework\Ticket.cs" />
     <Compile Include="Framework\User.cs" />
     <Compile Include="Frames\ClosedTickets.xaml.cs">
@@ -157,6 +177,17 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <EmbeddedResource Include="Resources\Epilogue-VariableFont_wght.ttf" />
+    <None Include="Server\TicketsDataSet.xsc">
+      <DependentUpon>TicketsDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Server\TicketsDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TicketsDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Server\TicketsDataSet.xss">
+      <DependentUpon>TicketsDataSet.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -190,7 +221,19 @@
     <Resource Include="Resources\logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="logo.png" />
+    <Resource Include="Resources\Icons\People.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\terminal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Server\Tickets.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Server\Tickets_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>Tickets.mdf</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Framework\Users.mdf">

@@ -37,7 +37,7 @@ namespace TicketingSystem.Framework
                 if (sqlReader.HasRows)                      //  USER FOUND WITH MATCHING CREDENTIALS
                 {
                     while (sqlReader.Read())
-                    {
+    {
                         ID = sqlReader.GetInt32(0);         //  Sets this instance's ID to the the corresponding cell in the matching row
                         password = sqlReader.GetString(1);  //  Sets this instance's password to the the corresponding cell in the matching row
                         userType = sqlReader.GetInt32(2);   //  Sets this instance's usertype to the the corresponding cell in the matching row
@@ -53,7 +53,7 @@ namespace TicketingSystem.Framework
                     }
                 }
                 else                    //  INCORRECT / INVALID CREDENTIALS
-                {
+        {
                     sqlReader.Close();  //  CLOSES THE READER
                     command.Dispose();  //  NULLS THE COMMAND
                     connection.Close(); //  CLOSES OPEN CONNECTION TO SQL DATABASE
@@ -62,6 +62,13 @@ namespace TicketingSystem.Framework
                 }
             }
             return false;
+        }
+        public enum Type : int
+        {
+            User = 1,
+            Tech = 2,
+            Admin = 3,
+            Test = 4
         }
     }
 }

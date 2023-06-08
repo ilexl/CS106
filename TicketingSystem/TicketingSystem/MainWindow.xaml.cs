@@ -53,7 +53,7 @@ namespace TicketingSystem
             {
                 MessageBox.Show("Ticket doesnt exist");
             }
-
+            
 
             if (LoggedIn)
             {
@@ -80,7 +80,7 @@ namespace TicketingSystem
         }
 
 
-        #region LOGIN_STUFF
+#region LOGIN_STUFF
         /// <summary>
         /// Hides or Shows the main window and nav bar
         /// </summary>
@@ -121,8 +121,8 @@ namespace TicketingSystem
             // Temp
             GenerateSideNavButtons(User.Type.Test);
         }
-        #endregion
-        #region SIDE_NAV
+#endregion
+#region SIDE_NAV
         private void GenerateSideNavButtons(User.Type loginType)
         {
             var sidenav = SideNavButtonsHolder;
@@ -130,53 +130,53 @@ namespace TicketingSystem
             switch (loginType)
             {
                 case User.Type.User:
-                    {
-                        CreateSideNavButton("Dashboard", "Dashboard.xaml", "./Resources/Icons/Home.png");
-                        CreateSideNavButton("View Tickets", "ViewTickets.xaml", "./Resources/Icons/File_dock_search.png");
-                        CreateSideNavButton("Closed Tickets", "ClosedTickets.xaml", "./Resources/Icons/Arhives_group_docks.png");
-                        CreateSideNavButton("Create Ticket", "CreateTicket.xaml", "./Resources/Icons/File_dock_add.png");
-                        CreateSideNavButton("My Account", "MyAccount.xaml", "./Resources/Icons/Lock.png");
-                        CreateSideNavButton("Settings", "Settings.xaml", "./Resources/Icons/Setting_line.png");
-                        // Code for User
-                        break;
-                    }
+                {
+                    CreateSideNavButton("Dashboard", "Dashboard.xaml", "./Resources/Icons/Home.png");
+                    CreateSideNavButton("View Tickets", "ViewTickets.xaml", "./Resources/Icons/File_dock_search.png");
+                    CreateSideNavButton("Closed Tickets", "ClosedTickets.xaml", "./Resources/Icons/Arhives_group_docks.png");
+                    CreateSideNavButton("Create Ticket", "CreateTicket.xaml", "./Resources/Icons/File_dock_add.png");
+                    CreateSideNavButton("My Account", "MyAccount.xaml", "./Resources/Icons/Lock.png");
+                    CreateSideNavButton("Settings", "Settings.xaml", "./Resources/Icons/Setting_line.png");
+                    // Code for User
+                    break;
+                }
                 case User.Type.Tech:
-                    {
-                        CreateSideNavButton("Dashboard", "Dashboard.xaml", "./Resources/Icons/Home.png");
-                        CreateSideNavButton("View Tickets", "ViewTickets.xaml", "./Resources/Icons/File_dock_search.png");
-                        CreateSideNavButton("Closed Tickets", "ClosedTickets.xaml", "./Resources/Icons/Arhives_group_docks.png");
-                        CreateSideNavButton("Create Ticket", "CreateTicket.xaml", "./Resources/Icons/File_dock_add.png");
-                        CreateSideNavButton("My Account", "MyAccount.xaml", "./Resources/Icons/Lock.png");
-                        CreateSideNavButton("Settings", "Settings.xaml", "./Resources/Icons/Setting_line.png");
-                        // Code for Tech
-                        break;
-                    }
+                {
+                    CreateSideNavButton("Dashboard", "Dashboard.xaml", "./Resources/Icons/Home.png");
+                    CreateSideNavButton("View Tickets", "ViewTickets.xaml", "./Resources/Icons/File_dock_search.png");
+                    CreateSideNavButton("Closed Tickets", "ClosedTickets.xaml", "./Resources/Icons/Arhives_group_docks.png");
+                    CreateSideNavButton("Create Ticket", "CreateTicket.xaml", "./Resources/Icons/File_dock_add.png");
+                    CreateSideNavButton("My Account", "MyAccount.xaml", "./Resources/Icons/Lock.png");
+                    CreateSideNavButton("Settings", "Settings.xaml", "./Resources/Icons/Setting_line.png");
+                    // Code for Tech
+                    break;
+                }    
                 case User.Type.Admin:
-                    {
-                        CreateSideNavButton("Dashboard", "Dashboard.xaml", "./Resources/Icons/Home.png");
-                        CreateSideNavButton("All Tickets", "ViewTickets.xaml", "./Resources/Icons/File_dock_search.png");
-                        CreateSideNavButton("All Accounts", "ViewAccounts.xaml", "./Resources/Icons/People.png");
-                        CreateSideNavButton("Console", "Console.xaml", "./Resources/Icons/terminal.png");
-                        CreateSideNavButton("My Account", "MyAccount.xaml", "./Resources/Icons/Lock.png");
-                        CreateSideNavButton("Settings", "Settings.xaml", "./Resources/Icons/Setting_line.png");
-                        // Code for Admin
-                        break;
-                    }
+                {
+                    CreateSideNavButton("Dashboard", "Dashboard.xaml", "./Resources/Icons/Home.png");
+                    CreateSideNavButton("All Tickets", "ViewTickets.xaml", "./Resources/Icons/File_dock_search.png");
+                    CreateSideNavButton("All Accounts", "ViewAccounts.xaml", "./Resources/Icons/People.png");
+                    CreateSideNavButton("Console", "Console.xaml", "./Resources/Icons/terminal.png");
+                    CreateSideNavButton("My Account", "MyAccount.xaml", "./Resources/Icons/Lock.png");
+                    CreateSideNavButton("Settings", "Settings.xaml", "./Resources/Icons/Setting_line.png");
+                    // Code for Admin
+                    break;
+                }
                 case User.Type.Test:
                 default:
-                    {
-                        CreateSideNavButton("Dashboard", "Dashboard.xaml", "./Resources/Icons/Home.png");
-                        CreateSideNavButton("View Tickets", "ViewTickets.xaml", "./Resources/Icons/File_dock_search.png");
-                        CreateSideNavButton("Closed Tickets", "ClosedTickets.xaml", "./Resources/Icons/Arhives_group_docks.png");
-                        CreateSideNavButton("Create Ticket", "CreateTicket.xaml", "./Resources/Icons/File_dock_add.png");
-                        CreateSideNavButton("All Tickets", "ViewTickets.xaml", "./Resources/Icons/File_dock_search.png");
-                        CreateSideNavButton("All Accounts", "ViewAccounts.xaml", "./Resources/Icons/People.png");
-                        CreateSideNavButton("Console", "Console.xaml", "./Resources/Icons/terminal.png");
-                        CreateSideNavButton("My Account", "MyAccount.xaml", "./Resources/Icons/Lock.png");
-                        CreateSideNavButton("Settings", "Settings.xaml", "./Resources/Icons/Setting_line.png");
-                        // Code for Test or No Valid Value - For Testing
-                        break;
-                    }
+                {
+                    CreateSideNavButton("Dashboard", "Dashboard.xaml", "./Resources/Icons/Home.png");
+                    CreateSideNavButton("View Tickets", "ViewTickets.xaml", "./Resources/Icons/File_dock_search.png");
+                    CreateSideNavButton("Closed Tickets", "ClosedTickets.xaml", "./Resources/Icons/Arhives_group_docks.png");
+                    CreateSideNavButton("Create Ticket", "CreateTicket.xaml", "./Resources/Icons/File_dock_add.png");
+                    CreateSideNavButton("All Tickets", "ViewTickets.xaml", "./Resources/Icons/File_dock_search.png");
+                    CreateSideNavButton("All Accounts", "ViewAccounts.xaml", "./Resources/Icons/People.png");
+                    CreateSideNavButton("Console", "Console.xaml", "./Resources/Icons/terminal.png");
+                    CreateSideNavButton("My Account", "MyAccount.xaml", "./Resources/Icons/Lock.png");
+                    CreateSideNavButton("Settings", "Settings.xaml", "./Resources/Icons/Setting_line.png");
+                    // Code for Test or No Valid Value - For Testing
+                    break;
+                }
             }
         }
 
@@ -228,6 +228,6 @@ namespace TicketingSystem
             main.Content = stackPanel;
             sidenav.Children.Add(main);
         }
-        #endregion
+#endregion
     }
 }

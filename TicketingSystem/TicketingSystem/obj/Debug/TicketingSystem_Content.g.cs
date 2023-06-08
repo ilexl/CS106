@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("framework/users.mdf")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("framework/users_log.ldf")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("server/tickets.mdf")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("server/tickets_log.ldf")]
 
 

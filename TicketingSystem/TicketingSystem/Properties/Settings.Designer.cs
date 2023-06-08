@@ -26,10 +26,23 @@ namespace TicketingSystem.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Server\\Ticket" +
+            "s.mdf;Integrated Security=True")]
+        public string TicketsConnectionString {
+            get {
+                return ((string)(this["TicketsConnectionString"]));
+            }
+        }
+
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\UserDatabase." +
             "mdf;Integrated Security=True")]
-        public string UserDatabaseConnectionString {
-            get {
+        public string UserDatabaseConnectionString
+        {
+            get
+            {
                 return ((string)(this["UserDatabaseConnectionString"]));
             }
         }
