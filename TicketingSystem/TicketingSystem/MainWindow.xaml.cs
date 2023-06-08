@@ -94,6 +94,9 @@ namespace TicketingSystem
             ChangeWindow("Settings.xaml");
         }
 
-
+        private void Button_Create(object sender, RoutedEventArgs e)
+        {
+            ChangeWindow("CreateTicket.xaml");
+        }
     }
 }
