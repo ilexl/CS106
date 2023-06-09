@@ -36,9 +36,6 @@ namespace TicketingSystem.Framework
         {
             this.id = _id;
             worked = GetTicketInfo(id);
-
-
-
         }
 
         private Ticket()
@@ -46,16 +43,10 @@ namespace TicketingSystem.Framework
             // Does nothing - not to be used except by static functions
         }
 
-        public static void TestCreate()
-        {
-            Ticket t = CreateNew("testing123", "testing321", "testing111", 2, DateTime.Now);
-            AddNewTicket(t);
-        }
-
         public static Ticket CreateNew(string callerID, string creatorID, string title, int urgency, DateTime created)
         {
             Ticket ticket = new Ticket();
-            ticket.id = 2;
+            ticket.id = NewID();
             ticket.status = true; // open by default
             ticket.callerID = callerID;
             ticket.creatorID = creatorID;
@@ -66,43 +57,97 @@ namespace TicketingSystem.Framework
             ticket.resolveReason = RESOLVEREASON.None;
             ticket.comments = new List<string>();
 
+            AddNewTicket(ticket);
             return ticket;
         }
 
         private static int NewID()
         {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(SOURCE))
+                {
+                    connection.Open();
+                    string tableName = "AllTickets"; 
+                    string countQuery = $"SELECT COUNT(*) FROM {tableName}";
+                    using (SqlCommand command = new SqlCommand(countQuery, connection))
+                    {
+                        int rowCount = (int)command.ExecuteScalar();
+                        return rowCount + 1;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"An error occurred: {ex.Message}");
+            }
 
-            
-
-            return 0; // TODO : Create new id based off database
+                return 0; // TODO : Create new id based off database
         }
 
         private static void AddNewTicket(Ticket t)
         {
+            const string SPACE = ", ";
             using (SqlConnection connection = new SqlConnection(SOURCE))  //  DISPOSES CONNECTION WHEN FINISHED
             {
-                connection.Open();
-                SqlDataAdapter adapter = new SqlDataAdapter();
-                string reason = "";
-                string commentsAll = "";
-                foreach(string s in t.comments)
+                // format reason and comments
+                string reason = "'";
+                string commentsAll = "'";
+                foreach (string s in t.comments)
                 {
-                    commentsAll += s;
+                    commentsAll += (s + "♦");
                 }
-                if(commentsAll == "")
+                if (commentsAll.EndsWith("♦"))
+                {
+                    commentsAll = commentsAll.Remove(commentsAll.Length - 1, 1); // remove last symbol
+                }
+                commentsAll += "'";
+                if (commentsAll == "''")
                 {
                     commentsAll = "NULL";
                 }
-                if(t.resolveReason == RESOLVEREASON.None)
+                
+                if (t.resolveReason == RESOLVEREASON.None)
                 {
                     reason = "NULL";
                 }
                 else
                 {
                     reason = ((int)t.resolveReason).ToString();
+                    reason += "'";
                 }
+                
 
-                string commandText = "INSERT INTO AllTickets VALUES(2, 'True', 'Test', 'Test', 'Test', '2', NULL, '6/8/2023 3:55:00 PM', '6/8/2023 3:55:00 PM', NULL)";
+                string commandText = "INSERT INTO AllTickets VALUES(";
+                commandText += t.id.ToString();
+                commandText += SPACE;
+                commandText += "'" + t.status.ToString() + "'";
+                commandText += SPACE;
+                commandText += "'" + t.callerID + "'";
+                commandText += SPACE;
+                commandText += "'" + t.creatorID + "'";
+                commandText += SPACE;
+                commandText += "'" + t.title + "'";
+                commandText += SPACE;
+                commandText += "'" + t.urgency.ToString() + "'";
+                commandText += SPACE;
+                commandText += reason;
+                commandText += SPACE;
+                commandText += "'" + t.created.ToString() + "'";
+                commandText += SPACE;
+                commandText += "'" + t.updated.ToString() + "'"; ;
+                commandText += SPACE;
+                commandText += commentsAll;
+                commandText += ");";
+
+                connection.Open();
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                Debug.Log(commandText);
+
+                //commandText = "INSERT INTO AllTickets VALUES(2, 'True', 'Test', 'Test', 'Test', '2', NULL, '6/8/2023 3:55:00 PM', '6/8/2023 3:55:00 PM', NULL)";
+
+
+
                 /*
                 string commandText = "INSERT INTO AllTickets (Id, STATUS, CALLER, CREATOR, TITLE, URGENCY, RESOLVEREASON, CREATED, UPDATED, COMMENTS)";
                 commandText += "\nVALUES (" + t.id + ", " + t.status.ToString() + ", " + t.callerID + ", " + t.callerID + ", " + t.title + ", " + t.urgency + ", " + reason + ", " + t.created + ", " + t.updated + ", " + commentsAll + ");";
@@ -118,12 +163,6 @@ namespace TicketingSystem.Framework
                 connection.Close();
             }
         }
-
-        private static void DeleteTicket(int _id)
-        {
-
-        }
-
 
         private bool GetTicketInfo(int _id)
         {
@@ -161,7 +200,7 @@ namespace TicketingSystem.Framework
                         updated = sqlReader.GetDateTime(8);
                         try
                         {
-                            comments = (sqlReader.GetString(9)).Split(' ').ToList();
+                            comments = (sqlReader.GetString(9)).Split('♦').ToList();
                         }
                         catch (System.Data.SqlTypes.SqlNullValueException)
                         {
@@ -186,19 +225,6 @@ namespace TicketingSystem.Framework
             }
             return false;
         } 
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         enum RESOLVEREASON : int
         {

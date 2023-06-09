@@ -41,7 +41,8 @@ namespace TicketingSystem
                 // or another that follows the correct interface
             }
 
-            Debug.Log(User.HashString("password"));
+            Ticket t = Ticket.CreateNew("testing123", "testing123", "testing123", 2, DateTime.Now);
+            Debug.Log(DateTime.Now.ToString());
             Debug.Log("application started");
 
             if (LoggedIn)
