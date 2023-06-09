@@ -5,10 +5,21 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TicketingSystem.Frames"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="900" d:DesignWidth="1600"
       Title="MyAccount">
 
-    <Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="329,203,0,0" TextWrapping="Wrap" Text="My Account" VerticalAlignment="Top" Height="55" Width="159" Background="White"/>
+    <Grid Background="#FF111122">
+        <Grid HorizontalAlignment="Center" Height="400" VerticalAlignment="Center" Width="745">
+            <Grid Margin="0,50,0,64">
+                <StackPanel Margin="10,0,0,-74">
+                    <Label FontWeight="Bold" HorizontalContentAlignment="Center" Content="Change Password" HorizontalAlignment="Center" Margin="0,0,0,20" VerticalAlignment="Top" Width="300" Foreground="#FFF9F9F9" FontSize="32" FontFamily="{DynamicResource Epilogue}"/>
+                    <TextBox x:Name="OldPassword" FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" HorizontalAlignment="Center" VerticalContentAlignment="Center" Padding="10" Height="80" Margin="0,0,0,22" Foreground="#FF111122" FontSize="32" TextWrapping="NoWrap" Text="Old Password" Width="745"/>
+                    <TextBox x:Name="NewPassword" FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" HorizontalAlignment="Center" VerticalContentAlignment="Center" Padding="10" Height="80" Margin="0,0,0,22" Foreground="#FF111122" FontSize="32" TextWrapping="NoWrap" Text="New Password" Width="745"/>
+                    <TextBox x:Name="ConfirmNewPassword" FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" HorizontalAlignment="Center" VerticalContentAlignment="Center" Padding="10" Height="80" Margin="0,0,0,22" Foreground="#FF111122" FontSize="32" TextWrapping="NoWrap" Text="New Password" Width="745"/>
+                </StackPanel>
+            </Grid>
+            <Button Content="Apply" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="300" Height="64" Click="ButtonClick_ApplyPassword" Margin="0,0,0,-80" FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFF9F9F9" FontSize="32" BorderBrush="#00000000" Background="#FF0066FF"/>
+        </Grid>
+
     </Grid>
 </Page>

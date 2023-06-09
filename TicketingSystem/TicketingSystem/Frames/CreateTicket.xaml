@@ -28,18 +28,18 @@
             
             <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="0,5">
                 <TextBlock Padding="3" FontSize="25" Margin="24.5, 0, 0, 0" Foreground="White">Title</TextBlock>
-                <TextBox Padding="3" Width="600" FontSize="25" Margin="24.5, 0, 0, 15">Steak Stuck in Toaster</TextBox>
+                <TextBox Name="Title"  Padding="3" Width="600" FontSize="25" Margin="24.5, 0, 0, 15">Steak Stuck in Toaster</TextBox>
                 <TextBlock Padding="3" FontSize="25" Margin="24.5, 0, 0, 0" Foreground="White">Urgency</TextBlock>
-                <ComboBox Padding="3" FontSize="25" Margin="24.5, 0, 0, 15">
+                <ComboBox Name="Urgency" Padding="3" FontSize="25" Margin="24.5, 0, 0, 15">
                     <ComboBoxItem Content="Low"></ComboBoxItem>
                     <ComboBoxItem Content="Medium"></ComboBoxItem>
                     <ComboBoxItem Content="High"></ComboBoxItem>
                 </ComboBox>
                 <TextBlock Padding="3" FontSize="25" Margin="24.5, 0, 0, 0" Foreground="White">Created For</TextBlock>
-                <TextBox Padding="3" FontSize="25" Margin="24.5, 0, 0, 15">John Banks</TextBox>
+                <TextBox Name="CreatedFor" Padding="3" FontSize="25" Margin="24.5, 0, 0, 15">John Banks</TextBox>
 
                 <TextBlock Padding="3" FontSize="25" Margin="24.5, 0, 0, 0" Foreground="White">Created By</TextBlock>
-                <TextBlock Padding="3" FontSize="25" Margin="24.5, 0, 0, 0" Background="White"><Run Text="Steve Pond"/></TextBlock>
+                <TextBlock Name="CreatedBy"  Padding="3" FontSize="25" Margin="24.5, 0, 0, 0" Background="White"><Run Text="Steve Pond"/></TextBlock>
 
             </StackPanel>
 
