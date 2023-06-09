@@ -23,8 +23,15 @@ namespace TicketingSystem.Frames
         public Login()
         {
             InitializeComponent();
+            ResetText();
         }
-
+        public void ResetText()
+        {
+            LoginUserName.Text = "Username";
+            LoginPassword.Text = "Password";
+            LoginUserName.Foreground = Brushes.Gray;
+            LoginPassword.Foreground = Brushes.Gray;
+        }
         private void ButtonClick_Login(object sender, RoutedEventArgs e)
         {
             ((MainWindow)Application.Current.MainWindow).LoginActivation(LoginUserName.Text, LoginPassword.Text);
@@ -67,6 +74,14 @@ namespace TicketingSystem.Frames
             {
                 textBox.Text = "Password";
                 textBox.Foreground = Brushes.Gray; // Set the desired ghost text color
+            }
+        }
+
+        private void OnKeyDownHandler(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return || e.Key == Key.Enter)
+            {
+                ((MainWindow)Application.Current.MainWindow).LoginActivation(LoginUserName.Text, LoginPassword.Text);
             }
         }
 

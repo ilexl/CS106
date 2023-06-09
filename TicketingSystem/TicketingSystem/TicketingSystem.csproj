@@ -213,6 +213,7 @@
     <Resource Include="Resources\Icons\terminal.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Icons\logout.png" />
     <Content Include="Server\Tickets.mdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
