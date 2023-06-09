@@ -18,6 +18,10 @@
         <!-- Sidebar -->
         <Grid Name="SideBarHolder" Width="330" Background="#FF10152D" HorizontalAlignment="Left" Grid.Column="0">
             <!-- Add your sidebar content here -->
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="100"></RowDefinition>
+            </Grid.RowDefinitions>
             <StackPanel Orientation="Vertical" Margin="325,0,0,0" Background="#FFF9F9F9"/>
             <StackPanel  Margin="0,15,5,0">
                 <Grid>
@@ -61,12 +65,17 @@
                         </Button>
                     </StackPanel>
                 </Grid>
-                <Grid>
-
-                    <!-- The bottom of the side nav -->
-                </Grid>
+                
             </StackPanel>
-
+            <Grid Grid.Row="1">
+                <Button Name="Logout" Click="Logout_Click" Margin="10" Background="#00000000" BorderBrush="#00000000" Foreground="#FFF9F9F9">
+                    <StackPanel Orientation="Horizontal" Width="305" >
+                        <Image HorizontalAlignment="Left" Height="33" Width="33" Source="./Resources/Icons/logout.png" Margin="10,3,10,7"/>
+                        <TextBlock HorizontalAlignment="Left" FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" Height="38" Foreground="#FFF9F9F9" FontSize="32" TextWrapping="NoWrap" Text="Log Out"/>
+                    </StackPanel>
+                </Button>
+                <!-- The bottom of the side nav -->
+            </Grid>
         </Grid>
 
         <!-- Main content area -->

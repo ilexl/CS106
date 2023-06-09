@@ -71,6 +71,15 @@ namespace TicketingSystem
 
 
 #region LOGIN_STUFF
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            user = new User();
+            LoggedIn = false;
+            MainWindowVisability(LoggedIn);
+            LoginWindowVisability(true);
+            ((TicketingSystem.Frames.Login)Login.Content).ResetText();
+        }
+
         /// <summary>
         /// Hides or Shows the main window and nav bar
         /// </summary>
@@ -93,8 +102,8 @@ namespace TicketingSystem
         {
             if (shown)
             {
-                Login.Visibility = Visibility.Visible;
                 Login.Navigate(new Uri("./Frames/Login.xaml", UriKind.Relative));
+                Login.Visibility = Visibility.Visible;
             }
             else
             {
@@ -222,5 +231,7 @@ namespace TicketingSystem
             sidenav.Children.Add(main);
         }
         #endregion
+
+        
     }
 }

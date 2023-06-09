@@ -23,11 +23,66 @@ namespace TicketingSystem.Frames
         public Login()
         {
             InitializeComponent();
+            ResetText();
         }
-
+        public void ResetText()
+        {
+            LoginUserName.Text = "Username";
+            LoginPassword.Text = "Password";
+            LoginUserName.Foreground = Brushes.Gray;
+            LoginPassword.Foreground = Brushes.Gray;
+        }
         private void ButtonClick_Login(object sender, RoutedEventArgs e)
         {
             ((MainWindow)Application.Current.MainWindow).LoginActivation(LoginUserName.Text, LoginPassword.Text);
+        }
+
+        private void UTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (textBox.Text == "Username")
+            {
+                textBox.Text = string.Empty;
+                textBox.Foreground = Brushes.Black; // Set the desired text color
+            }
+        }
+
+        private void UTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (string.IsNullOrEmpty(textBox.Text))
+            {
+                textBox.Text = "Username";
+                textBox.Foreground = Brushes.Gray; // Set the desired ghost text color
+            }
+        }
+
+        private void PTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (textBox.Text == "Password")
+            {
+                textBox.Text = string.Empty;
+                textBox.Foreground = Brushes.Black; // Set the desired text color
+            }
+        }
+
+        private void PTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (string.IsNullOrEmpty(textBox.Text))
+            {
+                textBox.Text = "Password";
+                textBox.Foreground = Brushes.Gray; // Set the desired ghost text color
+            }
+        }
+
+        private void OnKeyDownHandler(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return || e.Key == Key.Enter)
+            {
+                ((MainWindow)Application.Current.MainWindow).LoginActivation(LoginUserName.Text, LoginPassword.Text);
+            }
         }
 
     }

@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Windows;
 using System.Security.Cryptography;
-using System.Text;
 
 namespace TicketingSystem.Framework
 {
