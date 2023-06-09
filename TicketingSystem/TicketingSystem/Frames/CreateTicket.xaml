@@ -28,7 +28,7 @@
             
             <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="0,5">
                 <TextBlock Padding="3" FontSize="25" Margin="24.5, 0, 0, 0" Foreground="White">Title</TextBlock>
-                <TextBox Name="Title"  Padding="3" Width="600" FontSize="25" Margin="24.5, 0, 0, 15">Steak Stuck in Toaster</TextBox>
+                <TextBox Name="TitleInput"  Padding="3" Width="600" FontSize="25" Margin="24.5, 0, 0, 15">Steak Stuck in Toaster</TextBox>
                 <TextBlock Padding="3" FontSize="25" Margin="24.5, 0, 0, 0" Foreground="White">Urgency</TextBlock>
                 <ComboBox Name="Urgency" Padding="3" FontSize="25" Margin="24.5, 0, 0, 15">
                     <ComboBoxItem Content="Low"></ComboBoxItem>
