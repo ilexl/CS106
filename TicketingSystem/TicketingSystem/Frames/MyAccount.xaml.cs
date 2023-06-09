@@ -31,26 +31,9 @@ namespace TicketingSystem.Frames
         private void ButtonClick_ApplyPassword(object sender, RoutedEventArgs e)
         {
             var window = (MainWindow)Application.Current.MainWindow;
-
-            //  CHECKS IF THE NEW PASSWORDS MATCHES, AND IF THE OLD PASSWORD MATCHES THEIR CURRENT PASSWORD
-            if (NewPassword.Text == ConfirmNewPassword.Text && OldPassword.Text == window.user.password)
+            if(NewPassword.Text == ConfirmNewPassword.Text)
             {
-                //  DISPOSES CONNECTION WHEN FINISHED
-                using (SqlConnection connection = new SqlConnection(connectionStringUsers))
-                {
-                    connection.Open();
-
-                    //  FILESTREAM / WRITER, ALLOWS INSERTING / UPDATING ROWS IN SQL
-                    SqlDataAdapter adapter = new SqlDataAdapter();
-
-                    string commandText = "UPDATE Users SET Password='" + NewPassword.Text + "' WHERE ID='" + window.user.ID + "';";
-
-                    adapter.InsertCommand = new SqlCommand(commandText, connection);
-
-                    adapter.InsertCommand.ExecuteNonQuery();
-
-                    connection.Close();
-                }
+                window.user.ChangePassword(OldPassword.Text, NewPassword.Text);
             }
         }
     }

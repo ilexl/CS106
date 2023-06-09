@@ -24,7 +24,7 @@ namespace TicketingSystem
     {
         public bool LoggedIn = false; // temp
         public User user = new User();
-        public const string connectionStringUsers = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Server\Users.mdf;Integrated Security=True";
+        //public const string connectionStringUsers = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Server\Users.mdf;Integrated Security=True";
        
         
         public MainWindow()
@@ -41,21 +41,8 @@ namespace TicketingSystem
                 // or another that follows the correct interface
             }
 
+            Debug.Log(User.HashString("password"));
             Debug.Log("application started");
-
-            Ticket.TestCreate();
-
-            bool worked = false;
-            Ticket known = new Ticket(2, out worked);
-            if (worked)
-            {
-                MessageBox.Show("Ticket Loaded");
-            }
-            else
-            {
-                MessageBox.Show("Ticket doesnt exist");
-            }
-            
 
             if (LoggedIn)
             {
@@ -234,10 +221,5 @@ namespace TicketingSystem
             sidenav.Children.Add(main);
         }
         #endregion
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

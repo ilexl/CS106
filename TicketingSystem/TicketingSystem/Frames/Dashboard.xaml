@@ -5,11 +5,110 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TicketingSystem.Frames"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="900" d:DesignWidth="1270"
       Title="Dashboard">
 
-    <Grid>
-        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Dashboard" VerticalAlignment="Center" Height="55" Width="159" Background="White"/>
+    <Grid Background="#111122">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        
+        <Grid Grid.Row="0" Grid.Column="0">
+            <TextBlock Name="Header" Margin="24.5,27.5" TextWrapping="Wrap" Text="Dashboard" VerticalAlignment="Top" HorizontalAlignment="Left" Height="55" Width="159" Background="Transparent" FontSize="30" Foreground="White" FontWeight="Bold" FontFamily="Epilogue"/>
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="0">
+
+            <Button Name="OT" Margin="24.5,27.5" >
+                <TextBlock TextAlignment="Center" TextWrapping="Wrap" Width="200" Background="Transparent" Foreground="White" FontWeight="Bold" FontSize="40" FontFamily="Epilogue">Open Tickets</TextBlock>
+                <Button.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="#0066FF"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#0044BB"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Button Name="CT" Margin="24.5,27.5">
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center" Width="200" Background="Transparent" Foreground="White" FontWeight="Bold" FontSize="40" FontFamily="Epilogue">Closed Tickets</TextBlock>
+                <Button.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="#0066FF"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#0044BB"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            
+        </Grid>
+        
+        <Grid Grid.Row="1" Grid.Column="2">
+            <Button Name="CRT" Margin="24.5,27.5">
+                <TextBlock TextAlignment="Center" TextWrapping="Wrap" Width="200" Background="Transparent" Foreground="White" FontWeight="Bold" FontSize="40" FontFamily="Epilogue">Create Tickets</TextBlock>
+                <Button.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="#0066FF"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#0044BB"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </Grid>
     </Grid>
 </Page>

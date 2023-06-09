@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Windows;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace TicketingSystem.Framework
 {
@@ -19,7 +21,7 @@ namespace TicketingSystem.Framework
         public string firstName;
         public string lastName;
         
-        public bool ConnectToDatabase(string _ID, string _Password)
+        public bool ConnectToDatabase(string _ID, string _NonHashedPassword)
         {
             var window = (MainWindow)Application.Current.MainWindow;
 
@@ -30,6 +32,8 @@ namespace TicketingSystem.Framework
 
                 SqlDataReader sqlReader;                    //  FILESTREAM / READER, MAKES THE DATA INDEXABLE
                 SqlCommand command = new SqlCommand();      //  USED TO SPECIFY THE SQL QUERY
+
+                string _Password = HashString(_NonHashedPassword);
 
                 command.Connection = connection;            //  SPECIFIES THE CONNECTION THAT THE COMMAND WILL BE USED IN
                 command.CommandText = "SELECT * FROM Users WHERE (ID='" + _ID + "' OR Email='" + _ID + "') AND Password='" + _Password + "';";
@@ -71,6 +75,42 @@ namespace TicketingSystem.Framework
             Tech = 2,
             Admin = 3,
             Test = 4
+        }
+
+        public static string HashString(string nonHashString)
+        {
+            byte[] tmpSource;
+            byte[] tmpHash;
+            tmpSource = ASCIIEncoding.ASCII.GetBytes(nonHashString);
+            tmpHash = new MD5CryptoServiceProvider().ComputeHash(tmpSource);
+            StringBuilder sOutput = new StringBuilder(tmpHash.Length);
+            for (int i = 0; i < tmpHash.Length; i++)
+            {
+                sOutput.Append(tmpHash[i].ToString("X2"));
+            }
+            return sOutput.ToString();
+        }
+
+        public void ChangePassword(string oldPassword, string newPassword)
+        {
+            oldPassword = HashString(oldPassword);
+            newPassword = HashString(newPassword);
+            //  CHECKS IF THE NEW PASSWORDS MATCHES, AND IF THE OLD PASSWORD MATCHES THEIR CURRENT PASSWORD
+            if (oldPassword == password)
+            {
+                //  DISPOSES CONNECTION WHEN FINISHED
+                using (SqlConnection connection = new SqlConnection(connectionStringUsers))
+                {
+                    connection.Open();
+
+                    //  FILESTREAM / WRITER, ALLOWS INSERTING / UPDATING ROWS IN SQL
+                    SqlDataAdapter adapter = new SqlDataAdapter();
+                    string commandText = "UPDATE Users SET Password='" + newPassword + "' WHERE ID='" + ID + "';";
+                    adapter.InsertCommand = new SqlCommand(commandText, connection);
+                    adapter.InsertCommand.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
         }
     }
 }
