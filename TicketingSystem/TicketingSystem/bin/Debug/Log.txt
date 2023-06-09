@@ -3,3 +3,6 @@
 6/7/2023 2:34:31 PM - Message - ViewTickets.xaml opened
 6/7/2023 2:34:32 PM - Message - CreateTicket.xaml opened
 6/7/2023 2:34:32 PM - Message - MyAccount.xaml opened
+6/9/2023 1:20:17 PM - Message - application started
+6/9/2023 1:20:24 PM - Message - application started
+6/9/2023 1:20:30 PM - Message - application started
