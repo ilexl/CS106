@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\270168960\OneDrive - UP Education\Desktop\CS106\TicketingSystem\TicketingSystem\obj\Debug\
+C:\Users\lxcrg\OneDrive\Documents\GitHub\CS106\TicketingSystem\TicketingSystem\obj\Debug\
 TicketingSystem
 none
 false
 DEBUG;TRACE
-C:\Users\270168960\OneDrive - UP Education\Desktop\CS106\TicketingSystem\TicketingSystem\App.xaml
-101483861943
-4-816640392
-171404422380
-13-1505183044
+C:\Users\lxcrg\OneDrive\Documents\GitHub\CS106\TicketingSystem\TicketingSystem\App.xaml
+10-1412414369
+4-674950046
+18-30994795
+13-1310406943
 Frames\ClosedTickets.xaml;Frames\CreateTicket.xaml;Frames\Dashboard.xaml;Frames\Login.xaml;Frames\MyAccount.xaml;Frames\Console.xaml;Frames\Settings.xaml;Frames\ViewAccounts.xaml;Frames\ViewTickets.xaml;MainWindow.xaml;
 
-False
+True
 
