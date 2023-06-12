@@ -1,8 +1,2 @@
-
-TicketingSystem/TicketingSystem/bin/Debug/Server/Tickets.mdf
-TicketingSystem/TicketingSystem/bin/Debug/Server/Users_log.ldf
-TicketingSystem/TicketingSystem/bin/Debug/Server/Users_log.ldf
-TicketingSystem/TicketingSystem/obj/Debug/DesignTimeResolveAssemblyReferences.cache
-TicketingSystem/TicketingSystem/obj/Debug/TicketingSystem.csprojAssemblyReference.cache
-TicketingSystem/TicketingSystem/obj/Debug/TicketingSystem_MarkupCompile.i.lref
-TicketingSystem/TicketingSystem/bin/Debug/Server/Users_log.ldf
+TicketingSystem/TicketingSystem/bin/
+TicketingSystem/TicketingSystem/obj/
