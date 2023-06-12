@@ -14,10 +14,13 @@
                 <StackPanel>
                     <Label FontWeight="Bold" HorizontalContentAlignment="Center" Content="Log In" HorizontalAlignment="Center" Margin="0,0,0,20" VerticalAlignment="Top" Width="174" Foreground="#FFF9F9F9" FontSize="32" FontFamily="{DynamicResource Epilogue}"/>
                     <TextBox KeyDown="OnKeyDownHandler" GotFocus="UTextBox_GotFocus" LostFocus="UTextBox_LostFocus" x:Name="LoginUserName" FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" HorizontalAlignment="Center" VerticalContentAlignment="Center" Padding="10" Height="80" Margin="0,0,0,22" Foreground="Gray" FontSize="32" TextWrapping="NoWrap" Text="Username" Width="745" />
-                    <TextBox KeyDown="OnKeyDownHandler" GotFocus="PTextBox_GotFocus" LostFocus="PTextBox_LostFocus" x:Name="LoginPassword" FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" HorizontalAlignment="Center" VerticalContentAlignment="Center" Padding="10" Height="80" Margin="0,0,0,22" Foreground="Gray" FontSize="32" TextWrapping="NoWrap" Text="Password" Width="745"/>
+                    <Grid>
+                        <PasswordBox VerticalAlignment="Center" PasswordChar="*" MaxLength="32" Visibility="Visible" KeyDown="OnKeyDownHandler" GotFocus="PTextBox_GotFocus" LostFocus="PTextBox_LostFocus" x:Name="LoginPassword" FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" HorizontalAlignment="Center" VerticalContentAlignment="Center" Padding="10" Height="80" Margin="0,0,0,22" Foreground="Gray" FontSize="32" Width="745"/>
+                        <TextBlock Cursor="IBeam"  PreviewMouseDown="PasswordGhostText_PreviewMouseDown"  x:Name="PasswordGhostText" VerticalAlignment="Center" Visibility="Visible" Text="Password" Margin="0, 0, 0, 20" FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" Padding="10" Foreground="Gray" FontSize="32" TextWrapping="NoWrap"/>
+                    </Grid>
                 </StackPanel>
             </Grid>
-            <Button Content="Log In" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="300" Height="64" Click="ButtonClick_Login" Margin="145,250,0,0" FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFF9F9F9" FontSize="32" BorderBrush="#00000000" Background="#FF0066FF"/>
+            <Button x:Name="LoginButton" Content="Log In" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="300" Height="64" Click="ButtonClick_Login" Margin="145,250,0,0" FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFF9F9F9" FontSize="32" BorderBrush="#00000000" Background="#FF0066FF"/>
         </Grid>
 
     </Grid>
