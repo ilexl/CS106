@@ -18,9 +18,9 @@ namespace TicketingSystem.Frames
     /// <summary>
     /// Interaction logic for ViewTickets.xaml
     /// </summary>
-    public partial class ViewTickets : Page
+    public partial class ViewSpecificTickets : Page
     {
-        public ViewTickets()
+        public ViewSpecificTickets()
         {
             InitializeComponent();
         }
