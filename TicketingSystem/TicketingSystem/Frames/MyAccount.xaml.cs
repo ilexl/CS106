@@ -40,9 +40,9 @@ namespace TicketingSystem.Frames
 
             if (oldPasswordFocused && newPasswordFocused && confirmPasswordFocused)
             {
-                if (NewPassword.Text == ConfirmNewPassword.Text)
+                if (NewPassword.Password == ConfPassword.Password)
                 {
-                    if (!window.user.ChangePassword(OldPassword.Text, NewPassword.Text))
+                    if (!window.user.ChangePassword(OldPassword.Password, NewPassword.Password))
                     {
                         ResetText();
                         MessageBoxResult wrongOldPass = MessageBox.Show("Old password is incorrect!");
@@ -69,9 +69,14 @@ namespace TicketingSystem.Frames
         public void ResetText()
         {
             var window = (MainWindow)Application.Current.MainWindow;
-            OldPassword.Text = "Old password";
-            NewPassword.Text = "New password";
-            ConfirmNewPassword.Text = "Confirm new password";
+            OldPassword.Password = string.Empty;
+            NewPassword.Password = string.Empty;
+            ConfPassword.Password = string.Empty;
+
+            PasswordGhostText.Visibility = Visibility.Visible;
+            NewPasswordGhostText.Visibility = Visibility.Visible;
+            ConfPasswordGhostText.Visibility = Visibility.Visible;
+
             if (window.user.email == null)
             {
                 Email.Text = "No e-mail address found.";
@@ -84,76 +89,57 @@ namespace TicketingSystem.Frames
             AccountIDTextBlock.Text = "#" + window.user.ID;
             NameTextBlock.Text = window.user.firstName + " " + window.user.lastName;
 
-            OldPassword.Foreground = Brushes.Gray;
-            NewPassword.Foreground = Brushes.Gray;
-            ConfirmNewPassword.Foreground = Brushes.Gray;
-
             ApplyButton.Focus();
         }
 
         private void OldPassTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            TextBox textBox = (TextBox)sender;
-            if (textBox.Text == "Old password")
-            {
-                oldPasswordFocused = true;
-                textBox.Text = string.Empty;
-                textBox.Foreground = Brushes.Black; // Set the desired text color
-            }
+            PasswordBox textBox = (PasswordBox)sender;
+            oldPasswordFocused = true;
+            PasswordGhostText.Visibility = Visibility.Hidden;
         }
 
         private void OldPassTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            TextBox textBox = (TextBox)sender;
-            if (string.IsNullOrEmpty(textBox.Text))
+            PasswordBox textBox = (PasswordBox)sender;
+            if (string.IsNullOrEmpty(textBox.Password))
             {
                 oldPasswordFocused = false;
-                textBox.Text = "Old password";
-                textBox.Foreground = Brushes.Gray; // Set the desired ghost text color
+                PasswordGhostText.Visibility = Visibility.Visible;
             }
         }
 
         private void NewPassTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            TextBox textBox = (TextBox)sender;
-            if (textBox.Text == "New password")
-            {
-                newPasswordFocused = true;
-                textBox.Text = string.Empty;
-                textBox.Foreground = Brushes.Black; // Set the desired text color
-            }
+            PasswordBox textBox = (PasswordBox)sender;
+            newPasswordFocused = true;
+            NewPasswordGhostText.Visibility = Visibility.Hidden;
         }
 
         private void NewPassTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            TextBox textBox = (TextBox)sender;
-            if (string.IsNullOrEmpty(textBox.Text))
+            PasswordBox textBox = (PasswordBox)sender;
+            if (string.IsNullOrEmpty(textBox.Password))
             {
                 newPasswordFocused = false;
-                textBox.Text = "New password";
-                textBox.Foreground = Brushes.Gray; // Set the desired ghost text color
+                NewPasswordGhostText.Visibility = Visibility.Visible;
             }
         }
 
         private void ConfPassTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            TextBox textBox = (TextBox)sender;
-            if (textBox.Text == "Confirm new password")
-            {
-                confirmPasswordFocused = true;
-                textBox.Text = string.Empty;
-                textBox.Foreground = Brushes.Black; // Set the desired text color
-            }
+            PasswordBox textBox = (PasswordBox)sender;
+            confirmPasswordFocused = true;
+            ConfPasswordGhostText.Visibility = Visibility.Hidden;
         }
 
         private void ConfPassTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            TextBox textBox = (TextBox)sender;
-            if (string.IsNullOrEmpty(textBox.Text))
+            PasswordBox textBox = (PasswordBox)sender;
+            if (string.IsNullOrEmpty(textBox.Password))
             {
                 confirmPasswordFocused = false;
-                textBox.Text = "Confirm new password";
-                textBox.Foreground = Brushes.Gray; // Set the desired ghost text color
+                ConfPasswordGhostText.Visibility = Visibility.Visible;
             }
         }
 
@@ -206,12 +192,16 @@ namespace TicketingSystem.Frames
                 
                 if (oldPasswordFocused && newPasswordFocused && confirmPasswordFocused)
                 {
-                    if (NewPassword.Text == ConfirmNewPassword.Text)
+                    if (NewPassword.Password == ConfPassword.Password)
                     {
-                        if (!window.user.ChangePassword(OldPassword.Text, NewPassword.Text))
+                        if (!window.user.ChangePassword(OldPassword.Password, NewPassword.Password))
                         {
                             ResetText();
                             MessageBoxResult wrongOldPass = MessageBox.Show("Old password is incorrect!");
+                        }
+                        else
+                        {
+                            MessageBoxResult successfullyChangedPassword = MessageBox.Show("Successfully updated password!");
                         }
                     }
                     else
@@ -226,11 +216,27 @@ namespace TicketingSystem.Frames
                     if (Email.Text != window.user.email)
                     {
                         window.user.ChangeEmail(Email.Text);
+                        MessageBoxResult successfullyChangedPassword = MessageBox.Show("Successfully updated e-mail address!");
                     }
                 }
 
                 ResetText();
             }
+        }
+
+        private void NewPasswordGhostText_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            NewPassword.Focus();
+        }
+
+        private void PasswordGhostText_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            OldPassword.Focus();
+        }
+
+        private void ConfPasswordGhostText_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            ConfPassword.Focus();
         }
     }
 }
