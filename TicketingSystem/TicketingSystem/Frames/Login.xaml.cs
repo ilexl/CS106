@@ -34,7 +34,11 @@ namespace TicketingSystem.Frames
         }
         private void ButtonClick_Login(object sender, RoutedEventArgs e)
         {
-            ((MainWindow)Application.Current.MainWindow).LoginActivation(LoginUserName.Text, LoginPassword.Text);
+            if(!((MainWindow)Application.Current.MainWindow).LoginActivation(LoginUserName.Text, LoginPassword.Text))
+            {
+                ResetText();
+                MessageBoxResult wrongCredentials = MessageBox.Show("Incorrect credentials!");
+            }
         }
 
         private void UTextBox_GotFocus(object sender, RoutedEventArgs e)
@@ -81,7 +85,11 @@ namespace TicketingSystem.Frames
         {
             if (e.Key == Key.Return || e.Key == Key.Enter)
             {
-                ((MainWindow)Application.Current.MainWindow).LoginActivation(LoginUserName.Text, LoginPassword.Text);
+                if (!((MainWindow)Application.Current.MainWindow).LoginActivation(LoginUserName.Text, LoginPassword.Text))
+                {
+                    ResetText();
+                    MessageBoxResult wrongCredentials = MessageBox.Show("Incorrect credentials!");
+                }
             }
         }
 

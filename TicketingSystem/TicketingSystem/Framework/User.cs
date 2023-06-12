@@ -90,7 +90,7 @@ namespace TicketingSystem.Framework
             return sOutput.ToString();
         }
 
-        public void ChangePassword(string oldPassword, string newPassword)
+        public bool ChangePassword(string oldPassword, string newPassword)
         {
             oldPassword = HashString(oldPassword);
             newPassword = HashString(newPassword);
@@ -109,6 +109,11 @@ namespace TicketingSystem.Framework
                     adapter.InsertCommand.ExecuteNonQuery();
                     connection.Close();
                 }
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }
