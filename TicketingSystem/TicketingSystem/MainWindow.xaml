@@ -7,8 +7,6 @@
         mc:Ignorable="d"
         Title="Ticketing Software" Height="900" Width="1600" MinHeight="900" MinWidth="1600">
 
-
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="330"></ColumnDefinition>

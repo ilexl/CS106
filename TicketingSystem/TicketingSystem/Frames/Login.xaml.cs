@@ -28,13 +28,20 @@ namespace TicketingSystem.Frames
         public void ResetText()
         {
             LoginUserName.Text = "Username";
-            LoginPassword.Text = "Password";
+            LoginPassword.Password = string.Empty;
+            PasswordGhostText.Visibility = Visibility.Visible;
             LoginUserName.Foreground = Brushes.Gray;
-            LoginPassword.Foreground = Brushes.Gray;
+            //LoginPassword.Foreground = Brushes.Gray;
+
+            LoginButton.Focus();
         }
         private void ButtonClick_Login(object sender, RoutedEventArgs e)
         {
-            ((MainWindow)Application.Current.MainWindow).LoginActivation(LoginUserName.Text, LoginPassword.Text);
+            if(!((MainWindow)Application.Current.MainWindow).LoginActivation(LoginUserName.Text, LoginPassword.Password))
+            {
+                ResetText();
+                MessageBoxResult wrongCredentials = MessageBox.Show("Incorrect credentials!");
+            }
         }
 
         private void UTextBox_GotFocus(object sender, RoutedEventArgs e)
@@ -59,21 +66,19 @@ namespace TicketingSystem.Frames
 
         private void PTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            TextBox textBox = (TextBox)sender;
-            if (textBox.Text == "Password")
+            PasswordBox textBox = (PasswordBox)sender;
+            if (string.IsNullOrEmpty(textBox.Password))
             {
-                textBox.Text = string.Empty;
-                textBox.Foreground = Brushes.Black; // Set the desired text color
+                PasswordGhostText.Visibility = Visibility.Hidden;
             }
         }
 
         private void PTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            TextBox textBox = (TextBox)sender;
-            if (string.IsNullOrEmpty(textBox.Text))
+            PasswordBox textBox = (PasswordBox)sender;
+            if (string.IsNullOrEmpty(textBox.Password))
             {
-                textBox.Text = "Password";
-                textBox.Foreground = Brushes.Gray; // Set the desired ghost text color
+                PasswordGhostText.Visibility = Visibility.Visible;
             }
         }
 
@@ -81,9 +86,17 @@ namespace TicketingSystem.Frames
         {
             if (e.Key == Key.Return || e.Key == Key.Enter)
             {
-                ((MainWindow)Application.Current.MainWindow).LoginActivation(LoginUserName.Text, LoginPassword.Text);
+                if (!((MainWindow)Application.Current.MainWindow).LoginActivation(LoginUserName.Text, LoginPassword.Password))
+                {
+                    ResetText();
+                    MessageBoxResult wrongCredentials = MessageBox.Show("Incorrect credentials!");
+                }
             }
         }
 
+        private void PasswordGhostText_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            LoginPassword.Focus();
+        }
     }
 }

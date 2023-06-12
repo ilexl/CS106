@@ -111,7 +111,7 @@ namespace TicketingSystem
             }
         }
 
-        public void LoginActivation(string username, string password)
+        public bool LoginActivation(string username, string password)
         {
             if (user.ConnectToDatabase(username, password))
             {
@@ -121,6 +121,12 @@ namespace TicketingSystem
 
                 // Temp
                 GenerateSideNavButtons((User.Type)user.userType);
+
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 #endregion
