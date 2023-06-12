@@ -6,6 +6,7 @@
     <Application.Resources>
 
         <FontFamily x:Key="Epilogue">Epilogue</FontFamily>
+        <FontFamily x:Key="Inter">/TicketingSystem;component/Resources/#Inter Thin</FontFamily>
 
     </Application.Resources>
 </Application>

@@ -37,6 +37,7 @@ C:\Users\270168960\OneDrive - UP Education\Desktop\CS106\TicketingSystem\Ticketi
 C:\Users\270168960\OneDrive - UP Education\Desktop\CS106\TicketingSystem\TicketingSystem\obj\Debug\TicketingSystem_Content.g.cs
 C:\Users\270168960\OneDrive - UP Education\Desktop\CS106\TicketingSystem\TicketingSystem\bin\Debug\Server\Users.mdf
 C:\Users\270168960\OneDrive - UP Education\Desktop\CS106\TicketingSystem\TicketingSystem\bin\Debug\Server\Users_log.ldf
+<<<<<<< HEAD
 C:\Users\270045020\source\repos\CS105_Assesment_Scenario_4\CS106\TicketingSystem\TicketingSystem\bin\Debug\Server\Tickets.mdf
 C:\Users\270045020\source\repos\CS105_Assesment_Scenario_4\CS106\TicketingSystem\TicketingSystem\bin\Debug\Server\Tickets_log.ldf
 C:\Users\270045020\source\repos\CS105_Assesment_Scenario_4\CS106\TicketingSystem\TicketingSystem\bin\Debug\Server\Users.mdf
@@ -76,3 +77,44 @@ C:\Users\270045020\source\repos\CS105_Assesment_Scenario_4\CS106\TicketingSystem
 C:\Users\270045020\source\repos\CS105_Assesment_Scenario_4\CS106\TicketingSystem\TicketingSystem\obj\Debug\TicketingSystem.csproj.CoreCompileInputs.cache
 C:\Users\270045020\source\repos\CS105_Assesment_Scenario_4\CS106\TicketingSystem\TicketingSystem\obj\Debug\TicketingSystem.exe
 C:\Users\270045020\source\repos\CS105_Assesment_Scenario_4\CS106\TicketingSystem\TicketingSystem\obj\Debug\TicketingSystem.pdb
+=======
+C:\Users\270213207\OneDrive - UP Education\Desktop\CS106\CS106\TicketingSystem\TicketingSystem\bin\Debug\Server\Tickets.mdf
+C:\Users\270213207\OneDrive - UP Education\Desktop\CS106\CS106\TicketingSystem\TicketingSystem\bin\Debug\Server\Tickets_log.ldf
+C:\Users\270213207\OneDrive - UP Education\Desktop\CS106\CS106\TicketingSystem\TicketingSystem\bin\Debug\Server\Users.mdf
+C:\Users\270213207\OneDrive - UP Education\Desktop\CS106\CS106\TicketingSystem\TicketingSystem\bin\Debug\Server\Users_log.ldf
+C:\Users\270213207\OneDrive - UP Education\Desktop\CS106\CS106\TicketingSystem\TicketingSystem\bin\Debug\TicketingSystem.exe.config
+C:\Users\270213207\OneDrive - UP Education\Desktop\CS106\CS106\TicketingSystem\TicketingSystem\bin\Debug\TicketingSystem.exe
+C:\Users\270213207\OneDrive - UP Education\Desktop\CS106\CS106\TicketingSystem\TicketingSystem\bin\Debug\TicketingSystem.pdb
+C:\Users\270213207\OneDrive - UP Education\Desktop\CS106\CS106\TicketingSystem\TicketingSystem\obj\Debug\TicketingSystem.csprojAssemblyReference.cache
+C:\Users\270213207\OneDrive - UP Education\Desktop\CS106\CS106\TicketingSystem\TicketingSystem\obj\Debug\Frames\ClosedTickets.g.cs
+C:\Users\270213207\OneDrive - UP Education\Desktop\CS106\CS106\TicketingSystem\TicketingSystem\obj\Debug\Frames\CreateTicket.g.cs
+C:\Users\270213207\OneDrive - UP Education\Desktop\CS106\CS106\TicketingSystem\TicketingSystem\obj\Debug\Frames\Dashboard.g.cs
+C:\Users\270213207\OneDrive - UP Education\Desktop\CS106\CS106\TicketingSystem\TicketingSystem\obj\Debug\Frames\Login.g.cs
+C:\Users\270213207\OneDrive - UP Education\Desktop\CS106\CS106\TicketingSystem\TicketingSystem\obj\Debug\Frames\MyAccount.g.cs
+C:\Users\270213207\OneDrive - UP Education\Desktop\CS106\CS106\TicketingSystem\TicketingSystem\obj\Debug\Frames\Console.g.cs
+C:\Users\270213207\OneDrive - UP Education\Desktop\CS106\CS106\TicketingSystem\TicketingSystem\obj\Debug\Frames\Settings.g.cs
+C:\Users\270213207\OneDrive - UP Education\Desktop\CS106\CS106\TicketingSystem\TicketingSystem\obj\Debug\Frames\ViewAccounts.g.cs
+C:\Users\270213207\OneDrive - UP Education\Desktop\CS106\CS106\TicketingSystem\TicketingSystem\obj\Debug\Frames\ViewTickets.g.cs
+C:\Users\270213207\OneDrive - UP Education\Desktop\CS106\CS106\TicketingSystem\TicketingSystem\obj\Debug\MainWindow.g.cs
+C:\Users\270213207\OneDrive - UP Education\Desktop\CS106\CS106\TicketingSystem\TicketingSystem\obj\Debug\App.g.cs
+C:\Users\270213207\OneDrive - UP Education\Desktop\CS106\CS106\TicketingSystem\TicketingSystem\obj\Debug\TicketingSystem_Content.g.cs
+C:\Users\270213207\OneDrive - UP Education\Desktop\CS106\CS106\TicketingSystem\TicketingSystem\obj\Debug\TicketingSystem_MarkupCompile.cache
+C:\Users\270213207\OneDrive - UP Education\Desktop\CS106\CS106\TicketingSystem\TicketingSystem\obj\Debug\TicketingSystem_MarkupCompile.lref
+C:\Users\270213207\OneDrive - UP Education\Desktop\CS106\CS106\TicketingSystem\TicketingSystem\obj\Debug\App.baml
+C:\Users\270213207\OneDrive - UP Education\Desktop\CS106\CS106\TicketingSystem\TicketingSystem\obj\Debug\Frames\ClosedTickets.baml
+C:\Users\270213207\OneDrive - UP Education\Desktop\CS106\CS106\TicketingSystem\TicketingSystem\obj\Debug\Frames\CreateTicket.baml
+C:\Users\270213207\OneDrive - UP Education\Desktop\CS106\CS106\TicketingSystem\TicketingSystem\obj\Debug\Frames\Dashboard.baml
+C:\Users\270213207\OneDrive - UP Education\Desktop\CS106\CS106\TicketingSystem\TicketingSystem\obj\Debug\Frames\Login.baml
+C:\Users\270213207\OneDrive - UP Education\Desktop\CS106\CS106\TicketingSystem\TicketingSystem\obj\Debug\Frames\MyAccount.baml
+C:\Users\270213207\OneDrive - UP Education\Desktop\CS106\CS106\TicketingSystem\TicketingSystem\obj\Debug\Frames\Console.baml
+C:\Users\270213207\OneDrive - UP Education\Desktop\CS106\CS106\TicketingSystem\TicketingSystem\obj\Debug\Frames\Settings.baml
+C:\Users\270213207\OneDrive - UP Education\Desktop\CS106\CS106\TicketingSystem\TicketingSystem\obj\Debug\Frames\ViewAccounts.baml
+C:\Users\270213207\OneDrive - UP Education\Desktop\CS106\CS106\TicketingSystem\TicketingSystem\obj\Debug\Frames\ViewTickets.baml
+C:\Users\270213207\OneDrive - UP Education\Desktop\CS106\CS106\TicketingSystem\TicketingSystem\obj\Debug\MainWindow.baml
+C:\Users\270213207\OneDrive - UP Education\Desktop\CS106\CS106\TicketingSystem\TicketingSystem\obj\Debug\TicketingSystem.g.resources
+C:\Users\270213207\OneDrive - UP Education\Desktop\CS106\CS106\TicketingSystem\TicketingSystem\obj\Debug\TicketingSystem.Properties.Resources.resources
+C:\Users\270213207\OneDrive - UP Education\Desktop\CS106\CS106\TicketingSystem\TicketingSystem\obj\Debug\TicketingSystem.csproj.GenerateResource.cache
+C:\Users\270213207\OneDrive - UP Education\Desktop\CS106\CS106\TicketingSystem\TicketingSystem\obj\Debug\TicketingSystem.csproj.CoreCompileInputs.cache
+C:\Users\270213207\OneDrive - UP Education\Desktop\CS106\CS106\TicketingSystem\TicketingSystem\obj\Debug\TicketingSystem.exe
+C:\Users\270213207\OneDrive - UP Education\Desktop\CS106\CS106\TicketingSystem\TicketingSystem\obj\Debug\TicketingSystem.pdb
+>>>>>>> GUI-Tickets-View-All
