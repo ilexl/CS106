@@ -5,21 +5,31 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TicketingSystem.Frames"
       mc:Ignorable="d" 
-      d:DesignHeight="900" d:DesignWidth="1600"
+      d:DesignHeight="900" d:DesignWidth="1270"
       Title="MyAccount">
 
-    <Grid Background="#FF111122">
-        <Grid HorizontalAlignment="Center" Height="400" VerticalAlignment="Center" Width="745">
-            <Grid Margin="0,50,0,64">
-                <StackPanel Margin="10,0,0,-74">
-                    <Label FontWeight="Bold" HorizontalContentAlignment="Center" Content="Change Password" HorizontalAlignment="Center" Margin="0,0,0,20" VerticalAlignment="Top" Width="300" Foreground="#FFF9F9F9" FontSize="32" FontFamily="{DynamicResource Epilogue}"/>
-                    <TextBox KeyDown="OnKeyDownHandler" GotFocus="OldPassTextBox_GotFocus" LostFocus="OldPassTextBox_LostFocus" x:Name="OldPassword"  FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" HorizontalAlignment="Center" VerticalContentAlignment="Center" Padding="10" Height="80" Margin="0,0,0,22" Foreground="Gray" FontSize="32" TextWrapping="NoWrap" Text="Old password" Width="745"/>
-                    <TextBox KeyDown="OnKeyDownHandler" GotFocus="NewPassTextBox_GotFocus" LostFocus="NewPassTextBox_LostFocus" x:Name="NewPassword"  FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" HorizontalAlignment="Center" VerticalContentAlignment="Center" Padding="10" Height="80" Margin="0,0,0,22" Foreground="Gray" FontSize="32" TextWrapping="NoWrap" Text="New password" Width="745"/>
-                    <TextBox KeyDown="OnKeyDownHandler" GotFocus="ConfPassTextBox_GotFocus" LostFocus="ConfPassTextBox_LostFocus" x:Name="ConfirmNewPassword"  FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" HorizontalAlignment="Center" VerticalContentAlignment="Center" Padding="10" Height="80" Margin="0,0,0,22" Foreground="Gray" FontSize="32" TextWrapping="NoWrap" Text="Confirm new password" Width="745"/>
-                </StackPanel>
-            </Grid>
-            <Button x:Name="ApplyButton" Content="Apply" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="300" Height="64" Click="ButtonClick_Apply" Margin="0,0,0,-80" FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFF9F9F9" FontSize="32" BorderBrush="#00000000" Background="#FF0066FF"/>
-        </Grid>
 
+    
+    <Grid Background="#FF111122">
+        <Grid HorizontalAlignment="Left" Height="860" VerticalAlignment="Center" Width="1000" Margin="30,20,0,20">
+            <StackPanel Margin="0,0,0,0">
+                <TextBlock x:Name="AccountTitle" FontWeight="Bold" Text="My Account" HorizontalAlignment="Left" Margin="0,20,0,20" VerticalAlignment="Top" Width="500" Foreground="#FFF9F9F9" FontSize="40" FontFamily="{DynamicResource Epilogue}"/>
+                
+                <Label FontWeight="Bold" Content="Account ID" HorizontalAlignment="Left" Margin="0,0,0,10" VerticalAlignment="Top" Width="300" Foreground="#FFF9F9F9" FontSize="20" FontFamily="{DynamicResource Epilogue}"/>
+                <TextBlock x:Name="AccountIDTextBlock"  FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="10,20" Height="50" Margin="0,0,0,18" Foreground="black" Background="#888888" FontSize="20" TextWrapping="NoWrap" Text="Placeholder ID (#186728)" Width="450"/>
+
+                <Label FontWeight="Bold" Content="Name" HorizontalAlignment="Left" Margin="0,0,0,10" VerticalAlignment="Top" Width="300" Foreground="#FFF9F9F9" FontSize="20" FontFamily="{DynamicResource Epilogue}"/>
+                <TextBlock x:Name="NameTextBlock"  FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="10,20" Height="50" Margin="0,0,0,22" Foreground="black" Background="#888888" FontSize="20" TextWrapping="NoWrap" Text="Placeholder name (Rob Banks)" Width="450"/>
+
+                <Label FontWeight="Bold" Content="E-mail address" HorizontalAlignment="Left" Margin="0,0,0,10" VerticalAlignment="Top" Width="300" Foreground="#FFF9F9F9" FontSize="20" FontFamily="{DynamicResource Epilogue}"/>
+                <TextBox KeyDown="OnKeyDownHandler" GotFocus="EmailTextBox_GotFocus" LostFocus="EmailTextBox_LostFocus" x:Name="Email"  FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center" Padding="10" Height="50" Margin="0,0,0,22" Foreground="Black" FontSize="20" TextWrapping="NoWrap" Text="No e-mail address found." Width="450"/>
+
+                <Label FontWeight="Bold" Content="Change Password" HorizontalAlignment="Left" Margin="0,0,0,10" VerticalAlignment="Top" Width="300" Foreground="#FFF9F9F9" FontSize="20" FontFamily="{DynamicResource Epilogue}"/>
+                <TextBox KeyDown="OnKeyDownHandler" GotFocus="OldPassTextBox_GotFocus" LostFocus="OldPassTextBox_LostFocus" x:Name="OldPassword"  FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center" Padding="10" Height="50" Margin="0,0,0,40" Foreground="Gray" FontSize="20" TextWrapping="NoWrap" Text="Old password" Width="450"/>
+                <TextBox KeyDown="OnKeyDownHandler" GotFocus="NewPassTextBox_GotFocus" LostFocus="NewPassTextBox_LostFocus" x:Name="NewPassword"  FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center" Padding="10" Height="50" Margin="0,0,0,10" Foreground="Gray" FontSize="20" TextWrapping="NoWrap" Text="New password" Width="450"/>
+                <TextBox KeyDown="OnKeyDownHandler" GotFocus="ConfPassTextBox_GotFocus" LostFocus="ConfPassTextBox_LostFocus" x:Name="ConfirmNewPassword"  FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center" Padding="10" Height="50" Margin="0,0,0,22" Foreground="Gray" FontSize="20" TextWrapping="NoWrap" Text="Confirm new password" Width="450"/>
+                <Button x:Name="ApplyButton" Content="Apply Changes" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="300" Height="65" Click="ButtonClick_Apply" Margin="150,0,0,0" FontFamily="{DynamicResource Epilogue}" FontWeight="Regular" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFF9F9F9" FontSize="32" BorderBrush="#00000000" Background="#FF0066FF"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>

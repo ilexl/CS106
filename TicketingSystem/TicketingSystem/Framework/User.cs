@@ -68,6 +68,7 @@ namespace TicketingSystem.Framework
             }
             return false;
         }
+
         public enum Type : int
         {
             User = 1,
@@ -97,6 +98,7 @@ namespace TicketingSystem.Framework
             //  CHECKS IF THE NEW PASSWORDS MATCHES, AND IF THE OLD PASSWORD MATCHES THEIR CURRENT PASSWORD
             if (oldPassword == password)
             {
+                password = newPassword;
                 //  DISPOSES CONNECTION WHEN FINISHED
                 using (SqlConnection connection = new SqlConnection(connectionStringUsers))
                 {
@@ -114,6 +116,24 @@ namespace TicketingSystem.Framework
             else
             {
                 return false;
+            }
+        }
+
+        public void ChangeEmail(string newEmail)
+        {
+            //  DISPOSES CONNECTION WHEN FINISHED
+            using (SqlConnection connection = new SqlConnection(connectionStringUsers))
+            {
+                connection.Open();
+
+                //  FILESTREAM / WRITER, ALLOWS INSERTING / UPDATING ROWS IN SQL
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                string commandText = "UPDATE Users SET Email='" + newEmail + "' WHERE ID='" + ID + "';";
+                adapter.InsertCommand = new SqlCommand(commandText, connection);
+                adapter.InsertCommand.ExecuteNonQuery();
+                connection.Close();
+
+                email = newEmail;
             }
         }
     }
