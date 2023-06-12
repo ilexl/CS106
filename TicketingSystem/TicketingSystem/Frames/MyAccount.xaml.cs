@@ -23,12 +23,14 @@ namespace TicketingSystem.Frames
     {
         public const string connectionStringUsers = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Server\Users.mdf;Integrated Security=True";
 
+        private bool allPasswordFieldsUnfocused = true;
+
         public MyAccount()
         {
             InitializeComponent();
         }
 
-        private void ButtonClick_ApplyPassword(object sender, RoutedEventArgs e)
+        private void ButtonClick_Apply(object sender, RoutedEventArgs e)
         {
             var window = (MainWindow)Application.Current.MainWindow;
             if(NewPassword.Text == ConfirmNewPassword.Text)
@@ -124,6 +126,7 @@ namespace TicketingSystem.Frames
             if (e.Key == Key.Return || e.Key == Key.Enter)
             {
                 var window = (MainWindow)Application.Current.MainWindow;
+                if ()
                 if (NewPassword.Text == ConfirmNewPassword.Text)
                 {
                     if (!window.user.ChangePassword(OldPassword.Text, NewPassword.Text))

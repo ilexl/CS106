@@ -18,7 +18,7 @@
                     <TextBox KeyDown="OnKeyDownHandler" GotFocus="ConfPassTextBox_GotFocus" LostFocus="ConfPassTextBox_LostFocus" x:Name="ConfirmNewPassword"  FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" HorizontalAlignment="Center" VerticalContentAlignment="Center" Padding="10" Height="80" Margin="0,0,0,22" Foreground="Gray" FontSize="32" TextWrapping="NoWrap" Text="Confirm new password" Width="745"/>
                 </StackPanel>
             </Grid>
-            <Button x:Name="ApplyButton" Content="Apply" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="300" Height="64" Click="ButtonClick_ApplyPassword" Margin="0,0,0,-80" FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFF9F9F9" FontSize="32" BorderBrush="#00000000" Background="#FF0066FF"/>
+            <Button x:Name="ApplyButton" Content="Apply" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="300" Height="64" Click="ButtonClick_Apply" Margin="0,0,0,-80" FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFF9F9F9" FontSize="32" BorderBrush="#00000000" Background="#FF0066FF"/>
         </Grid>
 
     </Grid>

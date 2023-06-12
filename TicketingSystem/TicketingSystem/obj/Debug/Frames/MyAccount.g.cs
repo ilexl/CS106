@@ -169,7 +169,7 @@ namespace TicketingSystem.Frames {
             this.ApplyButton = ((System.Windows.Controls.Button)(target));
             
             #line 21 "..\..\..\Frames\MyAccount.xaml"
-            this.ApplyButton.Click += new System.Windows.RoutedEventHandler(this.ButtonClick_ApplyPassword);
+            this.ApplyButton.Click += new System.Windows.RoutedEventHandler(this.ButtonClick_Apply);
             
             #line default
             #line hidden
