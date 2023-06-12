@@ -26,7 +26,7 @@
             <StackPanel  Margin="0,15,5,0">
                 <Grid>
                     <StackPanel  Name="SideNavButtonsHolder" VerticalAlignment="Center">
-                        <Image HorizontalAlignment="Left" Width="100" Margin="100,0, 100, 0" Source="logo.png"/>
+                        <!--<Image HorizontalAlignment="Left" Width="100" Margin="100,0, 100, 0" Source="logo.png"/>-->
                         <Button Margin="10" Background="#00000000" BorderBrush="#00000000" Foreground="#FFF9F9F9">
                             <StackPanel Orientation="Horizontal" Width="305" >
                                 <Image HorizontalAlignment="Left" Height="33" Width="33" Source="./Resources/Icons/Home.png" Margin="10,0,3,7"/>
