@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\270168960\OneDrive - UP Education\Desktop\CS106\TicketingSystem\TicketingSystem\App.xaml
-101483861943
+11545898422
 4-816640392
-18562063013
+19807185859
 13-1505183044
-Frames\ClosedTickets.xaml;Frames\CreateTicket.xaml;Frames\Dashboard.xaml;Frames\Login.xaml;Frames\MyAccount.xaml;Frames\Console.xaml;Frames\Settings.xaml;Frames\ViewAccounts.xaml;Frames\ViewTickets.xaml;MainWindow.xaml;
+Frames\ClosedTickets.xaml;Frames\CreateTicket.xaml;Frames\Dashboard.xaml;Frames\Login.xaml;Frames\MyAccount.xaml;Frames\Console.xaml;Frames\Settings.xaml;Frames\SpecificTicket.xaml;Frames\ViewAccounts.xaml;Frames\ViewTickets.xaml;MainWindow.xaml;
 
 True
 
