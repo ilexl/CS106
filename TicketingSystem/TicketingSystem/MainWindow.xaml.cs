@@ -64,7 +64,7 @@ namespace TicketingSystem
             Debug.Log(windowName + " opened");
         }
 
-        private SolidColorBrush HexColor(string hex)
+        public static SolidColorBrush HexColor(string hex)
         {
             return new SolidColorBrush((Color)ColorConverter.ConvertFromString(hex));
         }
