@@ -31,6 +31,8 @@ namespace TicketingSystem.Frames
             LoginPassword.Text = "Password";
             LoginUserName.Foreground = Brushes.Gray;
             LoginPassword.Foreground = Brushes.Gray;
+
+            LoginButton.Focus();
         }
         private void ButtonClick_Login(object sender, RoutedEventArgs e)
         {
@@ -92,6 +94,5 @@ namespace TicketingSystem.Frames
                 }
             }
         }
-
     }
 }

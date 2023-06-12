@@ -39,6 +39,11 @@ namespace TicketingSystem.Frames
                     MessageBoxResult wrongOldPass = MessageBox.Show("Old password is incorrect!");
                 }
             }
+            else
+            {
+                ResetText();
+                MessageBoxResult nonMatchNewPass = MessageBox.Show("New password does not match in both fields!");
+            }
         }
 
         public void ResetText()
@@ -50,6 +55,8 @@ namespace TicketingSystem.Frames
             OldPassword.Foreground = Brushes.Gray;
             NewPassword.Foreground = Brushes.Gray;
             ConfirmNewPassword.Foreground = Brushes.Gray;
+
+            ApplyButton.Focus();
         }
 
         private void OldPassTextBox_GotFocus(object sender, RoutedEventArgs e)
@@ -109,6 +116,27 @@ namespace TicketingSystem.Frames
             {
                 textBox.Text = "Confirm new password";
                 textBox.Foreground = Brushes.Gray; // Set the desired ghost text color
+            }
+        }
+
+        private void OnKeyDownHandler(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return || e.Key == Key.Enter)
+            {
+                var window = (MainWindow)Application.Current.MainWindow;
+                if (NewPassword.Text == ConfirmNewPassword.Text)
+                {
+                    if (!window.user.ChangePassword(OldPassword.Text, NewPassword.Text))
+                    {
+                        ResetText();
+                        MessageBoxResult wrongOldPass = MessageBox.Show("Old password is incorrect!");
+                    }
+                }
+                else
+                {
+                    ResetText();
+                    MessageBoxResult nonMatchNewPass = MessageBox.Show("New password does not match in both fields!");
+                }
             }
         }
 
