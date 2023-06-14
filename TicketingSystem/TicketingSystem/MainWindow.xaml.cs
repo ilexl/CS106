@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TicketingSystem.Framework;
+using TicketingSystem.Frames;
 
 namespace TicketingSystem
 {
@@ -61,6 +62,15 @@ namespace TicketingSystem
         {
             mainFrame.Navigate(new Uri("./Frames/" + windowName, UriKind.Relative));
             Debug.Log(windowName + " opened");
+
+            if(ViewAccounts.current != null)
+            {
+                ViewAccounts.current.Refresh();
+            }
+            if(ViewTickets.current != null)
+            {
+                ViewTickets.current.Refresh();
+            }
         }
 
         public static SolidColorBrush HexColor(string hex)
@@ -140,7 +150,7 @@ namespace TicketingSystem
                 {
                     CreateSideNavButton("Dashboard", "Dashboard.xaml", "./Resources/Icons/Home.png");
                     CreateSideNavButtonT("View Tickets", "ViewTickets.xaml", "./Resources/Icons/File_dock_search.png", 1);
-                    CreateSideNavButtonT("Closed Tickets", "ClosedTickets.xaml", "./Resources/Icons/Arhives_group_docks.png", 2);
+                    CreateSideNavButtonT("Closed Tickets", "ViewTickets.xaml", "./Resources/Icons/Arhives_group_docks.png", 2);
                     CreateSideNavButton("Create Ticket", "CreateTicket.xaml", "./Resources/Icons/File_dock_add.png");
                     CreateSideNavButton("My Account", "MyAccount.xaml", "./Resources/Icons/Lock.png");
                     CreateSideNavButton("Settings", "Settings.xaml", "./Resources/Icons/Setting_line.png");
@@ -151,8 +161,8 @@ namespace TicketingSystem
                 {
                     CreateSideNavButton("Dashboard", "Dashboard.xaml", "./Resources/Icons/Home.png");
                     CreateSideNavButtonT("View Tickets", "ViewTickets.xaml", "./Resources/Icons/File_dock_search.png", 1);
-                    CreateSideNavButtonT("Closed Tickets", "ClosedTickets.xaml", "./Resources/Icons/Arhives_group_docks.png", 2);
-                    CreateSideNavButtonT("All Tickets", "ClosedTickets.xaml", "./Resources/Icons/Arhives_group_docks.png", 3);
+                    CreateSideNavButtonT("Closed Tickets", "ViewTickets.xaml", "./Resources/Icons/Arhives_group_docks.png", 2);
+                    CreateSideNavButtonT("All Tickets", "ViewTickets.xaml", "./Resources/Icons/Arhives_group_docks.png", 3);
                     CreateSideNavButton("Create Ticket", "CreateTicket.xaml", "./Resources/Icons/File_dock_add.png");
                     CreateSideNavButton("My Account", "MyAccount.xaml", "./Resources/Icons/Lock.png");
                     CreateSideNavButton("Settings", "Settings.xaml", "./Resources/Icons/Setting_line.png");
@@ -257,7 +267,12 @@ namespace TicketingSystem
             main.BorderBrush = HexColor("#00000000");
             main.Foreground = HexColor("#FFF9F9F9");
 
-            main.Click += (sender, e) => ChangeWindow(nameFrame);
+            main.Click += (sender, e) =>
+            {
+                ViewTickets.viewType = selection;
+                ChangeWindow(nameFrame);
+            };
+            
 
             // stack panel properties
             stackPanel.Orientation = Orientation.Horizontal;

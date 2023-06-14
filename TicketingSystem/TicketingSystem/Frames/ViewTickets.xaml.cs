@@ -21,6 +21,7 @@ namespace TicketingSystem.Frames
     /// </summary>
     public partial class ViewTickets : Page
     {
+        public static ViewTickets current;
         public static int viewType;
         // 1 = Current Open Tickets
         // 2 = Current Closed Tickets
@@ -29,8 +30,15 @@ namespace TicketingSystem.Frames
 
         public ViewTickets()
         {
+            current = this;
             InitializeComponent();
             // All Tickets
+            HolderMain.Children.Clear();
+            showCorrectTickets(viewType);
+        }
+
+        public void Refresh()
+        {
             HolderMain.Children.Clear();
             showCorrectTickets(viewType);
         }
@@ -42,6 +50,10 @@ namespace TicketingSystem.Frames
                 case 1:
                     {
                         List<int> allTicketIds = Ticket.GetAllTicketIds(1);
+                        if(allTicketIds == null)
+                        {
+                            break;
+                        }
                         foreach (int t in allTicketIds)
                         {
                             bool validTicket;
@@ -56,6 +68,10 @@ namespace TicketingSystem.Frames
                 case 2:
                     {
                         List<int> allTicketIds = Ticket.GetAllTicketIds(2);
+                        if (allTicketIds == null)
+                        {
+                            break;
+                        }
                         foreach (int t in allTicketIds)
                         {
                             bool validTicket;
@@ -70,6 +86,10 @@ namespace TicketingSystem.Frames
                 case 3:
                     {
                         List<int> allTicketIds = Ticket.GetAllTicketIds(3);
+                        if (allTicketIds == null)
+                        {
+                            break;
+                        }
                         foreach (int t in allTicketIds)
                         {
                             bool validTicket;
@@ -84,6 +104,10 @@ namespace TicketingSystem.Frames
                 case 4:
                     {
                         List<int> allTicketIds = Ticket.GetAllTicketIds();
+                        if (allTicketIds == null)
+                        {
+                            break;
+                        }
                         foreach (int t in allTicketIds)
                         {
                             bool validTicket;
@@ -288,6 +312,7 @@ namespace TicketingSystem.Frames
             border.Child = grid;
             button.Content = border;
 
+            HolderMain.Children.Add(button);
         }
     }
 }

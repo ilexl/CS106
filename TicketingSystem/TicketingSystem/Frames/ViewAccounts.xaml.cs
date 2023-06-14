@@ -21,12 +21,24 @@ namespace TicketingSystem.Frames
     /// </summary>
     public partial class ViewAccounts : Page
     {
+        public static ViewAccounts current;
         public ViewAccounts()
         {
+            current = this;
             InitializeComponent();
             AllAccounts.Children.Clear();
             List<int> allIds = User.GetAllAccountIds();
             foreach(int id in allIds)
+            {
+                AddAccountToMenu(id);
+            }
+        }
+
+        public void Refresh()
+        {
+            AllAccounts.Children.Clear();
+            List<int> allIds = User.GetAllAccountIds();
+            foreach (int id in allIds)
             {
                 AddAccountToMenu(id);
             }

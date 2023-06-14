@@ -111,7 +111,7 @@ namespace TicketingSystem.Framework
                 {
                     connection.Open();
                     string tableName = "AllTickets"; 
-                    string countQuery = $"SELECT COUNT(*) FROM {tableName}";
+                    string countQuery = $"SET DATEFORMAT dmy;SELECT COUNT(*) FROM {tableName}";
                     using (SqlCommand command = new SqlCommand(countQuery, connection))
                     {
                         int rowCount = (int)command.ExecuteScalar();
@@ -160,7 +160,7 @@ namespace TicketingSystem.Framework
                 }
                 
 
-                string commandText = "INSERT INTO AllTickets VALUES(";
+                string commandText = "SET DATEFORMAT dmy;INSERT INTO AllTickets VALUES(";
                 commandText += t.id.ToString();
                 commandText += SPACE;
                 commandText += "'" + t.status.ToString() + "'";
@@ -216,7 +216,7 @@ namespace TicketingSystem.Framework
                 SqlCommand command = new SqlCommand();  //  USED TO SPECIFY THE SQL QUERY
 
                 command.Connection = connection;        //  SPECIFIES THE CONNECTION THAT THE COMMAND WILL BE USED IN
-                command.CommandText = "SELECT * FROM AllTickets WHERE ID='" + _id + "';";
+                command.CommandText = "SET DATEFORMAT dmy;SELECT * FROM AllTickets WHERE ID='" + _id + "';";
 
                 sqlReader = command.ExecuteReader();    //  TAKES THE OUTPUT INTO THE READER
 
@@ -299,7 +299,7 @@ namespace TicketingSystem.Framework
 
                 //  FILESTREAM / WRITER, ALLOWS INSERTING / UPDATING ROWS IN SQL
                 SqlDataAdapter adapter = new SqlDataAdapter();
-                string commandText = "UPDATE AllTickets SET UPDATED='" + DateTime.Now.ToString() + "' WHERE ID='" + this.id + "';";
+                string commandText = "SET DATEFORMAT dmy;UPDATE AllTickets SET UPDATED='" + DateTime.Now.ToString() + "' WHERE ID='" + this.id + "';";
                 adapter.InsertCommand = new SqlCommand(commandText, connection);
                 adapter.InsertCommand.ExecuteNonQuery();
                 connection.Close();
@@ -367,7 +367,7 @@ namespace TicketingSystem.Framework
                 SqlCommand command = new SqlCommand();      //  USED TO SPECIFY THE SQL QUERY
 
                 command.Connection = connection;            //  SPECIFIES THE CONNECTION THAT THE COMMAND WILL BE USED IN
-                command.CommandText = "SELECT * FROM AllTickets (WHERE ID='" + currentUser.ID.ToString() + "'" + cmdAdd + ");";
+                command.CommandText = "SET DATEFORMAT dmy;SELECT * FROM AllTickets WHERE (CALLER='" + currentUser.ID.ToString() + "' OR CREATOR='" + currentUser.ID.ToString() + "')" +  cmdAdd + ";";
 
                 sqlReader = command.ExecuteReader();        //  TAKES THE OUTPUT INTO THE READER
 
