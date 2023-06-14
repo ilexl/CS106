@@ -116,6 +116,7 @@ namespace TicketingSystem.Frames
             label2.FontSize = 32;
             label2.FontFamily = new FontFamily("Epilogue");
             Grid.SetColumn(label2, 1);
+            Grid.SetColumnSpan(label2, 2);
 
             Label label3 = new Label();
             label3.FontWeight = FontWeights.SemiBold;
@@ -148,10 +149,10 @@ namespace TicketingSystem.Frames
             grid.Children.Add(label3);
             grid.Children.Add(label4);
             
-            accountIDLabel.Content = data.ID.ToString();
-            accountNameLabel.Content = data.firstName + " " + data.lastName;
-            accountTypeLabel.Content = User.TypeToString(data);
-            accountTicketsLabel.Content = data.GetActiveTicketsAmount();
+            label1.Content = data.ID.ToString();
+            label2.Content = data.firstName + " " + data.lastName;
+            label3.Content = User.TypeToString(data);
+            label4.Content = data.GetActiveTicketsAmount();
 
             button.Content = grid;
             main.Children.Add(button);
