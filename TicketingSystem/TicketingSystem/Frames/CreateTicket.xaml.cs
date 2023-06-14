@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TicketingSystem.Framework;
 
 namespace TicketingSystem.Frames
 {
@@ -22,16 +23,30 @@ namespace TicketingSystem.Frames
     /// </summary>
     public partial class CreateTicket : Page
     {
-        private const string SOURCE = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Server\Tickets.mdf";
 
         public CreateTicket()
         {
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_CreateTicket(object sender, RoutedEventArgs e)
         {
-            var window = (MainWindow)Application.Current.MainWindow;
+            User current = ((MainWindow)Application.Current.MainWindow).user;
+
+            string title = TitleInput.Text;
+            int urgency = Urgency.SelectedIndex + 1; // 1 2 3 for high medium low
+            string creatorID = current.ID.ToString();
+            string createdFor = CreatedBy.Text;
+            string description = Descritpion.Text;
+
+
+            Ticket t = Ticket.CreateNew(createdFor, creatorID, title, urgency, DateTime.Now);
+            t.AddComment(description);
+
+
+
+            #region OLD
+            /*var window = (MainWindow)Application.Current.MainWindow;
 
             //  DISPOSES CONNECTION WHEN FINISHED
             using (SqlConnection connection = new SqlConnection(SOURCE))
@@ -65,7 +80,8 @@ namespace TicketingSystem.Frames
                     command.ExecuteNonQuery();
 
                 }
-            }
+            }*/
+            #endregion
         }
     }
 }

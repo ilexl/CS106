@@ -28,18 +28,18 @@
             
             <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="0,5">
                 <TextBlock Padding="3" FontSize="25" Margin="24.5, 0, 0, 0" Foreground="White">Title</TextBlock>
-                <TextBox Name="TitleInput"  Padding="3" Width="600" FontSize="25" Margin="24.5, 0, 0, 15">Steak Stuck in Toaster</TextBox>
+                <TextBox Name="TitleInput"  Padding="3" Width="600" FontSize="25" Margin="24.5, 0, 0, 15">Title</TextBox>
                 <TextBlock Padding="3" FontSize="25" Margin="24.5, 0, 0, 0" Foreground="White">Urgency</TextBlock>
-                <ComboBox Name="Urgency" Padding="3" FontSize="25" Margin="24.5, 0, 0, 15">
-                    <ComboBoxItem Content="Low"></ComboBoxItem>
-                    <ComboBoxItem Content="Medium"></ComboBoxItem>
+                <ComboBox SelectedIndex="2" Name="Urgency" Padding="3" FontSize="25" Margin="24.5, 0, 0, 15">
                     <ComboBoxItem Content="High"></ComboBoxItem>
+                    <ComboBoxItem Content="Medium"></ComboBoxItem>
+                    <ComboBoxItem Content="Low"></ComboBoxItem>
                 </ComboBox>
                 <TextBlock Padding="3" FontSize="25" Margin="24.5, 0, 0, 0" Foreground="White">Created For</TextBlock>
-                <TextBox Name="CreatedFor" Padding="3" FontSize="25" Margin="24.5, 0, 0, 15">John Banks</TextBox>
+                <TextBox Name="CreatedFor" Padding="3" FontSize="25" Margin="24.5, 0, 0, 15"></TextBox>
 
                 <TextBlock Padding="3" FontSize="25" Margin="24.5, 0, 0, 0" Foreground="White">Created By</TextBlock>
-                <TextBlock Name="CreatedBy"  Padding="3" FontSize="25" Margin="24.5, 0, 0, 0" Background="White"><Run Text="Steve Pond"/></TextBlock>
+                <TextBlock Name="CreatedBy"  Padding="3" FontSize="25" Margin="24.5, 0, 0, 0" Background="White"></TextBlock>
 
             </StackPanel>
 
@@ -47,12 +47,12 @@
         <Grid Grid.Row="2">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <TextBlock Padding="3" Margin="24.5,27,0,0" FontSize="25" Foreground="White">Description of problem</TextBlock>
-                <TextBox Padding="3" TextWrapping="Wrap" FontSize="30" Margin="24.5, 0, 0, 0" Height="200" Width="1200">The steak John was cooking got stuck in the toaster and started burning. John unplugged the toaster and now cannot get it out. John has tried using a fork but its really jammed in there. John has also tried plugging it back in but that only makes it worse.</TextBox>
+                <TextBox x:Name="Descritpion" Padding="3" TextWrapping="Wrap" FontSize="30" Margin="24.5, 0, 0, 0" Height="200" Width="1200"></TextBox>
             </StackPanel>
         </Grid>
 
         <Grid Grid.Row="3">
-            <Button Click="Button_Click" Width="300" Height="100">
+            <Button Click="Button_CreateTicket" Width="300" Height="100">
                 <TextBlock Padding="3" Margin="5,5" TextAlignment="Center" TextWrapping="Wrap"  Foreground="White" FontWeight="Bold" FontSize="40" FontFamily="Epilogue">Submit</TextBlock>
                 <Button.Resources>
                     <Style TargetType="{x:Type Button}">
