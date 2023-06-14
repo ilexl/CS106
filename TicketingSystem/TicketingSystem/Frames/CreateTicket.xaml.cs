@@ -26,7 +26,7 @@ namespace TicketingSystem.Frames
 
         public CreateTicket()
         {
-            User current = ((MainWindow)Application.Current.MainWindow).user;
+            User current = MainWindow.user;
             InitializeComponent();
             CreatedBy.Text = current.ID.ToString();
             CreatedFor.Text = current.ID.ToString();
@@ -34,7 +34,7 @@ namespace TicketingSystem.Frames
 
         private void Button_CreateTicket(object sender, RoutedEventArgs e)
         {
-            User current = ((MainWindow)Application.Current.MainWindow).user;
+            User current = MainWindow.user;
 
             string title = TitleInput.Text;
             int urgency = Urgency.SelectedIndex + 1; // 1 2 3 for high medium low

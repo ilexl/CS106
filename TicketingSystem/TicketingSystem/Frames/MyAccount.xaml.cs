@@ -36,13 +36,11 @@ namespace TicketingSystem.Frames
 
         private void ButtonClick_Apply(object sender, RoutedEventArgs e)
         {
-            var window = (MainWindow)Application.Current.MainWindow;
-
             if (oldPasswordFocused && newPasswordFocused && confirmPasswordFocused)
             {
                 if (NewPassword.Password == ConfPassword.Password)
                 {
-                    if (!window.user.ChangePassword(OldPassword.Password, NewPassword.Password))
+                    if (!MainWindow.user.ChangePassword(OldPassword.Password, NewPassword.Password))
                     {
                         ResetText();
                         MessageBoxResult wrongOldPass = MessageBox.Show("Old password is incorrect!");
@@ -57,9 +55,9 @@ namespace TicketingSystem.Frames
 
             if (emailFocused)
             {
-                if (Email.Text != window.user.email)
+                if (Email.Text != MainWindow.user.email)
                 {
-                    window.user.ChangeEmail(Email.Text);
+                    MainWindow.user.ChangeEmail(Email.Text);
                 }
             }
 
@@ -77,17 +75,17 @@ namespace TicketingSystem.Frames
             NewPasswordGhostText.Visibility = Visibility.Visible;
             ConfPasswordGhostText.Visibility = Visibility.Visible;
 
-            if (window.user.email == null)
+            if (MainWindow.user.email == null)
             {
                 Email.Text = "No e-mail address found.";
             }
             else
             {
-                Email.Text = window.user.email;
+                Email.Text = MainWindow.user.email;
             }
 
-            AccountIDTextBlock.Text = "#" + window.user.ID;
-            NameTextBlock.Text = window.user.firstName + " " + window.user.lastName;
+            AccountIDTextBlock.Text = "#" + MainWindow.user.ID;
+            NameTextBlock.Text = MainWindow.user.firstName + " " + MainWindow.user.lastName;
 
             ApplyButton.Focus();
         }
@@ -152,7 +150,7 @@ namespace TicketingSystem.Frames
                 emailFocused = true;
                 textBox.Text = string.Empty;
             }
-            else if(textBox.Text == window.user.email)
+            else if(textBox.Text == MainWindow.user.email)
             {
                 emailFocused = true;
                 textBox.Text = string.Empty;
@@ -166,20 +164,20 @@ namespace TicketingSystem.Frames
             if (string.IsNullOrEmpty(textBox.Text))
             {
                 emailFocused = false;
-                if (window.user.email != "")
+                if (MainWindow.user.email != "")
                 {
-                    if (window.user.email == null)
+                    if (MainWindow.user.email == null)
                     {
                         textBox.Text = "No e-mail address found.";
                     }
                     else
                     {
-                        textBox.Text = window.user.email;
+                        textBox.Text = MainWindow.user.email;
                     }
                 }
                 else
                 {
-                    textBox.Text = window.user.email;
+                    textBox.Text = MainWindow.user.email;
                 }
             }
         }
@@ -188,13 +186,12 @@ namespace TicketingSystem.Frames
         {
             if (e.Key == Key.Return || e.Key == Key.Enter)
             {
-                var window = (MainWindow)Application.Current.MainWindow;
                 
                 if (oldPasswordFocused && newPasswordFocused && confirmPasswordFocused)
                 {
                     if (NewPassword.Password == ConfPassword.Password)
                     {
-                        if (!window.user.ChangePassword(OldPassword.Password, NewPassword.Password))
+                        if (!MainWindow.user.ChangePassword(OldPassword.Password, NewPassword.Password))
                         {
                             ResetText();
                             MessageBoxResult wrongOldPass = MessageBox.Show("Old password is incorrect!");
@@ -213,9 +210,9 @@ namespace TicketingSystem.Frames
 
                 if (emailFocused)
                 {
-                    if (Email.Text != window.user.email)
+                    if (Email.Text != MainWindow.user.email)
                     {
-                        window.user.ChangeEmail(Email.Text);
+                        MainWindow.user.ChangeEmail(Email.Text);
                         MessageBoxResult successfullyChangedPassword = MessageBox.Show("Successfully updated e-mail address!");
                     }
                 }

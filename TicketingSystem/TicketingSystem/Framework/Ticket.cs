@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TicketingSystem;
 
 namespace TicketingSystem.Framework
 {
@@ -110,7 +111,7 @@ namespace TicketingSystem.Framework
                 {
                     connection.Open();
                     string tableName = "AllTickets"; 
-                    string countQuery = $"SELECT COUNT(*) FROM {tableName}";
+                    string countQuery = $"SET DATEFORMAT dmy;SELECT COUNT(*) FROM {tableName}";
                     using (SqlCommand command = new SqlCommand(countQuery, connection))
                     {
                         int rowCount = (int)command.ExecuteScalar();
@@ -159,7 +160,7 @@ namespace TicketingSystem.Framework
                 }
                 
 
-                string commandText = "INSERT INTO AllTickets VALUES(";
+                string commandText = "SET DATEFORMAT dmy;INSERT INTO AllTickets VALUES(";
                 commandText += t.id.ToString();
                 commandText += SPACE;
                 commandText += "'" + t.status.ToString() + "'";
@@ -215,7 +216,7 @@ namespace TicketingSystem.Framework
                 SqlCommand command = new SqlCommand();  //  USED TO SPECIFY THE SQL QUERY
 
                 command.Connection = connection;        //  SPECIFIES THE CONNECTION THAT THE COMMAND WILL BE USED IN
-                command.CommandText = "SELECT * FROM AllTickets WHERE ID='" + _id + "';";
+                command.CommandText = "SET DATEFORMAT dmy;SELECT * FROM AllTickets WHERE ID='" + _id + "';";
 
                 sqlReader = command.ExecuteReader();    //  TAKES THE OUTPUT INTO THE READER
 
@@ -298,10 +299,99 @@ namespace TicketingSystem.Framework
 
                 //  FILESTREAM / WRITER, ALLOWS INSERTING / UPDATING ROWS IN SQL
                 SqlDataAdapter adapter = new SqlDataAdapter();
-                string commandText = "UPDATE AllTickets SET UPDATED='" + DateTime.Now.ToString() + "' WHERE ID='" + this.id + "';";
+                string commandText = "SET DATEFORMAT dmy;UPDATE AllTickets SET UPDATED='" + DateTime.Now.ToString() + "' WHERE ID='" + this.id + "';";
                 adapter.InsertCommand = new SqlCommand(commandText, connection);
                 adapter.InsertCommand.ExecuteNonQuery();
                 connection.Close();
+            }
+        }
+
+        public static List<int> GetAllTicketIds()
+        {
+
+            //  DISPOSES CONNECTION WHEN FINISHED
+            using (SqlConnection connection = new SqlConnection(SOURCE))
+            {
+                connection.Open();
+
+                SqlDataReader sqlReader;                    //  FILESTREAM / READER, MAKES THE DATA INDEXABLE
+                SqlCommand command = new SqlCommand();      //  USED TO SPECIFY THE SQL QUERY
+
+                command.Connection = connection;            //  SPECIFIES THE CONNECTION THAT THE COMMAND WILL BE USED IN
+                command.CommandText = "SELECT * FROM AllTickets;";
+
+                sqlReader = command.ExecuteReader();        //  TAKES THE OUTPUT INTO THE READER
+
+                if (sqlReader.HasRows)                      //  USER FOUND WITH MATCHING CREDENTIALS
+                {
+                    List<int> ids = new List<int>();
+                    while (sqlReader.Read())
+                    {
+                        int ID = sqlReader.GetInt32(0);         //  Sets this instance's ID to the the corresponding cell in the matching row
+                        ids.Add(ID);
+                    }
+                    sqlReader.Close();  //  CLOSES THE READER
+                    command.Dispose();  //  NULLS THE COMMAND
+                    connection.Close(); //  CLOSES OPEN CONNECTION TO SQL DATABASE
+                    return ids;
+                }
+                else                    //  INCORRECT / INVALID CREDENTIALS
+                {
+                    sqlReader.Close();  //  CLOSES THE READER
+                    command.Dispose();  //  NULLS THE COMMAND
+                    connection.Close(); //  CLOSES OPEN CONNECTION TO SQL DATABASE
+
+                    return null;
+                }
+            }
+        }
+
+        public static List<int> GetAllTicketIds(int opa)
+        {
+            User currentUser = MainWindow.user;
+            string cmdAdd = "";
+            if(opa == 1)
+            {
+                cmdAdd = "AND Status='True'";
+            }
+            if(opa == 2)
+            {
+                cmdAdd = "AND Status='False'";
+            }
+            //  DISPOSES CONNECTION WHEN FINISHED
+            using (SqlConnection connection = new SqlConnection(SOURCE))
+            {
+                connection.Open();
+
+                SqlDataReader sqlReader;                    //  FILESTREAM / READER, MAKES THE DATA INDEXABLE
+                SqlCommand command = new SqlCommand();      //  USED TO SPECIFY THE SQL QUERY
+
+                command.Connection = connection;            //  SPECIFIES THE CONNECTION THAT THE COMMAND WILL BE USED IN
+                command.CommandText = "SET DATEFORMAT dmy;SELECT * FROM AllTickets WHERE (CALLER='" + currentUser.ID.ToString() + "' OR CREATOR='" + currentUser.ID.ToString() + "')" +  cmdAdd + ";";
+
+                sqlReader = command.ExecuteReader();        //  TAKES THE OUTPUT INTO THE READER
+
+                if (sqlReader.HasRows)                      //  USER FOUND WITH MATCHING CREDENTIALS
+                {
+                    List<int> ids = new List<int>();
+                    while (sqlReader.Read())
+                    {
+                        int ID = sqlReader.GetInt32(0);         //  Sets this instance's ID to the the corresponding cell in the matching row
+                        ids.Add(ID);
+                    }
+                    sqlReader.Close();  //  CLOSES THE READER
+                    command.Dispose();  //  NULLS THE COMMAND
+                    connection.Close(); //  CLOSES OPEN CONNECTION TO SQL DATABASE
+                    return ids;
+                }
+                else                    //  INCORRECT / INVALID CREDENTIALS
+                {
+                    sqlReader.Close();  //  CLOSES THE READER
+                    command.Dispose();  //  NULLS THE COMMAND
+                    connection.Close(); //  CLOSES OPEN CONNECTION TO SQL DATABASE
+
+                    return null;
+                }
             }
         }
 

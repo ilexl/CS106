@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TicketingSystem.Framework;
+using TicketingSystem.Frames;
 
 namespace TicketingSystem
 {
@@ -23,7 +24,7 @@ namespace TicketingSystem
     public partial class MainWindow : Window
     {
         public bool LoggedIn = false; // temp
-        public User user = new User();
+        public static User user = new User();
         //public const string connectionStringUsers = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Server\Users.mdf;Integrated Security=True";
        
         
@@ -41,7 +42,6 @@ namespace TicketingSystem
                 // or another that follows the correct interface
             }
 
-            Ticket t = Ticket.CreateNew("testing123", "testing123", "testing123", 2, DateTime.Now);
             Debug.Log(DateTime.Now.ToString());
             Debug.Log("application started");
 
@@ -62,6 +62,15 @@ namespace TicketingSystem
         {
             mainFrame.Navigate(new Uri("./Frames/" + windowName, UriKind.Relative));
             Debug.Log(windowName + " opened");
+
+            if(ViewAccounts.current != null)
+            {
+                ViewAccounts.current.Refresh();
+            }
+            if(ViewTickets.current != null)
+            {
+                ViewTickets.current.Refresh();
+            }
         }
 
         public static SolidColorBrush HexColor(string hex)
@@ -140,8 +149,8 @@ namespace TicketingSystem
                 case User.Type.User:
                 {
                     CreateSideNavButton("Dashboard", "Dashboard.xaml", "./Resources/Icons/Home.png");
-                    CreateSideNavButton("View Tickets", "ViewTickets.xaml", "./Resources/Icons/File_dock_search.png");
-                    CreateSideNavButton("Closed Tickets", "ClosedTickets.xaml", "./Resources/Icons/Arhives_group_docks.png");
+                    CreateSideNavButtonT("View Tickets", "ViewTickets.xaml", "./Resources/Icons/File_dock_search.png", 1);
+                    CreateSideNavButtonT("Closed Tickets", "ViewTickets.xaml", "./Resources/Icons/Arhives_group_docks.png", 2);
                     CreateSideNavButton("Create Ticket", "CreateTicket.xaml", "./Resources/Icons/File_dock_add.png");
                     CreateSideNavButton("My Account", "MyAccount.xaml", "./Resources/Icons/Lock.png");
                     CreateSideNavButton("Settings", "Settings.xaml", "./Resources/Icons/Setting_line.png");
@@ -151,8 +160,9 @@ namespace TicketingSystem
                 case User.Type.Tech:
                 {
                     CreateSideNavButton("Dashboard", "Dashboard.xaml", "./Resources/Icons/Home.png");
-                    CreateSideNavButton("View Tickets", "ViewTickets.xaml", "./Resources/Icons/File_dock_search.png");
-                    CreateSideNavButton("Closed Tickets", "ClosedTickets.xaml", "./Resources/Icons/Arhives_group_docks.png");
+                    CreateSideNavButtonT("View Tickets", "ViewTickets.xaml", "./Resources/Icons/File_dock_search.png", 1);
+                    CreateSideNavButtonT("Closed Tickets", "ViewTickets.xaml", "./Resources/Icons/Arhives_group_docks.png", 2);
+                    CreateSideNavButtonT("All Tickets", "ViewTickets.xaml", "./Resources/Icons/Arhives_group_docks.png", 3);
                     CreateSideNavButton("Create Ticket", "CreateTicket.xaml", "./Resources/Icons/File_dock_add.png");
                     CreateSideNavButton("My Account", "MyAccount.xaml", "./Resources/Icons/Lock.png");
                     CreateSideNavButton("Settings", "Settings.xaml", "./Resources/Icons/Setting_line.png");
@@ -162,7 +172,7 @@ namespace TicketingSystem
                 case User.Type.Admin:
                 {
                     CreateSideNavButton("Dashboard", "Dashboard.xaml", "./Resources/Icons/Home.png");
-                    CreateSideNavButton("All Tickets", "ViewTickets.xaml", "./Resources/Icons/File_dock_search.png");
+                    CreateSideNavButtonT("All Tickets", "ViewTickets.xaml", "./Resources/Icons/File_dock_search.png", 4);
                     CreateSideNavButton("All Accounts", "ViewAccounts.xaml", "./Resources/Icons/People.png");
                     CreateSideNavButton("Console", "Console.xaml", "./Resources/Icons/terminal.png");
                     CreateSideNavButton("My Account", "MyAccount.xaml", "./Resources/Icons/Lock.png");
@@ -236,8 +246,62 @@ namespace TicketingSystem
             main.Content = stackPanel;
             sidenav.Children.Add(main);
         }
+
+        /// <summary>
+        /// Creates a sidebar button for navigation
+        /// </summary>
+        /// <param name="nameDisplay">Name of the function as displayes</param>
+        /// <param name="nameFrame">Frame to show location</param>
+        /// <param name="iconLocation">Icon location to display</param>
+        void CreateSideNavButtonT(string nameDisplay, string nameFrame, string iconLocation, int selection)
+        {
+            var sidenav = SideNavButtonsHolder;
+            Button main = new Button();
+            StackPanel stackPanel = new StackPanel();
+            Image icon = new Image();
+            TextBlock textBlock = new TextBlock();
+
+            // button properties
+            main.Margin = new Thickness(10);
+            main.Background = HexColor("#00000000");
+            main.BorderBrush = HexColor("#00000000");
+            main.Foreground = HexColor("#FFF9F9F9");
+
+            main.Click += (sender, e) =>
+            {
+                ViewTickets.viewType = selection;
+                ChangeWindow(nameFrame);
+            };
+            
+
+            // stack panel properties
+            stackPanel.Orientation = Orientation.Horizontal;
+            stackPanel.Width = 305;
+
+            // icon properties
+            icon.HorizontalAlignment = HorizontalAlignment.Left;
+            icon.Height = 33;
+            icon.Width = 33;
+            icon.Source = new BitmapImage(new Uri(iconLocation, UriKind.Relative));
+            icon.Margin = new Thickness(10, 0, 3, 7);
+
+            // text block properties
+            textBlock.Text = nameDisplay;
+            textBlock.FontFamily = (FontFamily)FindResource("Epilogue");
+            textBlock.FontWeight = FontWeights.SemiBold;
+            textBlock.Height = 38;
+            textBlock.Foreground = HexColor("#FFF9F9F9");
+            textBlock.FontSize = 32;
+            textBlock.TextWrapping = TextWrapping.NoWrap;
+
+            // add each element to correct parents
+            stackPanel.Children.Add(icon);
+            stackPanel.Children.Add(textBlock);
+            main.Content = stackPanel;
+            sidenav.Children.Add(main);
+        }
         #endregion
 
-        
+
     }
 }
