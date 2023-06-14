@@ -38,113 +38,123 @@ namespace TicketingSystem.Frames
             User data = User.GetUser(id);
 
             StackPanel main = AllAccounts;
-            StackPanel holder = new StackPanel();
-            Border border = new Border();
-            Grid spacing = new Grid();
 
-            Label accountIDLabel = new Label();
-            Label accountNameLabel = new Label();
-            Label accountTypeLabel = new Label();
-            Label accountTicketsLabel = new Label();
-            Button clickButton = new Button();
+            Button button = new Button();
+            button.BorderThickness = new Thickness(0);
+            button.HorizontalContentAlignment = HorizontalAlignment.Stretch;
+            button.Margin = new Thickness(20);
 
-            clickButton.Click += (sender, e) =>
+            button.Click += (sender, e) =>
             {
                 SpecifcAccount.target = data;
                 MainWindow mw = (MainWindow)Application.Current.MainWindow;
                 mw.ChangeWindow("SpecifcAccount.xaml");
             };
 
+            // **********************************************************************************
+            Style buttonStyle = new Style(typeof(Button));
+            buttonStyle.Setters.Add(new Setter(Button.BackgroundProperty, new SolidColorBrush(Color.FromRgb(249, 249, 249))));
+
+            ControlTemplate buttonTemplate = new ControlTemplate(typeof(Button));
+            FrameworkElementFactory buttonBorder = new FrameworkElementFactory(typeof(Border));
+            Binding backgroundBinding = new Binding("Background") { RelativeSource = new RelativeSource(RelativeSourceMode.TemplatedParent) };
+            buttonBorder.SetBinding(Border.BackgroundProperty, backgroundBinding);
+            FrameworkElementFactory contentPresenter = new FrameworkElementFactory(typeof(ContentPresenter));
+            contentPresenter.SetValue(ContentPresenter.VerticalAlignmentProperty, VerticalAlignment.Center);
+            buttonBorder.AppendChild(contentPresenter);
+            buttonTemplate.VisualTree = buttonBorder;
+            buttonStyle.Setters.Add(new Setter(Button.TemplateProperty, buttonTemplate));
+
+            Trigger buttonTrigger = new Trigger();
+            buttonTrigger.Property = Button.IsMouseOverProperty;
+            buttonTrigger.Value = true;
+            buttonTrigger.Setters.Add(new Setter(Button.BackgroundProperty, new SolidColorBrush(Color.FromRgb(0, 68, 187))));
+            buttonStyle.Triggers.Add(buttonTrigger);
+
+            Style borderStyle = new Style(typeof(Border));
+            borderStyle.Setters.Add(new Setter(Border.CornerRadiusProperty, new CornerRadius(10)));
+            button.Resources.Add(typeof(Border), borderStyle);
+
+            button.Resources.Add(typeof(Button), buttonStyle);
+            // ************************************************************************************
+
+            Grid grid = new Grid();
+            grid.HorizontalAlignment = HorizontalAlignment.Stretch;
+
+            grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(230) });
+            grid.ColumnDefinitions.Add(new ColumnDefinition());
+            grid.ColumnDefinitions.Add(new ColumnDefinition());
+            grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(300) });
+            grid.ColumnDefinitions.Add(new ColumnDefinition());
+            grid.ColumnDefinitions.Add(new ColumnDefinition());
+            grid.ColumnDefinitions.Add(new ColumnDefinition());
+
+            grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(100) });
+
+            Label label1 = new Label();
+            label1.FontWeight = FontWeights.SemiBold;
+            label1.HorizontalContentAlignment = HorizontalAlignment.Left;
+            label1.Content = "Test";
+            label1.HorizontalAlignment = HorizontalAlignment.Left;
+            label1.Margin = new Thickness(10, 0, 0, 0);
+            label1.VerticalAlignment = VerticalAlignment.Center;
+            label1.Width = 200;
+            label1.Foreground = new SolidColorBrush(Color.FromRgb(17, 17, 34));
+            label1.FontSize = 32;
+            label1.FontFamily = new FontFamily("Epilogue");
+            Grid.SetColumn(label1, 0);
+
+            Label label2 = new Label();
+            label2.FontWeight = FontWeights.SemiBold;
+            label2.HorizontalContentAlignment = HorizontalAlignment.Left;
+            label2.Content = "Test";
+            label2.HorizontalAlignment = HorizontalAlignment.Left;
+            label2.Margin = new Thickness(0, 0, 0, 5);
+            label2.VerticalAlignment = VerticalAlignment.Center;
+            label2.Width = 200;
+            label2.Foreground = new SolidColorBrush(Color.FromRgb(17, 17, 34));
+            label2.FontSize = 32;
+            label2.FontFamily = new FontFamily("Epilogue");
+            Grid.SetColumn(label2, 1);
+
+            Label label3 = new Label();
+            label3.FontWeight = FontWeights.SemiBold;
+            label3.HorizontalContentAlignment = HorizontalAlignment.Center;
+            label3.Content = "3";
+            label3.HorizontalAlignment = HorizontalAlignment.Center;
+            label3.Margin = new Thickness(0, 0, 0, 5);
+            label3.VerticalAlignment = VerticalAlignment.Center;
+            label3.Width = 200;
+            label3.Foreground = new SolidColorBrush(Color.FromRgb(17, 17, 34));
+            label3.FontSize = 32;
+            label3.FontFamily = new FontFamily("Epilogue");
+            Grid.SetColumn(label3, 3);
+
+            Label label4 = new Label();
+            label4.FontWeight = FontWeights.SemiBold;
+            label4.HorizontalContentAlignment = HorizontalAlignment.Right;
+            label4.Content = "Name";
+            label4.HorizontalAlignment = HorizontalAlignment.Left;
+            label4.VerticalAlignment = VerticalAlignment.Center;
+            label4.Padding = new Thickness(0, 0, 20, 0);
+            label4.Width = 140;
+            label4.Foreground = new SolidColorBrush(Color.FromRgb(17, 17, 34));
+            label4.FontSize = 32;
+            label4.FontFamily = new FontFamily("Epilogue");
+            Grid.SetColumn(label4, 6);
+
+            grid.Children.Add(label1);
+            grid.Children.Add(label2);
+            grid.Children.Add(label3);
+            grid.Children.Add(label4);
+            
             accountIDLabel.Content = data.ID.ToString();
             accountNameLabel.Content = data.firstName + " " + data.lastName;
             accountTypeLabel.Content = User.TypeToString(data);
             accountTicketsLabel.Content = data.GetActiveTicketsAmount();
 
-            border.CornerRadius = new CornerRadius(4);
-            border.Background = (Brush)MainWindow.HexColor("#F9F9F9FF");
-
-            holder.Height = 100;
-            holder.Orientation = Orientation.Vertical;
-            holder.Margin = new Thickness(20, 10, 20, 10);
-
-            ColumnDefinition CD1 = new ColumnDefinition();
-            CD1.Width = new GridLength(230);
-            ColumnDefinition CD2 = new ColumnDefinition();
-            ColumnDefinition CD3 = new ColumnDefinition();
-            ColumnDefinition CD4 = new ColumnDefinition();
-            CD4.Width = new GridLength(300);
-            ColumnDefinition CD5 = new ColumnDefinition();
-            ColumnDefinition CD6 = new ColumnDefinition();
-            ColumnDefinition CD7 = new ColumnDefinition();
-            spacing.ColumnDefinitions.Add(CD1);
-            spacing.ColumnDefinitions.Add(CD2);
-            spacing.ColumnDefinitions.Add(CD3);
-            spacing.ColumnDefinitions.Add(CD4);
-            spacing.ColumnDefinitions.Add(CD5);
-            spacing.ColumnDefinitions.Add(CD6);
-            spacing.ColumnDefinitions.Add(CD7);
-
-            RowDefinition rowDefinition = new RowDefinition();
-            rowDefinition.Height = new GridLength(100);
-            spacing.RowDefinitions.Add(rowDefinition);
-
-            accountIDLabel.SetValue(Grid.ColumnProperty, 0);
-            accountIDLabel.FontWeight = FontWeights.SemiBold;
-            accountIDLabel.HorizontalContentAlignment = HorizontalAlignment.Left;
-            accountIDLabel.HorizontalAlignment = HorizontalAlignment.Left;
-            accountIDLabel.Margin = new Thickness(10, 0, 0, 0);
-            accountIDLabel.VerticalAlignment = VerticalAlignment.Center;
-            accountIDLabel.Width = 200;
-            accountIDLabel.Foreground = MainWindow.HexColor("#111122");
-            accountIDLabel.FontSize = 32;
-            accountIDLabel.FontFamily = (FontFamily)FindResource("Epilogue");
-
-            accountNameLabel.SetValue(Grid.ColumnProperty, 1);
-            accountNameLabel.SetValue(Grid.ColumnSpanProperty, 2);
-            accountNameLabel.FontWeight = FontWeights.SemiBold;
-            accountNameLabel.HorizontalContentAlignment = HorizontalAlignment.Left;
-            accountNameLabel.HorizontalAlignment = HorizontalAlignment.Left;
-            accountNameLabel.Margin = new Thickness(0,0,0,5);
-            accountNameLabel.VerticalAlignment = VerticalAlignment.Center;
-            accountNameLabel.Width = 300;
-            accountNameLabel.Foreground = MainWindow.HexColor("#111122");
-            accountNameLabel.FontSize = 32;
-            accountNameLabel.FontFamily = (FontFamily)FindResource("Epilogue");
-
-            accountTypeLabel.SetValue(Grid.ColumnProperty, 3);
-            accountTypeLabel.FontWeight = FontWeights.SemiBold;
-            accountTypeLabel.HorizontalContentAlignment = HorizontalAlignment.Center;
-            accountTypeLabel.HorizontalAlignment = HorizontalAlignment.Center;
-            accountTypeLabel.Margin = new Thickness(0,0,0,5);
-            accountTypeLabel.VerticalAlignment = VerticalAlignment.Center;
-            accountTypeLabel.Width = 200;
-            accountTypeLabel.Foreground = MainWindow.HexColor("#111122");
-            accountTypeLabel.FontSize = 32;
-            accountTypeLabel.FontFamily = (FontFamily)FindResource("Epilogue");
-
-            accountTicketsLabel.SetValue(Grid.ColumnProperty, 6);
-            accountTicketsLabel.FontWeight = FontWeights.SemiBold;
-            accountTicketsLabel.HorizontalContentAlignment = HorizontalAlignment.Right;
-            accountTicketsLabel.HorizontalAlignment = HorizontalAlignment.Right;
-            accountTicketsLabel.Padding = new Thickness(0,0,20,0);
-            accountTicketsLabel.VerticalAlignment = VerticalAlignment.Center;
-            accountTicketsLabel.Width = 200;
-            accountTicketsLabel.Foreground = MainWindow.HexColor("#111122");
-            accountTicketsLabel.FontSize = 32;
-            accountTicketsLabel.FontFamily = (FontFamily)FindResource("Epilogue");
-
-            clickButton.SetValue(Grid.ColumnSpanProperty, 7);
-            clickButton.Background = MainWindow.HexColor("#00000000");
-            clickButton.BorderThickness = new Thickness(0);
-
-            spacing.Children.Add(accountIDLabel);
-            spacing.Children.Add(accountNameLabel);
-            spacing.Children.Add(accountTypeLabel);
-            spacing.Children.Add(accountTicketsLabel);
-            spacing.Children.Add(clickButton);
-            border.Child = spacing;
-            holder.Children.Add(border);
-            main.Children.Add(holder);
+            button.Content = grid;
+            main.Children.Add(button);
         }
     }
 }

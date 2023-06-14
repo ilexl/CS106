@@ -38,7 +38,30 @@
                     <TextBlock Cursor="IBeam"  PreviewMouseDown="ConfPasswordGhostText_PreviewMouseDown"  x:Name="ConfPasswordGhostText" VerticalAlignment="Center" Visibility="Visible" Text="Confirm new password" Margin="0, -20, 0, 20" FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" Padding="10" Foreground="Gray" FontSize="20" TextWrapping="NoWrap"/>
                 </Grid>
 
-                <Button x:Name="ApplyButton" Content="Apply Changes" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="300" Height="65" Click="ButtonClick_Apply" Margin="150,0,0,0" FontFamily="{DynamicResource Epilogue}" FontWeight="Regular" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFF9F9F9" FontSize="32" BorderBrush="#00000000" Background="#FF0066FF"/>
+                <Button x:Name="ApplyButton" Content="Apply Changes" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="300" Height="65" Click="ButtonClick_Apply" Margin="150,0,0,0" FontFamily="{DynamicResource Epilogue}" FontWeight="Regular" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFF9F9F9" FontSize="32" BorderBrush="#00000000">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="#0066FF"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#0044BB"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
             </StackPanel>
         </Grid>
     </Grid>
