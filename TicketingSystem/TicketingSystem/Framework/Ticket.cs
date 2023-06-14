@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TicketingSystem;
 
 namespace TicketingSystem.Framework
 {
@@ -302,6 +303,95 @@ namespace TicketingSystem.Framework
                 adapter.InsertCommand = new SqlCommand(commandText, connection);
                 adapter.InsertCommand.ExecuteNonQuery();
                 connection.Close();
+            }
+        }
+
+        public static List<int> GetAllTicketIds()
+        {
+
+            //  DISPOSES CONNECTION WHEN FINISHED
+            using (SqlConnection connection = new SqlConnection(SOURCE))
+            {
+                connection.Open();
+
+                SqlDataReader sqlReader;                    //  FILESTREAM / READER, MAKES THE DATA INDEXABLE
+                SqlCommand command = new SqlCommand();      //  USED TO SPECIFY THE SQL QUERY
+
+                command.Connection = connection;            //  SPECIFIES THE CONNECTION THAT THE COMMAND WILL BE USED IN
+                command.CommandText = "SELECT * FROM AllTickets;";
+
+                sqlReader = command.ExecuteReader();        //  TAKES THE OUTPUT INTO THE READER
+
+                if (sqlReader.HasRows)                      //  USER FOUND WITH MATCHING CREDENTIALS
+                {
+                    List<int> ids = new List<int>();
+                    while (sqlReader.Read())
+                    {
+                        int ID = sqlReader.GetInt32(0);         //  Sets this instance's ID to the the corresponding cell in the matching row
+                        ids.Add(ID);
+                    }
+                    sqlReader.Close();  //  CLOSES THE READER
+                    command.Dispose();  //  NULLS THE COMMAND
+                    connection.Close(); //  CLOSES OPEN CONNECTION TO SQL DATABASE
+                    return ids;
+                }
+                else                    //  INCORRECT / INVALID CREDENTIALS
+                {
+                    sqlReader.Close();  //  CLOSES THE READER
+                    command.Dispose();  //  NULLS THE COMMAND
+                    connection.Close(); //  CLOSES OPEN CONNECTION TO SQL DATABASE
+
+                    return null;
+                }
+            }
+        }
+
+        public static List<int> GetAllTicketIds(int opa)
+        {
+            User currentUser = MainWindow.user;
+            string cmdAdd = "";
+            if(opa == 1)
+            {
+                cmdAdd = "AND Status='True'";
+            }
+            if(opa == 2)
+            {
+                cmdAdd = "AND Status='False'";
+            }
+            //  DISPOSES CONNECTION WHEN FINISHED
+            using (SqlConnection connection = new SqlConnection(SOURCE))
+            {
+                connection.Open();
+
+                SqlDataReader sqlReader;                    //  FILESTREAM / READER, MAKES THE DATA INDEXABLE
+                SqlCommand command = new SqlCommand();      //  USED TO SPECIFY THE SQL QUERY
+
+                command.Connection = connection;            //  SPECIFIES THE CONNECTION THAT THE COMMAND WILL BE USED IN
+                command.CommandText = "SELECT * FROM AllTickets (WHERE ID='" + currentUser.ID.ToString() + "'" + cmdAdd + ");";
+
+                sqlReader = command.ExecuteReader();        //  TAKES THE OUTPUT INTO THE READER
+
+                if (sqlReader.HasRows)                      //  USER FOUND WITH MATCHING CREDENTIALS
+                {
+                    List<int> ids = new List<int>();
+                    while (sqlReader.Read())
+                    {
+                        int ID = sqlReader.GetInt32(0);         //  Sets this instance's ID to the the corresponding cell in the matching row
+                        ids.Add(ID);
+                    }
+                    sqlReader.Close();  //  CLOSES THE READER
+                    command.Dispose();  //  NULLS THE COMMAND
+                    connection.Close(); //  CLOSES OPEN CONNECTION TO SQL DATABASE
+                    return ids;
+                }
+                else                    //  INCORRECT / INVALID CREDENTIALS
+                {
+                    sqlReader.Close();  //  CLOSES THE READER
+                    command.Dispose();  //  NULLS THE COMMAND
+                    connection.Close(); //  CLOSES OPEN CONNECTION TO SQL DATABASE
+
+                    return null;
+                }
             }
         }
 

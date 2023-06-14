@@ -36,37 +36,39 @@
 
         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
             <StackPanel Margin="20">
-                <StackPanel Height="125" Orientation="Vertical">
-                    <Border Height="125" CornerRadius="4" Background="#f9f9f9" >
-                        <Grid >
-                            <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                            </Grid.RowDefinitions>
+                <StackPanel Height="125" Orientation="Vertical" x:Name="HolderMain">
+                    <Button Background="#00000000" BorderThickness="0" Click="Button_Click_1" HorizontalContentAlignment="Stretch">
+                        <Border Height="125" CornerRadius="4" Background="#f9f9f9" >
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
 
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
 
-                            </Grid.ColumnDefinitions>
+                                </Grid.ColumnDefinitions>
 
-                            <Label Grid.Column="0" Grid.Row="0" FontSize="24" FontWeight="Regular" VerticalAlignment="Center" Margin="10 0 0 0" FontFamily="{DynamicResource Inter}">Ticket Problem</Label>
-                            <Label Grid.Column="1" Grid.Row="0" FontSize="24" FontWeight="Regular" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 0 0 0" FontFamily="{DynamicResource Inter}">Ticket state - stage</Label>
-                            <Label Grid.Column="2" Grid.Row="0" FontSize="24" FontWeight="Regular" HorizontalAlignment="Right" HorizontalContentAlignment="Right" VerticalAlignment="Center" Margin="0 0 20 0" FontFamily="{DynamicResource Inter}">Created - when made</Label>
+                                <Label Grid.Column="0" Grid.Row="0" FontSize="24" FontWeight="Regular" VerticalAlignment="Center" Margin="10 0 0 0" FontFamily="{DynamicResource Inter}">Ticket Problem</Label>
+                                <Label Grid.Column="1" Grid.Row="0" FontSize="24" FontWeight="Regular" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 0 0 0" FontFamily="{DynamicResource Inter}">Ticket state - stage</Label>
+                                <Label Grid.Column="2" Grid.Row="0" FontSize="24" FontWeight="Regular" HorizontalAlignment="Right" HorizontalContentAlignment="Right" VerticalAlignment="Center" Margin="0 0 20 0" FontFamily="{DynamicResource Inter}">Created - when made</Label>
 
-                            <Label Grid.Column="0" Grid.Row="1" FontSize="24" FontWeight="Regular" VerticalAlignment="Center" Margin="10 0 0 0" FontFamily="{DynamicResource Inter}">Ticket Number</Label>
-                            <Label Grid.Column="1" Grid.Row="1" FontSize="24" FontWeight="Regular" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 0 0 0" FontFamily="{DynamicResource Inter}">urgency - urgenchy lvl</Label>
-                            <Label Grid.Column="2" Grid.Row="1" FontSize="24" FontWeight="Regular"  HorizontalAlignment="Right" HorizontalContentAlignment="Right" VerticalAlignment="Center" Margin="0 0 20 0" FontFamily="{DynamicResource Inter}">updated - when updated</Label>
-                            <Button Background="#00000000" BorderThickness="0" Grid.ColumnSpan="3" Grid.RowSpan="2" Click="Button_Click_1"></Button>
-                            <Grid.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="10"/>
-                                </Style>
+                                <Label Grid.Column="0" Grid.Row="1" FontSize="24" FontWeight="Regular" VerticalAlignment="Center" Margin="10 0 0 0" FontFamily="{DynamicResource Inter}">Ticket Number</Label>
+                                <Label Grid.Column="1" Grid.Row="1" FontSize="24" FontWeight="Regular" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 0 0 0" FontFamily="{DynamicResource Inter}">urgency - urgenchy lvl</Label>
+                                <Label Grid.Column="2" Grid.Row="1" FontSize="24" FontWeight="Regular"  HorizontalAlignment="Right" HorizontalContentAlignment="Right" VerticalAlignment="Center" Margin="0 0 20 0" FontFamily="{DynamicResource Inter}">updated - when updated</Label>
+                                <Grid.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="10"/>
+                                    </Style>
 
-                            </Grid.Resources>
-                        </Grid>
-                    </Border>
+                                </Grid.Resources>
+                            </Grid>
+                        </Border>
+                    </Button>
+                            
 
                 </StackPanel>
 

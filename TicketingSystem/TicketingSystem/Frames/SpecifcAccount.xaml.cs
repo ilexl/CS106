@@ -65,14 +65,13 @@ namespace TicketingSystem.Frames
 
         private void EmailTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            var window = (MainWindow)Application.Current.MainWindow;
             TextBox textBox = (TextBox)sender;
             if (textBox.Text == "No e-mail address found.")
             {
                 emailFocused = true;
                 textBox.Text = string.Empty;
             }
-            else if (textBox.Text == window.user.email)
+            else if (textBox.Text == MainWindow.user.email)
             {
                 emailFocused = true;
                 textBox.Text = string.Empty;
@@ -81,25 +80,24 @@ namespace TicketingSystem.Frames
 
         private void EmailTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            var window = (MainWindow)Application.Current.MainWindow;
             TextBox textBox = (TextBox)sender;
             if (string.IsNullOrEmpty(textBox.Text))
             {
                 emailFocused = false;
-                if (window.user.email != "")
+                if (MainWindow.user.email != "")
                 {
-                    if (window.user.email == null)
+                    if (MainWindow.user.email == null)
                     {
                         textBox.Text = "No e-mail address found.";
                     }
                     else
                     {
-                        textBox.Text = window.user.email;
+                        textBox.Text = MainWindow.user.email;
                     }
                 }
                 else
                 {
-                    textBox.Text = window.user.email;
+                    textBox.Text = MainWindow.user.email;
                 }
             }
         }
@@ -113,7 +111,7 @@ namespace TicketingSystem.Frames
                 accountTypeFocused = true;
                 textBox.Text = string.Empty;
             }
-            else if (textBox.Text == window.user.email)
+            else if (textBox.Text == MainWindow.user.email)
             {
                 accountTypeFocused = true;
                 textBox.Text = string.Empty;
@@ -122,25 +120,24 @@ namespace TicketingSystem.Frames
 
         private void AccountTypeTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            var window = (MainWindow)Application.Current.MainWindow;
             TextBox textBox = (TextBox)sender;
             if (string.IsNullOrEmpty(textBox.Text))
             {
                 emailFocused = false;
-                if (window.user.email != "")
+                if (MainWindow.user.email != "")
                 {
-                    if (window.user.email == null)
+                    if (MainWindow.user.email == null)
                     {
                         textBox.Text = "No e-mail address found.";
                     }
                     else
                     {
-                        textBox.Text = window.user.email;
+                        textBox.Text = MainWindow.user.email;
                     }
                 }
                 else
                 {
-                    textBox.Text = window.user.email;
+                    textBox.Text = MainWindow.user.email;
                 }
             }
         }
