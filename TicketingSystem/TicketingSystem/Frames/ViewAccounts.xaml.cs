@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TicketingSystem.Framework;
 
 namespace TicketingSystem.Frames
 {
@@ -24,18 +25,31 @@ namespace TicketingSystem.Frames
         {
             InitializeComponent();
             AllAccounts.Children.Clear();
-            AddAccountToMenu(2);
+            List<int> allIds = User.GetAllAccountIds();
+            foreach(int id in allIds)
+            {
+                AddAccountToMenu(id);
+            }
         }
 
 
         private void AddAccountToMenu(int id)
         {
+            User data = User.GetUser(id);
+
             StackPanel main = AllAccounts;
 
             Button button = new Button();
             button.BorderThickness = new Thickness(0);
             button.HorizontalContentAlignment = HorizontalAlignment.Stretch;
             button.Margin = new Thickness(20);
+
+            button.Click += (sender, e) =>
+            {
+                SpecifcAccount.target = data;
+                MainWindow mw = (MainWindow)Application.Current.MainWindow;
+                mw.ChangeWindow("SpecifcAccount.xaml");
+            };
 
             // **********************************************************************************
             Style buttonStyle = new Style(typeof(Button));
@@ -133,10 +147,14 @@ namespace TicketingSystem.Frames
             grid.Children.Add(label2);
             grid.Children.Add(label3);
             grid.Children.Add(label4);
+            
+            accountIDLabel.Content = data.ID.ToString();
+            accountNameLabel.Content = data.firstName + " " + data.lastName;
+            accountTypeLabel.Content = User.TypeToString(data);
+            accountTicketsLabel.Content = data.GetActiveTicketsAmount();
 
             button.Content = grid;
             main.Children.Add(button);
-
         }
     }
 }

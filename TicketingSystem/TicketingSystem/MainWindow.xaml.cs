@@ -58,7 +58,7 @@ namespace TicketingSystem
 
         }
 
-        private void ChangeWindow(string windowName)
+        public void ChangeWindow(string windowName)
         {
             mainFrame.Navigate(new Uri("./Frames/" + windowName, UriKind.Relative));
             Debug.Log(windowName + " opened");
@@ -113,7 +113,7 @@ namespace TicketingSystem
 
         public bool LoginActivation(string username, string password)
         {
-            if (user.ConnectToDatabase(username, password))
+            if (user.Login(username, password))
             {
                 MainWindowVisability(true);
                 LoginWindowVisability(false);
