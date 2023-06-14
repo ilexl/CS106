@@ -29,5 +29,15 @@ namespace TicketingSystem.Frames
         {
 
         }
+
+        private void Urgency_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void ComboBox_DropDownClosed(object sender, EventArgs e)
+        {
+            ResolveButton.Focus();
+        }
     }
 }
