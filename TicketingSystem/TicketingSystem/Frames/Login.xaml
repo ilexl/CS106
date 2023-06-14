@@ -20,7 +20,30 @@
                     </Grid>
                 </StackPanel>
             </Grid>
-            <Button x:Name="LoginButton" Content="Log In" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="300" Height="64" Click="ButtonClick_Login" Margin="145,250,0,0" FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFF9F9F9" FontSize="32" BorderBrush="#00000000" Background="#FF0066FF"/>
+            <Button x:Name="LoginButton" Content="Log In" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="300" Height="64" Click="ButtonClick_Login" Margin="145,250,0,0" FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFF9F9F9" FontSize="32" BorderBrush="#00000000">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="#0066FF"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#0044BB"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
         </Grid>
 
     </Grid>
