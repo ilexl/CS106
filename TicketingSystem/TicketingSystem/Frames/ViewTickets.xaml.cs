@@ -24,5 +24,11 @@ namespace TicketingSystem.Frames
         {
             InitializeComponent();
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            MainWindow window = (MainWindow)Application.Current.MainWindow;
+            window.ChangeWindow("SpecificTicket.xaml");
+        }
     }
 }

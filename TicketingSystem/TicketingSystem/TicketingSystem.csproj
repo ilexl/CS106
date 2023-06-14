@@ -100,6 +100,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Frames\SpecificTicket.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Frames\ViewAccounts.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -118,6 +122,9 @@
     </Compile>
     <Compile Include="Frames\Console.xaml.cs">
       <DependentUpon>Console.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Frames\SpecificTicket.xaml.cs">
+      <DependentUpon>SpecificTicket.xaml</DependentUpon>
     </Compile>
     <Compile Include="Frames\ViewAccounts.xaml.cs">
       <DependentUpon>ViewAccounts.xaml</DependentUpon>
