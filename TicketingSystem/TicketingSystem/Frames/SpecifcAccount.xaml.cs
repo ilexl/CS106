@@ -16,11 +16,13 @@ using TicketingSystem.Framework;
 
 namespace TicketingSystem.Frames
 {
+    
     /// <summary>
     /// Interaction logic for SpecifcAccount.xaml
     /// </summary>
     public partial class SpecifcAccount : Page
     {
+
         public static User target;
         private bool accountTypeFocused = false;
         private bool emailFocused = false;

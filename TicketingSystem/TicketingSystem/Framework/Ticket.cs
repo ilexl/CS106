@@ -22,6 +22,47 @@ namespace TicketingSystem.Framework
         private DateTime updated;
         private List<string> comments;
 
+        public int GetID()
+        {
+            return id;
+        }
+        public bool GetStatus()
+        {
+            return status;
+        }
+        public string GetCallerID()
+        {
+            return callerID;
+        }
+        public string GetCreatorID()
+        {
+            return creatorID;
+        }
+        public string GetTitle()
+        {
+            return title;
+        }
+        public int GetUrgency()
+        {
+            return urgency;
+        }
+        public RESOLVEREASON GetResolveReason()
+        {
+            return resolveReason;
+        }
+        public DateTime GetCreatedTime()
+        {
+            return created;
+        }
+        public DateTime GetUpdatedTime()
+        {
+            return updated;
+        }
+        public List<string> GetComments()
+        {
+            return comments;
+        }
+
         /* Ticket class needs to
          * Create a ticket
          * Add comments to ticket
@@ -264,7 +305,7 @@ namespace TicketingSystem.Framework
             }
         }
 
-        enum RESOLVEREASON : int
+        public enum RESOLVEREASON : int
         {
             None = 0,
             FIXED = 1,

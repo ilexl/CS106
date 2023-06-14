@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TicketingSystem.Framework;
 
 namespace TicketingSystem.Frames
 {
@@ -20,24 +21,56 @@ namespace TicketingSystem.Frames
     /// </summary>
     public partial class SpecificTicket : Page
     {
+        public static Ticket target;
         public SpecificTicket()
         {
             InitializeComponent();
+            ViewTicketDetails(target);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ViewTicketDetails(Ticket t)
         {
+            TicketNumber.Content = "INC" + t.GetID().ToString();
+            TitleT.Content = t.GetTitle();
+            if (t.GetStatus())
+            {
+                Status.Content = "Open";
+            }
+            else
+            {
+                Status.Content = "False";
+            }
+            Caller.Content = t.GetCallerID();
+            CreatedBy.Content = t.GetCreatorID();
+            Urgency.SelectedIndex = t.GetUrgency() - 1;
 
-        }
+            TimeSpan CreatedDW = (((DateTime)(t.GetCreatedTime())) - ((DateTime)(DateTime.Now))).Duration(); ;
+            if(CreatedDW.Days != 0)
+            {
+                Created.Content = CreatedDW.Days + "d ago";
+            }
+            else if (CreatedDW.Hours != 0)
+            {
+                Created.Content = CreatedDW.Hours + "h ago";
+            }
+            else
+            {
+                Created.Content = CreatedDW.Minutes + "m ago";
+            }
 
-        private void Urgency_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void ComboBox_DropDownClosed(object sender, EventArgs e)
-        {
-            ResolveButton.Focus();
+            TimeSpan UpdatedDW = (((DateTime)(t.GetUpdatedTime())) - ((DateTime)(DateTime.Now))).Duration(); ;
+            if (UpdatedDW.Days != 0)
+            {
+                Updated.Content = UpdatedDW.Days + "d ago";
+            }
+            else if (UpdatedDW.Hours != 0)
+            {
+                Updated.Content = UpdatedDW.Hours + "h ago";
+            }
+            else
+            {
+                Updated.Content = UpdatedDW.Minutes + "m ago";
+            }
         }
     }
 }

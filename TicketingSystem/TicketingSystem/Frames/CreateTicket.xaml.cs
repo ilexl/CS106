@@ -26,7 +26,10 @@ namespace TicketingSystem.Frames
 
         public CreateTicket()
         {
+            User current = ((MainWindow)Application.Current.MainWindow).user;
             InitializeComponent();
+            CreatedBy.Text = current.ID.ToString();
+            CreatedFor.Text = current.ID.ToString();
         }
 
         private void Button_CreateTicket(object sender, RoutedEventArgs e)
@@ -36,14 +39,16 @@ namespace TicketingSystem.Frames
             string title = TitleInput.Text;
             int urgency = Urgency.SelectedIndex + 1; // 1 2 3 for high medium low
             string creatorID = current.ID.ToString();
-            string createdFor = CreatedBy.Text;
+            string createdFor = CreatedFor.Text;
             string description = Descritpion.Text;
 
 
             Ticket t = Ticket.CreateNew(createdFor, creatorID, title, urgency, DateTime.Now);
             t.AddComment(description);
 
-
+            MainWindow window = (MainWindow)Application.Current.MainWindow;
+            SpecificTicket.target = t;
+            window.ChangeWindow("SpecificTicket.xaml");
 
             #region OLD
             /*var window = (MainWindow)Application.Current.MainWindow;

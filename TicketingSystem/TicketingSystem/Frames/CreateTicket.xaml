@@ -39,7 +39,7 @@
                 <TextBox Name="CreatedFor" Padding="3" FontSize="25" Margin="24.5, 0, 0, 15"></TextBox>
 
                 <TextBlock Padding="3" FontSize="25" Margin="24.5, 0, 0, 0" Foreground="White">Created By</TextBlock>
-                <TextBlock Name="CreatedBy"  Padding="3" FontSize="25" Margin="24.5, 0, 0, 0" Background="White"></TextBlock>
+                <TextBlock Name="CreatedBy"  Padding="3" FontSize="25" Margin="24.5, 0, 0, 0" Background="Gray"></TextBlock>
 
             </StackPanel>
 
