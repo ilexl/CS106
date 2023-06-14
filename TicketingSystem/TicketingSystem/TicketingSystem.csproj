@@ -104,6 +104,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Frames\SpecifcAccount.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Frames\ViewAccounts.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -125,6 +129,9 @@
     </Compile>
     <Compile Include="Frames\SpecificTicket.xaml.cs">
       <DependentUpon>SpecificTicket.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Frames\SpecifcAccount.xaml.cs">
+      <DependentUpon>SpecifcAccount.xaml</DependentUpon>
     </Compile>
     <Compile Include="Frames\ViewAccounts.xaml.cs">
       <DependentUpon>ViewAccounts.xaml</DependentUpon>
@@ -222,6 +229,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\logout.png" />
+    <EmbeddedResource Include="Resources\DAB.png" />
     <Content Include="Server\Tickets.mdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

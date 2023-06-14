@@ -113,7 +113,7 @@ namespace TicketingSystem
 
         public bool LoginActivation(string username, string password)
         {
-            if (user.ConnectToDatabase(username, password))
+            if (user.Login(username, password))
             {
                 MainWindowVisability(true);
                 LoginWindowVisability(false);

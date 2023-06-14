@@ -19,8 +19,55 @@ namespace TicketingSystem.Framework
         public string email;
         public string firstName;
         public string lastName;
-        
-        public bool ConnectToDatabase(string _ID, string _NonHashedPassword)
+
+        public static User GetUser(int ID)
+        {
+            User user = new User();
+
+            //  DISPOSES CONNECTION WHEN FINISHED
+            using (SqlConnection connection = new SqlConnection(connectionStringUsers))
+            {
+                connection.Open();
+
+                SqlDataReader sqlReader;                    //  FILESTREAM / READER, MAKES THE DATA INDEXABLE
+                SqlCommand command = new SqlCommand();      //  USED TO SPECIFY THE SQL QUERY
+
+                command.Connection = connection;            //  SPECIFIES THE CONNECTION THAT THE COMMAND WILL BE USED IN
+                command.CommandText = "SELECT * FROM Users WHERE (ID='" + ID.ToString() + "');";
+
+                sqlReader = command.ExecuteReader();        //  TAKES THE OUTPUT INTO THE READER
+
+                if (sqlReader.HasRows)                      //  USER FOUND WITH MATCHING CREDENTIALS
+                {
+                    while (sqlReader.Read())
+                    {
+                        user.ID = sqlReader.GetInt32(0);         //  Sets this instance's ID to the the corresponding cell in the matching row
+                        user.password = sqlReader.GetString(1);  //  Sets this instance's password to the the corresponding cell in the matching row
+                        user.userType = sqlReader.GetInt32(2);   //  Sets this instance's usertype to the the corresponding cell in the matching row
+                        user.email = sqlReader.GetString(3);     //  Sets this instance's email to the the corresponding cell in the matching row
+                        user.firstName = sqlReader.GetString(4); //  Sets this instance's first name to the the corresponding cell in the matching row
+                        user.lastName = sqlReader.GetString(5);  //  Sets this instance's last name to the the corresponding cell in the matching row
+
+                        sqlReader.Close();  //  CLOSES THE READER
+                        command.Dispose();  //  NULLS THE COMMAND
+                        connection.Close(); //  CLOSES OPEN CONNECTION TO SQL DATABASE
+
+                        return user;
+                    }
+                }
+                else                    //  INCORRECT / INVALID CREDENTIALS
+                {
+                    sqlReader.Close();  //  CLOSES THE READER
+                    command.Dispose();  //  NULLS THE COMMAND
+                    connection.Close(); //  CLOSES OPEN CONNECTION TO SQL DATABASE
+
+                    return null;
+                }
+            }
+            return null;
+        }
+
+        public bool Login(string _ID, string _NonHashedPassword)
         {
             var window = (MainWindow)Application.Current.MainWindow;
 
@@ -36,13 +83,13 @@ namespace TicketingSystem.Framework
 
                 command.Connection = connection;            //  SPECIFIES THE CONNECTION THAT THE COMMAND WILL BE USED IN
                 command.CommandText = "SELECT * FROM Users WHERE (ID='" + _ID + "' OR Email='" + _ID + "') AND Password='" + _Password + "';";
-                
+
                 sqlReader = command.ExecuteReader();        //  TAKES THE OUTPUT INTO THE READER
 
                 if (sqlReader.HasRows)                      //  USER FOUND WITH MATCHING CREDENTIALS
                 {
                     while (sqlReader.Read())
-    {
+                    {
                         ID = sqlReader.GetInt32(0);         //  Sets this instance's ID to the the corresponding cell in the matching row
                         password = sqlReader.GetString(1);  //  Sets this instance's password to the the corresponding cell in the matching row
                         userType = sqlReader.GetInt32(2);   //  Sets this instance's usertype to the the corresponding cell in the matching row
@@ -58,7 +105,7 @@ namespace TicketingSystem.Framework
                     }
                 }
                 else                    //  INCORRECT / INVALID CREDENTIALS
-        {
+                {
                     sqlReader.Close();  //  CLOSES THE READER
                     command.Dispose();  //  NULLS THE COMMAND
                     connection.Close(); //  CLOSES OPEN CONNECTION TO SQL DATABASE
@@ -75,6 +122,35 @@ namespace TicketingSystem.Framework
             Tech = 2,
             Admin = 3,
             Test = 4
+        }
+
+        public static string TypeToString(User user)
+        {
+            Type type = (Type)user.userType;
+            switch (type)
+            {
+                case Type.User:
+                    {
+                        return "User";
+                    }
+                case Type.Tech:
+                    {
+                        return "Tech";
+                    }
+                case Type.Admin:
+                    {
+                        return "Admin";
+                    }
+                case Type.Test:
+                    {
+                        return "Test";
+                    }
+                default:
+                    {
+                        Debug.LogError("User type invalid for user " + user.ID.ToString());
+                        return "Error - Unknown User Type";
+                    }
+            }
         }
 
         public static string HashString(string nonHashString)
@@ -135,6 +211,51 @@ namespace TicketingSystem.Framework
 
                 email = newEmail;
             }
+        }
+
+        public static List<int> GetAllAccountIds()
+        {
+
+            //  DISPOSES CONNECTION WHEN FINISHED
+            using (SqlConnection connection = new SqlConnection(connectionStringUsers))
+            {
+                connection.Open();
+
+                SqlDataReader sqlReader;                    //  FILESTREAM / READER, MAKES THE DATA INDEXABLE
+                SqlCommand command = new SqlCommand();      //  USED TO SPECIFY THE SQL QUERY
+
+                command.Connection = connection;            //  SPECIFIES THE CONNECTION THAT THE COMMAND WILL BE USED IN
+                command.CommandText = "SELECT * FROM Users;";
+
+                sqlReader = command.ExecuteReader();        //  TAKES THE OUTPUT INTO THE READER
+
+                if (sqlReader.HasRows)                      //  USER FOUND WITH MATCHING CREDENTIALS
+                {
+                    List<int> ids = new List<int>();
+                    while (sqlReader.Read())
+                    {
+                        int ID = sqlReader.GetInt32(0);         //  Sets this instance's ID to the the corresponding cell in the matching row
+                        ids.Add(ID);
+                    }
+                    sqlReader.Close();  //  CLOSES THE READER
+                    command.Dispose();  //  NULLS THE COMMAND
+                    connection.Close(); //  CLOSES OPEN CONNECTION TO SQL DATABASE
+                    return ids;
+                }
+                else                    //  INCORRECT / INVALID CREDENTIALS
+                {
+                    sqlReader.Close();  //  CLOSES THE READER
+                    command.Dispose();  //  NULLS THE COMMAND
+                    connection.Close(); //  CLOSES OPEN CONNECTION TO SQL DATABASE
+
+                    return null;
+                }
+            }
+        }
+
+        public int GetActiveTicketsAmount()
+        {
+            return 0;
         }
     }
 }

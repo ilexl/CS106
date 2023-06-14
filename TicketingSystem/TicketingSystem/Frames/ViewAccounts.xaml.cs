@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TicketingSystem.Framework;
 
 namespace TicketingSystem.Frames
 {
@@ -24,13 +25,18 @@ namespace TicketingSystem.Frames
         {
             InitializeComponent();
             AllAccounts.Children.Clear();
-            AddAccountToMenu(2);
-            AddAccountToMenu(2);
+            List<int> allIds = User.GetAllAccountIds();
+            foreach(int id in allIds)
+            {
+                AddAccountToMenu(id);
+            }
         }
 
 
         private void AddAccountToMenu(int id)
         {
+            User data = User.GetUser(id);
+
             StackPanel main = AllAccounts;
             StackPanel holder = new StackPanel();
             Border border = new Border();
@@ -42,10 +48,17 @@ namespace TicketingSystem.Frames
             Label accountTicketsLabel = new Label();
             Button clickButton = new Button();
 
-            accountIDLabel.Content = "TestID";
-            accountNameLabel.Content = "TestName";
-            accountTypeLabel.Content = "Admin";
-            accountTicketsLabel.Content = "Test#";
+            clickButton.Click += (sender, e) =>
+            {
+                SpecifcAccount.target = data;
+                MainWindow mw = (MainWindow)Application.Current.MainWindow;
+                mw.ChangeWindow("SpecifcAccount.xaml");
+            };
+
+            accountIDLabel.Content = data.ID.ToString();
+            accountNameLabel.Content = data.firstName + " " + data.lastName;
+            accountTypeLabel.Content = User.TypeToString(data);
+            accountTicketsLabel.Content = data.GetActiveTicketsAmount();
 
             border.CornerRadius = new CornerRadius(4);
             border.Background = (Brush)MainWindow.HexColor("#F9F9F9FF");
