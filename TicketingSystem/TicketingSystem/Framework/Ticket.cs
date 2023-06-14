@@ -224,7 +224,45 @@ namespace TicketingSystem.Framework
                 }
             }
             return false;
-        } 
+        }
+
+        public void AddComment(string comment)
+        {
+            comments.Add(comment);
+            comment = "";
+            foreach(string c in comments)
+            {
+                comment += c + '♦';
+            }
+            if (comment.EndsWith("♦"))
+            {
+                comment = comment.Remove(comment.Length - 1, 1); // remove last symbol
+            }
+
+            using (SqlConnection connection = new SqlConnection(SOURCE))
+            {
+                connection.Open();
+
+                //  FILESTREAM / WRITER, ALLOWS INSERTING / UPDATING ROWS IN SQL
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                string commandText = "UPDATE AllTickets SET COMMENTS='" + comment + "' WHERE ID='" + this.id + "';";
+                adapter.InsertCommand = new SqlCommand(commandText, connection);
+                adapter.InsertCommand.ExecuteNonQuery();
+                connection.Close();
+            }
+
+            using (SqlConnection connection = new SqlConnection(SOURCE))
+            {
+                connection.Open();
+
+                //  FILESTREAM / WRITER, ALLOWS INSERTING / UPDATING ROWS IN SQL
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                string commandText = "UPDATE AllTickets SET UPDATED='" + DateTime.Now.ToString() + "' WHERE ID='" + this.id + "';";
+                adapter.InsertCommand = new SqlCommand(commandText, connection);
+                adapter.InsertCommand.ExecuteNonQuery();
+                connection.Close();
+            }
+        }
 
         enum RESOLVEREASON : int
         {
