@@ -48,6 +48,13 @@ namespace TicketingSystem.Frames
             Label accountTicketsLabel = new Label();
             Button clickButton = new Button();
 
+            clickButton.Click += (sender, e) =>
+            {
+                SpecifcAccount.target = data;
+                MainWindow mw = (MainWindow)Application.Current.MainWindow;
+                mw.ChangeWindow("SpecifcAccount.xaml");
+            };
+
             accountIDLabel.Content = data.ID.ToString();
             accountNameLabel.Content = data.firstName + " " + data.lastName;
             accountTypeLabel.Content = User.TypeToString(data);

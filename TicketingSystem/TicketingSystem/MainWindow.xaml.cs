@@ -58,7 +58,7 @@ namespace TicketingSystem
 
         }
 
-        private void ChangeWindow(string windowName)
+        public void ChangeWindow(string windowName)
         {
             mainFrame.Navigate(new Uri("./Frames/" + windowName, UriKind.Relative));
             Debug.Log(windowName + " opened");
