@@ -267,6 +267,29 @@ namespace TicketingSystem.Framework
             }
         }
 
+        public void ChangeUrgency(int newUrgency)
+        {
+            using (SqlConnection connection = Server.GetConnection(Server.SOURCE_TICKET))
+            {
+                //  FILESTREAM / WRITER, ALLOWS INSERTING / UPDATING ROWS IN SQL
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                string commandText = "UPDATE AllTickets SET URGENCY=@urgency WHERE ID='" + this.id + "';";
+                adapter.InsertCommand = new SqlCommand(commandText, connection);
+                adapter.InsertCommand.Parameters.AddWithValue("@urgency", newUrgency);
+                adapter.InsertCommand.ExecuteNonQuery();
+                Server.CloseConnection(connection);
+            }
+
+            using (SqlConnection connection = Server.GetConnection(Server.SOURCE_TICKET))
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                string commandText = "UPDATE AllTickets SET UPDATED='" + DateTime.Now.ToString() + "' WHERE ID='" + this.id + "';";
+                adapter.InsertCommand = new SqlCommand(commandText, connection);
+                adapter.InsertCommand.ExecuteNonQuery();
+                Server.CloseConnection(connection);
+            }
+        }
+
         public static List<int> GetAllTicketIds()
         {
 

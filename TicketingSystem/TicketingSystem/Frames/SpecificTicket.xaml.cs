@@ -136,6 +136,8 @@ namespace TicketingSystem.Frames
 
                 stackPanel.Children.Add(commentBlock);
 
+                stackPanel.Height = commentBlock.Height + nameBlock.Height + 10;
+
                 newCommentGrid.Children.Add(stackPanel);
 
                 CommentField.Children.Add(newCommentGrid);
@@ -192,6 +194,11 @@ namespace TicketingSystem.Frames
                     ResetText();
                 }
             }
+        }
+
+        private void Urgency_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            target.ChangeUrgency(Urgency.SelectedIndex + 1);
         }
     }
 }
