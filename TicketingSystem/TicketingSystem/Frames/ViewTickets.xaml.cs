@@ -108,13 +108,13 @@ namespace TicketingSystem.Frames
                         {
                             break;
                         }
-                        foreach (int t in allTicketIds)
+                        foreach (int t in allTicketIds) // loop through results
                         {
                             bool validTicket;
-                            Ticket ticket = new Ticket(t, out validTicket);
+                            Ticket ticket = new Ticket(t, out validTicket); // get from db
                             if (validTicket)
                             {
-                                AddTicketToList(ticket);
+                                AddTicketToList(ticket); // create button
                             }
                         }
                         break;
@@ -135,9 +135,6 @@ namespace TicketingSystem.Frames
 
         private void AddTicketToList(Ticket t)
         {
-            
-
-
             Button button = new Button
             {
                 Height = 125,
