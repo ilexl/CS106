@@ -158,7 +158,7 @@ namespace TicketingSystem.Framework
             commandText += SPACE;
             commandText += "'" + t.creatorID + "'";
             commandText += SPACE;
-            commandText += "'" + t.title + "'";
+            commandText += "@tTitle";
             commandText += SPACE;
             commandText += "'" + t.urgency.ToString() + "'";
             commandText += SPACE;
@@ -168,13 +168,15 @@ namespace TicketingSystem.Framework
             commandText += SPACE;
             commandText += "'" + t.updated.ToString() + "'"; ;
             commandText += SPACE;
-            commandText += commentsAll;
+            commandText += "@commentsAll";
             commandText += ");";
             #endregion
 
             SqlConnection connection = Server.GetConnection(Server.SOURCE_TICKET);
             SqlDataAdapter adapter = new SqlDataAdapter();
             adapter.InsertCommand = new SqlCommand(commandText, connection);
+            adapter.InsertCommand.Parameters.AddWithValue("@tTitle", t.title);
+            adapter.InsertCommand.Parameters.AddWithValue("@commentsAll", commentsAll);
             adapter.InsertCommand.ExecuteNonQuery();
             Server.CloseConnection(connection);
         }
@@ -247,8 +249,9 @@ namespace TicketingSystem.Framework
             {
                 //  FILESTREAM / WRITER, ALLOWS INSERTING / UPDATING ROWS IN SQL
                 SqlDataAdapter adapter = new SqlDataAdapter();
-                string commandText = "UPDATE AllTickets SET COMMENTS='" + comment + "' WHERE ID='" + this.id + "';";
+                string commandText = "UPDATE AllTickets SET COMMENTS=@comment WHERE ID='" + this.id + "';";
                 adapter.InsertCommand = new SqlCommand(commandText, connection);
+                adapter.InsertCommand.Parameters.AddWithValue("@comment", comment);
                 adapter.InsertCommand.ExecuteNonQuery();
                 Server.CloseConnection(connection);
             }
