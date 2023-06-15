@@ -29,11 +29,9 @@ namespace TicketingSystem.Framework
 
         internal static SqlConnection GetConnection(string connectionString)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-                return connection;
-            }
+            SqlConnection connection = new SqlConnection(connectionString);
+            connection.Open();
+            return connection;
         }
 
         internal static void CloseConnection(SqlDataReader sdr, SqlCommand sc, SqlConnection connection)
