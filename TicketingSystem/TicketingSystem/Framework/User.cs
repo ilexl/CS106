@@ -73,7 +73,9 @@ namespace TicketingSystem.Framework
             SqlCommand command = new SqlCommand();      //  USED TO SPECIFY THE SQL QUERY
 
             command.Connection = connection;            //  SPECIFIES THE CONNECTION THAT THE COMMAND WILL BE USED IN
-            command.CommandText = "SELECT * FROM Users WHERE (ID='" + _ID + "' OR Email='" + _ID + "') AND Password='" + _Password + "';";
+            command.CommandText = "SELECT * FROM Users WHERE (ID=@id OR Email=@id) AND Password=@password;";
+            command.Parameters.AddWithValue("@id", _ID); //  ADDS THE ID TO THE QUERY
+            command.Parameters.AddWithValue("@password", _Password); //  ADDS THE PASSWORD TO THE QUERY
             sqlReader = command.ExecuteReader();        //  TAKES THE OUTPUT INTO THE READER
 
             if (sqlReader.HasRows) //  USER FOUND WITH MATCHING CREDENTIALS
@@ -115,8 +117,9 @@ namespace TicketingSystem.Framework
                 SqlConnection connection = Server.GetConnection(Server.SOURCE_USERS);
                 SqlDataAdapter adapter = new SqlDataAdapter();
 
-                string commandText = "UPDATE Users SET Password='" + newPassword + "' WHERE ID='" + ID + "';";
+                string commandText = "UPDATE Users SET Password=@password WHERE ID='" + ID + "';";
                 adapter.InsertCommand = new SqlCommand(commandText, connection);
+                adapter.InsertCommand.Parameters.AddWithValue("@password", newPassword);
                 adapter.InsertCommand.ExecuteNonQuery();
                 
                 Server.CloseConnection(connection);
@@ -138,8 +141,9 @@ namespace TicketingSystem.Framework
             //  FILESTREAM / WRITER, ALLOWS INSERTING / UPDATING ROWS IN SQL
             SqlConnection connection = Server.GetConnection(Server.SOURCE_USERS);
             SqlDataAdapter adapter = new SqlDataAdapter();
-            string commandText = "UPDATE Users SET Email='" + newEmail + "' WHERE ID='" + ID + "';";
+            string commandText = "UPDATE Users SET Email=@email WHERE ID='" + ID + "';";
             adapter.InsertCommand = new SqlCommand(commandText, connection);
+            adapter.InsertCommand.Parameters.AddWithValue("@email", newEmail);
             adapter.InsertCommand.ExecuteNonQuery();
             Server.CloseConnection(connection);
             email = newEmail;
