@@ -9,7 +9,7 @@
       Title="SpecifcAccount">
 
     <Grid Background="#FF111122">
-        <Grid HorizontalAlignment="Left" Height="860" VerticalAlignment="Center" Width="1000" Margin="30,20,0,20">
+        <Grid HorizontalAlignment="Left" Height="860" VerticalAlignment="Top" Width="1000" Margin="30,20,0,20">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>
@@ -32,16 +32,108 @@
                     <TextBox GotFocus="AccountTypeTextBox_GotFocus" LostFocus="AccountTypeTextBox_LostFocus" x:Name="AccountType"  FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center" Padding="10" Height="50" Margin="0,0,0,22" Foreground="Black" FontSize="20" TextWrapping="NoWrap" Text="Test" Width="600"/>
 
                     <Label FontWeight="Bold" Content="Password" HorizontalAlignment="Left" Margin="0,0,0,10" VerticalAlignment="Top" Width="300" Foreground="#FFF9F9F9" FontSize="20" FontFamily="{DynamicResource Epilogue}"/>
-                    <Button x:Name="ResetPassword" Content="Reset Password" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="600" Height="65" Click="ButtonClick_ResetPassword" Margin="0,0,0,0" FontFamily="{DynamicResource Epilogue}" FontWeight="Regular" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFF9F9F9" FontSize="22" BorderBrush="#00000000" Background="#FF0066FF"/>
+                    <Button x:Name="ResetPassword" Content="Reset Password" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="600" Height="65" Click="ButtonClick_ResetPassword" Margin="0,0,0,0" FontFamily="{DynamicResource Epilogue}" FontWeight="Regular" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFF9F9F9" FontSize="22" BorderBrush="#00000000">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="#0066FF"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#0044BB"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
                     <StackPanel Orientation="Horizontal" Margin="0,20">
-                        <Button x:Name="DiscardChanges" Content="Discard Changes" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="190" Height="65" Click="ButtonClick_Discard" Margin="0,0,10,0" FontFamily="{DynamicResource Epilogue}" FontWeight="Regular" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFF9F9F9" FontSize="22" BorderBrush="#00000000" Background="#FF0066FF"/>
-                        <Button x:Name="SaveChanges" Content="Save Changes" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="390" Height="65" Click="ButtonClick_Save" Margin="10,0,0,0" FontFamily="{DynamicResource Epilogue}" FontWeight="Regular" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFF9F9F9" FontSize="22" BorderBrush="#00000000" Background="#FF0066FF"/>
+                        <Button x:Name="DiscardChanges" Content="Discard Changes" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="190" Height="65" Click="ButtonClick_Discard" Margin="0,0,10,0" FontFamily="{DynamicResource Epilogue}" FontWeight="Regular" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#000000" FontSize="22" BorderBrush="#00000000">
+                            <Button.Resources>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="#CCEEFF"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border Background="{TemplateBinding Background}">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#0066ff"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="10"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+                        <Button x:Name="SaveChanges" Content="Save Changes" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="390" Height="65" Click="ButtonClick_Save" Margin="10,0,0,0" FontFamily="{DynamicResource Epilogue}" FontWeight="Regular" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFF9F9F9" FontSize="22" BorderBrush="#00000000">
+                            <Button.Resources>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="#0066FF"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border Background="{TemplateBinding Background}">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#0044BB"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="10"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
                     </StackPanel>
 
                 </StackPanel>
-                <Grid Height="65" Grid.Row="1">
-                    <Button x:Name="DeleteAccount" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="600" Height="65" Click="ButtonClick_Save" Margin="0,0,0,0" FontFamily="{DynamicResource Epilogue}" FontWeight="Regular" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFF9F9F9" FontSize="22" Background="#00000000" BorderBrush="#00000000">
-                        <Image HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="600" Height="65" Margin="0,0,0,0" Source="DAB.png"></Image>
+                <Grid Grid.Row="1">
+                    <Button x:Name="DeleteAccount" HorizontalAlignment="Left" VerticalAlignment="Top" Height="55" Click="ButtonClick_Save" Margin="0,5,0,0" FontFamily="{DynamicResource Epilogue}" FontWeight="Regular" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="22" BorderBrush="#00000000">
+                        DELETE ACCOUNT
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Foreground" Value="Red"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10"/>
+                            </Style>
+                        </Button.Resources>
                     </Button>
                 </Grid>
             </Grid>
