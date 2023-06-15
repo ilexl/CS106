@@ -234,15 +234,16 @@ namespace TicketingSystem.Framework
 
         public void AddComment(string comment)
         {
-            comments.Add(comment);
-            comment = "";
+            string amendedComment = "" + (char)MainWindow.user.firstName[0] + (char)MainWindow.user.lastName[0] + comment;
+            comments.Add(amendedComment);
+            amendedComment = string.Empty;
             foreach(string c in comments)
             {
-                comment += c + '♦';
+                amendedComment += c + '♦';
             }
-            if (comment.EndsWith("♦"))
+            if (amendedComment.EndsWith("♦"))
             {
-                comment = comment.Remove(comment.Length - 1, 1); // remove last symbol
+                amendedComment = amendedComment.Remove(amendedComment.Length - 1, 1); // remove last symbol
             }
 
             using (SqlConnection connection = Server.GetConnection(Server.SOURCE_TICKET))
@@ -251,7 +252,7 @@ namespace TicketingSystem.Framework
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 string commandText = "UPDATE AllTickets SET COMMENTS=@comment WHERE ID='" + this.id + "';";
                 adapter.InsertCommand = new SqlCommand(commandText, connection);
-                adapter.InsertCommand.Parameters.AddWithValue("@comment", comment);
+                adapter.InsertCommand.Parameters.AddWithValue("@comment", amendedComment);
                 adapter.InsertCommand.ExecuteNonQuery();
                 Server.CloseConnection(connection);
             }
