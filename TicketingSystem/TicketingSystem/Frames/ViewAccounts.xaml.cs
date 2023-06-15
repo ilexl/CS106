@@ -80,7 +80,7 @@ namespace TicketingSystem.Frames
             Trigger buttonTrigger = new Trigger();
             buttonTrigger.Property = Button.IsMouseOverProperty;
             buttonTrigger.Value = true;
-            buttonTrigger.Setters.Add(new Setter(Button.BackgroundProperty, new SolidColorBrush(Color.FromRgb(0, 68, 187))));
+            buttonTrigger.Setters.Add(new Setter(Button.BackgroundProperty, new SolidColorBrush(Color.FromRgb(204, 238, 255))));
             buttonStyle.Triggers.Add(buttonTrigger);
 
             Style borderStyle = new Style(typeof(Border));
