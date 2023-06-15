@@ -141,7 +141,7 @@
                 </Grid.ColumnDefinitions>
 
 
-                <TextBox Grid.Column="0" Height="60" VerticalAlignment="Top" Background="#f9f9f9" Foreground="#989898" VerticalContentAlignment="Center" Padding="10,0,0,0" FontFamily="{DynamicResource Epilogue}" FontWeight="Medium" FontSize="20">
+                <TextBox KeyDown="OnKeyDownHandler" GotFocus="CommentInputField_GotFocus" LostFocus="CommentInputField_LostFocus" x:Name="CommentInputField" Grid.Column="0" Height="60" VerticalAlignment="Top" Background="#f9f9f9" Foreground="#989898" VerticalContentAlignment="Center" Padding="10,0,0,0" FontFamily="{DynamicResource Epilogue}" FontWeight="Medium" FontSize="20">
                     <TextBox.Resources>
                         <Style TargetType="Border">
 
@@ -154,7 +154,7 @@
                     Add Comment Here
                 </TextBox>
 
-                <Button x:Name="Comment" Grid.Column="1" VerticalAlignment="top" Grid.Row="1" Height="60" FontSize="24" FontWeight="Regular" Margin= "10,0,0,0" FontFamily="{DynamicResource Epilogue}" >
+                <Button x:Name="CommentButton" Click="CommentButton_Click" Grid.Column="1" VerticalAlignment="top" Grid.Row="1" Height="60" FontSize="24" FontWeight="Regular" Margin= "10,0,0,0" FontFamily="{DynamicResource Epilogue}" >
                     <Button.Resources>
                         <Style TargetType="{x:Type Button}">
                             <Setter Property="Background" Value="#0066ff"/>
@@ -179,7 +179,7 @@
                             <Setter Property="CornerRadius" Value="4"/>
                         </Style>
                     </Button.Resources>
-                    comment
+                    Submit Comment
                 </Button>
 
             </Grid>
@@ -191,9 +191,9 @@
 
 
 
-                    <StackPanel Margin="0,15,0,0">
+                    <StackPanel x:Name="CommentField" Margin="0,15,0,0">
 
-                        <Grid Height="100">
+                        <!--<Grid Height="100">
 
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
@@ -507,7 +507,7 @@
 
 
 
-                        </Grid>
+                        </Grid>-->
 
 
 
