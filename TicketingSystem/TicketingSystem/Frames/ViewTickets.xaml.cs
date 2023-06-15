@@ -140,6 +140,7 @@ namespace TicketingSystem.Frames
 
             Button button = new Button
             {
+                Height = 125,
                 Background = Brushes.Transparent,
                 BorderThickness = new Thickness(0),
                 HorizontalContentAlignment = HorizontalAlignment.Stretch
@@ -159,7 +160,10 @@ namespace TicketingSystem.Frames
                 Background = new SolidColorBrush(Color.FromRgb(249, 249, 249))
             };
 
-            Grid grid = new Grid();
+            Grid grid = new Grid()
+            {
+                Height = 125
+            };
 
             grid.RowDefinitions.Add(new RowDefinition());
             grid.RowDefinitions.Add(new RowDefinition());
@@ -298,9 +302,52 @@ namespace TicketingSystem.Frames
             Grid.SetColumn(label6, 2);
             Grid.SetRow(label6, 1);
 
+            
+
+
+            Style GridStyle = new Style(typeof(Grid));
+            GridStyle.Setters.Add(new Setter(Grid.BackgroundProperty, new SolidColorBrush(Color.FromRgb(249, 249, 249))));
+
+            Trigger gridTrigger = new Trigger();
+            gridTrigger.Property = Grid.IsMouseOverProperty;
+            gridTrigger.Value = true;
+            gridTrigger.Setters.Add(new Setter(Grid.BackgroundProperty, new SolidColorBrush(Color.FromRgb(204, 238, 255))));
+            GridStyle.Triggers.Add(gridTrigger);
+
+            Style buttonStyle = new Style(typeof(Button));
+            buttonStyle.Setters.Add(new Setter(Button.BackgroundProperty, new SolidColorBrush(Color.FromRgb(249, 249, 249))));
+
+            ControlTemplate buttonTemplate = new ControlTemplate(typeof(Button));
+            FrameworkElementFactory buttonBorder = new FrameworkElementFactory(typeof(Border));
+            Binding backgroundBinding = new Binding("Background") { RelativeSource = new RelativeSource(RelativeSourceMode.TemplatedParent) };
+            buttonBorder.SetBinding(Border.BackgroundProperty, backgroundBinding);
+            FrameworkElementFactory contentPresenter = new FrameworkElementFactory(typeof(ContentPresenter));
+            contentPresenter.SetValue(ContentPresenter.VerticalAlignmentProperty, VerticalAlignment.Center);
+            buttonBorder.AppendChild(contentPresenter);
+            buttonTemplate.VisualTree = buttonBorder;
+            buttonStyle.Setters.Add(new Setter(Button.TemplateProperty, buttonTemplate));
+
+            Trigger buttonTrigger = new Trigger();
+            buttonTrigger.Property = Button.IsMouseOverProperty;
+            buttonTrigger.Value = true;
+            buttonTrigger.Setters.Add(new Setter(Button.BackgroundProperty, new SolidColorBrush(Color.FromRgb(204, 238, 255))));
+            buttonStyle.Triggers.Add(buttonTrigger);
+
+
             Style borderStyle = new Style(typeof(Border));
             borderStyle.Setters.Add(new Setter(Border.CornerRadiusProperty, new CornerRadius(10)));
-            grid.Resources.Add(typeof(Border), borderStyle);
+            button.Resources.Add(typeof(Border), borderStyle);
+
+            Style borderStyle1 = new Style(typeof(Grid));
+            borderStyle1.Setters.Add(new Setter(Border.CornerRadiusProperty, new CornerRadius(10)));
+            button.Resources.Add(typeof(Grid), borderStyle1);
+
+            Style borderStyle2 = new Style(typeof(Button));
+            borderStyle2.Setters.Add(new Setter(Border.CornerRadiusProperty, new CornerRadius(10)));
+            button.Resources.Add(typeof(Button), borderStyle2);
+
+            grid.Resources.Add(typeof(Grid), GridStyle);
+
 
             grid.Children.Add(label1);
             grid.Children.Add(label2);
@@ -309,10 +356,12 @@ namespace TicketingSystem.Frames
             grid.Children.Add(label5);
             grid.Children.Add(label6);
 
-            border.Child = grid;
-            button.Content = border;
+            border.Child = button;
+            button.Content = grid;
+            border.Margin = new Thickness(10);
+            
 
-            HolderMain.Children.Add(button);
+            HolderMain.Children.Add(border);
         }
     }
 }
