@@ -42,6 +42,16 @@ namespace TicketingSystem.Frames
             string createdFor = CreatedFor.Text;
             string description = Description.Text;
 
+            if (TitleInput.Text == "Title" || TitleInput.Text == "")    //  IF THE USER HAS NOT ENTERED A TITLE
+            {
+                MessageBox.Show("Please enter a title");
+                return;
+            }
+            else if (Description.Text == "Description" || Description.Text == "")   //  IF THE USER HAS NOT ENTERED A DESCRIPTION
+            {
+                MessageBox.Show("Please enter a description");
+                return;
+            }
 
             Ticket t = Ticket.CreateNew(createdFor, creatorID, title, urgency, DateTime.Now);
             t.AddComment(description);
