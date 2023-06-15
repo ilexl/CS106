@@ -16,31 +16,32 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="100px"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Row="0" Grid.Column="0">
         
             
             <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,5">
-                <TextBlock Name="Header" Margin="24.5,27.5" TextWrapping="Wrap" Text="Create Ticket" Background="Transparent" FontSize="30" Foreground="White" FontWeight="Bold" FontFamily="Epilogue"/>
+                <TextBlock Name="Header" Margin="24.5,27.5,24.5,12" TextWrapping="Wrap" Text="Create Ticket" Background="Transparent" FontSize="30" Foreground="White" FontWeight="Bold" FontFamily="{DynamicResource Epilogue}"/>
                 <TextBlock Padding="3" FontSize="25" Margin="24.5, 0, 0, 0" Foreground="White">Title</TextBlock>
-                <TextBox Name="TitleInput" Padding="3" FontSize="25" Margin="24.5, 0, 0, 15"></TextBox>
+                <TextBox Name="TitleInput" GotFocus="TitleInput_GotFocus" LostFocus="TitleInput_LostFocus"  Padding="3" FontSize="25" Margin="24.5, 0, 0, 15" FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Foreground="Gray" TextWrapping="NoWrap" Text="Title"/>
                 <TextBlock Padding="3" FontSize="25" Margin="24.5, 0, 0, 0" Foreground="White">Urgency</TextBlock>
-                <ComboBox SelectedIndex="2" Name="Urgency" Padding="3" FontSize="25" Margin="24.5, 0, 0, 15">
+                <ComboBox SelectedIndex="2" Name="Urgency" Padding="3" FontSize="25" Margin="24.5, 0, 0, 12" FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Foreground="Black">
                     <ComboBoxItem Content="High"></ComboBoxItem>
                     <ComboBoxItem Content="Medium"></ComboBoxItem>
                     <ComboBoxItem Content="Low"></ComboBoxItem>
                 </ComboBox>
                 <TextBlock Padding="3" FontSize="25" Margin="24.5, 0, 0, 0" Foreground="White">Created For</TextBlock>
-                <TextBox Name="CreatedFor" Padding="3" FontSize="25" Margin="24.5, 0, 0, 15"></TextBox>
+                <TextBox Name="CreatedFor" Padding="3" FontSize="25" Margin="24.5, 0, 0, 12" FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" Foreground="Black"/>
 
                 <TextBlock Padding="3" FontSize="25" Margin="24.5, 0, 0, 0" Foreground="White">Created By</TextBlock>
-                <TextBlock Name="CreatedBy"  Padding="3" FontSize="25" Margin="24.5, 0, 0, 0" Background="Gray"></TextBlock>
+                <TextBlock Name="CreatedBy"  Padding="3" FontSize="25" Margin="24.5, 0, 0, 12" Background="Gray" FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" Foreground="Black"/>
 
-            
-                <TextBlock Padding="3" Margin="24.5,27,0,0" FontSize="25" Foreground="White">Description of problem</TextBlock>
-                <TextBox x:Name="Descritpion" Padding="3" TextWrapping="Wrap" FontSize="30" Margin="24.5, 0, 0, 0" Height="200" Width="1200"></TextBox>
-                <Button Click="Button_CreateTicket" Width="250" Height="75" Margin="20">
+
+                <TextBlock Padding="3" Margin="24.5,0,0,0" FontSize="25" Foreground="White">Description of problem</TextBlock>
+                <TextBox x:Name="Description" GotFocus="Description_GotFocus" LostFocus="Description_LostFocus" Padding="3" TextWrapping="Wrap" FontSize="30" Margin="24.5, 0, 0, 0" Height="200" Width="1145" FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" Foreground="Gray" Text="Description"/>
+                <Button x:Name="SubmitButton" Click="Button_CreateTicket" Width="250" Height="75" Margin="20">
                     <TextBlock Padding="3" Margin="5,5" TextAlignment="Center" TextWrapping="Wrap"  Foreground="White" FontWeight="Bold" FontSize="40" FontFamily="Epilogue">Submit</TextBlock>
                     <Button.Resources>
                         <Style TargetType="{x:Type Button}">
