@@ -174,7 +174,6 @@ namespace TicketingSystem
                     CreateSideNavButton("Dashboard", "Dashboard.xaml", "./Resources/Icons/Home.png");
                     CreateSideNavButtonT("All Tickets", "ViewTickets.xaml", "./Resources/Icons/File_dock_search.png", 4);
                     CreateSideNavButton("All Accounts", "ViewAccounts.xaml", "./Resources/Icons/People.png");
-                    CreateSideNavButton("Console", "Console.xaml", "./Resources/Icons/terminal.png");
                     CreateSideNavButton("My Account", "MyAccount.xaml", "./Resources/Icons/Lock.png");
                     CreateSideNavButton("Settings", "Settings.xaml", "./Resources/Icons/Setting_line.png");
                     // Code for Admin
