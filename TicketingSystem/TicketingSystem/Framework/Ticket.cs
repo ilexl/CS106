@@ -10,8 +10,6 @@ namespace TicketingSystem.Framework
 {
     public class Ticket
     {
-        private const string SOURCE = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Server\Tickets.mdf";
-
         private int id;
         private bool status; // false or 0 means closed - true or 1 means open
         private string callerID;
@@ -23,6 +21,7 @@ namespace TicketingSystem.Framework
         private DateTime updated;
         private List<string> comments;
 
+        #region Instance-Get
         public int GetID()
         {
             return id;
@@ -63,12 +62,7 @@ namespace TicketingSystem.Framework
         {
             return comments;
         }
-
-        /* Ticket class needs to
-         * Create a ticket
-         * Add comments to ticket
-         * Change properties of a ticket
-         */
+        #endregion
 
         /// <summary>
         /// Creates an instance of ticket with a known ID
@@ -107,163 +101,131 @@ namespace TicketingSystem.Framework
         {
             try
             {
-                using (SqlConnection connection = new SqlConnection(SOURCE))
-                {
-                    connection.Open();
-                    string tableName = "AllTickets"; 
-                    string countQuery = $"SELECT COUNT(*) FROM {tableName}";
-                    using (SqlCommand command = new SqlCommand(countQuery, connection))
-                    {
-                        int rowCount = (int)command.ExecuteScalar();
-                        return rowCount + 1;
-                    }
-                }
+                SqlConnection connection = Server.GetConnection(Server.SOURCE_TICKET);
+                string tableName = "AllTickets"; 
+                string countQuery = $"SELECT COUNT(*) FROM {tableName}";
+                SqlCommand command = new SqlCommand(countQuery, connection);
+                int rowCount = (int)command.ExecuteScalar();
+                Server.CloseConnection(connection);
+                return rowCount + 1;
             }
             catch (Exception ex)
             {
                 Debug.LogError($"An error occurred: {ex.Message}");
             }
-
-                return 0; // TODO : Create new id based off database
+            return 0; 
         }
 
         private static void AddNewTicket(Ticket t)
         {
             const string SPACE = ", ";
-            using (SqlConnection connection = new SqlConnection(SOURCE))  //  DISPOSES CONNECTION WHEN FINISHED
+
+            #region format
+            // format reason and comments
+            string reason = "'";
+            string commentsAll = "'";
+            foreach (string s in t.comments)
             {
-                // format reason and comments
-                string reason = "'";
-                string commentsAll = "'";
-                foreach (string s in t.comments)
-                {
-                    commentsAll += (s + "♦");
-                }
-                if (commentsAll.EndsWith("♦"))
-                {
-                    commentsAll = commentsAll.Remove(commentsAll.Length - 1, 1); // remove last symbol
-                }
-                commentsAll += "'";
-                if (commentsAll == "''")
-                {
-                    commentsAll = "NULL";
-                }
-                
-                if (t.resolveReason == RESOLVEREASON.None)
-                {
-                    reason = "NULL";
-                }
-                else
-                {
-                    reason = ((int)t.resolveReason).ToString();
-                    reason += "'";
-                }
-                
-
-                string commandText = "INSERT INTO AllTickets VALUES(";
-                commandText += t.id.ToString();
-                commandText += SPACE;
-                commandText += "'" + t.status.ToString() + "'";
-                commandText += SPACE;
-                commandText += "'" + t.callerID + "'";
-                commandText += SPACE;
-                commandText += "'" + t.creatorID + "'";
-                commandText += SPACE;
-                commandText += "'" + t.title + "'";
-                commandText += SPACE;
-                commandText += "'" + t.urgency.ToString() + "'";
-                commandText += SPACE;
-                commandText += reason;
-                commandText += SPACE;
-                commandText += "'" + t.created.ToString() + "'";
-                commandText += SPACE;
-                commandText += "'" + t.updated.ToString() + "'"; ;
-                commandText += SPACE;
-                commandText += commentsAll;
-                commandText += ");";
-
-                connection.Open();
-                SqlDataAdapter adapter = new SqlDataAdapter();
-                Debug.Log(commandText);
-
-                //commandText = "INSERT INTO AllTickets VALUES(2, 'True', 'Test', 'Test', 'Test', '2', NULL, '6/8/2023 3:55:00 PM', '6/8/2023 3:55:00 PM', NULL)";
-
-
-
-                /*
-                string commandText = "INSERT INTO AllTickets (Id, STATUS, CALLER, CREATOR, TITLE, URGENCY, RESOLVEREASON, CREATED, UPDATED, COMMENTS)";
-                commandText += "\nVALUES (" + t.id + ", " + t.status.ToString() + ", " + t.callerID + ", " + t.callerID + ", " + t.title + ", " + t.urgency + ", " + reason + ", " + t.created + ", " + t.updated + ", " + commentsAll + ");";
-                Debug.Log(commandText);
-                */
-
-                adapter.InsertCommand = new SqlCommand(commandText, connection);
-
-
-                adapter.InsertCommand.ExecuteNonQuery();
-
-                //command.Dispose();
-                connection.Close();
+                commentsAll += (s + "♦");
             }
+            if (commentsAll.EndsWith("♦"))
+            {
+                commentsAll = commentsAll.Remove(commentsAll.Length - 1, 1); // remove last symbol
+            }
+            commentsAll += "'";
+            if (commentsAll == "''")
+            {
+                commentsAll = "NULL";
+            }
+                
+            if (t.resolveReason == RESOLVEREASON.None)
+            {
+                reason = "NULL";
+            }
+            else
+            {
+                reason = ((int)t.resolveReason).ToString();
+                reason += "'";
+            }
+            #endregion
+            #region createCommand
+            string commandText = "INSERT INTO AllTickets VALUES(";
+            commandText += t.id.ToString();
+            commandText += SPACE;
+            commandText += "'" + t.status.ToString() + "'";
+            commandText += SPACE;
+            commandText += "'" + t.callerID + "'";
+            commandText += SPACE;
+            commandText += "'" + t.creatorID + "'";
+            commandText += SPACE;
+            commandText += "'" + t.title + "'";
+            commandText += SPACE;
+            commandText += "'" + t.urgency.ToString() + "'";
+            commandText += SPACE;
+            commandText += reason;
+            commandText += SPACE;
+            commandText += "'" + t.created.ToString() + "'";
+            commandText += SPACE;
+            commandText += "'" + t.updated.ToString() + "'"; ;
+            commandText += SPACE;
+            commandText += commentsAll;
+            commandText += ");";
+            #endregion
+
+            SqlConnection connection = Server.GetConnection(Server.SOURCE_TICKET);
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            adapter.InsertCommand = new SqlCommand(commandText, connection);
+            adapter.InsertCommand.ExecuteNonQuery();
+            Server.CloseConnection(connection);
         }
 
         private bool GetTicketInfo(int _id)
         {
-            using (SqlConnection connection = new SqlConnection(SOURCE))  //  DISPOSES CONNECTION WHEN FINISHED
+            SqlConnection connection = Server.GetConnection(Server.SOURCE_TICKET);
+
+            SqlDataReader sqlReader;                //  FILESTREAM / READER, MAKES THE DATA INDEXABLE
+            SqlCommand command = new SqlCommand();  //  USED TO SPECIFY THE SQL QUERY
+            command.Connection = connection;        //  SPECIFIES THE CONNECTION THAT THE COMMAND WILL BE USED IN
+            command.CommandText = "SELECT * FROM AllTickets WHERE ID='" + _id + "';";
+            sqlReader = command.ExecuteReader();    //  TAKES THE OUTPUT INTO THE READER
+
+            if (sqlReader.HasRows)  //  USER FOUND WITH MATCHING CREDENTIALS
             {
-                connection.Open();
-
-                SqlDataReader sqlReader;                //  FILESTREAM / READER, MAKES THE DATA INDEXABLE
-                SqlCommand command = new SqlCommand();  //  USED TO SPECIFY THE SQL QUERY
-
-                command.Connection = connection;        //  SPECIFIES THE CONNECTION THAT THE COMMAND WILL BE USED IN
-                command.CommandText = "SELECT * FROM AllTickets WHERE ID='" + _id + "';";
-
-                sqlReader = command.ExecuteReader();    //  TAKES THE OUTPUT INTO THE READER
-
-                if (sqlReader.HasRows)  //  USER FOUND WITH MATCHING CREDENTIALS
+                while (sqlReader.Read())
                 {
-                    while (sqlReader.Read())
+                    id = sqlReader.GetInt32(0);
+                    status = sqlReader.GetBoolean(1);
+                    callerID = sqlReader.GetString(2);
+                    creatorID = sqlReader.GetString(3);
+                    title = sqlReader.GetString(4);
+                    urgency = sqlReader.GetInt32(5);
+                    try
                     {
-                        id = sqlReader.GetInt32(0);
-                        status = sqlReader.GetBoolean(1);
-                        callerID = sqlReader.GetString(2);
-                        creatorID = sqlReader.GetString(3);
-                        title = sqlReader.GetString(4);
-                        urgency = sqlReader.GetInt32(5);
-                        try
-                        {
-                            resolveReason = (RESOLVEREASON)sqlReader.GetInt32(6);
-                        }
-                        catch (System.Data.SqlTypes.SqlNullValueException)
-                        {
-                            resolveReason = RESOLVEREASON.None;
-                        }
-                        created = sqlReader.GetDateTime(7);
-                        updated = sqlReader.GetDateTime(8);
-                        try
-                        {
-                            comments = (sqlReader.GetString(9)).Split('♦').ToList();
-                        }
-                        catch (System.Data.SqlTypes.SqlNullValueException)
-                        {
-                            comments = new List<string>();
-                        }
-
-                        sqlReader.Close();  //  CLOSES THE READER
-                        command.Dispose();  //  NULLS THE COMMAND
-                        connection.Close(); //  CLOSES OPEN CONNECTION TO SQL DATABASE
-
-                        return true;
+                        resolveReason = (RESOLVEREASON)sqlReader.GetInt32(6);
                     }
-                }
-                else                    //  INCORRECT / INVALID CREDENTIALS
-                {
-                    sqlReader.Close();  //  CLOSES THE READER
-                    command.Dispose();  //  NULLS THE COMMAND
-                    connection.Close(); //  CLOSES OPEN CONNECTION TO SQL DATABASE
+                    catch (System.Data.SqlTypes.SqlNullValueException)
+                    {
+                        resolveReason = RESOLVEREASON.None;
+                    }
+                    created = sqlReader.GetDateTime(7);
+                    updated = sqlReader.GetDateTime(8);
+                    try
+                    {
+                        comments = (sqlReader.GetString(9)).Split('♦').ToList();
+                    }
+                    catch (System.Data.SqlTypes.SqlNullValueException)
+                    {
+                        comments = new List<string>();
+                    }
 
-                    return false;
+                    Server.CloseConnection(sqlReader, command, connection);
+                    return true;
                 }
+            }
+            else                    //  INCORRECT / INVALID CREDENTIALS
+            {
+                Server.CloseConnection(sqlReader, command, connection);
+                return false;
             }
             return false;
         }
@@ -281,68 +243,52 @@ namespace TicketingSystem.Framework
                 comment = comment.Remove(comment.Length - 1, 1); // remove last symbol
             }
 
-            using (SqlConnection connection = new SqlConnection(SOURCE))
+            using (SqlConnection connection = Server.GetConnection(Server.SOURCE_TICKET))
             {
-                connection.Open();
-
                 //  FILESTREAM / WRITER, ALLOWS INSERTING / UPDATING ROWS IN SQL
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 string commandText = "UPDATE AllTickets SET COMMENTS='" + comment + "' WHERE ID='" + this.id + "';";
                 adapter.InsertCommand = new SqlCommand(commandText, connection);
                 adapter.InsertCommand.ExecuteNonQuery();
-                connection.Close();
+                Server.CloseConnection(connection);
             }
 
-            using (SqlConnection connection = new SqlConnection(SOURCE))
+            using (SqlConnection connection = Server.GetConnection(Server.SOURCE_TICKET))
             {
-                connection.Open();
-
-                //  FILESTREAM / WRITER, ALLOWS INSERTING / UPDATING ROWS IN SQL
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 string commandText = "UPDATE AllTickets SET UPDATED='" + DateTime.Now.ToString() + "' WHERE ID='" + this.id + "';";
                 adapter.InsertCommand = new SqlCommand(commandText, connection);
                 adapter.InsertCommand.ExecuteNonQuery();
-                connection.Close();
+                Server.CloseConnection(connection);
             }
         }
 
         public static List<int> GetAllTicketIds()
         {
 
-            //  DISPOSES CONNECTION WHEN FINISHED
-            using (SqlConnection connection = new SqlConnection(SOURCE))
+            SqlConnection connection = Server.GetConnection(Server.SOURCE_TICKET);
+            SqlDataReader sqlReader;                    //  FILESTREAM / READER, MAKES THE DATA INDEXABLE
+            SqlCommand command = new SqlCommand();      //  USED TO SPECIFY THE SQL QUERY
+
+            command.Connection = connection;            //  SPECIFIES THE CONNECTION THAT THE COMMAND WILL BE USED IN
+            command.CommandText = "SELECT * FROM AllTickets;";
+            sqlReader = command.ExecuteReader();        //  TAKES THE OUTPUT INTO THE READER
+
+            if (sqlReader.HasRows)                      //  USER FOUND WITH MATCHING CREDENTIALS
             {
-                connection.Open();
-
-                SqlDataReader sqlReader;                    //  FILESTREAM / READER, MAKES THE DATA INDEXABLE
-                SqlCommand command = new SqlCommand();      //  USED TO SPECIFY THE SQL QUERY
-
-                command.Connection = connection;            //  SPECIFIES THE CONNECTION THAT THE COMMAND WILL BE USED IN
-                command.CommandText = "SELECT * FROM AllTickets;";
-
-                sqlReader = command.ExecuteReader();        //  TAKES THE OUTPUT INTO THE READER
-
-                if (sqlReader.HasRows)                      //  USER FOUND WITH MATCHING CREDENTIALS
+                List<int> ids = new List<int>();
+                while (sqlReader.Read())
                 {
-                    List<int> ids = new List<int>();
-                    while (sqlReader.Read())
-                    {
-                        int ID = sqlReader.GetInt32(0);         //  Sets this instance's ID to the the corresponding cell in the matching row
-                        ids.Add(ID);
-                    }
-                    sqlReader.Close();  //  CLOSES THE READER
-                    command.Dispose();  //  NULLS THE COMMAND
-                    connection.Close(); //  CLOSES OPEN CONNECTION TO SQL DATABASE
-                    return ids;
+                    int ID = sqlReader.GetInt32(0);         //  Sets this instance's ID to the the corresponding cell in the matching row
+                    ids.Add(ID);
                 }
-                else                    //  INCORRECT / INVALID CREDENTIALS
-                {
-                    sqlReader.Close();  //  CLOSES THE READER
-                    command.Dispose();  //  NULLS THE COMMAND
-                    connection.Close(); //  CLOSES OPEN CONNECTION TO SQL DATABASE
-
-                    return null;
-                }
+                Server.CloseConnection(sqlReader, command, connection);
+                return ids;
+            }
+            else                    //  INCORRECT / INVALID CREDENTIALS
+            {
+                Server.CloseConnection(sqlReader, command, connection);
+                return null;
             }
         }
 
@@ -358,41 +304,32 @@ namespace TicketingSystem.Framework
             {
                 cmdAdd = "AND Status='False'";
             }
-            //  DISPOSES CONNECTION WHEN FINISHED
-            using (SqlConnection connection = new SqlConnection(SOURCE))
+
+            SqlConnection connection = Server.GetConnection(Server.SOURCE_TICKET);
+            SqlDataReader sqlReader;                    //  FILESTREAM / READER, MAKES THE DATA INDEXABLE
+            SqlCommand command = new SqlCommand();      //  USED TO SPECIFY THE SQL QUERY
+
+            command.Connection = connection;            //  SPECIFIES THE CONNECTION THAT THE COMMAND WILL BE USED IN
+            command.CommandText = "SELECT * FROM AllTickets WHERE (CALLER='" + currentUser.ID.ToString() + "' OR CREATOR='" + currentUser.ID.ToString() + "')" +  cmdAdd + ";";
+            sqlReader = command.ExecuteReader();        //  TAKES THE OUTPUT INTO THE READER
+
+            if (sqlReader.HasRows)                      //  USER FOUND WITH MATCHING CREDENTIALS
             {
-                connection.Open();
-
-                SqlDataReader sqlReader;                    //  FILESTREAM / READER, MAKES THE DATA INDEXABLE
-                SqlCommand command = new SqlCommand();      //  USED TO SPECIFY THE SQL QUERY
-
-                command.Connection = connection;            //  SPECIFIES THE CONNECTION THAT THE COMMAND WILL BE USED IN
-                command.CommandText = "SELECT * FROM AllTickets WHERE (CALLER='" + currentUser.ID.ToString() + "' OR CREATOR='" + currentUser.ID.ToString() + "')" +  cmdAdd + ";";
-
-                sqlReader = command.ExecuteReader();        //  TAKES THE OUTPUT INTO THE READER
-
-                if (sqlReader.HasRows)                      //  USER FOUND WITH MATCHING CREDENTIALS
+                List<int> ids = new List<int>();
+                while (sqlReader.Read())
                 {
-                    List<int> ids = new List<int>();
-                    while (sqlReader.Read())
-                    {
-                        int ID = sqlReader.GetInt32(0);         //  Sets this instance's ID to the the corresponding cell in the matching row
-                        ids.Add(ID);
-                    }
-                    sqlReader.Close();  //  CLOSES THE READER
-                    command.Dispose();  //  NULLS THE COMMAND
-                    connection.Close(); //  CLOSES OPEN CONNECTION TO SQL DATABASE
-                    return ids;
+                    int ID = sqlReader.GetInt32(0);         //  Sets this instance's ID to the the corresponding cell in the matching row
+                    ids.Add(ID);
                 }
-                else                    //  INCORRECT / INVALID CREDENTIALS
-                {
-                    sqlReader.Close();  //  CLOSES THE READER
-                    command.Dispose();  //  NULLS THE COMMAND
-                    connection.Close(); //  CLOSES OPEN CONNECTION TO SQL DATABASE
-
-                    return null;
-                }
+                Server.CloseConnection(sqlReader, command, connection);
+                return ids;
             }
+            else                    //  INCORRECT / INVALID CREDENTIALS
+            {
+                Server.CloseConnection(sqlReader, command, connection);
+                return null;
+            }
+            
         }
 
         public enum RESOLVEREASON : int

@@ -47,7 +47,7 @@ namespace TicketingSystem.Frames
 
         private void AddAccountToMenu(int id)
         {
-            User data = User.GetUser(id);
+            User data = User.GetUserFromID(id);
 
             StackPanel main = AllAccounts;
 
