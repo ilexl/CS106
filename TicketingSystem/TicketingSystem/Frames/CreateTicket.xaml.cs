@@ -40,7 +40,7 @@ namespace TicketingSystem.Frames
             int urgency = Urgency.SelectedIndex + 1; // 1 2 3 for high medium low
             string creatorID = current.ID.ToString();
             string createdFor = CreatedFor.Text;
-            string description = Descritpion.Text;
+            string description = Description.Text;
 
 
             Ticket t = Ticket.CreateNew(createdFor, creatorID, title, urgency, DateTime.Now);
@@ -87,6 +87,56 @@ namespace TicketingSystem.Frames
                 }
             }*/
             #endregion
+        }
+
+        public void ResetText()
+        {
+            TitleInput.Text = "Username";
+            Description.Text = "Description";
+            TitleInput.Foreground = Brushes.Gray;
+            Description.Foreground = Brushes.Gray;
+
+            SubmitButton.Focus();
+        }
+
+        private void Description_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (string.IsNullOrEmpty(textBox.Text))
+            {
+                textBox.Text = "Description";
+                textBox.Foreground = Brushes.Gray; // Set the desired ghost text color
+            }
+        }
+
+        private void Description_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (textBox.Text == "Description")
+            {
+                textBox.Text = string.Empty;
+                textBox.Foreground = Brushes.Black; // Set the desired text color
+            }
+        }
+
+        private void TitleInput_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (textBox.Text == "Title")
+            {
+                textBox.Text = string.Empty;
+                textBox.Foreground = Brushes.Black; // Set the desired text color
+            }
+        }
+
+        private void TitleInput_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (string.IsNullOrEmpty(textBox.Text))
+            {
+                textBox.Text = "Title";
+                textBox.Foreground = Brushes.Gray; // Set the desired ghost text color
+            }
         }
     }
 }
