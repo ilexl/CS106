@@ -22,18 +22,27 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="1" x:Name="CreateAccountButton" Content="Create Account" Height="60" Foreground="#f9f9f9" Margin="30,0,30,45" FontFamily="{DynamicResource Epilogue}" FontSize="30">
+            <Button Grid.Column="2" x:Name="CreateAccountButton" Content="Create Account" Height="60" Foreground="#F9F9F9"  Margin="30,0,30,45" FontFamily="{DynamicResource Epilogue}" FontSize="30">
                 <Button.Resources>
-                    <Style TargetType="Button">
-                        <Setter Property="Background" Value="#0066ff"></Setter>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="#0066FF"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#0044bb"/>
+                                <Setter Property="Background" Value="#0044BB"/>
                             </Trigger>
                         </Style.Triggers>
                     </Style>
                     <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="6"></Setter>
+                        <Setter Property="CornerRadius" Value="10"/>
                     </Style>
                 </Button.Resources>
             </Button>
