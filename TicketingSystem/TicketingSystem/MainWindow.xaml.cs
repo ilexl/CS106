@@ -25,9 +25,7 @@ namespace TicketingSystem
     {
         public bool LoggedIn = false; // temp
         public static User user = new User();
-        //public const string connectionStringUsers = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Server\Users.mdf;Integrated Security=True";
-       
-        
+
         public MainWindow()
         {
             InitializeComponent();
