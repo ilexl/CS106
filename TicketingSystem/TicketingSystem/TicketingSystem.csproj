@@ -49,6 +49,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>TicketingSystem.App</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System">
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
@@ -73,6 +76,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Frames\ClosedTickets.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Frames\CreateAccount.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -126,6 +133,9 @@
     </Compile>
     <Compile Include="Frames\Console.xaml.cs">
       <DependentUpon>Console.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Frames\CreateAccount.xaml.cs">
+      <DependentUpon>CreateAccount.xaml</DependentUpon>
     </Compile>
     <Compile Include="Frames\SpecificTicket.xaml.cs">
       <DependentUpon>SpecificTicket.xaml</DependentUpon>
@@ -230,6 +240,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\User_add.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Server\Tickets.mdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

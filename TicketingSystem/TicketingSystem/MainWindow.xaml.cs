@@ -25,9 +25,7 @@ namespace TicketingSystem
     {
         public bool LoggedIn = false; // temp
         public static User user = new User();
-        //public const string connectionStringUsers = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Server\Users.mdf;Integrated Security=True";
-       
-        
+
         public MainWindow()
         {
             InitializeComponent();
@@ -175,6 +173,7 @@ namespace TicketingSystem
                     CreateSideNavButtonT("All Tickets", "ViewTickets.xaml", "./Resources/Icons/File_dock_search.png", 4);
                     CreateSideNavButton("All Accounts", "ViewAccounts.xaml", "./Resources/Icons/People.png");
                     CreateSideNavButton("Create Ticket", "CreateTicket.xaml", "./Resources/Icons/File_dock_add.png");
+                    CreateSideNavButton("Create Account", "CreateAccount.xaml", "./Resources/Icons/User_add.png");
                     CreateSideNavButton("My Account", "MyAccount.xaml", "./Resources/Icons/Lock.png");
                     CreateSideNavButton("Settings", "Settings.xaml", "./Resources/Icons/Setting_line.png");
                     // Code for Admin

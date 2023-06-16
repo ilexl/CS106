@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TicketingSystem;
+using TicketingSystem.Frames;
+using System.Windows;
 
 namespace TicketingSystem.Framework
 {
@@ -81,20 +83,33 @@ namespace TicketingSystem.Framework
 
         public static Ticket CreateNew(string callerID, string creatorID, string title, int urgency, DateTime created)
         {
-            Ticket ticket = new Ticket();
-            ticket.id = NewID();
-            ticket.status = true; // open by default
-            ticket.callerID = callerID;
-            ticket.creatorID = creatorID;
-            ticket.title = title;
-            ticket.urgency = urgency;
-            ticket.created = created;
-            ticket.updated = created;
-            ticket.resolveReason = RESOLVEREASON.None;
-            ticket.comments = new List<string>();
+            try
+            {
+                Ticket ticket = new Ticket();
+                ticket.id = NewID();
+                if(ticket.id < 0)
+                {
+                    throw new Exception("Invalid Ticket Number");
+                }
+                ticket.status = true; // open by default
+                ticket.callerID = callerID;
+                ticket.creatorID = creatorID;
+                ticket.title = title;
+                ticket.urgency = urgency;
+                ticket.created = created;
+                ticket.updated = created;
+                ticket.resolveReason = RESOLVEREASON.None;
+                ticket.comments = new List<string>();
 
-            AddNewTicket(ticket);
-            return ticket;
+                AddNewTicket(ticket);
+                return ticket;
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning("Operation Unsuccessful - " + e.Message);
+                MessageBox.Show("Operation was not successful!\nPlease try again...", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
         }
 
         private static int NewID()
@@ -109,251 +124,306 @@ namespace TicketingSystem.Framework
                 Server.CloseConnection(connection);
                 return rowCount + 1;
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                Debug.LogError($"An error occurred: {ex.Message}");
+                Debug.LogWarning("Operation Unsuccessful - " + e.Message);
+                //MessageBox.Show("Operation was not successful!\nPlease try again...", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return -1;
             }
-            return 0; 
         }
 
         private static void AddNewTicket(Ticket t)
         {
-            const string SPACE = ", ";
+            try
+            {
+                const string SPACE = ", ";
 
-            #region format
-            // format reason and comments
-            string reason = "'";
-            string commentsAll = "'";
-            foreach (string s in t.comments)
-            {
-                commentsAll += (s + "♦");
-            }
-            if (commentsAll.EndsWith("♦"))
-            {
-                commentsAll = commentsAll.Remove(commentsAll.Length - 1, 1); // remove last symbol
-            }
-            commentsAll += "'";
-            if (commentsAll == "''")
-            {
-                commentsAll = "NULL";
-            }
-                
-            if (t.resolveReason == RESOLVEREASON.None)
-            {
-                reason = "NULL";
-            }
-            else
-            {
-                reason = ((int)t.resolveReason).ToString();
-                reason += "'";
-            }
-            #endregion
-            #region createCommand
-            string commandText = "INSERT INTO AllTickets VALUES(";
-            commandText += t.id.ToString();
-            commandText += SPACE;
-            commandText += "'" + t.status.ToString() + "'";
-            commandText += SPACE;
-            commandText += "'" + t.callerID + "'";
-            commandText += SPACE;
-            commandText += "'" + t.creatorID + "'";
-            commandText += SPACE;
-            commandText += "@tTitle";
-            commandText += SPACE;
-            commandText += "'" + t.urgency.ToString() + "'";
-            commandText += SPACE;
-            commandText += reason;
-            commandText += SPACE;
-            commandText += "'" + t.created.ToString() + "'";
-            commandText += SPACE;
-            commandText += "'" + t.updated.ToString() + "'"; ;
-            commandText += SPACE;
-            commandText += "@commentsAll";
-            commandText += ");";
-            #endregion
+                #region format
+                // format reason and comments
+                string reason = "'";
+                string commentsAll = "'";
+                foreach (string s in t.comments)
+                {
+                    commentsAll += (s + "♦");
+                }
+                if (commentsAll.EndsWith("♦"))
+                {
+                    commentsAll = commentsAll.Remove(commentsAll.Length - 1, 1); // remove last symbol
+                }
+                commentsAll += "'";
+                if (commentsAll == "''")
+                {
+                    commentsAll = "NULL";
+                }
 
-            SqlConnection connection = Server.GetConnection(Server.SOURCE_TICKET);
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            adapter.InsertCommand = new SqlCommand(commandText, connection);
-            adapter.InsertCommand.Parameters.AddWithValue("@tTitle", t.title);
-            adapter.InsertCommand.Parameters.AddWithValue("@commentsAll", commentsAll);
-            adapter.InsertCommand.ExecuteNonQuery();
-            Server.CloseConnection(connection);
+                if (t.resolveReason == RESOLVEREASON.None)
+                {
+                    reason = "NULL";
+                }
+                else
+                {
+                    reason = ((int)t.resolveReason).ToString();
+                    reason += "'";
+                }
+                #endregion
+                #region createCommand
+                string commandText = "INSERT INTO AllTickets VALUES(";
+                commandText += t.id.ToString();
+                commandText += SPACE;
+                commandText += "'" + t.status.ToString() + "'";
+                commandText += SPACE;
+                commandText += "'" + t.callerID + "'";
+                commandText += SPACE;
+                commandText += "'" + t.creatorID + "'";
+                commandText += SPACE;
+                commandText += "@tTitle";
+                commandText += SPACE;
+                commandText += "'" + t.urgency.ToString() + "'";
+                commandText += SPACE;
+                commandText += reason;
+                commandText += SPACE;
+                commandText += "'" + t.created.ToString() + "'";
+                commandText += SPACE;
+                commandText += "'" + t.updated.ToString() + "'"; ;
+                commandText += SPACE;
+                commandText += "@commentsAll";
+                commandText += ");";
+                #endregion
+
+                SqlConnection connection = Server.GetConnection(Server.SOURCE_TICKET);
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                adapter.InsertCommand = new SqlCommand(commandText, connection);
+                adapter.InsertCommand.Parameters.AddWithValue("@tTitle", t.title);
+                adapter.InsertCommand.Parameters.AddWithValue("@commentsAll", commentsAll);
+                adapter.InsertCommand.ExecuteNonQuery();
+                Server.CloseConnection(connection);
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning("Operation Unsuccessful - " + e.Message);
+                MessageBox.Show("Operation was not successful!\nPlease try again...", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
         }
 
         private bool GetTicketInfo(int _id)
         {
-            SqlConnection connection = Server.GetConnection(Server.SOURCE_TICKET);
-
-            SqlDataReader sqlReader;                //  FILESTREAM / READER, MAKES THE DATA INDEXABLE
-            SqlCommand command = new SqlCommand();  //  USED TO SPECIFY THE SQL QUERY
-            command.Connection = connection;        //  SPECIFIES THE CONNECTION THAT THE COMMAND WILL BE USED IN
-            command.CommandText = "SELECT * FROM AllTickets WHERE ID='" + _id + "';";
-            sqlReader = command.ExecuteReader();    //  TAKES THE OUTPUT INTO THE READER
-
-            if (sqlReader.HasRows)  //  USER FOUND WITH MATCHING CREDENTIALS
+            try
             {
-                while (sqlReader.Read())
+                SqlConnection connection = Server.GetConnection(Server.SOURCE_TICKET);
+
+                SqlDataReader sqlReader;                //  FILESTREAM / READER, MAKES THE DATA INDEXABLE
+                SqlCommand command = new SqlCommand();  //  USED TO SPECIFY THE SQL QUERY
+                command.Connection = connection;        //  SPECIFIES THE CONNECTION THAT THE COMMAND WILL BE USED IN
+                command.CommandText = "SELECT * FROM AllTickets WHERE ID='" + _id + "';";
+                sqlReader = command.ExecuteReader();    //  TAKES THE OUTPUT INTO THE READER
+
+                if (sqlReader.HasRows)  //  USER FOUND WITH MATCHING CREDENTIALS
                 {
-                    id = sqlReader.GetInt32(0);
-                    status = sqlReader.GetBoolean(1);
-                    callerID = sqlReader.GetString(2);
-                    creatorID = sqlReader.GetString(3);
-                    title = sqlReader.GetString(4);
-                    urgency = sqlReader.GetInt32(5);
-                    try
+                    while (sqlReader.Read())
                     {
-                        resolveReason = (RESOLVEREASON)sqlReader.GetInt32(6);
-                    }
-                    catch (System.Data.SqlTypes.SqlNullValueException)
-                    {
-                        resolveReason = RESOLVEREASON.None;
-                    }
-                    created = sqlReader.GetDateTime(7);
-                    updated = sqlReader.GetDateTime(8);
-                    try
-                    {
-                        comments = (sqlReader.GetString(9)).Split('♦').ToList();
-                    }
-                    catch (System.Data.SqlTypes.SqlNullValueException)
-                    {
-                        comments = new List<string>();
-                    }
+                        id = sqlReader.GetInt32(0);
+                        status = sqlReader.GetBoolean(1);
+                        callerID = sqlReader.GetString(2);
+                        creatorID = sqlReader.GetString(3);
+                        title = sqlReader.GetString(4);
+                        urgency = sqlReader.GetInt32(5);
+                        try
+                        {
+                            resolveReason = (RESOLVEREASON)sqlReader.GetInt32(6);
+                        }
+                        catch (System.Data.SqlTypes.SqlNullValueException)
+                        {
+                            resolveReason = RESOLVEREASON.None;
+                        }
+                        created = sqlReader.GetDateTime(7);
+                        updated = sqlReader.GetDateTime(8);
+                        try
+                        {
+                            comments = (sqlReader.GetString(9)).Split('♦').ToList();
+                        }
+                        catch (System.Data.SqlTypes.SqlNullValueException)
+                        {
+                            comments = new List<string>();
+                        }
 
-                    Server.CloseConnection(sqlReader, command, connection);
-                    return true;
+                        Server.CloseConnection(sqlReader, command, connection);
+                        return true;
+                    }
                 }
-            }
-            else                    //  INCORRECT / INVALID CREDENTIALS
-            {
-                Server.CloseConnection(sqlReader, command, connection);
+                else                    //  INCORRECT / INVALID CREDENTIALS
+                {
+                    Server.CloseConnection(sqlReader, command, connection);
+                    return false;
+                }
                 return false;
             }
-            return false;
+            catch (Exception e)
+            {
+                Debug.LogWarning("Operation Unsuccessful - " + e.Message);
+                MessageBox.Show("Operation was not successful!\nPlease try again...", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
         }
 
         public void AddComment(string comment)
         {
-            string amendedComment = "" + (char)MainWindow.user.firstName[0] + (char)MainWindow.user.lastName[0] + comment;
-            comments.Add(amendedComment);
-            amendedComment = string.Empty;
-            foreach(string c in comments)
+            try
             {
-                amendedComment += c + '♦';
-            }
-            if (amendedComment.EndsWith("♦"))
-            {
-                amendedComment = amendedComment.Remove(amendedComment.Length - 1, 1); // remove last symbol
-            }
+                string amendedComment = "" + (char)MainWindow.user.firstName[0] + (char)MainWindow.user.lastName[0] + comment;
+                comments.Add(amendedComment);
+                amendedComment = string.Empty;
+                foreach (string c in comments)
+                {
+                    amendedComment += c + '♦';
+                }
+                if (amendedComment.EndsWith("♦"))
+                {
+                    amendedComment = amendedComment.Remove(amendedComment.Length - 1, 1); // remove last symbol
+                }
 
-            using (SqlConnection connection = Server.GetConnection(Server.SOURCE_TICKET))
-            {
-                //  FILESTREAM / WRITER, ALLOWS INSERTING / UPDATING ROWS IN SQL
-                SqlDataAdapter adapter = new SqlDataAdapter();
-                string commandText = "UPDATE AllTickets SET COMMENTS=@comment WHERE ID='" + this.id + "';";
-                adapter.InsertCommand = new SqlCommand(commandText, connection);
-                adapter.InsertCommand.Parameters.AddWithValue("@comment", amendedComment);
-                adapter.InsertCommand.ExecuteNonQuery();
-                Server.CloseConnection(connection);
-            }
+                using (SqlConnection connection = Server.GetConnection(Server.SOURCE_TICKET))
+                {
+                    //  FILESTREAM / WRITER, ALLOWS INSERTING / UPDATING ROWS IN SQL
+                    SqlDataAdapter adapter = new SqlDataAdapter();
+                    string commandText = "UPDATE AllTickets SET COMMENTS=@comment WHERE ID='" + this.id + "';";
+                    adapter.InsertCommand = new SqlCommand(commandText, connection);
+                    adapter.InsertCommand.Parameters.AddWithValue("@comment", amendedComment);
+                    adapter.InsertCommand.ExecuteNonQuery();
+                    Server.CloseConnection(connection);
+                }
 
-            using (SqlConnection connection = Server.GetConnection(Server.SOURCE_TICKET))
+                using (SqlConnection connection = Server.GetConnection(Server.SOURCE_TICKET))
+                {
+                    SqlDataAdapter adapter = new SqlDataAdapter();
+                    string commandText = "UPDATE AllTickets SET UPDATED='" + DateTime.Now.ToString() + "' WHERE ID='" + this.id + "';";
+                    adapter.InsertCommand = new SqlCommand(commandText, connection);
+                    adapter.InsertCommand.ExecuteNonQuery();
+                    Server.CloseConnection(connection);
+                }
+            }
+            catch (Exception e)
             {
-                SqlDataAdapter adapter = new SqlDataAdapter();
-                string commandText = "UPDATE AllTickets SET UPDATED='" + DateTime.Now.ToString() + "' WHERE ID='" + this.id + "';";
-                adapter.InsertCommand = new SqlCommand(commandText, connection);
-                adapter.InsertCommand.ExecuteNonQuery();
-                Server.CloseConnection(connection);
+                Debug.LogWarning("Operation Unsuccessful - " + e.Message);
+                MessageBox.Show("Operation was not successful!\nPlease try again...", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         public void ChangeUrgency(int newUrgency)
         {
-            using (SqlConnection connection = Server.GetConnection(Server.SOURCE_TICKET))
+            try
             {
-                //  FILESTREAM / WRITER, ALLOWS INSERTING / UPDATING ROWS IN SQL
-                SqlDataAdapter adapter = new SqlDataAdapter();
-                string commandText = "UPDATE AllTickets SET URGENCY=@urgency WHERE ID='" + this.id + "';";
-                adapter.InsertCommand = new SqlCommand(commandText, connection);
-                adapter.InsertCommand.Parameters.AddWithValue("@urgency", newUrgency);
-                adapter.InsertCommand.ExecuteNonQuery();
-                Server.CloseConnection(connection);
-            }
+                using (SqlConnection connection = Server.GetConnection(Server.SOURCE_TICKET))
+                {
+                    //  FILESTREAM / WRITER, ALLOWS INSERTING / UPDATING ROWS IN SQL
+                    SqlDataAdapter adapter = new SqlDataAdapter();
+                    string commandText = "UPDATE AllTickets SET URGENCY=@urgency WHERE ID='" + this.id + "';";
+                    adapter.InsertCommand = new SqlCommand(commandText, connection);
+                    adapter.InsertCommand.Parameters.AddWithValue("@urgency", newUrgency);
+                    adapter.InsertCommand.ExecuteNonQuery();
+                    Server.CloseConnection(connection);
+                }
 
-            using (SqlConnection connection = Server.GetConnection(Server.SOURCE_TICKET))
+                using (SqlConnection connection = Server.GetConnection(Server.SOURCE_TICKET))
+                {
+                    SqlDataAdapter adapter = new SqlDataAdapter();
+                    string commandText = "UPDATE AllTickets SET UPDATED='" + DateTime.Now.ToString() + "' WHERE ID='" + this.id + "';";
+                    adapter.InsertCommand = new SqlCommand(commandText, connection);
+                    adapter.InsertCommand.ExecuteNonQuery();
+                    Server.CloseConnection(connection);
+                }
+            }
+            catch (Exception e)
             {
-                SqlDataAdapter adapter = new SqlDataAdapter();
-                string commandText = "UPDATE AllTickets SET UPDATED='" + DateTime.Now.ToString() + "' WHERE ID='" + this.id + "';";
-                adapter.InsertCommand = new SqlCommand(commandText, connection);
-                adapter.InsertCommand.ExecuteNonQuery();
-                Server.CloseConnection(connection);
+                Debug.LogWarning("Operation Unsuccessful - " + e.Message);
+                MessageBox.Show("Operation was not successful!\nPlease try again...", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
         }
 
         public static List<int> GetAllTicketIds()
         {
-
-            SqlConnection connection = Server.GetConnection(Server.SOURCE_TICKET);
-            SqlDataReader sqlReader;                    //  FILESTREAM / READER, MAKES THE DATA INDEXABLE
-            SqlCommand command = new SqlCommand();      //  USED TO SPECIFY THE SQL QUERY
-
-            command.Connection = connection;            //  SPECIFIES THE CONNECTION THAT THE COMMAND WILL BE USED IN
-            command.CommandText = "SELECT * FROM AllTickets;";
-            sqlReader = command.ExecuteReader();        //  TAKES THE OUTPUT INTO THE READER
-
-            if (sqlReader.HasRows)                      //  USER FOUND WITH MATCHING CREDENTIALS
+            try
             {
-                List<int> ids = new List<int>();
-                while (sqlReader.Read())
+                SqlConnection connection = Server.GetConnection(Server.SOURCE_TICKET);
+                SqlDataReader sqlReader;                    //  FILESTREAM / READER, MAKES THE DATA INDEXABLE
+                SqlCommand command = new SqlCommand();      //  USED TO SPECIFY THE SQL QUERY
+
+                command.Connection = connection;            //  SPECIFIES THE CONNECTION THAT THE COMMAND WILL BE USED IN
+                command.CommandText = "SELECT * FROM AllTickets;";
+                sqlReader = command.ExecuteReader();        //  TAKES THE OUTPUT INTO THE READER
+
+                if (sqlReader.HasRows)                      //  USER FOUND WITH MATCHING CREDENTIALS
                 {
-                    int ID = sqlReader.GetInt32(0);         //  Sets this instance's ID to the the corresponding cell in the matching row
-                    ids.Add(ID);
+                    List<int> ids = new List<int>();
+                    while (sqlReader.Read())
+                    {
+                        int ID = sqlReader.GetInt32(0);         //  Sets this instance's ID to the the corresponding cell in the matching row
+                        ids.Add(ID);
+                    }
+                    Server.CloseConnection(sqlReader, command, connection);
+                    return ids;
                 }
-                Server.CloseConnection(sqlReader, command, connection);
-                return ids;
+                else                    //  INCORRECT / INVALID CREDENTIALS
+                {
+                    Server.CloseConnection(sqlReader, command, connection);
+                    return null;
+                }
             }
-            else                    //  INCORRECT / INVALID CREDENTIALS
+            catch (Exception e)
             {
-                Server.CloseConnection(sqlReader, command, connection);
+                Debug.LogWarning("Operation Unsuccessful - " + e.Message);
+                MessageBox.Show("Operation was not successful!\nPlease try again...", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return null;
             }
+            
         }
 
         public static List<int> GetAllTicketIds(int opa)
         {
-            User currentUser = MainWindow.user;
-            string cmdAdd = "";
-            if(opa == 1)
+            try
             {
-                cmdAdd = "AND Status='True'";
-            }
-            if(opa == 2)
-            {
-                cmdAdd = "AND Status='False'";
-            }
-
-            SqlConnection connection = Server.GetConnection(Server.SOURCE_TICKET);
-            SqlDataReader sqlReader;                    //  FILESTREAM / READER, MAKES THE DATA INDEXABLE
-            SqlCommand command = new SqlCommand();      //  USED TO SPECIFY THE SQL QUERY
-
-            command.Connection = connection;            //  SPECIFIES THE CONNECTION THAT THE COMMAND WILL BE USED IN
-            command.CommandText = "SELECT * FROM AllTickets WHERE (CALLER='" + currentUser.ID.ToString() + "' OR CREATOR='" + currentUser.ID.ToString() + "')" +  cmdAdd + ";";
-            sqlReader = command.ExecuteReader();        //  TAKES THE OUTPUT INTO THE READER
-
-            if (sqlReader.HasRows)                      //  USER FOUND WITH MATCHING CREDENTIALS
-            {
-                List<int> ids = new List<int>();
-                while (sqlReader.Read())
+                User currentUser = MainWindow.user;
+                string cmdAdd = "";
+                if (opa == 1)
                 {
-                    int ID = sqlReader.GetInt32(0);         //  Sets this instance's ID to the the corresponding cell in the matching row
-                    ids.Add(ID);
+                    cmdAdd = "AND Status='True'";
                 }
-                Server.CloseConnection(sqlReader, command, connection);
-                return ids;
+                if (opa == 2)
+                {
+                    cmdAdd = "AND Status='False'";
+                }
+
+                SqlConnection connection = Server.GetConnection(Server.SOURCE_TICKET);
+                SqlDataReader sqlReader;                    //  FILESTREAM / READER, MAKES THE DATA INDEXABLE
+                SqlCommand command = new SqlCommand();      //  USED TO SPECIFY THE SQL QUERY
+
+                command.Connection = connection;            //  SPECIFIES THE CONNECTION THAT THE COMMAND WILL BE USED IN
+                command.CommandText = "SELECT * FROM AllTickets WHERE (CALLER='" + currentUser.ID.ToString() + "' OR CREATOR='" + currentUser.ID.ToString() + "')" + cmdAdd + ";";
+                sqlReader = command.ExecuteReader();        //  TAKES THE OUTPUT INTO THE READER
+
+                if (sqlReader.HasRows)                      //  USER FOUND WITH MATCHING CREDENTIALS
+                {
+                    List<int> ids = new List<int>();
+                    while (sqlReader.Read())
+                    {
+                        int ID = sqlReader.GetInt32(0);         //  Sets this instance's ID to the the corresponding cell in the matching row
+                        ids.Add(ID);
+                    }
+                    Server.CloseConnection(sqlReader, command, connection);
+                    return ids;
+                }
+                else                    //  INCORRECT / INVALID CREDENTIALS
+                {
+                    Server.CloseConnection(sqlReader, command, connection);
+                    return null;
+                }
+
             }
-            else                    //  INCORRECT / INVALID CREDENTIALS
+            catch (Exception e)
             {
-                Server.CloseConnection(sqlReader, command, connection);
+                Debug.LogWarning("Operation Unsuccessful - " + e.Message);
+                MessageBox.Show("Operation was not successful!\nPlease try again...", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return null;
             }
             
