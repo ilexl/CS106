@@ -159,18 +159,18 @@ namespace TicketingSystem.Frames
                 
 
 
-                    //  START OF NAME BLOCK CREATION
+                //  START OF NAME BLOCK CREATION
                 TextBlock nameBlock = new TextBlock();                                  //  CREATES NEW TEXTBLOCK FOR NAME
                 nameBlock.Text = comment.Substring(0, 2);                               //  SETS NAME BLOCK TEXT TO INITIALS (FIRST TO LETTERS OF COMMENT STRING)
                 nameBlock.Margin = new Thickness(100, 5, 0, 0);                        //  SETS MARGIN OF NAME BLOCK
                 nameBlock.FontSize = 30;                                                //  SETS FONT SIZE OF NAME BLOCK TO 40
                 nameBlock.FontWeight = FontWeights.SemiBold;                            //  SETS FONT WEIGHT OF NAME BLOCK TO SEMI BOLD
                 nameBlock.FontFamily = new FontFamily("{DynamicResource Epilogue}");    //  SETS FONT OF NAME BLOCK
-                    //  END OF NAME BLOCK CREATION
+                //  END OF NAME BLOCK CREATION
 
 
 
-                    //  START OF COMMENT BLOCK CREATION
+                //  START OF COMMENT BLOCK CREATION
                 TextBlock commentBlock = new TextBlock();                               //  CREATES NEW TEXTBLOCK FOR COMMENT
                 commentBlock.Text = comment.Substring(2);                               //  SETS COMMENT BLOCK TEXT TO COMMENT FROM INDEX 2 AND AFTER (EVERYTHING AFTER INITIALS)
                 commentBlock.TextWrapping = TextWrapping.Wrap;                          //  SETS TEXT WRAPPING TO WRAP

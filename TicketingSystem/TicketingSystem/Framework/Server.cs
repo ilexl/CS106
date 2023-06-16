@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Security.Cryptography;
@@ -29,9 +30,18 @@ namespace TicketingSystem.Framework
 
         internal static SqlConnection GetConnection(string connectionString)
         {
-            SqlConnection connection = new SqlConnection(connectionString);
-            connection.Open();
-            return connection;
+            try
+            {
+                SqlConnection connection = new SqlConnection(connectionString);
+                connection.Open();
+                return connection;
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning("Unable to connect to database - " + e.Message);
+                MessageBox.Show("Unable to connect to database!\nPlease try again...", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return GetConnection(connectionString);
+            }
         }
 
         internal static void CloseConnection(SqlDataReader sdr, SqlCommand sc, SqlConnection connection)
