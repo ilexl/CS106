@@ -230,8 +230,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\logout.png" />
-    <EmbeddedResource Include="Resources\DAB.png" />
-    <Resource Include="Frames\DAB.png" />
     <Content Include="Server\Tickets.mdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
