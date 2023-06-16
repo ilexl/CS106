@@ -25,37 +25,47 @@ namespace TicketingSystem.Framework
         /// <returns></returns>
         public static User GetUserFromID(int ID)
         {
-            User user = new User();
-
-            SqlConnection connection = Server.GetConnection(Server.SOURCE_USERS);
-            SqlDataReader sqlReader;                    //  FILESTREAM / READER, MAKES THE DATA INDEXABLE
-            SqlCommand command = new SqlCommand();      //  USED TO SPECIFY THE SQL QUERY
-
-            command.Connection = connection;            //  SPECIFIES THE CONNECTION THAT THE COMMAND WILL BE USED IN
-            command.CommandText = "SELECT * FROM Users WHERE (ID='" + ID.ToString() + "');";
-            sqlReader = command.ExecuteReader();        //  TAKES THE OUTPUT INTO THE READER
-
-            if (sqlReader.HasRows) //  USER FOUND WITH MATCHING CREDENTIALS
+            try
             {
-                while (sqlReader.Read())
+                User user = new User();
+
+                SqlConnection connection = Server.GetConnection(Server.SOURCE_USERS);
+                SqlDataReader sqlReader;                    //  FILESTREAM / READER, MAKES THE DATA INDEXABLE
+                SqlCommand command = new SqlCommand();      //  USED TO SPECIFY THE SQL QUERY
+
+                command.Connection = connection;            //  SPECIFIES THE CONNECTION THAT THE COMMAND WILL BE USED IN
+                command.CommandText = "SELECT * FROM Users WHERE (ID='" + ID.ToString() + "');";
+                sqlReader = command.ExecuteReader();        //  TAKES THE OUTPUT INTO THE READER
+
+                if (sqlReader.HasRows) //  USER FOUND WITH MATCHING CREDENTIALS
                 {
-                    user.ID = sqlReader.GetInt32(0);         //  Sets this instance's ID to the the corresponding cell in the matching row
-                    user.password = sqlReader.GetString(1);  //  Sets this instance's password to the the corresponding cell in the matching row
-                    user.userType = sqlReader.GetInt32(2);   //  Sets this instance's usertype to the the corresponding cell in the matching row
-                    user.email = sqlReader.GetString(3);     //  Sets this instance's email to the the corresponding cell in the matching row
-                    user.firstName = sqlReader.GetString(4); //  Sets this instance's first name to the the corresponding cell in the matching row
-                    user.lastName = sqlReader.GetString(5);  //  Sets this instance's last name to the the corresponding cell in the matching row
+                    while (sqlReader.Read())
+                    {
+                        user.ID = sqlReader.GetInt32(0);         //  Sets this instance's ID to the the corresponding cell in the matching row
+                        user.password = sqlReader.GetString(1);  //  Sets this instance's password to the the corresponding cell in the matching row
+                        user.userType = sqlReader.GetInt32(2);   //  Sets this instance's usertype to the the corresponding cell in the matching row
+                        user.email = sqlReader.GetString(3);     //  Sets this instance's email to the the corresponding cell in the matching row
+                        user.firstName = sqlReader.GetString(4); //  Sets this instance's first name to the the corresponding cell in the matching row
+                        user.lastName = sqlReader.GetString(5);  //  Sets this instance's last name to the the corresponding cell in the matching row
 
-                    Server.CloseConnection(sqlReader, command, connection);
-                    return user;
+                        Server.CloseConnection(sqlReader, command, connection);
+                        return user;
+                    }
                 }
-            }
-            else //  INCORRECT / INVALID CREDENTIALS
-            {
-                Server.CloseConnection(sqlReader, command, connection);
+                else //  INCORRECT / INVALID CREDENTIALS
+                {
+                    Server.CloseConnection(sqlReader, command, connection);
+                    return null;
+                }
                 return null;
             }
-            return null;
+            catch (Exception e)
+            {
+                Debug.LogWarning("Operation Unsuccessful - " + e.Message);
+                MessageBox.Show("Operation was not successful!\nPlease try again...", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
+            
         }
 
         /// <summary>
@@ -66,39 +76,49 @@ namespace TicketingSystem.Framework
         /// <returns></returns>
         public bool Login(string _ID, string _NonHashedPassword)
         {
-            string _Password = Server.HashString(_NonHashedPassword);
-            
-            SqlConnection connection = Server.GetConnection(Server.SOURCE_USERS);
-            SqlDataReader sqlReader;                    //  FILESTREAM / READER, MAKES THE DATA INDEXABLE
-            SqlCommand command = new SqlCommand();      //  USED TO SPECIFY THE SQL QUERY
-
-            command.Connection = connection;            //  SPECIFIES THE CONNECTION THAT THE COMMAND WILL BE USED IN
-            command.CommandText = "SELECT * FROM Users WHERE (ID=@id OR Email=@id) AND Password=@password;";
-            command.Parameters.AddWithValue("@id", _ID); //  ADDS THE ID TO THE QUERY
-            command.Parameters.AddWithValue("@password", _Password); //  ADDS THE PASSWORD TO THE QUERY
-            sqlReader = command.ExecuteReader();        //  TAKES THE OUTPUT INTO THE READER
-
-            if (sqlReader.HasRows) //  USER FOUND WITH MATCHING CREDENTIALS
+            try
             {
-                while (sqlReader.Read())
+                string _Password = Server.HashString(_NonHashedPassword);
+
+                SqlConnection connection = Server.GetConnection(Server.SOURCE_USERS);
+                SqlDataReader sqlReader;                    //  FILESTREAM / READER, MAKES THE DATA INDEXABLE
+                SqlCommand command = new SqlCommand();      //  USED TO SPECIFY THE SQL QUERY
+
+                command.Connection = connection;            //  SPECIFIES THE CONNECTION THAT THE COMMAND WILL BE USED IN
+                command.CommandText = "SELECT * FROM Users WHERE (ID=@id OR Email=@id) AND Password=@password;";
+                command.Parameters.AddWithValue("@id", _ID); //  ADDS THE ID TO THE QUERY
+                command.Parameters.AddWithValue("@password", _Password); //  ADDS THE PASSWORD TO THE QUERY
+                sqlReader = command.ExecuteReader();        //  TAKES THE OUTPUT INTO THE READER
+
+                if (sqlReader.HasRows) //  USER FOUND WITH MATCHING CREDENTIALS
                 {
-                    ID = sqlReader.GetInt32(0);         //  Sets this instance's ID to the the corresponding cell in the matching row
-                    password = sqlReader.GetString(1);  //  Sets this instance's password to the the corresponding cell in the matching row
-                    userType = sqlReader.GetInt32(2);   //  Sets this instance's usertype to the the corresponding cell in the matching row
-                    email = sqlReader.GetString(3);     //  Sets this instance's email to the the corresponding cell in the matching row
-                    firstName = sqlReader.GetString(4); //  Sets this instance's first name to the the corresponding cell in the matching row
-                    lastName = sqlReader.GetString(5);  //  Sets this instance's last name to the the corresponding cell in the matching row
+                    while (sqlReader.Read())
+                    {
+                        ID = sqlReader.GetInt32(0);         //  Sets this instance's ID to the the corresponding cell in the matching row
+                        password = sqlReader.GetString(1);  //  Sets this instance's password to the the corresponding cell in the matching row
+                        userType = sqlReader.GetInt32(2);   //  Sets this instance's usertype to the the corresponding cell in the matching row
+                        email = sqlReader.GetString(3);     //  Sets this instance's email to the the corresponding cell in the matching row
+                        firstName = sqlReader.GetString(4); //  Sets this instance's first name to the the corresponding cell in the matching row
+                        lastName = sqlReader.GetString(5);  //  Sets this instance's last name to the the corresponding cell in the matching row
 
-                    Server.CloseConnection(sqlReader, command, connection);
-                    return true;
+                        Server.CloseConnection(sqlReader, command, connection);
+                        return true;
+                    }
                 }
-            }
-            else //  INCORRECT / INVALID CREDENTIALS
-            {
-                Server.CloseConnection(sqlReader, command, connection);
+                else //  INCORRECT / INVALID CREDENTIALS
+                {
+                    Server.CloseConnection(sqlReader, command, connection);
+                    return false;
+                }
                 return false;
             }
-            return false;
+            catch (Exception e)
+            {
+                Debug.LogWarning("Operation Unsuccessful - " + e.Message);
+                MessageBox.Show("Operation was not successful!\nPlease try again...", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            
         }
 
         /// <summary>
@@ -109,27 +129,37 @@ namespace TicketingSystem.Framework
         /// <returns></returns>
         public bool ChangePassword(string oldPassword, string newPassword)
         {
-            oldPassword = Server.HashString(oldPassword);
-            newPassword = Server.HashString(newPassword);
-            //  CHECKS IF THE NEW PASSWORDS MATCHES, AND IF THE OLD PASSWORD MATCHES THEIR CURRENT PASSWORD
-            if (oldPassword == password)
+            try
             {
-                SqlConnection connection = Server.GetConnection(Server.SOURCE_USERS);
-                SqlDataAdapter adapter = new SqlDataAdapter();
+                oldPassword = Server.HashString(oldPassword);
+                newPassword = Server.HashString(newPassword);
+                //  CHECKS IF THE NEW PASSWORDS MATCHES, AND IF THE OLD PASSWORD MATCHES THEIR CURRENT PASSWORD
+                if (oldPassword == password)
+                {
+                    SqlConnection connection = Server.GetConnection(Server.SOURCE_USERS);
+                    SqlDataAdapter adapter = new SqlDataAdapter();
 
-                string commandText = "UPDATE Users SET Password=@password WHERE ID='" + ID + "';";
-                adapter.InsertCommand = new SqlCommand(commandText, connection);
-                adapter.InsertCommand.Parameters.AddWithValue("@password", newPassword);
-                adapter.InsertCommand.ExecuteNonQuery();
-                
-                Server.CloseConnection(connection);
-                password = newPassword;
-                return true;
+                    string commandText = "UPDATE Users SET Password=@password WHERE ID='" + ID + "';";
+                    adapter.InsertCommand = new SqlCommand(commandText, connection);
+                    adapter.InsertCommand.Parameters.AddWithValue("@password", newPassword);
+                    adapter.InsertCommand.ExecuteNonQuery();
+
+                    Server.CloseConnection(connection);
+                    password = newPassword;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
+            catch (Exception e)
             {
+                Debug.LogWarning("Operation Unsuccessful - " + e.Message);
+                MessageBox.Show("Operation was not successful!\nPlease try again...", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
+            
         }
 
         /// <summary>
@@ -138,15 +168,24 @@ namespace TicketingSystem.Framework
         /// <param name="newEmail"></param>
         public void ChangeEmail(string newEmail)
         {
-            //  FILESTREAM / WRITER, ALLOWS INSERTING / UPDATING ROWS IN SQL
-            SqlConnection connection = Server.GetConnection(Server.SOURCE_USERS);
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            string commandText = "UPDATE Users SET Email=@email WHERE ID='" + ID + "';";
-            adapter.InsertCommand = new SqlCommand(commandText, connection);
-            adapter.InsertCommand.Parameters.AddWithValue("@email", newEmail);
-            adapter.InsertCommand.ExecuteNonQuery();
-            Server.CloseConnection(connection);
-            email = newEmail;
+            try
+            {
+                //  FILESTREAM / WRITER, ALLOWS INSERTING / UPDATING ROWS IN SQL
+                SqlConnection connection = Server.GetConnection(Server.SOURCE_USERS);
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                string commandText = "UPDATE Users SET Email=@email WHERE ID='" + ID + "';";
+                adapter.InsertCommand = new SqlCommand(commandText, connection);
+                adapter.InsertCommand.Parameters.AddWithValue("@email", newEmail);
+                adapter.InsertCommand.ExecuteNonQuery();
+                Server.CloseConnection(connection);
+                email = newEmail;
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning("Operation Unsuccessful - " + e.Message);
+                MessageBox.Show("Operation was not successful!\nPlease try again...", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
         }
 
         /// <summary>
@@ -155,30 +194,40 @@ namespace TicketingSystem.Framework
         /// <returns></returns>
         public static List<int> GetAllAccountIds()
         {
-            SqlConnection connection = Server.GetConnection(Server.SOURCE_USERS);
-            SqlDataReader sqlReader;                    //  FILESTREAM / READER, MAKES THE DATA INDEXABLE
-            SqlCommand command = new SqlCommand();      //  USED TO SPECIFY THE SQL QUERY
-
-            command.Connection = connection;            //  SPECIFIES THE CONNECTION THAT THE COMMAND WILL BE USED IN
-            command.CommandText = "SELECT * FROM Users;";
-            sqlReader = command.ExecuteReader();        //  TAKES THE OUTPUT INTO THE READER
-
-            if (sqlReader.HasRows)                      //  USER FOUND WITH MATCHING CREDENTIALS
+            try
             {
-                List<int> ids = new List<int>();
-                while (sqlReader.Read())
+                SqlConnection connection = Server.GetConnection(Server.SOURCE_USERS);
+                SqlDataReader sqlReader;                    //  FILESTREAM / READER, MAKES THE DATA INDEXABLE
+                SqlCommand command = new SqlCommand();      //  USED TO SPECIFY THE SQL QUERY
+
+                command.Connection = connection;            //  SPECIFIES THE CONNECTION THAT THE COMMAND WILL BE USED IN
+                command.CommandText = "SELECT * FROM Users;";
+                sqlReader = command.ExecuteReader();        //  TAKES THE OUTPUT INTO THE READER
+
+                if (sqlReader.HasRows)                      //  USER FOUND WITH MATCHING CREDENTIALS
                 {
-                    int ID = sqlReader.GetInt32(0);         //  Sets this instance's ID to the the corresponding cell in the matching row
-                    ids.Add(ID);
+                    List<int> ids = new List<int>();
+                    while (sqlReader.Read())
+                    {
+                        int ID = sqlReader.GetInt32(0);         //  Sets this instance's ID to the the corresponding cell in the matching row
+                        ids.Add(ID);
+                    }
+                    Server.CloseConnection(sqlReader, command, connection);
+                    return ids;
                 }
-                Server.CloseConnection(sqlReader, command, connection);
-                return ids;
+                else //  INCORRECT / INVALID CREDENTIALS
+                {
+                    Server.CloseConnection(sqlReader, command, connection);
+                    return null;
+                }
             }
-            else //  INCORRECT / INVALID CREDENTIALS
+            catch (Exception e)
             {
-                Server.CloseConnection(sqlReader, command, connection);
+                Debug.LogWarning("Operation Unsuccessful - " + e.Message);
+                MessageBox.Show("Operation was not successful!\nPlease try again...", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return null;
             }
+            
         }
 
         /// <summary>

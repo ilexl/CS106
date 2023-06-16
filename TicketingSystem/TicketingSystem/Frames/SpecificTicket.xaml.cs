@@ -30,6 +30,14 @@ namespace TicketingSystem.Frames
 
         private void ViewTicketDetails(Ticket t)
         {
+            bool validTicket = false;
+            _ = new Ticket(t.GetID(), out validTicket);
+            if (!validTicket)
+            {
+                MainWindow mw = (MainWindow)Application.Current.MainWindow;
+                mw.ChangeWindow("Dashboard.xaml");
+            }
+
             TicketNumber.Content = "INC" + t.GetID().ToString();
             TitleT.Content = t.GetTitle();
             if (t.GetStatus())
