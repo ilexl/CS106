@@ -106,7 +106,7 @@
                     <ColumnDefinition Width="3*"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBox KeyDown="OnKeyDownHandler" GotFocus="CommentInputField_GotFocus" LostFocus="CommentInputField_LostFocus" x:Name="CommentInputField" Grid.Column="0" Height="60" VerticalAlignment="Top" Background="#f9f9f9" Foreground="#989898" VerticalContentAlignment="Center" Padding="10,0,0,0" FontFamily="{DynamicResource Epilogue}" FontWeight="Medium" FontSize="20">
+                <TextBox MaxLength="255" KeyDown="OnKeyDownHandler" GotFocus="CommentInputField_GotFocus" LostFocus="CommentInputField_LostFocus" x:Name="CommentInputField" Grid.Column="0" Height="60" VerticalAlignment="Top" Background="#f9f9f9" Foreground="#989898" VerticalContentAlignment="Center" Padding="10,0,0,0" FontFamily="{DynamicResource Epilogue}" FontWeight="Medium" FontSize="20">
                     <TextBox.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="4"></Setter>

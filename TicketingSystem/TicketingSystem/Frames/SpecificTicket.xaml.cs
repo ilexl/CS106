@@ -174,7 +174,7 @@ namespace TicketingSystem.Frames
                 TextBlock commentBlock = new TextBlock();                               //  CREATES NEW TEXTBLOCK FOR COMMENT
                 commentBlock.Text = comment.Substring(2);                               //  SETS COMMENT BLOCK TEXT TO COMMENT FROM INDEX 2 AND AFTER (EVERYTHING AFTER INITIALS)
                 commentBlock.TextWrapping = TextWrapping.Wrap;                          //  SETS TEXT WRAPPING TO WRAP
-                commentBlock.Margin = new Thickness(100, 0, 100, 0);                   //  SETS MARGIN OF COMMENT BLOCK
+                commentBlock.Margin = new Thickness(100, 0, 100, 0);                    //  SETS MARGIN OF COMMENT BLOCK
                 commentBlock.FontSize = 15;                                             //  SETS FONT SIZE OF COMMENT BLOCK TO 25
                 commentBlock.FontWeight = FontWeights.Regular;                          //  SETS FONT WEIGHT OF COMMENT BLOCK TO REGULAR
                 commentBlock.FontFamily = new FontFamily("{DynamicResource Epilogue}"); //  SETS FONT OF COMMENT BLOCK
