@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -78,97 +79,128 @@ namespace TicketingSystem.Frames
             for(int i = comments.Count() - 1; i >= 0; i--)
             {
                 string comment = comments[i];
+                
+
+
+                //  START OF NEW COMMENT GRID CREATION
                 Grid newCommentGrid = new Grid();
                 newCommentGrid.Margin = new Thickness(0, 0, 0, 20);
-                newCommentGrid.Height = 100;
+                
+                RowDefinition rowDefinition = new RowDefinition();
+                rowDefinition.Height = GridLength.Auto;
+                newCommentGrid.RowDefinitions.Add(rowDefinition);
+
                 newCommentGrid.ColumnDefinitions.Add(new ColumnDefinition());
 
                 ColumnDefinition columnDefinition = new ColumnDefinition();
                 columnDefinition.Width = new GridLength(8, GridUnitType.Star);
                 newCommentGrid.ColumnDefinitions.Add(columnDefinition);
+                //  END OF NEW COMMENT GRID CREATION
 
                 
 
+                //  START OF INITIALS CREATION
                 TextBlock commentInitials = new TextBlock();
                 commentInitials.Text = comment.Substring(0, 2);
                 commentInitials.FontSize = 50;
                 commentInitials.Width = 100;
-                //commentInitials.VerticalContentAlignment = VerticalAlignment.Center;
-                //commentInitials.HorizontalContentAlignment = HorizontalAlignment.Center;
                 Border roundedCorner = new Border();
                 roundedCorner.Background = Brushes.White;
                 roundedCorner.Width = 100;
+                roundedCorner.Height = 100;
+                roundedCorner.VerticalAlignment = VerticalAlignment.Center;
                 roundedCorner.Padding = new Thickness(17, 12, 0, 0);
                 roundedCorner.CornerRadius = new CornerRadius(60);
                 roundedCorner.Child = commentInitials;
-
+                
                 newCommentGrid.Children.Add(roundedCorner);
+                //  END OF INITIALS CREATION
 
-                Line line = new Line();
-                line.VerticalAlignment = VerticalAlignment.Center;
-                line.Margin = new Thickness(15, 15, 0, 0);
-                line.StrokeEndLineCap = PenLineCap.Triangle;
-                line.StrokeStartLineCap = PenLineCap.Round;
-                line.StrokeThickness = 80;
-                line.Stroke = Brushes.White;
-                line.X2 = 20;
-                line.Y2 = 20;
-                line.X1 = 1020;
-                line.Y1 = 20;
 
-                newCommentGrid.Children.Add(line);
-                line.SetValue(Grid.ColumnProperty, 1);
 
-                StackPanel stackPanel = new StackPanel();
-                stackPanel.SetValue(Grid.ColumnProperty, 1);
+                //  START OF COMMENT STACKPANEL CREATION
+                StackPanel stackPanel = new StackPanel();                               //  CREATES NEW STACKPANEL
+                stackPanel.VerticalAlignment = VerticalAlignment.Center;                //  SETS VERTICAL ALIGNMENT OF STACKPANEL TO CENTER
+                stackPanel.SetValue(Grid.ColumnProperty, 1);                            //  SETS COLUMN OF STACKPANEL TO 1
 
-                TextBlock nameBlock = new TextBlock();
-                nameBlock.Text = comment.Substring(0, 2);
-                nameBlock.Margin = new Thickness(40, 10, 0, 0);
-                nameBlock.FontSize = 40;
-                nameBlock.FontWeight = FontWeights.SemiBold;
-                nameBlock.FontFamily = new FontFamily("{DynamicResource Epilogue}");
 
-                stackPanel.Children.Add(nameBlock);
 
-                TextBlock commentBlock = new TextBlock();
-                commentBlock.Text = comment.Substring(2);
-                commentBlock.Margin = new Thickness(40, 0, 0, 0);
-                commentBlock.FontSize = 25;
-                commentBlock.FontWeight = FontWeights.Regular;
-                commentBlock.FontFamily = new FontFamily("{DynamicResource Epilogue}");
+                    //  START OF NAME BLOCK CREATION
+                TextBlock nameBlock = new TextBlock();                                  //  CREATES NEW TEXTBLOCK FOR NAME
+                nameBlock.Text = comment.Substring(0, 2);                               //  SETS NAME BLOCK TEXT TO INITIALS (FIRST TO LETTERS OF COMMENT STRING)
+                nameBlock.Margin = new Thickness(100, 10, 0, 0);                        //  SETS MARGIN OF NAME BLOCK
+                nameBlock.FontSize = 40;                                                //  SETS FONT SIZE OF NAME BLOCK TO 40
+                nameBlock.FontWeight = FontWeights.SemiBold;                            //  SETS FONT WEIGHT OF NAME BLOCK TO SEMI BOLD
+                nameBlock.FontFamily = new FontFamily("{DynamicResource Epilogue}");    //  SETS FONT OF NAME BLOCK
+                    //  END OF NAME BLOCK CREATION
 
-                stackPanel.Children.Add(commentBlock);
 
-                stackPanel.Height = commentBlock.Height + nameBlock.Height + 10;
 
-                newCommentGrid.Children.Add(stackPanel);
+                    //  START OF COMMENT BLOCK CREATION
+                TextBlock commentBlock = new TextBlock();                               //  CREATES NEW TEXTBLOCK FOR COMMENT
+                commentBlock.Text = comment.Substring(2);                               //  SETS COMMENT BLOCK TEXT TO COMMENT FROM INDEX 2 AND AFTER (EVERYTHING AFTER INITIALS)
+                commentBlock.TextWrapping = TextWrapping.Wrap;                          //  SETS TEXT WRAPPING TO WRAP
+                commentBlock.Margin = new Thickness(100, 0, 100, 10);                   //  SETS MARGIN OF COMMENT BLOCK
+                commentBlock.FontSize = 25;                                             //  SETS FONT SIZE OF COMMENT BLOCK TO 25
+                commentBlock.FontWeight = FontWeights.Regular;                          //  SETS FONT WEIGHT OF COMMENT BLOCK TO REGULAR
+                commentBlock.FontFamily = new FontFamily("{DynamicResource Epilogue}"); //  SETS FONT OF COMMENT BLOCK
+                commentBlock.VerticalAlignment = VerticalAlignment.Stretch;             //  SETS VERTICAL ALIGNMENT TO STRETCH
+                    //  END OF COMMENT BLOCK CREATION
 
-                CommentField.Children.Add(newCommentGrid);
+                stackPanel.Children.Add(nameBlock);                                     //  ADDS NAME TO STACKPANEL
+                stackPanel.Children.Add(commentBlock);                                  //  ADDS COMMENT TO STACKPANEL
+                //  END OF COMMENT STACKPANEL CREATION
+
+
+
+                //  START OF LINE CREATION 
+                Line line = new Line();                             
+                line.VerticalAlignment = VerticalAlignment.Center;  //  SETS LINE VERTICAL ALIGNMENT TO CENTER
+                line.Margin = new Thickness(15, 15, 0, 0);          //  SETS MARGIN OF LINE
+                line.StrokeEndLineCap = PenLineCap.Triangle;        //  SETS LINE CAPS TO TRIANGLE
+                line.StrokeStartLineCap = PenLineCap.Round;         //  SETS LINE CAPS TO ROUND
+                line.Stroke = Brushes.White;                        //  SETS LINE COLOUR TO WHITE
+
+                newCommentGrid.Children.Add(line);                  //  ADDS LINE TO NEW COMMENT GRID
+                line.SetValue(Grid.ColumnProperty, 1);              //  SETS LINE TO COLUMN 1
+                //  END OF LINE CREATION
+
+
+
+                stackPanel.SizeChanged += StackPanel_SizeChanged;   //  ADDS EVENT HANDLER FOR WHEN STACKPANEL SIZE CHANGES
+
+                newCommentGrid.Children.Add(stackPanel);            //  ADDS STACKPANEL TO NEW COMMENT GRID
+                
+                CommentField.Children.Add(newCommentGrid);          //  ADDS COMMENT TO GRID
             }
 
-            Grid startCommentGrid = new Grid();
-            startCommentGrid.Margin = new Thickness(0, 0, 0, 20);
-            startCommentGrid.Height = 100;
-            startCommentGrid.ColumnDefinitions.Add(new ColumnDefinition());
-            ColumnDefinition cd = new ColumnDefinition();
-            cd.Width = new GridLength(8, GridUnitType.Star);
-            startCommentGrid.ColumnDefinitions.Add(cd);
-            TextBlock StartInitials = new TextBlock();
-            StartInitials.Text = "START";
-            StartInitials.FontSize = 30;
-            StartInitials.Width = 100;
-            Border Start = new Border();
-            Start.Background = Brushes.White;
-            Start.Width = 100;
-            Start.Padding = new Thickness(10, 28, 0, 20);
-            Start.CornerRadius = new CornerRadius(60);
-            Start.Child = StartInitials;
+            Grid startCommentGrid = new Grid();                             //  CREATES NEW GRID FOR START COMMENT
+            startCommentGrid.Margin = new Thickness(0, 0, 0, 20);           //  SETS MARGIN OF START COMMENT GRID
+            startCommentGrid.Height = 100;                                  //  SETS HEIGHT OF START COMMENT GRID TO 100
 
-            startCommentGrid.Children.Add(Start);
-            CommentField.Children.Add(startCommentGrid);
+            startCommentGrid.ColumnDefinitions.Add(new ColumnDefinition()); //  ADDS NEW COLUMN TO START COMMENT GRID
+            ColumnDefinition cd = new ColumnDefinition();                   //  CREATES NEW COLUMN DEFINITION
+            cd.Width = new GridLength(8, GridUnitType.Star);                //  SETS COLUMN WIDTH TO 8 STARS
+            startCommentGrid.ColumnDefinitions.Add(cd);                     //  ADDS COLUMN DEFINITION TO START COMMENT GRID
+            
+            TextBlock StartInitials = new TextBlock();                      //  CREATES NEW TEXTBLOCK FOR START COMMENT
+            StartInitials.Text = "START";                                   //  SETS TEXT OF START COMMENT
+            StartInitials.FontSize = 30;                                    //  SETS FONT SIZE OF START COMMENT
+            StartInitials.Width = 100;                                      //  SETS WIDTH OF START COMMENT
+            Border Start = new Border();                                    //  CREATES NEW BORDER FOR START COMMENT
+            Start.Background = Brushes.White;                               //  SETS BACKGROUND OF START COMMENT TO WHITE
+            Start.Width = 100;                                              //  SETS WIDTH OF START COMMENT
+            Start.Padding = new Thickness(10, 28, 0, 20);                   //  SETS PADDING OF START COMMENT
+            Start.CornerRadius = new CornerRadius(60);                      //  SETS CORNER RADIUS OF START COMMENT
+            Start.Child = StartInitials;                                    //  ADDS START COMMENT TO START COMMENT BORDER
+
+            startCommentGrid.Children.Add(Start);                           //  ADDS START COMMENT TO START COMMENT GRID
+            CommentField.Children.Add(startCommentGrid);                    //  ADDS START COMMENT GRID TO COMMENT FIELD
         }
 
+        /// <summary>
+        /// Resets UI elements and empties text box
+        /// </summary>
         private void ResetText()
         {
             CommentInputField.Text = "Add Comment Here";
@@ -178,12 +210,30 @@ namespace TicketingSystem.Frames
             ViewTicketDetails(target);
         }
 
+        /// <summary>
+        /// Event handler for when the comment button is clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CommentButton_Click(object sender, RoutedEventArgs e)
         {
-            target.AddComment(CommentInputField.Text);
-            ResetText();
+            if (CommentInputField.Text == string.Empty || CommentInputField.Text == "Add Comment Here")
+            {
+                ResetText();
+                MessageBoxResult emptyComment = MessageBox.Show("Fill out comment before submitting!");
+            }
+            else
+            {
+                target.AddComment(CommentInputField.Text);
+                ResetText();
+            }
         }
 
+        /// <summary>
+        /// Event handler for when the comment input field is clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CommentInputField_GotFocus(object sender, RoutedEventArgs e)
         {
             TextBox textBox = (TextBox)sender;
@@ -194,6 +244,11 @@ namespace TicketingSystem.Frames
             }
         }
 
+        /// <summary>
+        /// Event handler for when the comment input field loses focus
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CommentInputField_LostFocus(object sender, RoutedEventArgs e)
         {
             TextBox textBox = (TextBox)sender;
@@ -204,6 +259,11 @@ namespace TicketingSystem.Frames
             }
         }
 
+        /// <summary>
+        /// Event handler for when the enter key is pressed while the comment input field is selected
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnKeyDownHandler(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Return || e.Key == Key.Enter)
@@ -221,9 +281,38 @@ namespace TicketingSystem.Frames
             }
         }
 
+        /// <summary>
+        /// Event handler for when the urgency combo box is changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Urgency_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             target.ChangeUrgency(Urgency.SelectedIndex + 1);
+        }
+
+        /// <summary>
+        /// Event handler that handles comment resizing when the stackpanel has shifted size
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void StackPanel_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            StackPanel panel = (StackPanel)sender;
+            Grid parentGrid = (Grid)panel.Parent;
+
+            Line line = parentGrid.Children.OfType<Line>().FirstOrDefault();
+
+            if (line != null)
+            {
+                line.StrokeThickness = e.NewSize.Height;
+
+                line.Y1 = e.NewSize.Height / 2;
+                line.Y2 = e.NewSize.Height / 2;
+
+                line.X1 = e.NewSize.Width - 150;
+                line.X2 = line.X1 - e.NewSize.Width + 220;
+            }
         }
     }
 }
