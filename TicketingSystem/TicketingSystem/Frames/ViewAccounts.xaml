@@ -14,6 +14,34 @@
             <RowDefinition Height="130"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="1" x:Name="CreateAccountButton" Content="Create Account" Height="60" Foreground="#f9f9f9" Margin="30,0,30,45" FontFamily="{DynamicResource Epilogue}" FontSize="30">
+                <Button.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="#0066ff"></Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#0044bb"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="6"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            
+
+        </Grid>
+
         <Grid Grid.Row="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="80"></RowDefinition>

@@ -169,5 +169,10 @@ namespace TicketingSystem.Frames
             button.Content = grid;
             main.Children.Add(button);
         }
+
+        private void CreateAccountBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
