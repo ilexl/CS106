@@ -148,5 +148,10 @@ namespace TicketingSystem.Frames
                 textBox.Foreground = Brushes.Gray; // Set the desired ghost text color
             }
         }
+
+        private void Description_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
