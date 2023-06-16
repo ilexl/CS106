@@ -11,7 +11,7 @@
     <Grid Background="#111122">
         
 
-        <StackPanel Width="600" HorizontalAlignment="Left">
+        <StackPanel Width="1000" HorizontalAlignment="Left">
          <TextBlock Margin="25" Foreground="#f9f9f9" FontSize="50" FontFamily="{DynamicResource Epilogue}" FontWeight="Bold">Create Account</TextBlock>
 
             <StackPanel Margin="25,0,0,0">
@@ -30,8 +30,12 @@
                 <Label FontWeight="Bold" Content="Account Type" HorizontalAlignment="Left" Margin="0,0,0,10" VerticalAlignment="Top" Width="300" Foreground="#FFF9F9F9" FontSize="20" FontFamily="{DynamicResource Epilogue}"/>
                 <TextBox  FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center" Padding="10" Height="50" Margin="0,0,0,22" Foreground="gray" FontSize="20" TextWrapping="NoWrap" Text="Enter Account Type" Width="500"/>
 
+                
                 <Label FontWeight="Bold" Content="Password" HorizontalAlignment="Left" Margin="0,0,0,10" VerticalAlignment="Top" Width="300" Foreground="#FFF9F9F9" FontSize="20" FontFamily="{DynamicResource Epilogue}"/>
-                <TextBox  FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center" Padding="10" Height="50" Margin="0,0,0,22" Foreground="gray" FontSize="20" TextWrapping="NoWrap" Text="Enter Password" Width="500"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBox  FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center" Padding="10" Height="50" Margin="0,0,0,22" Foreground="gray" FontSize="20" TextWrapping="NoWrap" Text="Enter Password" Width="500"/>
+                    <Label FontWeight="Bold" Content="This is a temporary password!" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" Width="300" Foreground="Red" FontSize="20" FontFamily="{DynamicResource Epilogue}"/>
+                </StackPanel>
                 <TextBox  FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center" Padding="10" Height="50" Margin="0,0,0,22" Foreground="gray" FontSize="20" TextWrapping="NoWrap" Text="Confirm Password" Width="500"/>
 
                 <StackPanel Orientation="Horizontal" Height="65">
