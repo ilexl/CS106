@@ -22,7 +22,7 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="2" x:Name="CreateAccountButton" Content="Create Account" Height="60" Foreground="#F9F9F9"  Margin="30,0,30,45" FontFamily="{DynamicResource Epilogue}" FontSize="30">
+            <Button Grid.Column="2" x:Name="CreateAccountButton" Content="Create Account" Height="60" Foreground="#F9F9F9" Click="CreateAccountButton_Click" Margin="30,0,30,45" FontFamily="{DynamicResource Epilogue}" FontSize="30">
                 <Button.Resources>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Background" Value="#0066FF"/>

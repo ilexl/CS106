@@ -170,9 +170,10 @@ namespace TicketingSystem.Frames
             main.Children.Add(button);
         }
 
-        private void CreateAccountBtn_Click(object sender, RoutedEventArgs e)
+        private void CreateAccountButton_Click(object sender, RoutedEventArgs e)
         {
-
+            MainWindow mw = (MainWindow)Application.Current.MainWindow;
+            mw.ChangeWindow("CreateAccount.xaml");
         }
     }
 }

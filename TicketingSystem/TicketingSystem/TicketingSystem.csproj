@@ -240,6 +240,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\logout.png" />
+    <Resource Include="Resources\Icons\User_add.png" />
     <Content Include="Server\Tickets.mdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
