@@ -10,8 +10,13 @@
 
     <Grid Background="#111122">
 
-        <StackPanel>
-            <Grid Background="#f9f9f9" Height="200" VerticalAlignment="Top">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="200"></RowDefinition>
+                <RowDefinition Height="80"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Background="#f9f9f9" Height="200" VerticalAlignment="Top">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200"></ColumnDefinition>
                     <ColumnDefinition Width="200"></ColumnDefinition>
@@ -96,7 +101,7 @@
                     Resolve
                 </Button>
             </Grid>
-            <Grid Height="60" VerticalAlignment="Bottom" Margin="15,20,15,0">
+            <Grid Grid.Row="1" Height="60" VerticalAlignment="Top" Margin="15,20,15,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
@@ -136,324 +141,13 @@
                     Submit Comment
                 </Button>
             </Grid>
-            <Grid  Margin="15,10,15,0" Height="600">
-                <ScrollViewer>
-                    <StackPanel x:Name="CommentField" Margin="0,15,0,0">
-                        <!--<Grid Height="100">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition Width="8*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <TextBox FontSize="50" Width="100" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
-                                <TextBox.Resources>
-                                    <Style TargetType="Border">
-                                        <Setter Property="CornerRadius" Value="60"></Setter>
-                                    </Style>
-                                </TextBox.Resources>
-                                TN
-                            </TextBox>
-                            <Line VerticalAlignment="Center" Margin="15,15,0,0" Grid.Column="1" StrokeEndLineCap="Triangle" StrokeStartLineCap="Round" StrokeThickness="80" Stroke="#f9f9f9" X2="20" Y2="20" X1="1020" Y1="20"></Line>
-                            <StackPanel Grid.Column="1">
-                                <TextBlock Margin="40,10,0,0" FontSize="40" FontWeight="SemiBold" FontFamily="{DynamicResource Epilogue}">
-                                        Technician name
-                                </TextBlock>
-                                <TextBlock FontSize="25" Margin="40,0,0,0" FontWeight="Regular" FontFamily="{DynamicResource Epilogue}">
-                                        Technicians comment
-                                </TextBlock>
-                            </StackPanel>
-                            <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="24" Margin="0,0,20,10" FontWeight="Regular" FontFamily="{DynamicResource Epilogue}">
-                                2m ago
-                            </TextBlock>
-                        </Grid>
-                        <Grid Height="100" Margin="0,20,0,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition Width="8*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <TextBox FontSize="50" Width="100" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
-                                <TextBox.Resources>
-                                    <Style TargetType="Border">
-                                        <Setter Property="CornerRadius" Value="60"></Setter>
-                                    </Style>
-                                </TextBox.Resources>
-                                CN
-                            </TextBox>
-                            <Line VerticalAlignment="Center" Margin="15,15,0,0" Grid.Column="1" StrokeEndLineCap="Triangle" StrokeStartLineCap="Round" StrokeThickness="80" Stroke="#f9f9f9" X2="20" Y2="20" X1="1020" Y1="20"></Line>
-
-                            <StackPanel Grid.Column="1">
-                                <TextBlock Margin="40,10,0,0" FontSize="40"  FontWeight="SemiBold" FontFamily="{DynamicResource Epilogue}">
-                                        Caller Name
-                                </TextBlock>
-                                <TextBlock FontSize="25" Margin="40,0,0,0"  FontWeight="Regular" FontFamily="{DynamicResource Epilogue}">
-                                        Callers comment
-                                </TextBlock>
-
-                            </StackPanel>
-
-                            <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="24" Margin="0,0,20,10">
-                                5m ago
-                            </TextBlock>
-                            
-
-
-
-                        </Grid>
-
-                        <Grid Height="100" Margin="0,20,0,0">
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition Width="8*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-
-
-
-                            <TextBox FontSize="50" Width="100" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
-                                <TextBox.Resources>
-                                    <Style TargetType="Border">
-                                        <Setter Property="CornerRadius" Value="60"></Setter>
-                                    </Style>
-                                </TextBox.Resources>
-                                TN
-                            </TextBox>
-
-
-                            <Line VerticalAlignment="Center" Margin="15,15,0,0" Grid.Column="1" StrokeEndLineCap="Triangle" StrokeStartLineCap="Round" StrokeThickness="80" Stroke="#f9f9f9" X2="20" Y2="20" X1="1020" Y1="20"></Line>
-
-                            <StackPanel Grid.Column="1">
-                                <TextBlock Margin="40,10,0,0" FontSize="40" FontWeight="SemiBold" FontFamily="{DynamicResource Epilogue}">
-                                        Technician name
-                                </TextBlock>
-                                <TextBlock FontSize="25" Margin="40,0,0,0" FontWeight="Regular" FontFamily="{DynamicResource Epilogue}">
-                                        Technicians comment
-                                </TextBlock>
-
-                            </StackPanel>
-
-                            <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="24" Margin="0,0,20,10" FontWeight="Regular" FontFamily="{DynamicResource Epilogue}">
-                                2m ago
-                            </TextBlock>
-
-
-
-                        </Grid>
-
-                        <Grid Height="100" Margin="0,20,0,0">
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition Width="8*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-
-
-
-                            <TextBox FontSize="50" Width="100" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
-                                <TextBox.Resources>
-                                    <Style TargetType="Border">
-                                        <Setter Property="CornerRadius" Value="60"></Setter>
-                                    </Style>
-                                </TextBox.Resources>
-                                CN
-                            </TextBox>
-
-
-                            <Line VerticalAlignment="Center" Margin="15,15,0,0" Grid.Column="1" StrokeEndLineCap="Triangle" StrokeStartLineCap="Round" StrokeThickness="80" Stroke="#f9f9f9" X2="20" Y2="20" X1="1020" Y1="20"></Line>
-
-                            <StackPanel Grid.Column="1">
-                                <TextBlock Margin="40,10,0,0" FontSize="40"  FontWeight="SemiBold" FontFamily="{DynamicResource Epilogue}">
-                                        Caller Name
-                                </TextBlock>
-                                <TextBlock FontSize="25" Margin="40,0,0,0"  FontWeight="Regular" FontFamily="{DynamicResource Epilogue}">
-                                        Callers comment
-                                </TextBlock>
-
-                            </StackPanel>
-
-                            <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="24" Margin="0,0,20,10">
-                                5m ago
-                            </TextBlock>
-
-
-
-
-                        </Grid>
-
-                        <Grid Height="100" Margin="0,20,0,0">
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition Width="8*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-
-
-
-                            <TextBox FontSize="50" Width="100" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
-                                <TextBox.Resources>
-                                    <Style TargetType="Border">
-                                        <Setter Property="CornerRadius" Value="60"></Setter>
-                                    </Style>
-                                </TextBox.Resources>
-                                TN
-                            </TextBox>
-
-
-                            <Line VerticalAlignment="Center" Margin="15,15,0,0" Grid.Column="1" StrokeEndLineCap="Triangle" StrokeStartLineCap="Round" StrokeThickness="80" Stroke="#f9f9f9" X2="20" Y2="20" X1="1020" Y1="20"></Line>
-
-                            <StackPanel Grid.Column="1">
-                                <TextBlock Margin="40,10,0,0" FontSize="40" FontWeight="SemiBold" FontFamily="{DynamicResource Epilogue}">
-                                        Technician name
-                                </TextBlock>
-                                <TextBlock FontSize="25" Margin="40,0,0,0" FontWeight="Regular" FontFamily="{DynamicResource Epilogue}">
-                                        Technicians comment
-                                </TextBlock>
-
-                            </StackPanel>
-
-                            <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="24" Margin="0,0,20,10" FontWeight="Regular" FontFamily="{DynamicResource Epilogue}">
-                                2m ago
-                            </TextBlock>
-
-
-
-                        </Grid>
-
-                        <Grid Height="100" Margin="0,20,0,0">
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition Width="8*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-
-
-
-                            <TextBox FontSize="50" Width="100" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
-                                <TextBox.Resources>
-                                    <Style TargetType="Border">
-                                        <Setter Property="CornerRadius" Value="60"></Setter>
-                                    </Style>
-                                </TextBox.Resources>
-                                CN
-                            </TextBox>
-
-
-                            <Line VerticalAlignment="Center" Margin="15,15,0,0" Grid.Column="1" StrokeEndLineCap="Triangle" StrokeStartLineCap="Round" StrokeThickness="80" Stroke="#f9f9f9" X2="20" Y2="20" X1="1020" Y1="20"></Line>
-
-                            <StackPanel Grid.Column="1">
-                                <TextBlock Margin="40,10,0,0" FontSize="40"  FontWeight="SemiBold" FontFamily="{DynamicResource Epilogue}">
-                                        Caller Name
-                                </TextBlock>
-                                <TextBlock FontSize="25" Margin="40,0,0,0"  FontWeight="Regular" FontFamily="{DynamicResource Epilogue}">
-                                        Callers comment
-                                </TextBlock>
-
-                            </StackPanel>
-
-                            <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="24" Margin="0,0,20,10">
-                                5m ago
-                            </TextBlock>
-
-
-
-
-                        </Grid>
-
-                        <Grid Height="100" Margin="0,20,0,0">
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition Width="8*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-
-
-
-                            <TextBox FontSize="50" Width="100" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
-                                <TextBox.Resources>
-                                    <Style TargetType="Border">
-                                        <Setter Property="CornerRadius" Value="60"></Setter>
-                                    </Style>
-                                </TextBox.Resources>
-                                TN
-                            </TextBox>
-
-
-                            <Line VerticalAlignment="Center" Margin="15,15,0,0" Grid.Column="1" StrokeEndLineCap="Triangle" StrokeStartLineCap="Round" StrokeThickness="80" Stroke="#f9f9f9" X2="20" Y2="20" X1="1020" Y1="20"></Line>
-
-                            <StackPanel Grid.Column="1">
-                                <TextBlock Margin="40,10,0,0" FontSize="40" FontWeight="SemiBold" FontFamily="{DynamicResource Epilogue}">
-                                        Technician name
-                                </TextBlock>
-                                <TextBlock FontSize="25" Margin="40,0,0,0" FontWeight="Regular" FontFamily="{DynamicResource Epilogue}">
-                                        Technicians comment
-                                </TextBlock>
-
-                            </StackPanel>
-
-                            <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="24" Margin="0,0,20,10" FontWeight="Regular" FontFamily="{DynamicResource Epilogue}">
-                                2m ago
-                            </TextBlock>
-
-
-
-                        </Grid>
-
-                        <Grid Height="100" Margin="0,20,0,0">
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition Width="8*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-
-
-
-                            <TextBox FontSize="50" Width="100" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
-                                <TextBox.Resources>
-                                    <Style TargetType="Border">
-                                        <Setter Property="CornerRadius" Value="60"></Setter>
-                                    </Style>
-                                </TextBox.Resources>
-                                CN
-                            </TextBox>
-
-
-                            <Line VerticalAlignment="Center" Margin="15,15,0,0" Grid.Column="1" StrokeEndLineCap="Triangle" StrokeStartLineCap="Round" StrokeThickness="80" Stroke="#f9f9f9" X2="20" Y2="20" X1="1020" Y1="20"></Line>
-
-                            <StackPanel Grid.Column="1">
-                                <TextBlock Margin="40,10,0,0" FontSize="40"  FontWeight="SemiBold" FontFamily="{DynamicResource Epilogue}">
-                                        Caller Name
-                                </TextBlock>
-                                <TextBlock FontSize="25" Margin="40,0,0,0"  FontWeight="Regular" FontFamily="{DynamicResource Epilogue}">
-                                        Callers comment
-                                </TextBlock>
-
-                            </StackPanel>
-
-                            <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="24" Margin="0,0,20,10">
-                                5m ago
-                            </TextBlock>
-
-
-
-
-                        </Grid>-->
-
-
-
-                    </StackPanel>
-                    
-                    
-
-
-                </ScrollViewer>
-                
-                
-
-
-            </Grid>
-
-
-
-
-        </StackPanel>
+            <ScrollViewer Grid.Row="2"  Margin="15, 15, 0, 15">
+                <StackPanel  x:Name="CommentField" >
+
+                </StackPanel>
+            </ScrollViewer>
+            
+        </Grid>
 
 
 

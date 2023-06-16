@@ -78,26 +78,29 @@ namespace TicketingSystem.Frames
 
             for(int i = comments.Count() - 1; i >= 0; i--)
             {
-                string comment = comments[i];
-                
-
-
                 //  START OF NEW COMMENT GRID CREATION
                 Grid newCommentGrid = new Grid();
-                newCommentGrid.Margin = new Thickness(0, 0, 0, 20);
-                
+
                 RowDefinition rowDefinition = new RowDefinition();
-                rowDefinition.Height = GridLength.Auto;
+                rowDefinition.Height = new GridLength(140, GridUnitType.Pixel);
+                
+                string comment = comments[i];
+
                 newCommentGrid.RowDefinitions.Add(rowDefinition);
+
+
 
                 newCommentGrid.ColumnDefinitions.Add(new ColumnDefinition());
 
                 ColumnDefinition columnDefinition = new ColumnDefinition();
                 columnDefinition.Width = new GridLength(8, GridUnitType.Star);
                 newCommentGrid.ColumnDefinitions.Add(columnDefinition);
+                ColumnDefinition cd3 = new ColumnDefinition();
+                cd3.Width = new GridLength(0, GridUnitType.Pixel);                //  SETS COLUMN WIDTH TO 8 STARS
+                newCommentGrid.ColumnDefinitions.Add(cd3);
                 //  END OF NEW COMMENT GRID CREATION
 
-                
+
 
                 //  START OF INITIALS CREATION
                 TextBlock commentInitials = new TextBlock();
@@ -112,17 +115,40 @@ namespace TicketingSystem.Frames
                 roundedCorner.Padding = new Thickness(17, 12, 0, 0);
                 roundedCorner.CornerRadius = new CornerRadius(60);
                 roundedCorner.Child = commentInitials;
-                
+                roundedCorner.Margin = new Thickness(30, 0,0,0);
+                roundedCorner.HorizontalAlignment = HorizontalAlignment.Left;
+
+                StackPanel lineHH = new StackPanel();
+                lineHH.Background = MainWindow.HexColor("#F9F9F9");
+                lineHH.SetValue(Grid.RowProperty, 0);
+                lineHH.SetValue(Grid.RowSpanProperty, 2);
+                lineHH.Width = 6;
+                lineHH.Margin = new Thickness(77, 0, 0, 0);
+                lineHH.HorizontalAlignment = HorizontalAlignment.Left;
+
+                if (i == comments.Count() - 1)
+                {
+                    lineHH.Margin = new Thickness(77, 30, 0, 0);
+
+                }
+
+
+                newCommentGrid.Children.Add(lineHH);
+
                 newCommentGrid.Children.Add(roundedCorner);
                 //  END OF INITIALS CREATION
 
-
+                //StackPanel stackPanelL = new StackPanel();                               //  CREATES NEW STACKPANEL
+                //stackPanelL.VerticalAlignment = VerticalAlignment.Center;                //  SETS VERTICAL ALIGNMENT OF STACKPANEL TO CENTER
+                //stackPanelL.SetValue(Grid.ColumnProperty, 0);
+                //stackPanelL.Background = Brushes.White;
+                //stackPanelL.Width = 20;
 
                 //  START OF COMMENT STACKPANEL CREATION
                 StackPanel stackPanel = new StackPanel();                               //  CREATES NEW STACKPANEL
                 stackPanel.VerticalAlignment = VerticalAlignment.Center;                //  SETS VERTICAL ALIGNMENT OF STACKPANEL TO CENTER
                 stackPanel.SetValue(Grid.ColumnProperty, 1);                            //  SETS COLUMN OF STACKPANEL TO 1
-
+                
 
 
                     //  START OF NAME BLOCK CREATION
@@ -156,10 +182,11 @@ namespace TicketingSystem.Frames
                 //  START OF LINE CREATION 
                 Line line = new Line();                             
                 line.VerticalAlignment = VerticalAlignment.Center;  //  SETS LINE VERTICAL ALIGNMENT TO CENTER
-                line.Margin = new Thickness(15, 15, 0, 0);          //  SETS MARGIN OF LINE
+                line.Margin = new Thickness(15, 15, 0, 15);          //  SETS MARGIN OF LINE
                 line.StrokeEndLineCap = PenLineCap.Triangle;        //  SETS LINE CAPS TO TRIANGLE
                 line.StrokeStartLineCap = PenLineCap.Round;         //  SETS LINE CAPS TO ROUND
                 line.Stroke = Brushes.White;                        //  SETS LINE COLOUR TO WHITE
+
 
                 newCommentGrid.Children.Add(line);                  //  ADDS LINE TO NEW COMMENT GRID
                 line.SetValue(Grid.ColumnProperty, 1);              //  SETS LINE TO COLUMN 1
@@ -172,17 +199,24 @@ namespace TicketingSystem.Frames
                 newCommentGrid.Children.Add(stackPanel);            //  ADDS STACKPANEL TO NEW COMMENT GRID
                 
                 CommentField.Children.Add(newCommentGrid);          //  ADDS COMMENT TO GRID
+
+                
+
             }
 
             Grid startCommentGrid = new Grid();                             //  CREATES NEW GRID FOR START COMMENT
-            startCommentGrid.Margin = new Thickness(0, 0, 0, 20);           //  SETS MARGIN OF START COMMENT GRID
+            startCommentGrid.Margin = new Thickness(0, 0, 0, 0);           //  SETS MARGIN OF START COMMENT GRID
             startCommentGrid.Height = 100;                                  //  SETS HEIGHT OF START COMMENT GRID TO 100
 
             startCommentGrid.ColumnDefinitions.Add(new ColumnDefinition()); //  ADDS NEW COLUMN TO START COMMENT GRID
+            ColumnDefinition cd2 = new ColumnDefinition();
+            cd2.Width = new GridLength(0, GridUnitType.Pixel);                //  SETS COLUMN WIDTH TO 8 STARS
+            startCommentGrid.ColumnDefinitions.Add(cd2);
             ColumnDefinition cd = new ColumnDefinition();                   //  CREATES NEW COLUMN DEFINITION
             cd.Width = new GridLength(8, GridUnitType.Star);                //  SETS COLUMN WIDTH TO 8 STARS
             startCommentGrid.ColumnDefinitions.Add(cd);                     //  ADDS COLUMN DEFINITION TO START COMMENT GRID
-            
+                              //  ADDS COLUMN DEFINITION TO START COMMENT GRID
+
             TextBlock StartInitials = new TextBlock();                      //  CREATES NEW TEXTBLOCK FOR START COMMENT
             StartInitials.Text = "START";                                   //  SETS TEXT OF START COMMENT
             StartInitials.FontSize = 30;                                    //  SETS FONT SIZE OF START COMMENT
@@ -192,9 +226,25 @@ namespace TicketingSystem.Frames
             Start.Width = 100;                                              //  SETS WIDTH OF START COMMENT
             Start.Padding = new Thickness(10, 28, 0, 20);                   //  SETS PADDING OF START COMMENT
             Start.CornerRadius = new CornerRadius(60);                      //  SETS CORNER RADIUS OF START COMMENT
-            Start.Child = StartInitials;                                    //  ADDS START COMMENT TO START COMMENT BORDER
+            Start.Child = StartInitials;
+            Start.Margin = new Thickness(30, 0, 0, 0);
+            Start.HorizontalAlignment = HorizontalAlignment.Left;//  ADDS START COMMENT TO START COMMENT BORDER
+            Start.SetValue(Grid.RowProperty, 1);
 
+            StackPanel lineH = new StackPanel();
+            lineH.Background = MainWindow.HexColor("#F9F9F9");
+            lineH.SetValue(Grid.RowProperty, 0);
+            lineH.SetValue(Grid.RowSpanProperty, 2);
+            lineH.Width = 6;
+            lineH.Margin = new Thickness(77, 0, 0, 0);
+            lineH.HorizontalAlignment = HorizontalAlignment.Left;
+
+
+
+            startCommentGrid.Children.Add(lineH);                           //  ADDS START COMMENT TO START COMMENT GRID
             startCommentGrid.Children.Add(Start);                           //  ADDS START COMMENT TO START COMMENT GRID
+
+
             CommentField.Children.Add(startCommentGrid);                    //  ADDS START COMMENT GRID TO COMMENT FIELD
         }
 
