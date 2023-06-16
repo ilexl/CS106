@@ -162,8 +162,8 @@ namespace TicketingSystem.Frames
                     //  START OF NAME BLOCK CREATION
                 TextBlock nameBlock = new TextBlock();                                  //  CREATES NEW TEXTBLOCK FOR NAME
                 nameBlock.Text = comment.Substring(0, 2);                               //  SETS NAME BLOCK TEXT TO INITIALS (FIRST TO LETTERS OF COMMENT STRING)
-                nameBlock.Margin = new Thickness(100, 10, 0, 0);                        //  SETS MARGIN OF NAME BLOCK
-                nameBlock.FontSize = 40;                                                //  SETS FONT SIZE OF NAME BLOCK TO 40
+                nameBlock.Margin = new Thickness(100, 5, 0, 0);                        //  SETS MARGIN OF NAME BLOCK
+                nameBlock.FontSize = 30;                                                //  SETS FONT SIZE OF NAME BLOCK TO 40
                 nameBlock.FontWeight = FontWeights.SemiBold;                            //  SETS FONT WEIGHT OF NAME BLOCK TO SEMI BOLD
                 nameBlock.FontFamily = new FontFamily("{DynamicResource Epilogue}");    //  SETS FONT OF NAME BLOCK
                     //  END OF NAME BLOCK CREATION
@@ -174,15 +174,17 @@ namespace TicketingSystem.Frames
                 TextBlock commentBlock = new TextBlock();                               //  CREATES NEW TEXTBLOCK FOR COMMENT
                 commentBlock.Text = comment.Substring(2);                               //  SETS COMMENT BLOCK TEXT TO COMMENT FROM INDEX 2 AND AFTER (EVERYTHING AFTER INITIALS)
                 commentBlock.TextWrapping = TextWrapping.Wrap;                          //  SETS TEXT WRAPPING TO WRAP
-                commentBlock.Margin = new Thickness(100, 0, 100, 10);                   //  SETS MARGIN OF COMMENT BLOCK
-                commentBlock.FontSize = 25;                                             //  SETS FONT SIZE OF COMMENT BLOCK TO 25
+                commentBlock.Margin = new Thickness(100, 0, 100, 0);                   //  SETS MARGIN OF COMMENT BLOCK
+                commentBlock.FontSize = 15;                                             //  SETS FONT SIZE OF COMMENT BLOCK TO 25
                 commentBlock.FontWeight = FontWeights.Regular;                          //  SETS FONT WEIGHT OF COMMENT BLOCK TO REGULAR
                 commentBlock.FontFamily = new FontFamily("{DynamicResource Epilogue}"); //  SETS FONT OF COMMENT BLOCK
                 commentBlock.VerticalAlignment = VerticalAlignment.Stretch;             //  SETS VERTICAL ALIGNMENT TO STRETCH
-                    //  END OF COMMENT BLOCK CREATION
+                commentBlock.MaxHeight = 55;
+                //  END OF COMMENT BLOCK CREATION
 
                 stackPanel.Children.Add(nameBlock);                                     //  ADDS NAME TO STACKPANEL
                 stackPanel.Children.Add(commentBlock);                                  //  ADDS COMMENT TO STACKPANEL
+                stackPanel.CanVerticallyScroll = true;
                 //  END OF COMMENT STACKPANEL CREATION
 
 
