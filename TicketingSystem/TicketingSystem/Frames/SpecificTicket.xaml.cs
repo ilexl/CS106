@@ -27,7 +27,6 @@ namespace TicketingSystem.Frames
             InitializeComponent();
             ViewTicketDetails(target);
         }
-
         private void ViewTicketDetails(Ticket t)
         {
             TicketNumber.Content = "INC" + t.GetID().ToString();
@@ -74,8 +73,11 @@ namespace TicketingSystem.Frames
 
             List<String> comments = t.GetComments();
 
-            foreach (string comment in comments)
+
+
+            for(int i = comments.Count() - 1; i >= 0; i--)
             {
+                string comment = comments[i];
                 Grid newCommentGrid = new Grid();
                 newCommentGrid.Margin = new Thickness(0, 0, 0, 20);
                 newCommentGrid.Height = 100;
@@ -84,7 +86,9 @@ namespace TicketingSystem.Frames
                 ColumnDefinition columnDefinition = new ColumnDefinition();
                 columnDefinition.Width = new GridLength(8, GridUnitType.Star);
                 newCommentGrid.ColumnDefinitions.Add(columnDefinition);
+
                 
+
                 TextBlock commentInitials = new TextBlock();
                 commentInitials.Text = comment.Substring(0, 2);
                 commentInitials.FontSize = 50;
@@ -142,6 +146,27 @@ namespace TicketingSystem.Frames
 
                 CommentField.Children.Add(newCommentGrid);
             }
+
+            Grid startCommentGrid = new Grid();
+            startCommentGrid.Margin = new Thickness(0, 0, 0, 20);
+            startCommentGrid.Height = 100;
+            startCommentGrid.ColumnDefinitions.Add(new ColumnDefinition());
+            ColumnDefinition cd = new ColumnDefinition();
+            cd.Width = new GridLength(8, GridUnitType.Star);
+            startCommentGrid.ColumnDefinitions.Add(cd);
+            TextBlock StartInitials = new TextBlock();
+            StartInitials.Text = "START";
+            StartInitials.FontSize = 30;
+            StartInitials.Width = 100;
+            Border Start = new Border();
+            Start.Background = Brushes.White;
+            Start.Width = 100;
+            Start.Padding = new Thickness(10, 28, 0, 20);
+            Start.CornerRadius = new CornerRadius(60);
+            Start.Child = StartInitials;
+
+            startCommentGrid.Children.Add(Start);
+            CommentField.Children.Add(startCommentGrid);
         }
 
         private void ResetText()
