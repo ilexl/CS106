@@ -32,6 +32,7 @@ namespace TicketingSystem.Frames
             if(target == null)
             {
                 Debug.LogError("No target user found for Specific Account");
+                MessageBox.Show("Operation was not successful!\nPlease try again...", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 MainWindow mw = (MainWindow)Application.Current.MainWindow;
                 mw.ChangeWindow("ViewAccounts.xaml");
             }
@@ -46,20 +47,31 @@ namespace TicketingSystem.Frames
             AccountIDTextBlock.Text = user.ID.ToString();
             NameTextBlock.Text = user.firstName + " " + user.lastName;
             Email.Text = user.email;
-            AccountType.Text = User.TypeToString(user);
+            AccountType.SelectedIndex = user.userType - 1;
         }
 
         private void ButtonClick_ResetPassword(object sender, RoutedEventArgs e)
         {
-
+            MessageBoxResult confirm = MessageBox.Show("Are you sure you want to reset this accounts password?","Warning!", MessageBoxButton.YesNo , MessageBoxImage.Warning);
+            if(confirm == MessageBoxResult.Yes)
+            {
+                string password = User.GenerateRandomPassword();
+                target.AdminChangePassword(password);
+                MessageBox.Show("The new TEMPORARY password is " + password, "New Password!", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
         private void ButtonClick_Discard(object sender, RoutedEventArgs e)
         {
-
+            ShowAccountDetails(target);
         }
 
         private void ButtonClick_Save(object sender, RoutedEventArgs e)
         {
+            // TODO: make name editable
+
+            target.ChangeEmail(Email.Text);
+            target.ChangeAccountType(AccountType.SelectedIndex + 1);
+            MessageBox.Show("Changes saved!", "Alert", MessageBoxButton.OK, MessageBoxImage.Information);
 
         }
 
@@ -142,5 +154,16 @@ namespace TicketingSystem.Frames
             }
         }
 
+        private void DeleteAccount_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult confirm = MessageBox.Show("Are you sure you want to DELETE this account?", "Warning!", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+            if (confirm == MessageBoxResult.Yes)
+            {
+                User.DeleteAccount(target);
+                MessageBox.Show("Account DELETED!", "Alert", MessageBoxButton.OK, MessageBoxImage.Information);
+                MainWindow mw = (MainWindow)Application.Current.MainWindow;
+                mw.ChangeWindow("ViewAccounts.xaml");
+            }
+        }
     }
 }
