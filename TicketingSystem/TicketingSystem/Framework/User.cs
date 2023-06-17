@@ -163,6 +163,37 @@ namespace TicketingSystem.Framework
         }
 
         /// <summary>
+        /// Changes the password of the current instance of the user if the old password matches the current password
+        /// </summary>
+        /// <param name="oldPassword"></param>
+        /// <param name="newPassword"></param>
+        /// <returns></returns>
+        public bool AdminChangePassword(string newPassword)
+        {
+            try
+            {
+                SqlConnection connection = Server.GetConnection(Server.SOURCE_USERS);
+                SqlDataAdapter adapter = new SqlDataAdapter();
+
+                string commandText = "UPDATE Users SET Password=@password WHERE ID='" + ID + "';";
+                adapter.InsertCommand = new SqlCommand(commandText, connection);
+                adapter.InsertCommand.Parameters.AddWithValue("@password", newPassword);
+                adapter.InsertCommand.ExecuteNonQuery();
+
+                Server.CloseConnection(connection);
+                password = newPassword;
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning("Operation Unsuccessful - " + e.Message);
+                MessageBox.Show("Operation was not successful!\nPlease try again...", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+        }
+
+        /// <summary>
         /// Changes the email of the current instance of the user
         /// </summary>
         /// <param name="newEmail"></param>
@@ -186,6 +217,32 @@ namespace TicketingSystem.Framework
                 MessageBox.Show("Operation was not successful!\nPlease try again...", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             
+        }
+
+        /// <summary>
+        /// Changes the account type of the current instance of the user
+        /// </summary>
+        /// <param name="newAccountType"></param>
+        public void ChangeAccountType(int newAccountType)
+        {
+            try
+            {
+                //  FILESTREAM / WRITER, ALLOWS INSERTING / UPDATING ROWS IN SQL
+                SqlConnection connection = Server.GetConnection(Server.SOURCE_USERS);
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                string commandText = "UPDATE Users SET UserType=@type WHERE ID='" + ID + "';";
+                adapter.InsertCommand = new SqlCommand(commandText, connection);
+                adapter.InsertCommand.Parameters.AddWithValue("@type", newAccountType);
+                adapter.InsertCommand.ExecuteNonQuery();
+                Server.CloseConnection(connection);
+                this.userType = newAccountType;
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning("Operation Unsuccessful - " + e.Message);
+                MessageBox.Show("Operation was not successful!\nPlease try again...", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
         }
 
         /// <summary>
@@ -284,5 +341,163 @@ namespace TicketingSystem.Framework
             }
         }
 
+        public static User CreateNew(string firstName, string lastName, string emailAddress, Type accountType, string rawPassword)
+        {
+            try
+            {
+                User user = new User();
+                user.ID = NewID();
+                if (user.ID < 0)
+                {
+                    throw new Exception("Invalid User Number");
+                }
+
+                user.firstName = firstName;
+                user.lastName = lastName;
+                user.email = emailAddress;
+                user.userType = (int)accountType;
+                user.password = Server.HashString(rawPassword);
+
+                bool success = AddNewUser(user);
+                if (!success)
+                {
+                    throw new Exception("Unable to create account...");
+                }
+                return user;
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning("Operation Unsuccessful - " + e.Message);
+                MessageBox.Show("Operation was not successful!\nPlease try again...", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
+        }
+
+        private static int NewID()
+        {
+            try
+            {
+                SqlConnection connection = Server.GetConnection(Server.SOURCE_USERS);
+                string tableName = "Users";
+                string countQuery = $"SELECT MAX(ID) FROM {tableName}";
+                SqlCommand command = new SqlCommand(countQuery, connection);
+                int rowCount = (int)command.ExecuteScalar();
+                Server.CloseConnection(connection);
+                return rowCount + 1;
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning("Operation Unsuccessful - " + e.Message);
+                return -1;
+            }
+        }
+
+        private static bool AddNewUser(User u)
+        {
+            try
+            {
+                const string SPACE = ", ";
+                string emailAddress = "";
+                if (u.email == null || u.email == "")
+                {
+                    emailAddress = "\'None\'";
+                }
+                else
+                {
+                    emailAddress += u.email;
+                }
+                #region createCommand
+                string commandText = "INSERT INTO Users VALUES(";
+                commandText += u.ID.ToString();
+                commandText += SPACE;
+                commandText += "'" + u.password + "'";
+                commandText += SPACE;
+                commandText += "'" + u.userType.ToString() + "'";
+                commandText += SPACE;
+                commandText += "@tEmail";
+                commandText += SPACE;
+                commandText += "@tFirstName";
+                commandText += SPACE;
+                commandText += "@tLastName";
+                commandText += ");";
+                #endregion
+
+                SqlConnection connection = Server.GetConnection(Server.SOURCE_USERS);
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                adapter.InsertCommand = new SqlCommand(commandText, connection);
+                adapter.InsertCommand.Parameters.AddWithValue("@tEmail", emailAddress);
+                adapter.InsertCommand.Parameters.AddWithValue("@tFirstName", u.firstName);
+                adapter.InsertCommand.Parameters.AddWithValue("@tLastName", u.lastName);
+                adapter.InsertCommand.ExecuteNonQuery();
+                Server.CloseConnection(connection);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning("Operation Unsuccessful - " + e.Message);
+                MessageBox.Show("Operation was not successful!\nPlease try again...", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+        }
+
+        public static string GenerateRandomPassword()
+        {
+            string temp = "";
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                // 0 -> 60 (random)
+                
+                int num = rnd.Next(61); 
+
+                if(num <= 9) // 0 -> 9
+                {
+                    temp += num.ToString();
+                }
+                else if (num >= 10 && num <= 35) // 10 -> 35
+                {
+                    num -= 10;
+                    num += 65;
+                    char c = (char)num;
+                    temp += c;
+                }
+                else if(num >= 36) // 36 -> 60
+                {
+                    num -= 36;
+                    num += 97;
+                    char c = (char)num;
+                    temp += c;
+                }
+                else
+                {
+                    temp += '#';
+                }
+            }
+
+            return temp;
+
+
+        }
+
+        public static void DeleteAccount(User u)
+        {
+            try
+            {
+                SqlConnection connection = Server.GetConnection(Server.SOURCE_USERS);
+                string tableName = "Users";
+                string countQuery = $"DELETE FROM {tableName} WHERE ID={u.ID};";
+                SqlCommand command = new SqlCommand(countQuery, connection);
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                adapter.InsertCommand = command;
+                adapter.InsertCommand.ExecuteNonQuery();
+                Server.CloseConnection(connection);
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning("Operation Unsuccessful - " + e.Message);
+                MessageBox.Show("Operation was not successful!\nPlease try again...", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }

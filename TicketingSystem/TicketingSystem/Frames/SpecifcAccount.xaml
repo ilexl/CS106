@@ -29,7 +29,11 @@
                     <TextBox  GotFocus="EmailTextBox_GotFocus" LostFocus="EmailTextBox_LostFocus" x:Name="Email"  FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center" Padding="10" Height="50" Margin="0,0,0,22" Foreground="Black" FontSize="20" TextWrapping="NoWrap" Text="No e-mail address found." Width="600"/>
 
                     <Label FontWeight="Bold" Content="Account Type" HorizontalAlignment="Left" Margin="0,0,0,10" VerticalAlignment="Top" Width="300" Foreground="#FFF9F9F9" FontSize="20" FontFamily="{DynamicResource Epilogue}"/>
-                    <TextBox GotFocus="AccountTypeTextBox_GotFocus" LostFocus="AccountTypeTextBox_LostFocus" x:Name="AccountType"  FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center" Padding="10" Height="50" Margin="0,0,0,22" Foreground="Black" FontSize="20" TextWrapping="NoWrap" Text="Test" Width="600"/>
+                    <ComboBox x:Name="AccountType" SelectedIndex="0" FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center" Padding="10" Height="50" Margin="0,0,0,22" Foreground="#111122" FontSize="25" Text="Enter Account Type" Width="600">
+                        <ComboBoxItem FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center" Padding="10" Height="50" Margin="0,0,0,0" Foreground="#111122" FontSize="25" Width="600">1 - User</ComboBoxItem>
+                        <ComboBoxItem FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center" Padding="10" Height="50" Margin="0,0,0,0" Foreground="#111122" FontSize="25" Width="600">2 - Technician</ComboBoxItem>
+                        <ComboBoxItem FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center" Padding="10" Height="50" Margin="0,0,0,0" Foreground="#111122" FontSize="25" Width="600">3 - Admin</ComboBoxItem>
+                    </ComboBox>
 
                     <Label FontWeight="Bold" Content="Password" HorizontalAlignment="Left" Margin="0,0,0,10" VerticalAlignment="Top" Width="300" Foreground="#FFF9F9F9" FontSize="20" FontFamily="{DynamicResource Epilogue}"/>
                     <Button x:Name="ResetPassword" Content="Reset Password" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="600" Height="65" Click="ButtonClick_ResetPassword" Margin="0,0,0,0" FontFamily="{DynamicResource Epilogue}" FontWeight="Regular" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFF9F9F9" FontSize="22" BorderBrush="#00000000">
@@ -109,7 +113,7 @@
 
                 </StackPanel>
                 <Grid Grid.Row="1">
-                    <Button x:Name="DeleteAccount" HorizontalAlignment="Left" VerticalAlignment="Top" Height="55" Click="ButtonClick_Save" Margin="0,5,0,0" FontFamily="{DynamicResource Epilogue}" FontWeight="Regular" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="22" BorderBrush="#00000000">
+                    <Button x:Name="DeleteAccount" HorizontalAlignment="Left" VerticalAlignment="Top" Height="55" Click="DeleteAccount_Click" Margin="0,5,0,0" FontFamily="{DynamicResource Epilogue}" FontWeight="Regular" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="22" BorderBrush="#00000000">
                         DELETE ACCOUNT
                         <Button.Resources>
                             <Style TargetType="{x:Type Button}">
