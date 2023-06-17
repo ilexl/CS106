@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TicketingSystem.Framework;
 
 namespace TicketingSystem.Frames
 {
@@ -23,6 +24,31 @@ namespace TicketingSystem.Frames
         public CreateAccount()
         {
             InitializeComponent();
+        }
+
+        private void BackBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.NavigationService.CanGoBack)
+            {
+                this.NavigationService.GoBack();
+            }
+        }
+
+        private void ConfirmBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if(Password.Text == PasswordConfirm.Text)
+            {
+                User u = User.CreateNew(FirstName.Text, LastName.Text, EmailAddress.Text, (User.Type)AccountType.SelectedIndex, Password.Text);
+                SpecifcAccount.target = u;
+                MainWindow mw = (MainWindow)Application.Current.MainWindow;
+                mw.ChangeWindow("SpecifcAccount.xaml");
+            }
+            
+        }
+
+        private void ResetText()
+        {
+            // TODO: needs implementing
         }
     }
 }

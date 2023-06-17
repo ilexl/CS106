@@ -284,5 +284,105 @@ namespace TicketingSystem.Framework
             }
         }
 
+        public static User CreateNew(string firstName, string lastName, string emailAddress, Type accountType, string rawPassword)
+        {
+            try
+            {
+                User user = new User();
+                user.ID = NewID();
+                if (user.ID < 0)
+                {
+                    throw new Exception("Invalid User Number");
+                }
+
+                user.firstName = firstName;
+                user.lastName = lastName;
+                user.email = emailAddress;
+                user.userType = (int)accountType;
+                user.password = Server.HashString(rawPassword);
+
+                bool success = AddNewUser(user);
+                if (!success)
+                {
+                    throw new Exception("Unable to create account...");
+                }
+                return user;
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning("Operation Unsuccessful - " + e.Message);
+                MessageBox.Show("Operation was not successful!\nPlease try again...", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
+        }
+
+        private static int NewID()
+        {
+            try
+            {
+                SqlConnection connection = Server.GetConnection(Server.SOURCE_USERS);
+                string tableName = "Users";
+                string countQuery = $"SELECT COUNT(*) FROM {tableName}";
+                SqlCommand command = new SqlCommand(countQuery, connection);
+                int rowCount = (int)command.ExecuteScalar();
+                Server.CloseConnection(connection);
+                return rowCount + 1;
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning("Operation Unsuccessful - " + e.Message);
+                return -1;
+            }
+        }
+
+        private static bool AddNewUser(User u)
+        {
+            try
+            {
+                const string SPACE = ", ";
+                string emailAddress = "";
+                if (u.email == null || u.email == "")
+                {
+                    emailAddress = "\'None\'";
+                }
+                else
+                {
+                    emailAddress += u.email;
+                }
+                #region createCommand
+                string commandText = "INSERT INTO Users VALUES(";
+                commandText += u.ID.ToString();
+                commandText += SPACE;
+                commandText += "'" + u.password + "'";
+                commandText += SPACE;
+                commandText += "'" + u.userType.ToString() + "'";
+                commandText += SPACE;
+                commandText += "@tEmail";
+                commandText += SPACE;
+                commandText += "@tFirstName";
+                commandText += SPACE;
+                commandText += "@tLastName";
+                commandText += ");";
+                #endregion
+
+                SqlConnection connection = Server.GetConnection(Server.SOURCE_USERS);
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                adapter.InsertCommand = new SqlCommand(commandText, connection);
+                adapter.InsertCommand.Parameters.AddWithValue("@tEmail", emailAddress);
+                adapter.InsertCommand.Parameters.AddWithValue("@tFirstName", u.firstName);
+                adapter.InsertCommand.Parameters.AddWithValue("@tLastName", u.lastName);
+                adapter.InsertCommand.ExecuteNonQuery();
+                Server.CloseConnection(connection);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning("Operation Unsuccessful - " + e.Message);
+                MessageBox.Show("Operation was not successful!\nPlease try again...", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+        }
+
     }
 }
