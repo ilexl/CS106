@@ -1,4 +1,4 @@
-# CS106 Ticketing System Installation Guide
+# CS106 Ticketing System Guide
 
 This guide is intended to get any user to be able to setup the ticketing system on their system.
 
@@ -7,6 +7,8 @@ This guide is intended to get any user to be able to setup the ticketing system 
 - Region/Language Settings (English United States)
 - 50 MB (Minimum for installation - increases with use)
 - Minimum screen resolution 1600x900
+
+# Installation/Setup Guide Guide
 
 ## Initial Setup
 
@@ -25,6 +27,8 @@ This guide is intended to get any user to be able to setup the ticketing system 
 - You can then manage all the users and tickets in this application using the 'All Accounts' button on the side nav
 - The buttons and instructions are self explanitory when it comes to managing accounts and tickets.
 - You will need to create accounts for you other admins, technicians and users so they can access the application too!
+
+# User manual 
 
 ## Admin Guide - Features
 #### Create an account
