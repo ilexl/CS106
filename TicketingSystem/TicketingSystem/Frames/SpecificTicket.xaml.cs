@@ -44,10 +44,12 @@ namespace TicketingSystem.Frames
             if (t.GetStatus())
             {
                 Status.Content = "Open";
+                ResolveButton.Visibility = Visibility.Visible;
             }
             else
             {
-                Status.Content = "False";
+                Status.Content = "Closed";
+                ResolveButton.Visibility = Visibility.Hidden;
             }
             Caller.Content = t.GetCallerID();
             CreatedBy.Content = t.GetCreatorID();
@@ -95,6 +97,50 @@ namespace TicketingSystem.Frames
                 
                 string comment = comments[i];
 
+                string commentFirstName = "", commentLastName = "", commentTimeStamp = "";
+
+                int subCharCounter = 0;
+                for (int j = 0; j < comment.Length; j++)
+                {
+                    if (subCharCounter == 0)
+                    {
+                        if (comment[j] != '¦')
+                        {
+                            commentFirstName += comment[j];
+                        }
+                        else
+                        {
+                            subCharCounter++;
+                        }
+                    }
+                    else if (subCharCounter == 1)
+                    {
+                        if (comment[j] != '¦')
+                        {
+                            commentLastName += comment[j];
+                        }
+                        else
+                        {
+                            subCharCounter++;
+                        }
+                    }
+                    else if (subCharCounter == 2)
+                    {
+                        if (comment[j] != '¦')
+                        {
+                            commentTimeStamp += comment[j];
+                        }
+                        else
+                        {
+                            subCharCounter++;
+                        }
+                    }
+                }
+
+                DateTime commentTime = DateTime.Parse(commentTimeStamp);
+
+                TimeSpan CommentedDelta = (((DateTime)(commentTime)) - ((DateTime)(DateTime.Now))).Duration();
+
                 newCommentGrid.RowDefinitions.Add(rowDefinition);
 
 
@@ -113,7 +159,7 @@ namespace TicketingSystem.Frames
 
                 //  START OF INITIALS CREATION
                 TextBlock commentInitials = new TextBlock();
-                commentInitials.Text = comment.Substring(0, 2);
+                commentInitials.Text = "" + commentFirstName[0] + commentLastName[0];
                 commentInitials.FontSize = 50;
                 commentInitials.Width = 100;
                 Border roundedCorner = new Border();
@@ -162,8 +208,8 @@ namespace TicketingSystem.Frames
 
                 //  START OF NAME BLOCK CREATION
                 TextBlock nameBlock = new TextBlock();                                  //  CREATES NEW TEXTBLOCK FOR NAME
-                nameBlock.Text = comment.Substring(0, 2);                               //  SETS NAME BLOCK TEXT TO INITIALS (FIRST TO LETTERS OF COMMENT STRING)
-                nameBlock.Margin = new Thickness(100, 5, 0, 0);                        //  SETS MARGIN OF NAME BLOCK
+                nameBlock.Text = commentFirstName + " " + commentLastName;              //  SETS NAME BLOCK TEXT TO FIRST AND LAST NAME
+                nameBlock.Margin = new Thickness(100, 5, 0, 0);                         //  SETS MARGIN OF NAME BLOCK
                 nameBlock.FontSize = 30;                                                //  SETS FONT SIZE OF NAME BLOCK TO 40
                 nameBlock.FontWeight = FontWeights.SemiBold;                            //  SETS FONT WEIGHT OF NAME BLOCK TO SEMI BOLD
                 nameBlock.FontFamily = new FontFamily("{DynamicResource Epilogue}");    //  SETS FONT OF NAME BLOCK
@@ -171,9 +217,45 @@ namespace TicketingSystem.Frames
 
 
 
+                TextBlock timeBlock = new TextBlock();
+                if (CommentedDelta.Days != 0)
+                {
+                    timeBlock.Text = CommentedDelta.Days + "d ago";
+                }
+                else if (CommentedDelta.Hours != 0)
+                {
+                    timeBlock.Text = CommentedDelta.Hours + "h ago";
+                }
+                else
+                {
+                    timeBlock.Text = CommentedDelta.Minutes + "m ago";
+                }
+                timeBlock.Margin = new Thickness(0, 5, 0, 0);                         //  SETS MARGIN OF NAME BLOCK
+                timeBlock.FontSize = 15;                                                //  SETS FONT SIZE OF NAME BLOCK TO 40
+                timeBlock.FontWeight = FontWeights.Regular;                            //  SETS FONT WEIGHT OF NAME BLOCK TO SEMI BOLD
+                timeBlock.FontFamily = new FontFamily("{DynamicResource Epilogue}");    //  SETS FONT OF NAME BLOCK
+
+
+
+                Grid horizontalGrid = new Grid();
+                horizontalGrid.Margin = new Thickness(0, 0, 160, 0);
+                ColumnDefinition starColumnDefinition = new ColumnDefinition();
+                ColumnDefinition secondColumnDefinition = new ColumnDefinition();
+                starColumnDefinition.Width = new GridLength(1, GridUnitType.Star);
+                secondColumnDefinition.Width = new GridLength(70);
+                horizontalGrid.ColumnDefinitions.Add(starColumnDefinition);
+                horizontalGrid.ColumnDefinitions.Add(secondColumnDefinition);
+
+                timeBlock.SetValue(Grid.ColumnProperty, 1);
+
+                horizontalGrid.Children.Add(nameBlock);
+                horizontalGrid.Children.Add(timeBlock);
+
+
+
                 //  START OF COMMENT BLOCK CREATION
                 TextBlock commentBlock = new TextBlock();                               //  CREATES NEW TEXTBLOCK FOR COMMENT
-                commentBlock.Text = comment.Substring(2);                               //  SETS COMMENT BLOCK TEXT TO COMMENT FROM INDEX 2 AND AFTER (EVERYTHING AFTER INITIALS)
+                commentBlock.Text = comment.Substring(commentFirstName.Length + commentLastName.Length + commentTimeStamp.Length + 3);                               //  SETS COMMENT BLOCK TEXT TO COMMENT FROM INDEX 2 AND AFTER (EVERYTHING AFTER INITIALS)
                 commentBlock.TextWrapping = TextWrapping.Wrap;                          //  SETS TEXT WRAPPING TO WRAP
                 commentBlock.Margin = new Thickness(100, 0, 100, 0);                    //  SETS MARGIN OF COMMENT BLOCK
                 commentBlock.FontSize = 15;                                             //  SETS FONT SIZE OF COMMENT BLOCK TO 25
@@ -183,7 +265,7 @@ namespace TicketingSystem.Frames
                 commentBlock.MaxHeight = 55;
                 //  END OF COMMENT BLOCK CREATION
 
-                stackPanel.Children.Add(nameBlock);                                     //  ADDS NAME TO STACKPANEL
+                stackPanel.Children.Add(horizontalGrid);                                     //  ADDS NAME TO STACKPANEL
                 stackPanel.Children.Add(commentBlock);                                  //  ADDS COMMENT TO STACKPANEL
                 stackPanel.CanVerticallyScroll = true;
                 //  END OF COMMENT STACKPANEL CREATION
@@ -285,8 +367,18 @@ namespace TicketingSystem.Frames
             }
             else
             {
-                target.AddComment(CommentInputField.Text);
-                ResetText();
+                if (target.GetStatus())
+                {
+                    target.AddComment(CommentInputField.Text);
+                    ResetText();
+                }
+                else
+                {
+                    target.ChangeStatus(true);
+                    target.AddComment("REOPENED TICKET.");
+                    target.AddComment(CommentInputField.Text);
+                    ResetText();
+                }
             }
         }
 
@@ -336,8 +428,18 @@ namespace TicketingSystem.Frames
                 }
                 else
                 {
-                    target.AddComment(CommentInputField.Text);
-                    ResetText();
+                    if (target.GetStatus())
+                    {
+                        target.AddComment(CommentInputField.Text);
+                        ResetText();
+                    }
+                    else
+                    {
+                        target.ChangeStatus(true);
+                        target.AddComment("REOPENED TICKET.");
+                        target.AddComment(CommentInputField.Text);
+                        ResetText();
+                    }
                 }
             }
         }
@@ -393,6 +495,39 @@ namespace TicketingSystem.Frames
             }
             else
             {
+                switch (ResolveReason.SelectedIndex)
+                {
+                    case 1:
+                        {
+                            target.AddComment("RESOLVED TICKET WITH REASON " + "Fixed.");
+                            break; 
+                        }
+                    case 2:
+                        {
+                            target.AddComment("RESOLVED TICKET WITH REASON " + "No Resolution.");
+                            break;
+                        }
+                    case 3:
+                        {
+                            target.AddComment("RESOLVED TICKET WITH REASON " + "Advise Given.");
+                            break;
+                        }
+                    case 4:
+                        {
+                            target.AddComment("RESOLVED TICKET WITH REASON " + "No Longer Required.");
+                            break;
+                        }
+                    case 5:
+                        {
+                            target.AddComment("RESOLVED TICKET WITH REASON " + "Nil Response.");
+                            break;
+                        }
+                    case 6:
+                        {
+                            target.AddComment("RESOLVED TICKET WITH REASON " + "Other.");
+                            break;
+                        }
+                }
                 target.Resolve(ResolveReason.SelectedIndex);
                 MainWindow mw = (MainWindow)Application.Current.MainWindow;
                 mw.ChangeWindow("Dashboard.xaml");

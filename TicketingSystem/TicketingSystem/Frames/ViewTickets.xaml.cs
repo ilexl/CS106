@@ -197,7 +197,7 @@ namespace TicketingSystem.Frames
             }
             else
             {
-                label2.Content = "False";
+                label2.Content = "Closed";
             }
 
             Grid.SetColumn(label2, 1);
@@ -268,7 +268,7 @@ namespace TicketingSystem.Frames
                 FontFamily = new FontFamily("Inter")
             };
 
-            TimeSpan CreatedDW = (((DateTime)(t.GetCreatedTime())) - ((DateTime)(DateTime.Now))).Duration(); ;
+            TimeSpan CreatedDW = (((DateTime)(t.GetCreatedTime())) - ((DateTime)(DateTime.Now))).Duration();
             if (CreatedDW.Days != 0)
             {
                 label3.Content = CreatedDW.Days + "d ago";
