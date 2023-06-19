@@ -18,15 +18,22 @@ This guide is intended to get any user to be able to setup the ticketing system 
 5. Open the TicketingSystem application
 ![image](https://github.com/ilexl/CS106/assets/109491531/1c0a1f1b-33c1-4398-932b-aef669866312)
 
-## Admin Guide
+## Admin Guide - Setup
 - Initial Setup - Log in with the default username: admin | password: admin
-- Navigate to 'My Account'<br/>
-![image](https://github.com/ilexl/CS106/assets/109491531/f6d2aae1-869d-4958-9b10-284f42f32125)
+- Navigate to 'My Account'
 - :warning: Enter the old password: admin | and create a new password for the admin account :warning:
 - You can then manage all the users and tickets in this application using the 'All Accounts' button on the side nav
 - The buttons and instructions are self explanitory when it comes to managing accounts and tickets.
 - You will need to create accounts for you other admins, technicians and users so they can access the application too!
-  
-## Technician Guide
 
-## User Guide
+## Admin Guide - Features
+#### Create an account
+#### Edit an account
+#### Delete an account
+
+## Common Feature to all Users
+#### Change password of current account
+#### Create a ticket
+#### Add comment to ticket
+#### Resolve a ticket
+#### Creating a ticket on behalve of another user (i.e. a caller with a problem)
