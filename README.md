@@ -33,6 +33,14 @@ This guide is intended to get any user to be able to setup the ticketing system 
 
 ## Common Feature to all Users
 #### Change password of current account
+- Navigate to 'My Account'
+- Enter old password
+- Enter new password and confirmation of new password
+- Press 'Apply Changes'<br/>
+
+![Annotation 2023-06-19 150327](https://github.com/ilexl/CS106/assets/109491531/ef49019b-a7c3-4868-90ab-7f3fd5282466)
+
+
 #### Create a ticket
 #### Add comment to ticket
 #### Resolve a ticket
