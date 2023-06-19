@@ -48,12 +48,11 @@ This guide is intended to get any user to be able to setup the ticketing system 
 | ---      | ---       |
 | ![image](https://github.com/ilexl/CS106/assets/109491531/a4b853f9-bdfc-49bf-9a82-a854aaae6f0f)  | ![image](https://github.com/ilexl/CS106/assets/109491531/070cb344-ab04-49d8-8da5-dc3711111969)         |
 
-
-
-
-
-
-  
 #### Add comment to ticket
+- Open or create a ticket.
+- Type in the comment box below the ticket info and above the current comments
+- Click on the 'submit comment' button to add a comment </br>
+![image](https://github.com/ilexl/CS106/assets/109491531/c4ff46ed-14e0-4afa-9211-107bac85b23f)
+
 #### Resolve a ticket
 #### Creating a ticket on behalve of another user (i.e. a caller with a problem)
