@@ -27,6 +27,7 @@ namespace TicketingSystem.Frames
         {
             InitializeComponent();
             ViewTicketDetails(target);
+            ResolveTicketPopUp.Visibility = Visibility.Hidden;
         }
         private void ViewTicketDetails(Ticket t)
         {
@@ -372,6 +373,30 @@ namespace TicketingSystem.Frames
 
                 line.X1 = e.NewSize.Width - 150;
                 line.X2 = line.X1 - e.NewSize.Width + 220;
+            }
+        }
+
+        private void ResolveButton_Click(object sender, RoutedEventArgs e)
+        {
+            ResolveTicketPopUp.Visibility = Visibility.Visible;
+        }
+        private void CancelPopup_Click(object sender, RoutedEventArgs e)
+        {
+            ResolveTicketPopUp.Visibility = Visibility.Hidden;
+        }
+
+        private void ResolvePopUp_Click(object sender, RoutedEventArgs e)
+        {
+            if(ResolveReason.SelectedIndex == 0)
+            {
+                MessageBox.Show("Reason to resolve/close ticket not selected...", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else
+            {
+                target.Resolve(ResolveReason.SelectedIndex);
+                MainWindow mw = (MainWindow)Application.Current.MainWindow;
+                mw.ChangeWindow("Dashboard.xaml");
+                MessageBox.Show("Ticket closed.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
     }
