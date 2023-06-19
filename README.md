@@ -52,28 +52,16 @@ This guide is intended to get any user to be able to setup the ticketing system 
 #### Add comment to ticket
 | Instruction     | Example |
 | ---      | ---       |
-- Open or create a ticket
-- Type in the comment box below the ticket info and above the current comments
-- Click on the 'submit comment' button to add a comment </br>
-![image](https://github.com/ilexl/CS106/assets/109491531/c4ff46ed-14e0-4afa-9211-107bac85b23f)
+| - Open or create a ticket </br> - Type in the comment box below the ticket info and above the current comments</br> - Click on the 'submit comment' button to add a comment | ![image](https://github.com/ilexl/CS106/assets/109491531/c4ff46ed-14e0-4afa-9211-107bac85b23f) |
 
 #### Resolve a ticket
 | Instruction     | Example |
 | ---      | ---       |
-- Open or create a ticket
-- Click on the 'resolve' button
-- A window will pop up to select a reason
-- Select a reason to resolve/close the ticket
-- Click the 'resolve ticket' button on the pop up window
-![image](https://github.com/ilexl/CS106/assets/109491531/18348647-f9ca-4b8c-8e7b-4012c2669d40)
+| - Open or create a ticket </br> - Click on the 'resolve' button </br> - A window will pop up to select a reason </br> - Select a reason to resolve/close the ticket </br> - Click the 'resolve ticket' button on the pop up window | ![image](https://github.com/ilexl/CS106/assets/109491531/18348647-f9ca-4b8c-8e7b-4012c2669d40) |
 
   
 #### Creating a ticket on behalve of another user (i.e. a caller with a problem)
 | Instruction     | Example |
 | ---      | ---       |
-- When creating a ticket there is a greyed out 'created by' field and a 'created for' field which you can change.
-- By default they are the same, however you can change who the ticket is created for in cases where tickets are created on behalf of somebody
-- To create the ticket on behalf of another user, simply change the created for input as THEIR account ID instead of yours.
-- When you do this you will still have access as you created the ticket (This field cannot be changed) </br>
-![image](https://github.com/ilexl/CS106/assets/109491531/f5947b8c-be68-4619-812f-e429eaed263f)
+| - When creating a ticket there is a greyed out 'created by' field and a 'created for' field which you can change. </br> - By default they are the same, however you can change who the ticket is created for in cases where tickets are created on behalf of somebody </br> - To create the ticket on behalf of another user, simply change the created for input as THEIR account ID instead of yours. </br> - When you do this you will still have access as you created the ticket (This field cannot be changed) | ![image](https://github.com/ilexl/CS106/assets/109491531/f5947b8c-be68-4619-812f-e429eaed263f) |
 
