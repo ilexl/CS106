@@ -38,28 +38,28 @@ This guide is intended to get any user to be able to setup the ticketing system 
 
 ## Common Feature to all Users
 #### Change password of current account
-- Navigate to 'My Account'
-- Enter old password
-- Enter new password and confirmation of new password
-- Press 'Apply Changes'<br/>
-<img src="https://github.com/ilexl/CS106/assets/109491531/ef49019b-a7c3-4868-90ab-7f3fd5282466" height="400" />
+| Instruction     | Example |
+| ---      | ---       |
+| - Navigate to 'My Account'</br>- Enter old password</br>- Enter new password and confirmation of new password</br>- Press 'Apply Changes' | <img src="https://github.com/ilexl/CS106/assets/109491531/ef49019b-a7c3-4868-90ab-7f3fd5282466" height="400" /> |
 
 #### Create a ticket
-- Navigate to 'Create Ticket"
-- Enter all fields with relevant data (Max 50 characters for title)
-- Click on the submit button
-
+| Instructions | |
+| --- | --- |
+| - Navigate to 'Create Ticket" </br>- Enter all fields with relevant data (Max 50 characters for title)</br>- Click on the submit button |   |
 | Create Ticket     | Ticket View |
-| ---      | ---       |
 | ![image](https://github.com/ilexl/CS106/assets/109491531/a4b853f9-bdfc-49bf-9a82-a854aaae6f0f)  | ![image](https://github.com/ilexl/CS106/assets/109491531/070cb344-ab04-49d8-8da5-dc3711111969)         |
 
 #### Add comment to ticket
+| Instruction     | Example |
+| ---      | ---       |
 - Open or create a ticket
 - Type in the comment box below the ticket info and above the current comments
 - Click on the 'submit comment' button to add a comment </br>
 ![image](https://github.com/ilexl/CS106/assets/109491531/c4ff46ed-14e0-4afa-9211-107bac85b23f)
 
 #### Resolve a ticket
+| Instruction     | Example |
+| ---      | ---       |
 - Open or create a ticket
 - Click on the 'resolve' button
 - A window will pop up to select a reason
@@ -69,6 +69,8 @@ This guide is intended to get any user to be able to setup the ticketing system 
 
   
 #### Creating a ticket on behalve of another user (i.e. a caller with a problem)
+| Instruction     | Example |
+| ---      | ---       |
 - When creating a ticket there is a greyed out 'created by' field and a 'created for' field which you can change.
 - By default they are the same, however you can change who the ticket is created for in cases where tickets are created on behalf of somebody
 - To create the ticket on behalf of another user, simply change the created for input as THEIR account ID instead of yours.
