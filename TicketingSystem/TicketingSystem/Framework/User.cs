@@ -315,9 +315,44 @@ namespace TicketingSystem.Framework
         /// TODO: NEEDS IMPLEMENTING
         /// </summary>
         /// <returns>The acitve tickets assigned to a user</returns>
-        public int GetActiveTicketsAmount()
+        public int GetActiveTicketsAmount(User u)
         {
-            return 0;
+            try
+            {
+                User currentUser = u;
+                string cmdAdd = "AND Status='True'";
+                SqlConnection connection = Server.GetConnection(Server.SOURCE_TICKET);
+                SqlDataReader sqlReader;                    //  FILESTREAM / READER, MAKES THE DATA INDEXABLE
+                SqlCommand command = new SqlCommand();      //  USED TO SPECIFY THE SQL QUERY
+
+                command.Connection = connection;            //  SPECIFIES THE CONNECTION THAT THE COMMAND WILL BE USED IN
+                command.CommandText = "SELECT * FROM AllTickets WHERE (CALLER='" + currentUser.ID.ToString() + "' OR CREATOR='" + currentUser.ID.ToString() + "')" + cmdAdd + ";";
+                sqlReader = command.ExecuteReader();        //  TAKES THE OUTPUT INTO THE READER
+
+                if (sqlReader.HasRows)                      //  USER FOUND WITH MATCHING CREDENTIALS
+                {
+                    List<int> ids = new List<int>();
+                    while (sqlReader.Read())
+                    {
+                        int ID = sqlReader.GetInt32(0);         //  Sets this instance's ID to the the corresponding cell in the matching row
+                        ids.Add(ID);
+                    }
+                    Server.CloseConnection(sqlReader, command, connection);
+                    return ids.Count();
+                }
+                else                    //  INCORRECT / INVALID CREDENTIALS
+                {
+                    Server.CloseConnection(sqlReader, command, connection);
+                    return 0;
+                }
+
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning("Operation Unsuccessful - " + e.Message);
+                MessageBox.Show("Operation was not successful!\nPlease try again...", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return 0;
+            }
         }
 
         /// <summary>
