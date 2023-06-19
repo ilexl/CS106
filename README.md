@@ -37,7 +37,7 @@ This guide is intended to get any user to be able to setup the ticketing system 
 - Enter old password
 - Enter new password and confirmation of new password
 - Press 'Apply Changes'<br/>
-![image](https://github.com/ilexl/CS106/assets/109491531/ef49019b-a7c3-4868-90ab-7f3fd5282466)
+<img src="https://github.com/ilexl/CS106/assets/109491531/ef49019b-a7c3-4868-90ab-7f3fd5282466" height="400" />
 
 #### Create a ticket
 - Navigate to 'Create Ticket"
