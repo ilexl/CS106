@@ -33,7 +33,7 @@
                 <Label FontWeight="Bold" Content="Password" HorizontalAlignment="Left" Margin="0,0,0,10" VerticalAlignment="Top" Width="300" Foreground="#FFF9F9F9" FontSize="20" FontFamily="{DynamicResource Epilogue}"/>
                 <StackPanel  Orientation="Horizontal">
                     <TextBox x:Name="Password"  FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center" Padding="10" Height="50" Margin="0,0,0,22" Foreground="gray" FontSize="20" TextWrapping="NoWrap" Text="Enter Password" Width="500"/>
-                    <Label FontWeight="Bold" Content="This is a temporary password!" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" Width="300" Foreground="Red" FontSize="20" FontFamily="{DynamicResource Epilogue}"/>
+                    <Label FontWeight="Bold" Content="This is a temporary password!" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" Width="310" Foreground="Red" FontSize="20" FontFamily="{DynamicResource Epilogue}"/>
                 </StackPanel>
                 <TextBox x:Name="PasswordConfirm"  FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center" Padding="10" Height="50" Margin="0,0,0,22" Foreground="gray" FontSize="20" TextWrapping="NoWrap" Text="Confirm Password" Width="500"/>
 
