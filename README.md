@@ -29,7 +29,7 @@ This guide is intended to get any user to be able to setup the ticketing system 
 
 ## Admin Guide - Features
 #### Create an account
-| Create Ticket     | Ticket View |
+| Instruction     | Example |
 | ---      | ---       |
 | - Navigate to 'create account' </br>- Fill out all the new account details </br>- :warning: Make sure you select the correct account type :warning:</br>- Enter a temporary password for the new user </br>- Give the login details (ID, email, temporary password) to the new user and tell them to change the password | ![image](https://github.com/ilexl/CS106/assets/109491531/0a01481d-eaf4-4de1-bb24-7e80a0c62296) |
 
