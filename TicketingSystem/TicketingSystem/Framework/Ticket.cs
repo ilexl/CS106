@@ -12,8 +12,6 @@ namespace TicketingSystem.Framework
 {
     public class Ticket
     {
-        // temps
-        private const string A;
 
         private int id;
         private bool status; // false or 0 means closed - true or 1 means open
@@ -442,6 +440,38 @@ namespace TicketingSystem.Framework
             NOLONGERREQUIRED = 4,
             NILRESPONSE = 5,
             OTHER = 6
+        }
+
+        public void Resolve(int reason)
+        {
+            try
+            {
+                using (SqlConnection connection = Server.GetConnection(Server.SOURCE_TICKET))
+                {
+                    //  FILESTREAM / WRITER, ALLOWS INSERTING / UPDATING ROWS IN SQL
+                    SqlDataAdapter adapter = new SqlDataAdapter();
+                    string commandText = "UPDATE AllTickets SET RESOLVEREASON=@reason WHERE ID='" + this.id + "';";
+                    adapter.InsertCommand = new SqlCommand(commandText, connection);
+                    adapter.InsertCommand.Parameters.AddWithValue("@reason", reason);
+                    adapter.InsertCommand.ExecuteNonQuery();
+                    Server.CloseConnection(connection);
+                }
+
+                using (SqlConnection connection = Server.GetConnection(Server.SOURCE_TICKET))
+                {
+                    SqlDataAdapter adapter = new SqlDataAdapter();
+                    string commandText = "UPDATE AllTickets SET STATUS=@status WHERE ID='" + this.id + "';";
+                    adapter.InsertCommand = new SqlCommand(commandText, connection);
+                    adapter.InsertCommand.Parameters.AddWithValue("@status", false);
+                    adapter.InsertCommand.ExecuteNonQuery();
+                    Server.CloseConnection(connection);
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning("Operation Unsuccessful - " + e.Message);
+                MessageBox.Show("Operation was not successful!\nPlease try again...", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

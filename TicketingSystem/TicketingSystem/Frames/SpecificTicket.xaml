@@ -75,7 +75,7 @@
                         <ComboBoxItem Content="Low"/>
                     </ComboBox>
                 </StackPanel>
-                <Button x:Name="ResolveButton" Grid.Column="6" VerticalAlignment="Bottom" Grid.Row="1" Height="29" FontSize="24" FontWeight="Regular" Margin= "0,0,10,13" FontFamily="{DynamicResource Epilogue}" >
+                <Button x:Name="ResolveButton" Click="ResolveButton_Click" Grid.Column="6" VerticalAlignment="Bottom" Grid.Row="1" Height="29" FontSize="24" FontWeight="Regular" Margin= "0,0,10,13" FontFamily="{DynamicResource Epilogue}" >
                     <Button.Resources>
                         <Style TargetType="{x:Type Button}">
                             <Setter Property="Background" Value="#cceeff"/>
@@ -146,7 +146,7 @@
 
                 </StackPanel>
             </ScrollViewer>
-            <Grid Grid.Row="0" Grid.RowSpan="3" Background="#F9F9F9" Margin="200">
+            <Grid  x:Name="ResolveTicketPopUp" Grid.Row="0" Grid.RowSpan="3" Background="#F9F9F9" Margin="200">
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
@@ -162,7 +162,15 @@
                     <ComboBoxItem FontWeight="SemiBold" FontSize="30"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="{DynamicResource Epilogue}" Content="Nil Response"></ComboBoxItem>
                     <ComboBoxItem FontWeight="SemiBold" FontSize="30"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="{DynamicResource Epilogue}" Content="Other"></ComboBoxItem>
                 </ComboBox>
-                <Button Grid.Row="2" Margin="30" Content="Resolve ticket" FontWeight="Regular"  Foreground="#111122" FontSize="48" FontFamily="{DynamicResource Epilogue}" />
+                <Grid Grid.Row="2" Margin="30"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"></ColumnDefinition>
+                        <ColumnDefinition Width="30"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Button Click="CancelPopup_Click" Grid.Column="0" Width="200" HorizontalAlignment="Left"  Content="Cancel" FontWeight="Regular"  Foreground="#111122" FontSize="48" FontFamily="{DynamicResource Epilogue}" />
+                    <Button x:Name="ResolvePopUp" Click="ResolvePopUp_Click" Grid.Column="2" HorizontalAlignment="Stretch"  Content="Resolve ticket" FontWeight="Regular"  Foreground="#111122" FontSize="48" FontFamily="{DynamicResource Epilogue}" />
+                </Grid>
 
 
             </Grid>
