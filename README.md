@@ -37,11 +37,23 @@ This guide is intended to get any user to be able to setup the ticketing system 
 - Enter old password
 - Enter new password and confirmation of new password
 - Press 'Apply Changes'<br/>
-
 ![Annotation 2023-06-19 150327](https://github.com/ilexl/CS106/assets/109491531/ef49019b-a7c3-4868-90ab-7f3fd5282466)
 
-
 #### Create a ticket
+- Navigate to 'Create Ticket"
+- Enter all fields with relevant data (Max 50 characters for title)
+- Click on the submit button
+
+| Create Ticket     | Ticket View |
+| ---      | ---       |
+| ![image](https://github.com/ilexl/CS106/assets/109491531/a4b853f9-bdfc-49bf-9a82-a854aaae6f0f)  | ![image](https://github.com/ilexl/CS106/assets/109491531/070cb344-ab04-49d8-8da5-dc3711111969)         |
+
+
+
+
+
+
+  
 #### Add comment to ticket
 #### Resolve a ticket
 #### Creating a ticket on behalve of another user (i.e. a caller with a problem)
