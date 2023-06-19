@@ -34,7 +34,18 @@ This guide is intended to get any user to be able to setup the ticketing system 
 | - Navigate to 'create account' </br>- Fill out all the new account details </br>- :warning: Make sure you select the correct account type :warning:</br>- Enter a temporary password for the new user </br>- Give the login details (ID, email, temporary password) to the new user and tell them to change the password | ![image](https://github.com/ilexl/CS106/assets/109491531/0a01481d-eaf4-4de1-bb24-7e80a0c62296) |
 
 #### Edit an account
+| Instruction     | Example |
+| ---      | ---       |
+| - Navigate to 'all accounts' | ![image](https://github.com/ilexl/CS106/assets/109491531/61ddb2dd-744a-4839-a755-6a879eb0f3ea) |
+| - Select an account </br>- Make edits as per sections | ![image](https://github.com/ilexl/CS106/assets/109491531/d0c63cf5-1664-4a2f-9ec8-dce601ce03f6) |
+| - Click on 'save changes' button | ![image](https://github.com/ilexl/CS106/assets/109491531/d4187a39-363a-4a9b-9300-6311e21b17e3) |
+
 #### Delete an account
+| Instruction     | Example |
+| ---      | ---       |
+| - Navigate to 'all accounts' | ![image](https://github.com/ilexl/CS106/assets/109491531/61ddb2dd-744a-4839-a755-6a879eb0f3ea) |
+| - Select an account </br> | ![image](https://github.com/ilexl/CS106/assets/109491531/d0c63cf5-1664-4a2f-9ec8-dce601ce03f6) |
+| - Click on 'DELETE ACCOUNT' button | ![image](https://github.com/ilexl/CS106/assets/109491531/7ef18f1a-bcd8-415f-8159-ae231dc6b8f8) ![image](https://github.com/ilexl/CS106/assets/109491531/4ea616c6-2f4f-4b77-8175-cfdc5be16d43) |
 
 ## Common Feature to all Users
 #### Change password of current account
