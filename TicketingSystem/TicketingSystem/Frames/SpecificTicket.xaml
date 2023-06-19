@@ -5,8 +5,10 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TicketingSystem.Frames"
       mc:Ignorable="d" 
+      RenderOptions.EdgeMode="Aliased"
       d:DesignHeight="900" d:DesignWidth="1270"
       Title="SpecificTicket">
+    
 
     <Grid Background="#111122">
 
@@ -146,46 +148,78 @@
 
                 </StackPanel>
             </ScrollViewer>
-            <Grid  x:Name="ResolveTicketPopUp" Grid.Row="0" Grid.RowSpan="3" Background="#F9F9F9" Margin="200">
-                <Grid.RowDefinitions>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                </Grid.RowDefinitions>
-                <Label Grid.Row="0" Content="Resolve/Close Ticket" FontWeight="SemiBold" FontSize="80" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10" FontFamily="{DynamicResource Epilogue}" ></Label>
-                <ComboBox x:Name="ResolveReason" SelectedIndex="0" Grid.Row="1" FontWeight="SemiBold" FontSize="80" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="{DynamicResource Epilogue}" Margin="30" >
-                    <ComboBoxItem FontWeight="SemiBold" FontSize="30"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="{DynamicResource Epilogue}" Content="Select Reason"></ComboBoxItem>
-                    <ComboBoxItem FontWeight="SemiBold" FontSize="30"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="{DynamicResource Epilogue}" Content="Fixed"></ComboBoxItem>
-                    <ComboBoxItem FontWeight="SemiBold" FontSize="30"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="{DynamicResource Epilogue}" Content="No Resolution"></ComboBoxItem>
-                    <ComboBoxItem FontWeight="SemiBold" FontSize="30"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="{DynamicResource Epilogue}" Content="Advise Given"></ComboBoxItem>
-                    <ComboBoxItem FontWeight="SemiBold" FontSize="30"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="{DynamicResource Epilogue}" Content="No Longer Required"></ComboBoxItem>
-                    <ComboBoxItem FontWeight="SemiBold" FontSize="30"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="{DynamicResource Epilogue}" Content="Nil Response"></ComboBoxItem>
-                    <ComboBoxItem FontWeight="SemiBold" FontSize="30"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="{DynamicResource Epilogue}" Content="Other"></ComboBoxItem>
+            <StackPanel x:Name="ResolveTicketPopUp" Background="Transparent" Width="600" Height="400" Grid.RowSpan="3">
+                <Border CornerRadius="30,30,0,0" Background="#C0C0C0" Height="134">
+                    <Label Grid.Row="0" Content="Resolve/Close Ticket" FontWeight="ExtraBold" FontSize="50" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="{DynamicResource Epilogue}" ></Label>
+                </Border>
+                <Border Background="#C0C0C0" Height="134">
+                    <ComboBox x:Name="ResolveReason" SelectedIndex="0" Grid.Row="1" Height="100" FontWeight="SemiBold" FontSize="30" VerticalContentAlignment="Center" Background="#f9f9f9" Foreground="Black" HorizontalAlignment="Stretch" FontFamily="{DynamicResource Epilogue}" Margin="20" Style="{StaticResource {x:Static ToolBar.ComboBoxStyleKey}}">
+                        <ComboBox.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
+                        </ComboBox.Resources>
+                            <ComboBoxItem FontWeight="SemiBold" FontSize="30"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="{DynamicResource Epilogue}" Content="Select Reason"></ComboBoxItem>
+                            <ComboBoxItem FontWeight="SemiBold" FontSize="30"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="{DynamicResource Epilogue}" Content="Fixed"></ComboBoxItem>
+                            <ComboBoxItem FontWeight="SemiBold" FontSize="30"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="{DynamicResource Epilogue}" Content="No Resolution"></ComboBoxItem>
+                            <ComboBoxItem FontWeight="SemiBold" FontSize="30"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="{DynamicResource Epilogue}" Content="Advise Given"></ComboBoxItem>
+                            <ComboBoxItem FontWeight="SemiBold" FontSize="30"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="{DynamicResource Epilogue}" Content="No Longer Required"></ComboBoxItem>
+                            <ComboBoxItem FontWeight="SemiBold" FontSize="30"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="{DynamicResource Epilogue}" Content="Nil Response"></ComboBoxItem>
+                            <ComboBoxItem FontWeight="SemiBold" FontSize="30"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="{DynamicResource Epilogue}" Content="Other"></ComboBoxItem>
                 </ComboBox>
-                <Grid Grid.Row="2" Margin="30"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="200"></ColumnDefinition>
-                        <ColumnDefinition Width="30"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Button Click="CancelPopup_Click" Grid.Column="0" Width="200" HorizontalAlignment="Left"  Content="Cancel" FontWeight="Regular"  Foreground="#111122" FontSize="48" FontFamily="{DynamicResource Epilogue}" />
-                    <Button x:Name="ResolvePopUp" Click="ResolvePopUp_Click" Grid.Column="2" HorizontalAlignment="Stretch"  Content="Resolve ticket" FontWeight="Regular"  Foreground="#111122" FontSize="48" FontFamily="{DynamicResource Epilogue}" />
-                </Grid>
-
-
-            </Grid>
+                </Border>
+                <Border BorderBrush="#99ccff" Margin="0" CornerRadius="0,0,30,30" Background="#C0C0C0" Height="134">
+                    <StackPanel Margin="20" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Orientation="Horizontal">
+                        
+                        <Button Click="CancelPopup_Click" Width="200" Content="Cancel" FontWeight="Regular"  Foreground="Black" FontSize="40" FontFamily="{DynamicResource Epilogue}">
+                            <Button.Resources>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="#CCEEFF"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border Background="{TemplateBinding Background}">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#99CCFF"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="10"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+                        <Button x:Name="ResolvePopUp" Margin="30,0, 0, 0" Width="330" Click="ResolvePopUp_Click" Content="Resolve ticket" FontWeight="Regular"  Foreground="White" FontSize="40" FontFamily="{DynamicResource Epilogue}">
+                            <Button.Resources>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="#0066FF"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border Background="{TemplateBinding Background}">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#0044BB"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="10"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
         </Grid>
-
-
-
-
-
-
-
-
-
-
-
-
     </Grid>
 </Page>
