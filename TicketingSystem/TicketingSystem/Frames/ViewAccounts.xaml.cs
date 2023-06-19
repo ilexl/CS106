@@ -164,7 +164,7 @@ namespace TicketingSystem.Frames
             label1.Content = data.ID.ToString();
             label2.Content = data.firstName + " " + data.lastName;
             label3.Content = User.TypeToString(data);
-            label4.Content = data.GetActiveTicketsAmount();
+            label4.Content = data.GetActiveTicketsAmount(data);
 
             button.Content = grid;
             main.Children.Add(button);
