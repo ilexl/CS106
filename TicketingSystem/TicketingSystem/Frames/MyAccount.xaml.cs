@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
+using TicketingSystem.Framework;
 
 namespace TicketingSystem.Frames
 {
@@ -57,7 +58,17 @@ namespace TicketingSystem.Frames
             {
                 if (Email.Text != MainWindow.user.email)
                 {
-                    MainWindow.user.ChangeEmail(Email.Text);
+                    if (User.ValidateEmail(Email.Text))
+                    {
+                        MainWindow.user.ChangeEmail(Email.Text);
+                        ResetText();
+                        MessageBoxResult successfulEmail = MessageBox.Show("E-mail address successfully updated!");
+                    }
+                    else
+                    {
+                        ResetText();
+                        MessageBoxResult invalidEmail = MessageBox.Show("E-mail address already in use by other account!");
+                    }
                 }
             }
 

@@ -500,6 +500,34 @@ namespace TicketingSystem.Framework
 
         }
 
+        public static bool ValidateEmail(string email)
+        {
+            try
+            {
+                SqlConnection connection = Server.GetConnection(Server.SOURCE_USERS);
+                string countQuery = "SELECT COUNT(*) FROM Users WHERE Email=@email";
+                SqlCommand command = new SqlCommand(countQuery, connection);
+                command.Parameters.AddWithValue("@Email", email);
+                int rowCount = (int)command.ExecuteScalar();
+                Server.CloseConnection(connection);
+
+                if (rowCount > 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning("Operation Unsuccessful - " + e.Message);
+                //MessageBox.Show("Operation was not successful!\nPlease try again...", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+        }
+
         public static string GenerateRandomPassword()
         {
             string temp = "";
