@@ -23,7 +23,7 @@ This guide is intended to get any user to be able to setup the ticketing system 
 - :warning: Enter the old password: admin | and create a new password for the admin account :warning:
 - You can then manage all the users and tickets in this application using the 'All Accounts' button on the side nav
 - The buttons and instructions are self explanitory when it comes to managing accounts and tickets.
-- You will need to create accounts for you other admins, technicians and users so they can access the application too!
+- You will need to create accounts for other admins, technicians and users so they can access the application too!
 
 # User manual 
 
