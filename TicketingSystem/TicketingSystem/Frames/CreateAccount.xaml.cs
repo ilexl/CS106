@@ -1,5 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
 using TicketingSystem.Framework;
 
 namespace TicketingSystem.Frames
@@ -9,6 +11,10 @@ namespace TicketingSystem.Frames
     /// </summary>
     public partial class CreateAccount : Page
     {
+        private bool newPasswordFocused = false;
+        private bool confirmPasswordFocused = false;
+        private bool emailFocused = false;
+
         /// <summary>
         /// constructor for create account page
         /// </summary>
@@ -37,9 +43,9 @@ namespace TicketingSystem.Frames
         /// <param name="e"></param>
         private void ConfirmBtn_Click(object sender, RoutedEventArgs e)
         {
-            if(Password.Text == PasswordConfirm.Text && User.ValidateEmail(EmailAddress.Text))
+            if(NewPassword.Password == ConfPassword.Password && User.ValidateEmail(EmailAddress.Text))
             {
-                User u = User.CreateNew(FirstName.Text, LastName.Text, EmailAddress.Text, (User.Type)AccountType.SelectedIndex, Password.Text);
+                User u = User.CreateNew(FirstName.Text, LastName.Text, EmailAddress.Text, (User.Type)AccountType.SelectedIndex, NewPassword.Password);
                 SpecifcAccount.target = u;
                 MainWindow mw = (MainWindow)Application.Current.MainWindow;
                 mw.ChangeWindow("SpecifcAccount.xaml");
@@ -47,6 +53,161 @@ namespace TicketingSystem.Frames
             else if (!User.ValidateEmail(EmailAddress.Text))
             {
                 MessageBoxResult invalidEmail = MessageBox.Show("Email address already in use!");
+            }
+        }
+
+        /// <summary>
+        /// code when textbox is focused to display correctly
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void NewPassTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            PasswordBox textBox = (PasswordBox)sender;
+            newPasswordFocused = true;
+            NewPasswordGhostText.Visibility = Visibility.Hidden;
+        }
+
+        /// <summary>
+        /// code when textbox is unfocused to display correctly
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void NewPassTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            PasswordBox textBox = (PasswordBox)sender;
+            if (string.IsNullOrEmpty(textBox.Password))
+            {
+                newPasswordFocused = false;
+                NewPasswordGhostText.Visibility = Visibility.Visible;
+            }
+        }
+
+        /// <summary>
+        /// code when textbox is focused to display correctly
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ConfPassTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            PasswordBox textBox = (PasswordBox)sender;
+            confirmPasswordFocused = true;
+            ConfPasswordGhostText.Visibility = Visibility.Hidden;
+        }
+
+        /// <summary>
+        /// code when textbox is unfocused to display correctly
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ConfPassTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            PasswordBox textBox = (PasswordBox)sender;
+            if (string.IsNullOrEmpty(textBox.Password))
+            {
+                confirmPasswordFocused = false;
+                ConfPasswordGhostText.Visibility = Visibility.Visible;
+            }
+        }
+
+        /// <summary>
+        /// code when textbox is focused to display correctly
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void NewPasswordGhostText_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            NewPassword.Focus();
+        }
+
+        /// <summary>
+        /// code when textbox is focused to display correctly
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ConfPasswordGhostText_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            ConfPassword.Focus();
+        }
+
+        private void EmailAddress_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (string.IsNullOrEmpty(textBox.Text) || textBox.Text == "Enter Email Address")
+            {
+                emailFocused = true;
+                textBox.Text = string.Empty;
+                textBox.Foreground = Brushes.Black;
+            }
+        }
+
+        private void EmailAddress_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (!string.IsNullOrEmpty(textBox.Text))
+            {
+                emailFocused = true;
+                textBox.Foreground = Brushes.Black;
+            }
+            else if (string.IsNullOrEmpty(textBox.Text))
+            {
+                emailFocused = false;
+                textBox.Text = "Enter Email Address";
+                textBox.Foreground = Brushes.Gray;
+            }
+        }
+
+        private void LastName_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (string.IsNullOrEmpty(textBox.Text) || textBox.Text == "Last Name")
+            {
+                emailFocused = true;
+                textBox.Text = string.Empty;
+                textBox.Foreground = Brushes.Black;
+            }
+        }
+
+        private void LastName_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (!string.IsNullOrEmpty(textBox.Text))
+            {
+                emailFocused = true;
+                textBox.Foreground = Brushes.Black;
+            }
+            else if (string.IsNullOrEmpty(textBox.Text))
+            {
+                emailFocused = false;
+                textBox.Text = "Last Name";
+                textBox.Foreground = Brushes.Gray;
+            }
+        }
+
+        private void FirstName_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (string.IsNullOrEmpty(textBox.Text) || textBox.Text == "First Name")
+            {
+                emailFocused = true;
+                textBox.Text = string.Empty;
+                textBox.Foreground = Brushes.Black;
+            }
+        }
+
+        private void FirstName_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (!string.IsNullOrEmpty(textBox.Text))
+            {
+                emailFocused = true;
+                textBox.Foreground = Brushes.Black;
+            }
+            else if (string.IsNullOrEmpty(textBox.Text))
+            {
+                emailFocused = false;
+                textBox.Text = "First Name";
+                textBox.Foreground = Brushes.Gray;
             }
         }
 

@@ -16,11 +16,11 @@
 
             <StackPanel Margin="25,0,0,0">
                 <Label FontWeight="Bold" Content="Name" HorizontalAlignment="Left" Margin="0,0,0,10" VerticalAlignment="Top" Width="300" Foreground="#FFF9F9F9" FontSize="20" FontFamily="{DynamicResource Epilogue}"/>
-                <TextBox x:Name="FirstName" FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center" Padding="10" Height="50" Margin="0,0,0,22" Foreground="gray" FontSize="20" TextWrapping="NoWrap" Text="First Name" Width="500"/>
-                <TextBox x:Name="LastName" FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center" Padding="10" Height="50" Margin="0,0,0,22" Foreground="gray" FontSize="20" TextWrapping="NoWrap" Text="Last Name" Width="500"/>
+                <TextBox x:Name="FirstName" GotFocus="FirstName_GotFocus" LostFocus="FirstName_LostFocus" FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center" Padding="10" Height="50" Margin="0,0,0,22" Foreground="gray" FontSize="20" TextWrapping="NoWrap" Text="First Name" Width="500"/>
+                <TextBox x:Name="LastName" GotFocus="LastName_GotFocus" LostFocus="LastName_LostFocus" FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center" Padding="10" Height="50" Margin="0,0,0,22" Foreground="gray" FontSize="20" TextWrapping="NoWrap" Text="Last Name" Width="500"/>
 
                 <Label  FontWeight="Bold" Content="E-mail address" HorizontalAlignment="Left" Margin="0,0,0,10" VerticalAlignment="Top" Width="300" Foreground="#FFF9F9F9" FontSize="20" FontFamily="{DynamicResource Epilogue}"/>
-                <TextBox x:Name="EmailAddress" FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center" Padding="10" Height="50" Margin="0,0,0,22" Foreground="gray" FontSize="20" TextWrapping="NoWrap" Text="Enter Email Address" Width="500"/>
+                <TextBox x:Name="EmailAddress" GotFocus="EmailAddress_GotFocus" LostFocus="EmailAddress_LostFocus" FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center" Padding="10" Height="50" Margin="0,0,0,22" Foreground="gray" FontSize="20" TextWrapping="NoWrap" Text="Enter Email Address" Width="500"/>
 
                 <Label  FontWeight="Bold" Content="Account Type" HorizontalAlignment="Left" Margin="0,0,0,10" VerticalAlignment="Top" Width="300" Foreground="#FFF9F9F9" FontSize="20" FontFamily="{DynamicResource Epilogue}"/>
                 <ComboBox x:Name="AccountType" SelectedIndex="0" FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center" Padding="10" Height="50" Margin="0,0,0,22" Foreground="#111122" FontSize="25" Text="Enter Account Type" Width="500">
@@ -32,10 +32,16 @@
                 
                 <Label FontWeight="Bold" Content="Password" HorizontalAlignment="Left" Margin="0,0,0,10" VerticalAlignment="Top" Width="300" Foreground="#FFF9F9F9" FontSize="20" FontFamily="{DynamicResource Epilogue}"/>
                 <StackPanel  Orientation="Horizontal">
-                    <TextBox x:Name="Password"  FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center" Padding="10" Height="50" Margin="0,0,0,22" Foreground="gray" FontSize="20" TextWrapping="NoWrap" Text="Enter Password" Width="500"/>
+                    <Grid>
+                        <PasswordBox PasswordChar="*" MaxLength="32" GotFocus="NewPassTextBox_GotFocus" LostFocus="NewPassTextBox_LostFocus" x:Name="NewPassword"  FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center" Padding="10" Height="50" Margin="0,0,0,40" Foreground="Black" FontSize="20" Width="450"/>
+                        <TextBlock Cursor="IBeam"  PreviewMouseDown="NewPasswordGhostText_PreviewMouseDown"  x:Name="NewPasswordGhostText" VerticalAlignment="Center" Visibility="Visible" Text="New password" Margin="0, -20, 0, 20" FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" Padding="10" Foreground="Gray" FontSize="20" TextWrapping="NoWrap"/>
+                    </Grid>
                     <Label FontWeight="Bold" Content="This is a temporary password!" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" Width="310" Foreground="Red" FontSize="20" FontFamily="{DynamicResource Epilogue}"/>
                 </StackPanel>
-                <TextBox x:Name="PasswordConfirm"  FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center" Padding="10" Height="50" Margin="0,0,0,22" Foreground="gray" FontSize="20" TextWrapping="NoWrap" Text="Confirm Password" Width="500"/>
+                <Grid>
+                    <PasswordBox PasswordChar="*" MaxLength="32" GotFocus="ConfPassTextBox_GotFocus" LostFocus="ConfPassTextBox_LostFocus" x:Name="ConfPassword"  FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center" Padding="10" Height="50" Margin="0,0,0,40" Foreground="Black" FontSize="20" Width="450"/>
+                    <TextBlock Cursor="IBeam"  PreviewMouseDown="ConfPasswordGhostText_PreviewMouseDown"  x:Name="ConfPasswordGhostText" VerticalAlignment="Center" Visibility="Visible" Text="Confirm new password" Margin="0, -20, 0, 20" FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" Padding="10" Foreground="Gray" FontSize="20" TextWrapping="NoWrap"/>
+                </Grid>
 
                 <StackPanel Orientation="Horizontal" Height="50">
                     <Button x:Name="BackBtn" Width="200" FontSize="30" FontWeight="Regular" Foreground="#111122" Background="#cceeff" Click="BackBtn_Click">
