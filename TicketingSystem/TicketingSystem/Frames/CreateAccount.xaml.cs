@@ -36,14 +36,17 @@ namespace TicketingSystem.Frames
 
         private void ConfirmBtn_Click(object sender, RoutedEventArgs e)
         {
-            if(Password.Text == PasswordConfirm.Text)
+            if(Password.Text == PasswordConfirm.Text && User.ValidateEmail(EmailAddress.Text))
             {
                 User u = User.CreateNew(FirstName.Text, LastName.Text, EmailAddress.Text, (User.Type)AccountType.SelectedIndex, Password.Text);
                 SpecifcAccount.target = u;
                 MainWindow mw = (MainWindow)Application.Current.MainWindow;
                 mw.ChangeWindow("SpecifcAccount.xaml");
             }
-            
+            else if (!User.ValidateEmail(EmailAddress.Text))
+            {
+                MessageBoxResult invalidEmail = MessageBox.Show("Email address already in use!");
+            }
         }
 
         private void ResetText()
