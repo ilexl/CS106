@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using TicketingSystem.Framework;
 
 namespace TicketingSystem.Frames
@@ -21,6 +11,9 @@ namespace TicketingSystem.Frames
     /// </summary>
     public partial class Dashboard : Page
     {
+        /// <summary>
+        /// constructor for dashboard page
+        /// </summary>
         public Dashboard()
         {
             InitializeComponent();
@@ -53,8 +46,15 @@ namespace TicketingSystem.Frames
             }
         }
 
+        /// <summary>
+        /// adds a dashboard button to the page
+        /// </summary>
+        /// <param name="title">title of the button</param>
+        /// <param name="navStr">page to navigate to</param>
         private void AddButton(string title, string navStr)
         {
+            // view ticket int is responsivle for keeping track 
+            // of the type of navigation to 'view ticket' page
             int ViewTicketInt = 0;
             if(title == "All Tickets")
             {
@@ -67,8 +67,10 @@ namespace TicketingSystem.Frames
             else
             {
                 ViewTicketInt = 1;
-            }            
-
+            }
+            
+            // all of the code to create objects for wpf
+            #region WPF
             Button button = new Button();
             button.Margin = new Thickness(24.5, 0, 0, 0);
             button.Width = 350;
@@ -117,19 +119,21 @@ namespace TicketingSystem.Frames
 
                 return template;
             }
+            #endregion
 
+            // buttons function when clicked on
             button.Click += (e, sender) =>
             {
                 MainWindow mw = (MainWindow)Application.Current.MainWindow;
-                ViewTickets.viewType = ViewTicketInt;
-                mw.ChangeWindow(navStr);
-                if (ViewTickets.current != null)
+                ViewTickets.viewType = ViewTicketInt; // set view ticket type
+                mw.ChangeWindow(navStr); // change window from navigation string
+                if (ViewTickets.current != null) // refresh list of tickets
                 {
-                    ViewTickets.current.Refresh();
+                    ViewTickets.current.Refresh(); 
                 }
             };
 
-            Holder.Children.Add(button);
+            Holder.Children.Add(button); // add the button to the holder in wpf
         }
     }
 }

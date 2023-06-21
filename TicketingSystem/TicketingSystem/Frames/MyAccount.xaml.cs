@@ -1,18 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Data.SqlClient;
 
 namespace TicketingSystem.Frames
 {
@@ -21,19 +9,27 @@ namespace TicketingSystem.Frames
     /// </summary>
     public partial class MyAccount : Page
     {
-        public const string connectionStringUsers = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Server\Users.mdf;Integrated Security=True";
+        // bools for checking focus status
 
         private bool oldPasswordFocused = false;
         private bool newPasswordFocused = false;
         private bool confirmPasswordFocused = false;
         private bool emailFocused = false;
 
+        /// <summary>
+        /// constructor for my account page
+        /// </summary>
         public MyAccount()
         {
             InitializeComponent();
             ResetText();
         }
 
+        /// <summary>
+        /// applys changes made by the user to their account
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonClick_Apply(object sender, RoutedEventArgs e)
         {
             if (oldPasswordFocused && newPasswordFocused && confirmPasswordFocused)
@@ -52,7 +48,6 @@ namespace TicketingSystem.Frames
                     MessageBoxResult nonMatchNewPass = MessageBox.Show("New password does not match in both fields!");
                 }
             }
-
             if (emailFocused)
             {
                 if (Email.Text != MainWindow.user.email)
@@ -64,6 +59,9 @@ namespace TicketingSystem.Frames
             ResetText();
         }
 
+        /// <summary>
+        /// resets the text to ghost text or current users data
+        /// </summary>
         public void ResetText()
         {
             var window = (MainWindow)Application.Current.MainWindow;
@@ -90,6 +88,11 @@ namespace TicketingSystem.Frames
             ApplyButton.Focus();
         }
 
+        /// <summary>
+        /// code when textbox is focused to display correctly
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OldPassTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             PasswordBox textBox = (PasswordBox)sender;
@@ -97,6 +100,11 @@ namespace TicketingSystem.Frames
             PasswordGhostText.Visibility = Visibility.Hidden;
         }
 
+        /// <summary>
+        /// code when textbox is unfocused to display correctly
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OldPassTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
             PasswordBox textBox = (PasswordBox)sender;
@@ -107,6 +115,11 @@ namespace TicketingSystem.Frames
             }
         }
 
+        /// <summary>
+        /// code when textbox is focused to display correctly
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void NewPassTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             PasswordBox textBox = (PasswordBox)sender;
@@ -114,6 +127,11 @@ namespace TicketingSystem.Frames
             NewPasswordGhostText.Visibility = Visibility.Hidden;
         }
 
+        /// <summary>
+        /// code when textbox is unfocused to display correctly
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void NewPassTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
             PasswordBox textBox = (PasswordBox)sender;
@@ -124,6 +142,11 @@ namespace TicketingSystem.Frames
             }
         }
 
+        /// <summary>
+        /// code when textbox is focused to display correctly
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ConfPassTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             PasswordBox textBox = (PasswordBox)sender;
@@ -131,6 +154,11 @@ namespace TicketingSystem.Frames
             ConfPasswordGhostText.Visibility = Visibility.Hidden;
         }
 
+        /// <summary>
+        /// code when textbox is unfocused to display correctly
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ConfPassTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
             PasswordBox textBox = (PasswordBox)sender;
@@ -141,6 +169,11 @@ namespace TicketingSystem.Frames
             }
         }
 
+        /// <summary>
+        /// code when textbox is focused to display correctly
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EmailTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             var window = (MainWindow)Application.Current.MainWindow;
@@ -157,6 +190,11 @@ namespace TicketingSystem.Frames
             }
         }
 
+        /// <summary>
+        /// code when textbox is unfocused to display correctly
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EmailTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
             var window = (MainWindow)Application.Current.MainWindow;
@@ -182,6 +220,11 @@ namespace TicketingSystem.Frames
             }
         }
 
+        /// <summary>
+        /// checks keyboard input when typing in a text box
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnKeyDownHandler(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Return || e.Key == Key.Enter)
@@ -221,16 +264,31 @@ namespace TicketingSystem.Frames
             }
         }
 
+        /// <summary>
+        /// code when textbox is focused to display correctly
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void NewPasswordGhostText_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             NewPassword.Focus();
         }
 
+        /// <summary>
+        /// code when textbox is focused to display correctly
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PasswordGhostText_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             OldPassword.Focus();
         }
 
+        /// <summary>
+        /// code when textbox is focused to display correctly
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ConfPasswordGhostText_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             ConfPassword.Focus();

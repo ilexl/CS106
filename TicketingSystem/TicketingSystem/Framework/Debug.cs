@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 #if DEBUG
 using System.Diagnostics;
@@ -11,23 +7,23 @@ using System.Diagnostics;
 namespace TicketingSystem.Framework
 {
     /// <summary>
-    /// Used to debug code by outputing log messages, warnings and errors
+    /// used to debug code by outputing log messages, warnings and errors
     /// </summary>
     public static class Debug
     {
-        private static ILogger logger;
+        private static ILogger logger; // the type of logger to use
 
         /// <summary>
-        /// Sets the logger type on startup
+        /// sets the logger type on startup
         /// </summary>
-        /// <param name="loggerToUse"></param>
+        /// <param name="loggerToUse">the logger to use</param>
         public static void SetLogger(ILogger loggerToUse)
         {
             logger = loggerToUse;
         }
 
         /// <summary>
-        /// Logs a message
+        /// logs a message
         /// </summary>
         /// <param name="message"></param>
         public static void Log(string message)
@@ -39,7 +35,7 @@ namespace TicketingSystem.Framework
         }
 
         /// <summary>
-        /// Logs a warning
+        /// logs a warning
         /// </summary>
         /// <param name="message"></param>
         public static void LogWarning(string message)
@@ -51,7 +47,7 @@ namespace TicketingSystem.Framework
         }
 
         /// <summary>
-        /// Logs an error
+        /// logs an error
         /// </summary>
         /// <param name="message"></param>
         public static void LogError(string message)
@@ -63,7 +59,7 @@ namespace TicketingSystem.Framework
         }
 
         /// <summary>
-        /// Interface for a logger
+        /// interface for a logger
         /// </summary>
         public interface ILogger
         {
@@ -74,7 +70,7 @@ namespace TicketingSystem.Framework
         }
 
         /// <summary>
-        /// Logger which logs to a .txt file
+        /// logger which logs to a .txt file
         /// </summary>
         public class LogTxt : ILogger
         {
@@ -95,9 +91,9 @@ namespace TicketingSystem.Framework
                 file.Flush();
             }
         }
-
+        #if DEBUG
         /// <summary>
-        /// Logger which logs to a debug console in visual studio
+        /// logger which logs to a debug console in visual studio
         /// </summary>
         public class LogConsole : ILogger
         {
@@ -114,6 +110,7 @@ namespace TicketingSystem.Framework
                 Trace.WriteLine(message);
             }
         }
+        #endif
 
     }
 }

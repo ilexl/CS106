@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using TicketingSystem.Framework;
 
 namespace TicketingSystem.Frames
@@ -21,11 +9,19 @@ namespace TicketingSystem.Frames
     /// </summary>
     public partial class CreateAccount : Page
     {
+        /// <summary>
+        /// constructor for create account page
+        /// </summary>
         public CreateAccount()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// returns to previous page in navigation
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BackBtn_Click(object sender, RoutedEventArgs e)
         {
             if (this.NavigationService.CanGoBack)
@@ -34,6 +30,11 @@ namespace TicketingSystem.Frames
             }
         }
 
+        /// <summary>
+        /// creates the account if the data is valid
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ConfirmBtn_Click(object sender, RoutedEventArgs e)
         {
             if(Password.Text == PasswordConfirm.Text)
@@ -46,9 +47,7 @@ namespace TicketingSystem.Frames
             
         }
 
-        private void ResetText()
-        {
-            // TODO: needs implementing
-        }
+        // TODO: ghost text HERE
+
     }
 }

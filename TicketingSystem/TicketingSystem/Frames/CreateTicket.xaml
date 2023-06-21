@@ -40,7 +40,7 @@
 
 
                 <TextBlock Padding="3" Margin="24.5,0,0,0" FontSize="25" Foreground="White">Description of problem</TextBlock>
-                <TextBox MaxLength="255" x:Name="Description" GotFocus="Description_GotFocus" LostFocus="Description_LostFocus" Padding="3" TextWrapping="Wrap" FontSize="30" Margin="24.5, 0, 0, 0" Height="200" Width="1145" FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" Foreground="Gray" Text="Description" TextChanged="Description_TextChanged"/>
+                <TextBox MaxLength="255" x:Name="Description" GotFocus="Description_GotFocus" LostFocus="Description_LostFocus" Padding="3" TextWrapping="Wrap" FontSize="30" Margin="24.5, 0, 0, 0" Height="200" Width="1145" FontFamily="{DynamicResource Epilogue}" FontWeight="SemiBold" HorizontalContentAlignment="Left" Foreground="Gray" Text="Description"/>
                 <Button x:Name="SubmitButton" Click="Button_CreateTicket" Width="250" Height="75" Margin="20">
                     <TextBlock Padding="3" Margin="5,5" TextAlignment="Center" TextWrapping="Wrap"  Foreground="White" FontWeight="Bold" FontSize="40" FontFamily="Epilogue">Submit</TextBlock>
                     <Button.Resources>
