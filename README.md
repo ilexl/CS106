@@ -23,7 +23,7 @@ This guide is intended to get any user to be able to setup the ticketing system 
 - :warning: Enter the old password: admin | and create a new password for the admin account :warning:
 - You can then manage all the users and tickets in this application using the 'All Accounts' button on the side nav
 - The buttons and instructions are self explanitory when it comes to managing accounts and tickets.
-- You will need to create accounts for you other admins, technicians and users so they can access the application too!
+- You will need to create accounts for other admins, technicians and users so they can access the application too!
 
 # User manual 
 
@@ -74,5 +74,5 @@ This guide is intended to get any user to be able to setup the ticketing system 
 #### Creating a ticket on behalve of another user (i.e. a caller with a problem)
 | Instruction     | Example |
 | ---      | ---       |
-| - When creating a ticket there is a greyed out 'created by' field and a 'created for' field which you can change. </br> - By default they are the same, however you can change who the ticket is created for in cases where tickets are created on behalf of somebody </br> - To create the ticket on behalf of another user, simply change the created for input as THEIR account ID instead of yours. </br> - When you do this you will still have access as you created the ticket (This field cannot be changed) | ![image](https://github.com/ilexl/CS106/assets/109491531/f5947b8c-be68-4619-812f-e429eaed263f) |
+| - When creating a ticket there is a greyed out 'created by' field and a 'created for' field which you can change. </br> - By default they are the same, however you can change who the ticket is created for in cases where tickets are created on behalf of somebody else </br> - To create the ticket on behalf of another user, simply change the created for input as THEIR account ID instead of yours. </br> - When you do this you will still have access as you created the ticket (This field cannot be changed) | ![image](https://github.com/ilexl/CS106/assets/109491531/f5947b8c-be68-4619-812f-e429eaed263f) |
 

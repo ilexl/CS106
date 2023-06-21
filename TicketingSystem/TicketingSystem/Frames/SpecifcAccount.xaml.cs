@@ -83,7 +83,18 @@ namespace TicketingSystem.Frames
         {
             // TODO: make name editable
 
-            target.ChangeEmail(Email.Text);
+            if (Email.Text != target.email)
+            {
+                if (User.ValidateEmail(Email.Text))
+                {
+                    target.ChangeEmail(Email.Text);
+                }
+                else
+                {
+                    MessageBox.Show("Email address already in use by other account!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+            }
             target.ChangeAccountType(AccountType.SelectedIndex + 1);
             MessageBox.Show("Changes saved!", "Alert", MessageBoxButton.OK, MessageBoxImage.Information);
 
