@@ -9,11 +9,21 @@ using System.Security.Cryptography;
 
 namespace TicketingSystem.Framework
 {
+    /// <summary>
+    /// server is responsible for any backend related code for dealing with the SQL server
+    /// </summary>
     public class Server
     {
+        // the ticket data source
         internal const string SOURCE_TICKET = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Server\Tickets.mdf;Integrated Security=True";
+        // the user data source
         internal const string SOURCE_USERS  = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Server\Users.mdf;Integrated Security=True";
 
+        /// <summary>
+        /// hashes a string into md5 hash
+        /// </summary>
+        /// <param name="nonHashString">the non hashed string to hash</param>
+        /// <returns></returns>
         internal static string HashString(string nonHashString)
         {
             byte[] tmpSource;
@@ -28,6 +38,11 @@ namespace TicketingSystem.Framework
             return sOutput.ToString();
         }
 
+        /// <summary>
+        /// connects to the data base
+        /// </summary>
+        /// <param name="connectionString">the database to connect to</param>
+        /// <returns>sql connection to the database</returns>
         internal static SqlConnection GetConnection(string connectionString)
         {
             try
@@ -44,6 +59,12 @@ namespace TicketingSystem.Framework
             }
         }
 
+        /// <summary>
+        /// closes a connection to a server
+        /// </summary>
+        /// <param name="sdr">reader to close</param>
+        /// <param name="sc">command to null</param>
+        /// <param name="connection">connection to close</param>
         internal static void CloseConnection(SqlDataReader sdr, SqlCommand sc, SqlConnection connection)
         {
             sdr.Close();  //  CLOSES THE READER
@@ -51,6 +72,10 @@ namespace TicketingSystem.Framework
             connection.Close(); //  CLOSES OPEN CONNECTION TO SQL DATABASE
         }
 
+        /// <summary>
+        /// closes a connection to a server
+        /// </summary>
+        /// <param name="connection">connection to close</param>
         internal static void CloseConnection(SqlConnection connection)
         {
             connection.Close(); //  CLOSES OPEN CONNECTION TO SQL DATABASE

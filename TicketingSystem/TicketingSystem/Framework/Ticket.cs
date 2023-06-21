@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TicketingSystem;
-using TicketingSystem.Frames;
 using System.Windows;
 
 namespace TicketingSystem.Framework
 {
+    /// <summary>
+    /// ticket for the ticketing system
+    /// </summary>
     public class Ticket
     {
-
+        // properties for the instance of a ticket
+        #region properties
         private int id;
         private bool status; // false or 0 means closed - true or 1 means open
         private string callerID;
@@ -23,7 +23,7 @@ namespace TicketingSystem.Framework
         private DateTime created;
         private DateTime updated;
         private List<string> comments;
-
+        #endregion
         #region Instance-Get
         public int GetID()
         {
@@ -68,30 +68,43 @@ namespace TicketingSystem.Framework
         #endregion
 
         /// <summary>
-        /// Creates an instance of ticket with a known ID
+        /// creates an instance of ticket with a known ID
         /// </summary>
-        /// <param name="_id">Known id</param>
+        /// <param name="_id">known id</param>
         public Ticket(int _id, out bool worked)
         {
             this.id = _id;
             worked = GetTicketInfo(id);
         }
 
+        /// <summary>
+        /// constructor *****NOT TO BE USED*****
+        /// </summary>
         private Ticket()
         {
-            // Does nothing - not to be used except by static functions
+            // does nothing - not to be used except by static functions
         }
 
+        /// <summary>
+        /// creates a new ticket to add to the data base
+        /// </summary>
+        /// <param name="callerID"></param>
+        /// <param name="creatorID"></param>
+        /// <param name="title"></param>
+        /// <param name="urgency"></param>
+        /// <param name="created"></param>
+        /// <returns>ticket that is created</returns>
         public static Ticket CreateNew(string callerID, string creatorID, string title, int urgency, DateTime created)
         {
             try
             {
-                Ticket ticket = new Ticket();
-                ticket.id = NewID();
+                Ticket ticket = new Ticket(); // create blank ticket
+                ticket.id = NewID(); // get a new id for the ticket
                 if(ticket.id < 0)
                 {
                     throw new Exception("Invalid Ticket Number");
-                }
+                } // make sure id is valid
+
                 ticket.status = true; // open by default
                 ticket.callerID = callerID;
                 ticket.creatorID = creatorID;
@@ -102,10 +115,10 @@ namespace TicketingSystem.Framework
                 ticket.resolveReason = RESOLVEREASON.None;
                 ticket.comments = new List<string>();
 
-                AddNewTicket(ticket);
-                return ticket;
+                AddNewTicket(ticket); // add ticket into the data base
+                return ticket; // returns the complete ticket
             }
-            catch (Exception e)
+            catch (Exception e) // catch any erros and return nothing
             {
                 Debug.LogWarning("Operation Unsuccessful - " + e.Message);
                 MessageBox.Show("Operation was not successful!\nPlease try again...", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -113,6 +126,10 @@ namespace TicketingSystem.Framework
             }
         }
 
+        /// <summary>
+        /// gets a new id from the database
+        /// </summary>
+        /// <returns>new id</returns>
         private static int NewID()
         {
             try
@@ -133,6 +150,10 @@ namespace TicketingSystem.Framework
             }
         }
 
+        /// <summary>
+        /// adds the ticket to the database
+        /// </summary>
+        /// <param name="t"></param>
         private static void AddNewTicket(Ticket t)
         {
             try
@@ -208,6 +229,11 @@ namespace TicketingSystem.Framework
             
         }
 
+        /// <summary>
+        /// gets the instances ticket info of the current 
+        /// </summary>
+        /// <param name="_id"></param>
+        /// <returns>true if the ticket info was gained successfully else false</returns>
         private bool GetTicketInfo(int _id)
         {
             try
@@ -268,6 +294,10 @@ namespace TicketingSystem.Framework
             }
         }
 
+        /// <summary>
+        /// adds a comment to the ticket
+        /// </summary>
+        /// <param name="comment">comment to add</param>
         public void AddComment(string comment)
         {
             try
@@ -311,6 +341,10 @@ namespace TicketingSystem.Framework
             }
         }
 
+        /// <summary>
+        /// changes the urgency of the ticket
+        /// </summary>
+        /// <param name="newUrgency"></param>
         public void ChangeUrgency(int newUrgency)
         {
             try
@@ -343,6 +377,10 @@ namespace TicketingSystem.Framework
             }
         }
 
+        /// <summary>
+        /// gets a list of all the ticket ids
+        /// </summary>
+        /// <returns></returns>
         public static List<int> GetAllTicketIds()
         {
             try
@@ -381,6 +419,11 @@ namespace TicketingSystem.Framework
             
         }
 
+        /// <summary>
+        /// gets a list of all the ticket ids based on the opa
+        /// </summary>
+        /// <param name="opa">open closed or all tickets of a user</param>
+        /// <returns></returns>
         public static List<int> GetAllTicketIds(int opa)
         {
             try
@@ -431,6 +474,9 @@ namespace TicketingSystem.Framework
             
         }
 
+        /// <summary>
+        /// resolve/close reason of the ticket
+        /// </summary>
         public enum RESOLVEREASON : int
         {
             None = 0,
@@ -442,6 +488,10 @@ namespace TicketingSystem.Framework
             OTHER = 6
         }
 
+        /// <summary>
+        /// resolves a ticket
+        /// </summary>
+        /// <param name="reason">reason to resolve ticket</param>
         public void Resolve(int reason)
         {
             try
@@ -466,6 +516,10 @@ namespace TicketingSystem.Framework
             }
         }
 
+        /// <summary>
+        /// changes the status of the ticket
+        /// </summary>
+        /// <param name="newStatus">open or closed</param>
         public void ChangeStatus(bool newStatus)
         {
             try

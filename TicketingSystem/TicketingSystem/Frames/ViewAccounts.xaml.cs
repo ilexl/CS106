@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using TicketingSystem.Framework;
 
 namespace TicketingSystem.Frames
@@ -21,19 +12,21 @@ namespace TicketingSystem.Frames
     /// </summary>
     public partial class ViewAccounts : Page
     {
-        public static ViewAccounts current;
+        public static ViewAccounts current; // the current instance of the view accounts page
+        
+        /// <summary>
+        /// constructor for view accounts page
+        /// </summary>
         public ViewAccounts()
         {
-            current = this;
+            current = this; // set static current as this
             InitializeComponent();
-            AllAccounts.Children.Clear();
-            List<int> allIds = User.GetAllAccountIds();
-            foreach(int id in allIds)
-            {
-                AddAccountToMenu(id);
-            }
+            Refresh();
         }
 
+        /// <summary>
+        /// clears and adds the all the accounts in case of any change
+        /// </summary>
         public void Refresh()
         {
             AllAccounts.Children.Clear();
@@ -44,12 +37,17 @@ namespace TicketingSystem.Frames
             }
         }
 
-
+        /// <summary>
+        /// adds an account to the list in wpf format
+        /// </summary>
+        /// <param name="id">the account to add to the list</param>
         private void AddAccountToMenu(int id)
         {
             User data = User.GetUserFromID(id);
-
             StackPanel main = AllAccounts;
+
+            // wpf button code
+            #region button
 
             Button button = new Button();
             button.BorderThickness = new Thickness(0);
@@ -63,10 +61,8 @@ namespace TicketingSystem.Frames
                 mw.ChangeWindow("SpecifcAccount.xaml");
             };
 
-            // **********************************************************************************
             Style buttonStyle = new Style(typeof(Button));
             buttonStyle.Setters.Add(new Setter(Button.BackgroundProperty, new SolidColorBrush(Color.FromRgb(249, 249, 249))));
-
             ControlTemplate buttonTemplate = new ControlTemplate(typeof(Button));
             FrameworkElementFactory buttonBorder = new FrameworkElementFactory(typeof(Border));
             Binding backgroundBinding = new Binding("Background") { RelativeSource = new RelativeSource(RelativeSourceMode.TemplatedParent) };
@@ -76,23 +72,21 @@ namespace TicketingSystem.Frames
             buttonBorder.AppendChild(contentPresenter);
             buttonTemplate.VisualTree = buttonBorder;
             buttonStyle.Setters.Add(new Setter(Button.TemplateProperty, buttonTemplate));
-
             Trigger buttonTrigger = new Trigger();
             buttonTrigger.Property = Button.IsMouseOverProperty;
             buttonTrigger.Value = true;
             buttonTrigger.Setters.Add(new Setter(Button.BackgroundProperty, new SolidColorBrush(Color.FromRgb(204, 238, 255))));
             buttonStyle.Triggers.Add(buttonTrigger);
-
             Style borderStyle = new Style(typeof(Border));
             borderStyle.Setters.Add(new Setter(Border.CornerRadiusProperty, new CornerRadius(10)));
             button.Resources.Add(typeof(Border), borderStyle);
-
             button.Resources.Add(typeof(Button), buttonStyle);
-            // ************************************************************************************
+            #endregion
 
+            // wpf grid code
+            #region grid
             Grid grid = new Grid();
             grid.HorizontalAlignment = HorizontalAlignment.Stretch;
-
             grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(230) });
             grid.ColumnDefinitions.Add(new ColumnDefinition());
             grid.ColumnDefinitions.Add(new ColumnDefinition());
@@ -100,9 +94,11 @@ namespace TicketingSystem.Frames
             grid.ColumnDefinitions.Add(new ColumnDefinition());
             grid.ColumnDefinitions.Add(new ColumnDefinition());
             grid.ColumnDefinitions.Add(new ColumnDefinition());
-
             grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(100) });
+            #endregion
 
+            // wpf label code
+            #region label
             Label label1 = new Label();
             label1.FontWeight = FontWeights.SemiBold;
             label1.HorizontalContentAlignment = HorizontalAlignment.Left;
@@ -165,11 +161,17 @@ namespace TicketingSystem.Frames
             label2.Content = data.firstName + " " + data.lastName;
             label3.Content = User.TypeToString(data);
             label4.Content = data.GetActiveTicketsAmount(data);
+            #endregion
 
             button.Content = grid;
             main.Children.Add(button);
         }
 
+        /// <summary>
+        /// create account button pressed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CreateAccountButton_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mw = (MainWindow)Application.Current.MainWindow;

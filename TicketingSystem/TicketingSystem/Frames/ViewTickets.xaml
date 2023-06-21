@@ -37,7 +37,7 @@
         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
             <StackPanel Margin="20" x:Name="HolderMain">
                 <StackPanel Height="125" Orientation="Vertical" >
-                    <Button Background="#00000000" BorderThickness="0" Click="Button_Click_1" HorizontalContentAlignment="Stretch">
+                    <Button Background="#00000000" BorderThickness="0"  HorizontalContentAlignment="Stretch">
                         <Border Height="125" CornerRadius="4" Background="#f9f9f9" >
                             <Grid >
                                 <Grid.RowDefinitions>

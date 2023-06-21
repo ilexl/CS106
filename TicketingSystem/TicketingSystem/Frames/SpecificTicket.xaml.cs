@@ -1,17 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TicketingSystem.Framework;
 
@@ -22,12 +15,16 @@ namespace TicketingSystem.Frames
     /// </summary>
     public partial class SpecificTicket : Page
     {
-        public static Ticket target;
+        public static Ticket target; // ticket to display on this page
+        
+        /// <summary>
+        /// constructor for specific ticket page
+        /// </summary>
         public SpecificTicket()
         {
             InitializeComponent();
-            ViewTicketDetails(target);
-            ResolveTicketPopUp.Visibility = Visibility.Hidden;
+            ViewTicketDetails(target); // view target details
+            ResolveTicketPopUp.Visibility = Visibility.Hidden; // hide resolve ticket popup by default
         }
         private void ViewTicketDetails(Ticket t)
         {
@@ -342,7 +339,7 @@ namespace TicketingSystem.Frames
         }
 
         /// <summary>
-        /// Resets UI elements and empties text box
+        /// resets UI elements and empties text box
         /// </summary>
         private void ResetText()
         {
@@ -354,7 +351,7 @@ namespace TicketingSystem.Frames
         }
 
         /// <summary>
-        /// Event handler for when the comment button is clicked
+        /// event handler for when the comment button is clicked
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -383,7 +380,7 @@ namespace TicketingSystem.Frames
         }
 
         /// <summary>
-        /// Event handler for when the comment input field is clicked
+        /// event handler for when the comment input field is clicked
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -398,7 +395,7 @@ namespace TicketingSystem.Frames
         }
 
         /// <summary>
-        /// Event handler for when the comment input field loses focus
+        /// event handler for when the comment input field loses focus
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -445,7 +442,7 @@ namespace TicketingSystem.Frames
         }
 
         /// <summary>
-        /// Event handler for when the urgency combo box is changed
+        /// event handler for when the urgency combo box is changed
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -455,7 +452,7 @@ namespace TicketingSystem.Frames
         }
 
         /// <summary>
-        /// Event handler that handles comment resizing when the stackpanel has shifted size
+        /// event handler that handles comment resizing when the stackpanel has shifted size
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -478,15 +475,31 @@ namespace TicketingSystem.Frames
             }
         }
 
+        /// <summary>
+        /// shows the resolve popup
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ResolveButton_Click(object sender, RoutedEventArgs e)
         {
             ResolveTicketPopUp.Visibility = Visibility.Visible;
         }
+        
+        /// <summary>
+        /// hides the resolve ticket popup
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CancelPopup_Click(object sender, RoutedEventArgs e)
         {
             ResolveTicketPopUp.Visibility = Visibility.Hidden;
         }
 
+        /// <summary>
+        /// resolves and closes a ticket if the reason is selected
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ResolvePopUp_Click(object sender, RoutedEventArgs e)
         {
             if(ResolveReason.SelectedIndex == 0)
@@ -527,11 +540,11 @@ namespace TicketingSystem.Frames
                             target.AddComment("RESOLVED TICKET WITH REASON " + "Other.");
                             break;
                         }
-                }
-                target.Resolve(ResolveReason.SelectedIndex);
+                } // reasons to resolve
+                target.Resolve(ResolveReason.SelectedIndex); // resolve ticket
                 MainWindow mw = (MainWindow)Application.Current.MainWindow;
-                mw.ChangeWindow("Dashboard.xaml");
-                MessageBox.Show("Ticket closed.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                mw.ChangeWindow("Dashboard.xaml"); // navigate to dashboard
+                MessageBox.Show("Ticket closed.", "Information", MessageBoxButton.OK, MessageBoxImage.Information); // inform user
             }
         }
     }

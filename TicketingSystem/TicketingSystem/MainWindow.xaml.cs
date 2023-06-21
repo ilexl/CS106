@@ -1,18 +1,8 @@
 ﻿using System;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using TicketingSystem.Framework;
 using TicketingSystem.Frames;
 
@@ -23,41 +13,49 @@ namespace TicketingSystem
     /// </summary>
     public partial class MainWindow : Window
     {
-        public bool LoggedIn = false; // temp
-        public static User user = new User();
+        public bool LoggedIn = false; 
+        public static User user = new User(); // creates a new user when the application is opened
 
+        /// <summary>
+        /// constructor for the main window
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
-
+#if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
             {
                 Debug.SetLogger(new Debug.LogConsole());
             }
             else
+#endif
             {
                 Debug.SetLogger(new Debug.LogTxt());
-                // or another that follows the correct interface
+                // sets the logger
             }
-
-            
 
             Debug.Log(DateTime.Now.ToString());
             Debug.Log("application started");
+            // log application start
 
-            if (LoggedIn)
+            if (LoggedIn) // check if logged in
             {
+                // show main window if logged in
                 MainWindowVisability(true);
                 LoginWindowVisability(false);
             }
             else
             {
+                // show login window if not logged in
                 MainWindowVisability(false);
                 LoginWindowVisability(true);
             }
-
         }
 
+        /// <summary>
+        /// changes the window to the specified window
+        /// </summary>
+        /// <param name="windowName">navigation window name</param>
         public void ChangeWindow(string windowName)
         {
             mainFrame.Navigate(new Uri("./Frames/" + windowName, UriKind.Relative));
@@ -73,26 +71,35 @@ namespace TicketingSystem
             }
         }
 
+        /// <summary>
+        /// gets a solid color from a hex value for WPF backend
+        /// </summary>
+        /// <param name="hex">hex code starting with #</param>
+        /// <returns></returns>
         public static SolidColorBrush HexColor(string hex)
         {
             return new SolidColorBrush((Color)ColorConverter.ConvertFromString(hex));
         }
 
-
-#region LOGIN_STUFF
+        #region LOGIN-Functions
+        /// <summary>
+        /// logs the user out
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Logout_Click(object sender, RoutedEventArgs e)
         {
             user = new User();
             LoggedIn = false;
             MainWindowVisability(LoggedIn);
             LoginWindowVisability(true);
-            ((TicketingSystem.Frames.Login)Login.Content).ResetText();
+            ((Login)Login.Content).ResetText();
         }
 
         /// <summary>
-        /// Hides or Shows the main window and nav bar
+        /// hides or shows the main window and nav bar
         /// </summary>
-        /// <param name="shown"></param>
+        /// <param name="shown">bool for showing/hiding the main window</param>
         private void MainWindowVisability(bool shown)
         {
             if (shown)
@@ -107,6 +114,10 @@ namespace TicketingSystem
             }
         }
 
+        /// <summary>
+        /// hides or shows the login window
+        /// </summary>
+        /// <param name="shown">bool for showing/hiding the login window</param>
         private void LoginWindowVisability(bool shown)
         {
             if (shown)
@@ -120,15 +131,19 @@ namespace TicketingSystem
             }
         }
 
+        /// <summary>
+        /// tries to login a user
+        /// </summary>
+        /// <param name="username">username to login with</param>
+        /// <param name="password">password to login with</param>
+        /// <returns></returns>
         public bool LoginActivation(string username, string password)
         {
-            if (user.Login(username, password))
+            if (user.Login(username, password)) // try login - result true if success
             {
                 MainWindowVisability(true);
                 LoginWindowVisability(false);
                 ChangeWindow("Dashboard.xaml");
-
-                // Temp
                 GenerateSideNavButtons((User.Type)user.userType);
 
                 return true;
@@ -138,12 +153,16 @@ namespace TicketingSystem
                 return false;
             }
         }
-#endregion
-#region SIDE_NAV
+        #endregion
+        #region SIDE-Nav
+        /// <summary>
+        /// creates the side nav buttons based on the logged in user
+        /// </summary>
+        /// <param name="loginType">login type to create buttons based off</param>
         private void GenerateSideNavButtons(User.Type loginType)
         {
             var sidenav = SideNavButtonsHolder;
-            sidenav.Children.Clear(); // Removes current buttons
+            sidenav.Children.Clear(); // removes current buttons
             switch (loginType)
             {
                 case User.Type.User:
@@ -185,28 +204,22 @@ namespace TicketingSystem
                 default:
                 {
                     CreateSideNavButton("Dashboard", "Dashboard.xaml", "./Resources/Icons/Home.png");
-                    CreateSideNavButton("View Tickets", "ViewTickets.xaml", "./Resources/Icons/File_dock_search.png");
-                    CreateSideNavButton("Closed Tickets", "ClosedTickets.xaml", "./Resources/Icons/Arhives_group_docks.png");
-                    CreateSideNavButton("Create Ticket", "CreateTicket.xaml", "./Resources/Icons/File_dock_add.png");
-                    CreateSideNavButton("All Tickets", "ViewTickets.xaml", "./Resources/Icons/File_dock_search.png");
-                    CreateSideNavButton("All Accounts", "ViewAccounts.xaml", "./Resources/Icons/People.png");
-                    CreateSideNavButton("Console", "Console.xaml", "./Resources/Icons/terminal.png");
                     CreateSideNavButton("My Account", "MyAccount.xaml", "./Resources/Icons/Lock.png");
-                    CreateSideNavButton("Settings", "Settings.xaml", "./Resources/Icons/Setting_line.png");
                     // Code for Test or No Valid Value - For Testing
                     break;
                 }
-            }
+            } // shows based on user
         }
 
         /// <summary>
-        /// Creates a sidebar button for navigation
+        /// creates a sidebar button for navigation
         /// </summary>
         /// <param name="nameDisplay">Name of the function as displayes</param>
         /// <param name="nameFrame">Frame to show location</param>
         /// <param name="iconLocation">Icon location to display</param>
         void CreateSideNavButton(string nameDisplay, string nameFrame, string iconLocation)
         {
+            #region wpf-stuff
             var sidenav = SideNavButtonsHolder;
             Button main = new Button();
             StackPanel stackPanel = new StackPanel();
@@ -246,16 +259,18 @@ namespace TicketingSystem
             stackPanel.Children.Add(textBlock);
             main.Content = stackPanel;
             sidenav.Children.Add(main);
+            #endregion
         }
 
         /// <summary>
-        /// Creates a sidebar button for navigation
+        /// creates a sidebar button for navigation
         /// </summary>
         /// <param name="nameDisplay">Name of the function as displayes</param>
         /// <param name="nameFrame">Frame to show location</param>
         /// <param name="iconLocation">Icon location to display</param>
         void CreateSideNavButtonT(string nameDisplay, string nameFrame, string iconLocation, int selection)
         {
+            #region wpf-stuff
             var sidenav = SideNavButtonsHolder;
             Button main = new Button();
             StackPanel stackPanel = new StackPanel();
@@ -300,6 +315,7 @@ namespace TicketingSystem
             stackPanel.Children.Add(textBlock);
             main.Content = stackPanel;
             sidenav.Children.Add(main);
+            #endregion
         }
         #endregion
 

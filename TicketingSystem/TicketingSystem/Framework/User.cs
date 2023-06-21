@@ -1,27 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Windows;
-using System.Security.Cryptography;
 
 namespace TicketingSystem.Framework
 {
+    /// <summary>
+    /// user is responsible for a user within the ticketing system
+    /// </summary>
     public class User
     {
+        #region instance-members
         public int ID;
         public int userType;
         public string password;
         public string email;
         public string firstName;
         public string lastName;
-
+        #endregion
         /// <summary>
-        /// Gets a user based on their ID
+        /// gets a user based on their ID
         /// </summary>
-        /// <param name="ID">The users ID</param>
+        /// <param name="ID">the users ID</param>
         /// <returns></returns>
         public static User GetUserFromID(int ID)
         {
@@ -69,7 +70,7 @@ namespace TicketingSystem.Framework
         }
 
         /// <summary>
-        /// Logs a user in and gets their details from the server
+        /// logs a user in and gets their details from the server
         /// </summary>
         /// <param name="_ID">user id</param>
         /// <param name="_NonHashedPassword">users raw password</param>
@@ -146,7 +147,7 @@ namespace TicketingSystem.Framework
         }
 
         /// <summary>
-        /// Changes the password of the current instance of the user if the old password matches the current password
+        /// changes the password of the current instance of the user if the old password matches the current password
         /// </summary>
         /// <param name="oldPassword"></param>
         /// <param name="newPassword"></param>
@@ -187,7 +188,7 @@ namespace TicketingSystem.Framework
         }
 
         /// <summary>
-        /// Changes the password of the current instance of the user if the old password matches the current password
+        /// changes the password of the current instance of the user if the old password matches the current password
         /// </summary>
         /// <param name="oldPassword"></param>
         /// <param name="newPassword"></param>
@@ -218,7 +219,7 @@ namespace TicketingSystem.Framework
         }
 
         /// <summary>
-        /// Changes the email of the current instance of the user
+        /// changes the email of the current instance of the user
         /// </summary>
         /// <param name="newEmail"></param>
         public void ChangeEmail(string newEmail)
@@ -244,7 +245,7 @@ namespace TicketingSystem.Framework
         }
 
         /// <summary>
-        /// Changes the account type of the current instance of the user
+        /// changes the account type of the current instance of the user
         /// </summary>
         /// <param name="newAccountType"></param>
         public void ChangeAccountType(int newAccountType)
@@ -270,7 +271,7 @@ namespace TicketingSystem.Framework
         }
 
         /// <summary>
-        /// Gets a list of all the account ids in the system
+        /// gets a list of all the account ids in the system
         /// </summary>
         /// <returns></returns>
         public static List<int> GetAllAccountIds()
@@ -312,9 +313,9 @@ namespace TicketingSystem.Framework
         }
 
         /// <summary>
-        /// TODO: NEEDS IMPLEMENTING
+        /// gets the amount of active tickets a user has created or assigned to
         /// </summary>
-        /// <returns>The acitve tickets assigned to a user</returns>
+        /// <returns>the acitve tickets assigned to a user</returns>
         public int GetActiveTicketsAmount(User u)
         {
             try
@@ -356,7 +357,7 @@ namespace TicketingSystem.Framework
         }
 
         /// <summary>
-        /// The user type which defines a users privileges
+        /// the user type which defines a users privileges
         /// </summary>
         public enum Type : int
         {
@@ -367,9 +368,9 @@ namespace TicketingSystem.Framework
         }
 
         /// <summary>
-        /// Gets usertype as a string
+        /// gets usertype as a string
         /// </summary>
-        /// <param name="user">User to check</param>
+        /// <param name="user">user to check</param>
         /// <returns></returns>
         public static string TypeToString(User user)
         {
@@ -400,6 +401,15 @@ namespace TicketingSystem.Framework
             }
         }
 
+        /// <summary>
+        /// creates a new user
+        /// </summary>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="emailAddress"></param>
+        /// <param name="accountType"></param>
+        /// <param name="rawPassword"></param>
+        /// <returns>the new user</returns>
         public static User CreateNew(string firstName, string lastName, string emailAddress, Type accountType, string rawPassword)
         {
             try
@@ -432,6 +442,10 @@ namespace TicketingSystem.Framework
             }
         }
 
+        /// <summary>
+        /// gets a new user id from the database
+        /// </summary>
+        /// <returns>new user id</returns>
         private static int NewID()
         {
             try
@@ -451,6 +465,11 @@ namespace TicketingSystem.Framework
             }
         }
 
+        /// <summary>
+        /// adds a new user to the database
+        /// </summary>
+        /// <param name="u"></param>
+        /// <returns></returns>
         private static bool AddNewUser(User u)
         {
             try
@@ -500,6 +519,11 @@ namespace TicketingSystem.Framework
 
         }
 
+
+        /// <summary>
+        /// validates and email
+        /// </summary>
+        /// <returns></returns>
         public static bool ValidateEmail(string email)
         {
             try
@@ -528,6 +552,10 @@ namespace TicketingSystem.Framework
             }
         }
 
+        /// <summary>
+        /// generates a random password using lowercase UPPERCASE and numbers###
+        /// </summary>
+        /// <returns>the random password</returns>
         public static string GenerateRandomPassword()
         {
             string temp = "";
@@ -567,6 +595,10 @@ namespace TicketingSystem.Framework
 
         }
 
+        /// <summary>
+        /// deletes an account from the database
+        /// </summary>
+        /// <param name="u">user to delete</param>
         public static void DeleteAccount(User u)
         {
             try

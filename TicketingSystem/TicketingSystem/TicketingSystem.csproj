@@ -102,10 +102,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Frames\Console.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Frames\Settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -133,9 +129,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Frames\Console.xaml.cs">
-      <DependentUpon>Console.xaml</DependentUpon>
     </Compile>
     <Compile Include="Frames\CreateAccount.xaml.cs">
       <DependentUpon>CreateAccount.xaml</DependentUpon>
