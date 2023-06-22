@@ -222,6 +222,10 @@ namespace TicketingSystem.Frames
                         ResetText();
                         MessageBoxResult wrongOldPass = MessageBox.Show("Old password is incorrect!");
                     }
+                    else
+                    {
+                        MessageBoxResult successfullyChangedPassword = MessageBox.Show("Successfully updated password!");
+                    }
                 }
                 else
                 {
