@@ -33,41 +33,7 @@ namespace TicketingSystem.Frames
         /// <param name="e"></param>
         private void ButtonClick_Apply(object sender, RoutedEventArgs e)
         {
-            if (oldPasswordFocused && newPasswordFocused && confirmPasswordFocused)
-            {
-                if (NewPassword.Password == ConfPassword.Password)
-                {
-                    if (!MainWindow.user.ChangePassword(OldPassword.Password, NewPassword.Password))
-                    {
-                        ResetText();
-                        MessageBoxResult wrongOldPass = MessageBox.Show("Old password is incorrect!");
-                    }
-                }
-                else
-                {
-                    ResetText();
-                    MessageBoxResult nonMatchNewPass = MessageBox.Show("New password does not match in both fields!");
-                }
-            }
-            if (emailFocused)
-            {
-                if (Email.Text != MainWindow.user.email)
-                {
-                    if (User.ValidateEmail(Email.Text))
-                    {
-                        MainWindow.user.ChangeEmail(Email.Text);
-                        ResetText();
-                        MessageBoxResult successfulEmail = MessageBox.Show("E-mail address successfully updated!");
-                    }
-                    else
-                    {
-                        ResetText();
-                        MessageBoxResult invalidEmail = MessageBox.Show("E-mail address already in use by other account!");
-                    }
-                }
-            }
-
-            ResetText();
+            UpdateChanges();
         }
 
         /// <summary>
@@ -240,39 +206,48 @@ namespace TicketingSystem.Frames
         {
             if (e.Key == Key.Return || e.Key == Key.Enter)
             {
-                
-                if (oldPasswordFocused && newPasswordFocused && confirmPasswordFocused)
+
+                UpdateChanges();
+            }
+        }
+
+        private void UpdateChanges()
+        {
+            if (oldPasswordFocused && newPasswordFocused && confirmPasswordFocused)
+            {
+                if (NewPassword.Password == ConfPassword.Password)
                 {
-                    if (NewPassword.Password == ConfPassword.Password)
+                    if (!MainWindow.user.ChangePassword(OldPassword.Password, NewPassword.Password))
                     {
-                        if (!MainWindow.user.ChangePassword(OldPassword.Password, NewPassword.Password))
-                        {
-                            ResetText();
-                            MessageBoxResult wrongOldPass = MessageBox.Show("Old password is incorrect!");
-                        }
-                        else
-                        {
-                            MessageBoxResult successfullyChangedPassword = MessageBox.Show("Successfully updated password!");
-                        }
+                        ResetText();
+                        MessageBoxResult wrongOldPass = MessageBox.Show("Old password is incorrect!");
+                    }
+                }
+                else
+                {
+                    ResetText();
+                    MessageBoxResult nonMatchNewPass = MessageBox.Show("New password does not match in both fields!");
+                }
+            }
+            if (emailFocused)
+            {
+                if (Email.Text != MainWindow.user.email)
+                {
+                    if (User.ValidateEmail(Email.Text))
+                    {
+                        MainWindow.user.ChangeEmail(Email.Text);
+                        ResetText();
+                        MessageBoxResult successfulEmail = MessageBox.Show("E-mail address successfully updated!");
                     }
                     else
                     {
                         ResetText();
-                        MessageBoxResult nonMatchNewPass = MessageBox.Show("New password does not match in both fields!");
+                        MessageBoxResult invalidEmail = MessageBox.Show("E-mail address already in use by other account!");
                     }
                 }
-
-                if (emailFocused)
-                {
-                    if (Email.Text != MainWindow.user.email)
-                    {
-                        MainWindow.user.ChangeEmail(Email.Text);
-                        MessageBoxResult successfullyChangedPassword = MessageBox.Show("Successfully updated e-mail address!");
-                    }
-                }
-
-                ResetText();
             }
+
+            ResetText();
         }
 
         /// <summary>
