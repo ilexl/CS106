@@ -39,14 +39,14 @@ namespace TicketingSystem.Frames
         public void Refresh()
         {
             HolderMain.Children.Clear();
-            showCorrectTickets(viewType);
+            ShowCorrectTickets(viewType);
         }
 
         /// <summary>
         /// shows the correct tickets based on the type
         /// </summary>
         /// <param name="vt">variable ticket type</param>
-        private void showCorrectTickets(int vt)
+        private void ShowCorrectTickets(int vt)
         {
             switch (vt)
             {
