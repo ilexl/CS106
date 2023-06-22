@@ -119,7 +119,7 @@ namespace TicketingSystem.Frames
             label2.HorizontalAlignment = HorizontalAlignment.Left;
             label2.Margin = new Thickness(0, 0, 0, 5);
             label2.VerticalAlignment = VerticalAlignment.Center;
-            label2.Width = 200;
+            label2.Width = 400;
             label2.Foreground = new SolidColorBrush(Color.FromRgb(17, 17, 34));
             label2.FontSize = 32;
             label2.FontFamily = new FontFamily("Epilogue");
