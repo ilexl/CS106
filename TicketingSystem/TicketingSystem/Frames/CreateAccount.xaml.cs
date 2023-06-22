@@ -43,17 +43,42 @@ namespace TicketingSystem.Frames
         /// <param name="e"></param>
         private void ConfirmBtn_Click(object sender, RoutedEventArgs e)
         {
-            if(NewPassword.Password == ConfPassword.Password && User.ValidateEmail(EmailAddress.Text))
+
+            if (FirstName.Text == "First Name")
             {
-                User u = User.CreateNew(FirstName.Text, LastName.Text, EmailAddress.Text, (User.Type)AccountType.SelectedIndex + 1, NewPassword.Password);
-                SpecifcAccount.target = u;
-                MainWindow mw = (MainWindow)Application.Current.MainWindow;
-                mw.ChangeWindow("SpecifcAccount.xaml");
+                MessageBoxResult invalidFirstName = MessageBox.Show("Please enter a valid value for first name!");
+                return;
             }
-            else if (!User.ValidateEmail(EmailAddress.Text))
+            if (LastName.Text == "Last Name")
+            {
+                MessageBoxResult invalidLastName = MessageBox.Show("Please enter a valid value for last name!");
+                return;
+            }
+            if (NewPasswordGhostText.IsVisible || ConfPasswordGhostText.IsVisible)
+            {
+                MessageBoxResult invalidPassword = MessageBox.Show("Please enter password in both fields!");
+                return;
+            }
+            if (!(NewPassword.Password == ConfPassword.Password))
+            {
+                MessageBoxResult invalidPassword = MessageBox.Show("Passwords do not match! Please try again!");
+                return;
+            }
+            if (!User.ValidateEmail(EmailAddress.Text))
             {
                 MessageBoxResult invalidEmail = MessageBox.Show("Email address already in use!");
+                return;
             }
+            if (EmailAddress.Text == "Enter Email Address")
+            {
+                MessageBoxResult invalidEmail = MessageBox.Show("Invalid email address!");
+                return;
+            }
+            
+            User u = User.CreateNew(FirstName.Text, LastName.Text, EmailAddress.Text, (User.Type)AccountType.SelectedIndex + 1, NewPassword.Password);
+            SpecifcAccount.target = u;
+            MainWindow mw = (MainWindow)Application.Current.MainWindow;
+            mw.ChangeWindow("SpecifcAccount.xaml");
         }
 
         /// <summary>
