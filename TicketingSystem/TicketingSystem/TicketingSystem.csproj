@@ -78,10 +78,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Frames\ClosedTickets.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Frames\CreateAccount.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -146,9 +142,6 @@
     <Compile Include="Framework\Server.cs" />
     <Compile Include="Framework\Ticket.cs" />
     <Compile Include="Framework\User.cs" />
-    <Compile Include="Frames\ClosedTickets.xaml.cs">
-      <DependentUpon>ClosedTickets.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Frames\CreateTicket.xaml.cs">
       <DependentUpon>CreateTicket.xaml</DependentUpon>
     </Compile>
