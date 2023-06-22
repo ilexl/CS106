@@ -172,7 +172,7 @@ namespace TicketingSystem
                     CreateSideNavButtonT("Closed Tickets", "ViewTickets.xaml", "./Resources/Icons/Arhives_group_docks.png", 2);
                     CreateSideNavButton("Create Ticket", "CreateTicket.xaml", "./Resources/Icons/File_dock_add.png");
                     CreateSideNavButton("My Account", "MyAccount.xaml", "./Resources/Icons/Lock.png");
-                    CreateSideNavButton("Settings", "Settings.xaml", "./Resources/Icons/Setting_line.png");
+                    
                     // Code for User
                     break;
                 }
@@ -184,7 +184,7 @@ namespace TicketingSystem
                     CreateSideNavButtonT("All Tickets", "ViewTickets.xaml", "./Resources/Icons/Arhives_group_docks.png", 3);
                     CreateSideNavButton("Create Ticket", "CreateTicket.xaml", "./Resources/Icons/File_dock_add.png");
                     CreateSideNavButton("My Account", "MyAccount.xaml", "./Resources/Icons/Lock.png");
-                    CreateSideNavButton("Settings", "Settings.xaml", "./Resources/Icons/Setting_line.png");
+                    
                     // Code for Tech
                     break;
                 }    
@@ -196,7 +196,7 @@ namespace TicketingSystem
                     CreateSideNavButton("Create Ticket", "CreateTicket.xaml", "./Resources/Icons/File_dock_add.png");
                     CreateSideNavButton("Create Account", "CreateAccount.xaml", "./Resources/Icons/User_add.png");
                     CreateSideNavButton("My Account", "MyAccount.xaml", "./Resources/Icons/Lock.png");
-                    CreateSideNavButton("Settings", "Settings.xaml", "./Resources/Icons/Setting_line.png");
+                    
                     // Code for Admin
                     break;
                 }
