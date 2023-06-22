@@ -81,6 +81,32 @@ namespace TicketingSystem.Frames
         /// <param name="e"></param>
         private void ButtonClick_Save(object sender, RoutedEventArgs e)
         {
+            if (NameTextBlock.Text != target.firstName + " " + target.lastName)
+            {
+                string newFirstName = "", newLastName = "";
+                foreach (char c in NameTextBlock.Text)
+                {
+                    if (c != ' ')
+                    {
+                        newFirstName += c;
+                    }
+                    else if (c == ' ')
+                    {
+                        break;
+                    }
+                }
+
+                if ((NameTextBlock.Text.Length <= newFirstName.Length + 1) || NameTextBlock.Text.Length == 0)
+                {
+                    MessageBox.Show("Can not set name to null or no last name!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                newLastName = NameTextBlock.Text.Substring(newFirstName.Length + 1);
+
+                target.ChangeAccountName(newFirstName, newLastName);
+            }
+
             // TODO: make name editable
 
             if (Email.Text != target.email)

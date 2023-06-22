@@ -270,6 +270,29 @@ namespace TicketingSystem.Framework
 
         }
 
+        public void ChangeAccountName(string newFirstName, string newLastName)
+        {
+            try
+            {
+                //  FILESTREAM / WRITER, ALLOWS INSERTING / UPDATING ROWS IN SQL
+                SqlConnection connection = Server.GetConnection(Server.SOURCE_USERS);
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                string commandText = "UPDATE Users SET FirstName=@first, LastName=@last WHERE ID='" + ID + "';";
+                adapter.InsertCommand = new SqlCommand(commandText, connection);
+                adapter.InsertCommand.Parameters.AddWithValue("@first", newFirstName);
+                adapter.InsertCommand.Parameters.AddWithValue("@last", newLastName);
+                adapter.InsertCommand.ExecuteNonQuery();
+                Server.CloseConnection(connection);
+                this.firstName = newFirstName;
+                this.lastName = newLastName;
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning("Operation Unsuccessful - " + e.Message);
+                MessageBox.Show("Operation was not successful!\nPlease try again...", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
         /// <summary>
         /// gets a list of all the account ids in the system
         /// </summary>

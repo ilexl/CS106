@@ -45,7 +45,7 @@ namespace TicketingSystem.Frames
         {
             if(NewPassword.Password == ConfPassword.Password && User.ValidateEmail(EmailAddress.Text))
             {
-                User u = User.CreateNew(FirstName.Text, LastName.Text, EmailAddress.Text, (User.Type)AccountType.SelectedIndex, NewPassword.Password);
+                User u = User.CreateNew(FirstName.Text, LastName.Text, EmailAddress.Text, (User.Type)AccountType.SelectedIndex + 1, NewPassword.Password);
                 SpecifcAccount.target = u;
                 MainWindow mw = (MainWindow)Application.Current.MainWindow;
                 mw.ChangeWindow("SpecifcAccount.xaml");
@@ -210,8 +210,5 @@ namespace TicketingSystem.Frames
                 textBox.Foreground = Brushes.Gray;
             }
         }
-
-        // TODO: ghost text HERE
-
     }
 }
