@@ -19,11 +19,11 @@ This guide is intended to get any user to be able to setup the ticketing system 
 
 ## Admin Guide - Setup
 - Initial Setup - Log in with the default username: admin | password: admin
-- Navigate to 'My Account'
+- Navigate to 'My Account' from the side navigation menu
 - :warning: Enter the old password: admin | and create a new password for the admin account :warning:
-- You can then manage all the users and tickets in this application using the 'All Accounts' button on the side nav
+- You can then manage all the users and tickets in this application using the 'All Accounts' and 'All Tickets' buttons on the side navigation menu. (Specififc are in the user guide)
 - The buttons and instructions are self explanitory when it comes to managing accounts and tickets.
-- You will need to create accounts for other admins, technicians and users so they can access the application too!
+- You will need to create accounts for other admins, technicians and users so they can access the application too... Initally it is just the default administrator account.
 
 # User manual 
 
@@ -31,39 +31,39 @@ This guide is intended to get any user to be able to setup the ticketing system 
 #### Create an account
 | Instruction     | Example |
 | ---      | ---       |
-| - Navigate to 'create account' </br>- Fill out all the new account details </br>- :warning: Make sure you select the correct account type :warning:</br>- Enter a temporary password for the new user </br>- Give the login details (ID, email, temporary password) to the new user and tell them to change the password | ![image](https://github.com/ilexl/CS106/assets/109491531/0a01481d-eaf4-4de1-bb24-7e80a0c62296) |
+| - Navigate to 'create account' from the side navigation menu</br>- Fill out all the new account details in each of the input boxes</br>- :warning: Make sure you select the correct account type :warning:</br>- Enter a temporary password for the new user which you will need to remember so the new user so they can login and reset their password</br>- Give the login details (ID, email, temporary password) to the new user and tell them to change the password | ![image](https://github.com/ilexl/CS106/assets/109491531/0a01481d-eaf4-4de1-bb24-7e80a0c62296) |
 
 #### Edit an account
 | Instruction     | Example |
 | ---      | ---       |
-| - Navigate to 'all accounts' | ![image](https://github.com/ilexl/CS106/assets/109491531/61ddb2dd-744a-4839-a755-6a879eb0f3ea) |
-| - Select an account </br>- Make edits as per sections | ![image](https://github.com/ilexl/CS106/assets/109491531/d0c63cf5-1664-4a2f-9ec8-dce601ce03f6) |
+| - Navigate to 'all accounts' from the side navigation menu when logged in as the admin | ![image](https://github.com/ilexl/CS106/assets/109491531/61ddb2dd-744a-4839-a755-6a879eb0f3ea) |
+| - Select an account from the list of accounts shown </br>- Make edits as per sections | ![image](https://github.com/ilexl/CS106/assets/109491531/d0c63cf5-1664-4a2f-9ec8-dce601ce03f6) |
 | - Click on 'save changes' button | ![image](https://github.com/ilexl/CS106/assets/109491531/d4187a39-363a-4a9b-9300-6311e21b17e3) |
 
 #### Delete an account
 | Instruction     | Example |
 | ---      | ---       |
-| - Navigate to 'all accounts' | ![image](https://github.com/ilexl/CS106/assets/109491531/61ddb2dd-744a-4839-a755-6a879eb0f3ea) |
-| - Select an account </br> | ![image](https://github.com/ilexl/CS106/assets/109491531/d0c63cf5-1664-4a2f-9ec8-dce601ce03f6) |
-| - Click on 'DELETE ACCOUNT' button | ![image](https://github.com/ilexl/CS106/assets/109491531/7ef18f1a-bcd8-415f-8159-ae231dc6b8f8) ![image](https://github.com/ilexl/CS106/assets/109491531/4ea616c6-2f4f-4b77-8175-cfdc5be16d43) |
+| - Navigate to 'all accounts' from the side navigation menu when logged in as the admin | ![image](https://github.com/ilexl/CS106/assets/109491531/61ddb2dd-744a-4839-a755-6a879eb0f3ea) |
+| - Select an account from the list of accounts shown </br> | ![image](https://github.com/ilexl/CS106/assets/109491531/d0c63cf5-1664-4a2f-9ec8-dce601ce03f6) |
+| - Click on the 'DELETE ACCOUNT' button and confirm you wish to delete the account | ![image](https://github.com/ilexl/CS106/assets/109491531/7ef18f1a-bcd8-415f-8159-ae231dc6b8f8) ![image](https://github.com/ilexl/CS106/assets/109491531/4ea616c6-2f4f-4b77-8175-cfdc5be16d43) |
 
 ## Common Feature to all Users
 #### Change password of current account
 | Instruction     | Example |
 | ---      | ---       |
-| - Navigate to 'My Account'</br>- Enter old password</br>- Enter new password and confirmation of new password</br>- Press 'Apply Changes' | <img src="https://github.com/ilexl/CS106/assets/109491531/ef49019b-a7c3-4868-90ab-7f3fd5282466" height="400" /> |
+| - Navigate to 'My Account' from the side navigation menu when logged in as any user type</br>- Enter your old password for that account</br>- Enter a new password and confirmation of new password in the respective input boxes</br>- Press the 'Apply Changes' button to change your password | <img src="https://github.com/ilexl/CS106/assets/109491531/ef49019b-a7c3-4868-90ab-7f3fd5282466" height="400" /> |
 
 #### Create a ticket
 | Instructions | |
 | --- | --- |
-| - Navigate to 'Create Ticket" </br>- Enter all fields with relevant data (Max 50 characters for title)</br>- Click on the submit button |   |
+| - Navigate to 'Create Ticket" from the side navigation menu when logged in any user type </br>- Enter all data into with relevant input boxes (Max 50 characters for title), including a title, the urgency of the ticket, who the ticket is created for (default is yourself), and an intial comment for the ticket. ** You cannot change who the ticket is created for </br>- Click on the submit button to finish creating your ticket which will add it to the system |   |
 | Create Ticket     | Ticket View |
 | ![image](https://github.com/ilexl/CS106/assets/109491531/a4b853f9-bdfc-49bf-9a82-a854aaae6f0f)  | ![image](https://github.com/ilexl/CS106/assets/109491531/070cb344-ab04-49d8-8da5-dc3711111969)         |
 
 #### Add comment to ticket
 | Instruction     | Example |
 | ---      | ---       |
-| - Open or create a ticket </br> - Type in the comment box below the ticket info and above the current comments</br> - Click on the 'submit comment' button to add a comment | ![image](https://github.com/ilexl/CS106/assets/109491531/c4ff46ed-14e0-4afa-9211-107bac85b23f) |
+| - Open a ticket from the list of tickets or create a ticket </br> - Type in the comment box below the ticket info and above the current comments</br> - Click on the 'submit comment' button to add the comment | ![image](https://github.com/ilexl/CS106/assets/109491531/c4ff46ed-14e0-4afa-9211-107bac85b23f) |
 
 #### Resolve a ticket
 | Instruction     | Example |
