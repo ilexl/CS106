@@ -19,11 +19,11 @@ This guide is intended to get any user to be able to setup the ticketing system 
 
 ## Admin Guide - Setup
 - Initial Setup - Log in with the default username: admin | password: admin
-- Navigate to 'My Account'
+- Navigate to 'My Account' from the side navigation menu
 - :warning: Enter the old password: admin | and create a new password for the admin account :warning:
-- You can then manage all the users and tickets in this application using the 'All Accounts' button on the side nav
+- You can then manage all the users and tickets in this application using the 'All Accounts' and 'All Tickets' buttons on the side navigation bar. (Specififc are in the user guide)
 - The buttons and instructions are self explanitory when it comes to managing accounts and tickets.
-- You will need to create accounts for other admins, technicians and users so they can access the application too!
+- You will need to create accounts for other admins, technicians and users so they can access the application too... Initally it is just the default administrator account.
 
 # User manual 
 
@@ -36,8 +36,8 @@ This guide is intended to get any user to be able to setup the ticketing system 
 #### Edit an account
 | Instruction     | Example |
 | ---      | ---       |
-| - Navigate to 'all accounts' | ![image](https://github.com/ilexl/CS106/assets/109491531/61ddb2dd-744a-4839-a755-6a879eb0f3ea) |
-| - Select an account </br>- Make edits as per sections | ![image](https://github.com/ilexl/CS106/assets/109491531/d0c63cf5-1664-4a2f-9ec8-dce601ce03f6) |
+| - Navigate to 'all accounts' from the side navigation menu when logged in as the admin | ![image](https://github.com/ilexl/CS106/assets/109491531/61ddb2dd-744a-4839-a755-6a879eb0f3ea) |
+| - Select an account from the list </br>- Make edits as per sections | ![image](https://github.com/ilexl/CS106/assets/109491531/d0c63cf5-1664-4a2f-9ec8-dce601ce03f6) |
 | - Click on 'save changes' button | ![image](https://github.com/ilexl/CS106/assets/109491531/d4187a39-363a-4a9b-9300-6311e21b17e3) |
 
 #### Delete an account
