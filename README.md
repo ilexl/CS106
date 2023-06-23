@@ -37,7 +37,7 @@ This guide is intended to get any user to be able to setup the ticketing system 
 | Instruction     | Example |
 | ---      | ---       |
 | - Navigate to 'all accounts' from the side navigation menu when logged in as the admin | ![image](https://github.com/ilexl/CS106/assets/109491531/61ddb2dd-744a-4839-a755-6a879eb0f3ea) |
-| - Select an account from the list </br>- Make edits as per sections | ![image](https://github.com/ilexl/CS106/assets/109491531/d0c63cf5-1664-4a2f-9ec8-dce601ce03f6) |
+| - Select an account from the list of accounts shown </br>- Make edits as per sections | ![image](https://github.com/ilexl/CS106/assets/109491531/d0c63cf5-1664-4a2f-9ec8-dce601ce03f6) |
 | - Click on 'save changes' button | ![image](https://github.com/ilexl/CS106/assets/109491531/d4187a39-363a-4a9b-9300-6311e21b17e3) |
 
 #### Delete an account
